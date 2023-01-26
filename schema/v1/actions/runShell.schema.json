@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://github.com/doc-detective/doc-detective-common/blob/main/schema/v1/actions/runShell.schema.json",
+  "title": "runShell",
+  "version": "1.0.0",
+  "type": "object",
+  "description": "Perform a native shell command.",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "runShell"
+      ]
+    },
+    "command": {
+      "type": "string",
+      "description": "Command to perform in the machine's default shell."
+    },
+    "env": {
+      "type": "string",
+      "description": "Path to a `.env` file to load before performing the action."
+    }
+  },
+  "required": [
+    "action",
+    "command"
+  ],
+  "additionalProperties": false
+}
