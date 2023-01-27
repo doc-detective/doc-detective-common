@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/doc-detective/doc-detective-common/blob/main/schema/v1/actions/runShell.schema.json",
   "title": "runShell",
   "version": "1.0.0",
