@@ -1,0 +1,447 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "analytics",
+  "version": "1.0.0",
+  "type": "object",
+  "description": "Perform a native shell command.",
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "string"
+    },
+    "detailLevel": {
+      "type": "string",
+      "enum": [
+        "run",
+        "tests",
+        "action-simple",
+        "action-detailed"
+      ]
+    },
+    "tests": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "numberTests": {
+          "type": "integer"
+        },
+        "passed": {
+          "type": "integer"
+        },
+        "failed": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "numberTests",
+        "passed",
+        "failed"
+      ]
+    },
+    "actions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "numberActions": {
+          "type": "integer"
+        },
+        "averageNumberActionsPerTest": {
+          "type": "integer"
+        },
+        "maxActionsPerTest": {
+          "type": "integer"
+        },
+        "minActionsPerTest": {
+          "type": "integer"
+        },
+        "passed": {
+          "type": "integer"
+        },
+        "failed": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "numberActions",
+        "averageNumberActionsPerTest",
+        "maxActionsPerTest",
+        "minActionsPerTest",
+        "passed",
+        "failed"
+      ]
+    },
+    "actionDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "goTo": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "uri": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "numberInstances",
+            "passed",
+            "failed",
+            "uri"
+          ]
+        },
+        "find": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "wait": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "numberInstances": {
+                  "type": "integer"
+                },
+                "duration": {
+                  "type": "integer"
+                }
+              }
+            },
+            "matchText": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "numberInstances": {
+                  "type": "integer"
+                },
+                "text": {
+                  "type": "integer"
+                }
+              }
+            },
+            "moveMouse": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "numberInstances": {
+                  "type": "integer"
+                },
+                "alignH": {
+                  "type": "integer"
+                },
+                "alignV": {
+                  "type": "integer"
+                },
+                "offsetX": {
+                  "type": "integer"
+                },
+                "offsetY": {
+                  "type": "integer"
+                }
+              }
+            },
+            "click": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "numberInstances": {
+                  "type": "integer"
+                }
+              }
+            },
+            "type": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "numberInstances": {
+                  "type": "integer"
+                },
+                "keys": {
+                  "type": "integer"
+                },
+                "trailingSpecialKey": {
+                  "type": "integer"
+                },
+                "env": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "matchText": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "css": {
+              "type": "integer"
+            },
+            "text": {
+              "type": "integer"
+            }
+          }
+        },
+        "click": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "css": {
+              "type": "integer"
+            }
+          }
+        },
+        "type": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "css": {
+              "type": "integer"
+            },
+            "keys": {
+              "type": "integer"
+            },
+            "trailingSpecialKey": {
+              "type": "integer"
+            },
+            "env": {
+              "type": "integer"
+            }
+          }
+        },
+        "moveMouse": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "css": {
+              "type": "integer"
+            },
+            "alignH": {
+              "type": "integer"
+            },
+            "alignV": {
+              "type": "integer"
+            },
+            "offsetX": {
+              "type": "integer"
+            },
+            "offsetY": {
+              "type": "integer"
+            }
+          }
+        },
+        "scroll": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "x": {
+              "type": "integer"
+            },
+            "y": {
+              "type": "integer"
+            }
+          }
+        },
+        "wait": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "duration": {
+              "type": "integer"
+            },
+            "css": {
+              "type": "integer"
+            }
+          }
+        },
+        "screenshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "mediaDirectory": {
+              "type": "integer"
+            },
+            "filename": {
+              "type": "integer"
+            },
+            "matchPrevious": {
+              "type": "integer"
+            },
+            "matchThreshold": {
+              "type": "integer"
+            }
+          }
+        },
+        "startRecording": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "mediaDirectory": {
+              "type": "integer"
+            },
+            "filename": {
+              "type": "integer"
+            },
+            "gifFps": {
+              "type": "integer"
+            },
+            "gifWidth": {
+              "type": "integer"
+            }
+          }
+        },
+        "stopRecording": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            }
+          }
+        },
+        "checkLink": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "uri": {
+              "type": "integer"
+            },
+            "statusCodes": {
+              "type": "integer"
+            }
+          }
+        },
+        "runShell": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "numberInstances": {
+              "type": "integer"
+            },
+            "passed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "command": {
+              "type": "integer"
+            },
+            "env": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "version",
+    "detailLevel"
+  ]
+}
