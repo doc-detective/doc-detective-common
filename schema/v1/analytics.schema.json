@@ -1,7 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "analytics",
-  "version": "1.0.0",
   "type": "object",
   "description": "Perform a native shell command.",
   "additionalProperties": false,
