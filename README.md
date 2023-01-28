@@ -8,13 +8,13 @@ Shared resources for Doc Detective projects.
 
 ## Install
 
-```
+```bash
 npm i doc-detective-common
 ```
 
 ## Init
 
-```
+```javascript
 const common = require("doc-detective-common");
 ```
 
