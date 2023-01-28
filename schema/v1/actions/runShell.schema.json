@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "runShell",
+  "version": "1.0.0",
+  "type": "object",
+  "description": "Perform a native shell command.",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "runShell"
+      ]
+    },
+    "command": {
+      "type": "string",
+      "description": "Command to perform in the machine's default shell."
+    },
+    "env": {
+      "type": "string",
+      "description": "Path to a `.env` file to load before performing the action."
+    }
+  },
+  "required": [
+    "action",
+    "command"
+  ],
+  "additionalProperties": false
+}

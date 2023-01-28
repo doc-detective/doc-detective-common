@@ -1,0 +1,19 @@
+{
+  "name": "doc-detective-common",
+  "version": "1.0.0",
+  "description": "Shared components for Doc Detective projects.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doc-detective/doc-detective-common.git"
+  },
+  "author": "Manny Silva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/doc-detective/doc-detective-common/issues"
+  },
+  "homepage": "https://github.com/doc-detective/doc-detective-common#readme"
+}
