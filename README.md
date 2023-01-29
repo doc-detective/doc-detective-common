@@ -20,11 +20,11 @@ const common = require("doc-detective-common");
 
 ## Objects
 
-### `common.schema`
+### `.schema`
 
 JSON schema definitions for various objects used throughout Doc Detective.
 
-Schema files are located in the [`/schema`](https://github.com/doc-detective/doc-detective-common/tree/schema/schema) directory and made available through the `common.schema` object.
+Schema objects are located in the [`/schema`](https://github.com/doc-detective/doc-detective-common/tree/schema/schema) directory and made available through the `common.schema` object.
 
 ```json
 {
