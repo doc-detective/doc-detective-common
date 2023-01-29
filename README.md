@@ -1,7 +1,7 @@
 # Doc Detective Common
 
 ![Current version](https://img.shields.io/github/package-json/v/doc-detective/doc-detective-common?color=orange)
-[![NPM Shield](https://img.shields.io/npm/v/doc-detective-common)](https://www.npmjs.com/package/doc-detective)
+[![NPM Shield](https://img.shields.io/npm/v/doc-detective-common)](https://www.npmjs.com/package/doc-detective-common)
 [![Discord Shield](https://img.shields.io/badge/chat-on%20discord-purple)](https://discord.gg/mSCCRAhH)
 
 Shared resources for Doc Detective projects.
