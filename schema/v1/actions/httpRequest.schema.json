@@ -1,0 +1,63 @@
+{
+  "title": "httpRequest",
+  "type": "object",
+  "description": "Perform a generic HTTP request, for example to a REST API.",
+  "properties": {
+    "action": {
+      "type": "string",
+      "const": "httpRequest"
+    },
+    "uri": {
+      "type": "string",
+      "description": ""
+    },
+    "statusCodes": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "default": [
+        200
+      ]
+    },
+    "env": {
+      "type": "string",
+      "description": ""
+    },
+    "method": {
+      "type": "string",
+      "description": "",
+      "enum": ["get","post","patch","delete"],
+      "default": "get"
+    },
+    "requestHeaders": {
+      "type": "object",
+      "additionalProperties": { "type": "string"},
+      "minProperties": 1,
+      "properties": {}
+    },
+    "requestParams": {
+      "type": "object",
+      "additionalProperties": { "type": "string"},
+      "minProperties": 1,
+      "properties": {}
+    },
+    "requestData": {
+      "type": "object",
+      "additionalProperties": { "type": "string"},
+      "minProperties": 1,
+      "properties": {}
+    },
+    "responseData": {
+      "type": "object",
+      "additionalProperties": { "type": "string"},
+      "minProperties": 1,
+      "properties": {}
+    }
+  },
+  "required": [
+    "action",
+    "uri"
+  ],
+  "additionalProperties": false
+}

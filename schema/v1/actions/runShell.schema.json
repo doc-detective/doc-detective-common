@@ -5,9 +5,7 @@
   "properties": {
     "action": {
       "type": "string",
-      "enum": [
-        "runShell"
-      ]
+      "const": "runShell"
     },
     "command": {
       "type": "string",
