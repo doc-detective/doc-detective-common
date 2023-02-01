@@ -8,8 +8,13 @@
       "const": "stopRecording"
     }
   },
+  "additionalProperties": false,
   "required": [
     "action"
   ],
-  "additionalProperties": false
+  "examples": [
+    {
+      "action": "stopRecording"
+    }
+  ]
 }

@@ -25,5 +25,14 @@
     "action",
     "uri"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "action": "checkLink",
+      "uri": "https://www.google.com",
+      "statusCodes": [
+        200
+      ]
+    }
+  ]
 }

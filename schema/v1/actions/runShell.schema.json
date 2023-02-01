@@ -2,13 +2,6 @@
   "title": "runShell",
   "type": "object",
   "description": "Perform a native shell command.",
-  "examples": [
-    {
-      "action": "runShell",
-      "command": "echo $username",
-      "env": "./variables.env"
-    }
-  ],
   "properties": {
     "action": {
       "type": "string",
@@ -23,9 +16,16 @@
       "description": "Path to a `.env` file to load before performing the action."
     }
   },
+  "additionalProperties": false,
   "required": [
     "action",
     "command"
   ],
-  "additionalProperties": false
+  "examples": [
+    {
+      "action": "runShell",
+      "command": "echo $username",
+      "env": "./variables.env"
+    }
+  ]
 }
