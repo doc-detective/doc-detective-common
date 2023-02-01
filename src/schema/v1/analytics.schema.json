@@ -441,5 +441,145 @@
   "required": [
     "version",
     "detailLevel"
+  ],
+  "examples": [
+    {
+      "version": "0.1.8",
+      "userId": "",
+      "detailLevel": "action-detailed",
+      "tests": {
+        "numberTests": 0,
+        "passed": 0,
+        "failed": 0
+      },
+      "actions": {
+        "numberActions": 0,
+        "averageNumberActionsPerTest": 0,
+        "maxActionsPerTest": 0,
+        "minActionsPerTest": 0,
+        "passed": 0,
+        "failed": 0
+      },
+      "actionDetails": {
+        "goTo": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "uri": 0
+        },
+        "find": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "wait": {
+            "numberInstances": 0,
+            "duration": 0
+          },
+          "matchText": {
+            "numberInstances": 0,
+            "text": 0
+          },
+          "moveMouse": {
+            "numberInstances": 0,
+            "alignH": 0,
+            "alignV": 0,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "click": {
+            "numberInstances": 0
+          },
+          "type": {
+            "numberInstances": 0,
+            "keys": 0,
+            "trailingSpecialKey": 0,
+            "env": 0
+          }
+        },
+        "matchText": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "css": 0,
+          "text": 0
+        },
+        "click": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "css": 0
+        },
+        "type": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "css": 0,
+          "keys": 0,
+          "trailingSpecialKey": 0,
+          "env": 0
+        },
+        "moveMouse": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "css": 0,
+          "alignH": 0,
+          "alignV": 0,
+          "offsetX": 0,
+          "offsetY": 0
+        },
+        "scroll": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "x": 0,
+          "y": 0
+        },
+        "wait": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "duration": 0,
+          "css": 0
+        },
+        "screenshot": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "mediaDirectory": 0,
+          "filename": 0,
+          "matchPrevious": 0,
+          "matchThreshold": 0
+        },
+        "startRecording": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "mediaDirectory": 0,
+          "filename": 0,
+          "gifFps": 0,
+          "gifWidth": 0
+        },
+        "stopRecording": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0
+        },
+        "checkLink": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "uri": 0,
+          "statusCodes": 0
+        },
+        "runShell": {
+          "numberInstances": 0,
+          "passed": 0,
+          "failed": 0,
+          "command": 0,
+          "env": 0
+        }
+      }
+    }
   ]
 }

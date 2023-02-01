@@ -29,6 +29,10 @@
   "examples": [
     {
       "action": "checkLink",
+      "uri": "https://www.google.com"
+    },
+    {
+      "action": "checkLink",
       "uri": "https://www.google.com",
       "statusCodes": [
         200

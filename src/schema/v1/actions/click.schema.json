@@ -14,12 +14,20 @@
     "alignH": {
       "type": "string",
       "description": "Horizantal alignment of the mouse to the element.",
-      "enum": ["left", "center", "right"]
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ]
     },
     "alignV": {
       "type": "string",
       "description": "Vertical alignment of the mouse to the element.",
-      "enum": ["left", "center", "right"]
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ]
     },
     "offsetX": {
       "type": "integer",
@@ -34,5 +42,19 @@
     "action",
     "css"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "action": "click",
+      "css": "#gbqfbb"
+    },
+    {
+      "action": "click",
+      "css": "#gbqfbb",
+      "alignH": "center",
+      "alignV": "center",
+      "offsetX": 10,
+      "offsetY": 10
+    }
+  ]
 }

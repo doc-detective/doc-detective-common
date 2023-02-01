@@ -21,5 +21,12 @@
     "css",
     "text"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "action": "matchText",
+      "css": "#gbqfbb",
+      "text": "I'm Feeling Lucky"
+    }
+  ]
 }

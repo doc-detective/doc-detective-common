@@ -9,7 +9,7 @@
     },
     "uri": {
       "type": "string",
-      "description": ""
+      "description": "The URI for the HTTP request."
     },
     "statusCodes": {
       "type": "array",
@@ -27,30 +27,43 @@
     "method": {
       "type": "string",
       "description": "",
-      "enum": ["get","post","patch","delete"],
+      "enum": [
+        "get",
+        "post",
+        "patch",
+        "delete"
+      ],
       "default": "get"
     },
     "requestHeaders": {
       "type": "object",
-      "additionalProperties": { "type": "string"},
+      "additionalProperties": {
+        "type": "string"
+      },
       "minProperties": 1,
       "properties": {}
     },
     "requestParams": {
       "type": "object",
-      "additionalProperties": { "type": "string"},
+      "additionalProperties": {
+        "type": "string"
+      },
       "minProperties": 1,
       "properties": {}
     },
     "requestData": {
       "type": "object",
-      "additionalProperties": { "type": "string"},
+      "additionalProperties": {
+        "type": "string"
+      },
       "minProperties": 1,
       "properties": {}
     },
     "responseData": {
       "type": "object",
-      "additionalProperties": { "type": "string"},
+      "additionalProperties": {
+        "type": "string"
+      },
       "minProperties": 1,
       "properties": {}
     }
@@ -59,5 +72,36 @@
     "action",
     "uri"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "action": "httpRequest",
+      "uri": "https://www.api-server.com",
+      "method": "post"
+    },
+    {
+      "action": "httpRequest",
+      "env": "path/to/variables.env",
+      "uri": "https://www.api-server.com",
+      "method": "post",
+      "requestHeaders": {
+        "header": "value"
+      },
+      "requestParams": {
+        "param": "value"
+      },
+      "requestData": {
+        "field": "value"
+      },
+      "responseHeaders": {
+        "header": "value"
+      },
+      "responseData": {
+        "field": "value"
+      },
+      "statusCodes": [
+        200
+      ]
+    }
+  ]
 }

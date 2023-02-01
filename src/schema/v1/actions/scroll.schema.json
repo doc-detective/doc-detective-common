@@ -31,5 +31,20 @@
   "required": [
     "action"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "action": "scroll",
+      "x": 100
+    },
+    {
+      "action": "scroll",
+      "y": 100
+    },
+    {
+      "action": "scroll",
+      "x": 100,
+      "y": 100
+    }
+  ]
 }

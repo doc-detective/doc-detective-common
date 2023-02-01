@@ -16,5 +16,15 @@
     "action",
     "uri"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "action": "goTo",
+      "uri": "https://www.google.com"
+    },
+    {
+      "action": "goTo",
+      "uri": "$URI"
+    }
+  ]
 }

@@ -37,5 +37,19 @@
   "required": [
     "action"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "action": "startRecording"
+    },
+    {
+      "action": "startRecording",
+      "overwrite": false,
+      "mediaDirectory": "./samples",
+      "filename": "results.mp4",
+      "fps": 30,
+      "width": 1200,
+      "height": 800
+    }
+  ]
 }

@@ -36,5 +36,23 @@
     "action",
     "css"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "action": "type",
+      "css": "[title=Search]",
+      "keys": "kittens"
+    },
+    {
+      "action": "type",
+      "css": "[title=Search]",
+      "trailingSpecialKey": "Enter"
+    },
+    {
+      "action": "type",
+      "css": "[title=Search]",
+      "keys": "kittens",
+      "trailingSpecialKey": "Enter"
+    }
+  ]
 }
