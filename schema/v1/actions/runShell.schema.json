@@ -2,6 +2,13 @@
   "title": "runShell",
   "type": "object",
   "description": "Perform a native shell command.",
+  "examples": [
+    {
+      "action": "runShell",
+      "command": "echo $username",
+      "env": "./variables.env"
+    }
+  ],
   "properties": {
     "action": {
       "type": "string",
