@@ -1,8 +1,19 @@
-const schema = {
-  checkLink_v1: require("./schema/v1/actions/checkLink.schema.json"),
-  stopRecording_v1: require("./schema/v1/actions/stopRecording.schema.json"),
-  runShell_v1: require("./schema/v1/actions/runShell.schema.json"),
-  analytics_v1: require("./schema/v1/analytics.schema.json"),
-};
+const approot = require("app-root-path")
+const fs = require("fs");
+
+// Read files from schema directory
+var files = fs.readdirSync(`${approot}/src/schema`);
+
+const schema = {}
+
+// Loop through all schema files
+files.forEach(file => {
+  // Exit early for files that don't match naming pattern
+  if (!file.includes(".schema.json")) return;
+  key = file.replace(".schema.json","");
+  path = `./schema/${file}`;
+  // Load into `schema` object
+  schema[key] = require(path);
+})
 
 exports.schema = schema;
