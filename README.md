@@ -18,6 +18,23 @@ npm i doc-detective-common
 const common = require("doc-detective-common");
 ```
 
+## Methods
+
+### `.validate(schemaKey: string, object: object)`
+
+Validate that `object` matches the specified [schema](#.schema) definition.
+
+#### Usage
+
+```js
+const schemaKey = "runShell_v1";
+const object = {
+  action: "runShell",
+  command: "echo $username"
+};
+console.log(common.validate(schemaKey, object));
+```
+
 ## Objects
 
 ### `.schema`
@@ -28,11 +45,7 @@ Schema objects are located in the [`/schema`](https://github.com/doc-detective/d
 
 ```json
 {
-  "v1": {
-    "actions": {
-      "runShell": {Object}
-    },
-    "analytics": {Object}
-  }
+  "runShell": {Object},
+  "analytics": {Object}
 }
 ```
