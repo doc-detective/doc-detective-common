@@ -30,6 +30,10 @@
     "trailingSpecialKey": {
       "type": "string",
       "description": "Special key pressed after the 'keys' value, if present. Supported values: https://github.com/puppeteer/puppeteer/blob/main/src/common/USKeyboardLayout.ts"
+    },
+    "env": {
+      "type": "string",
+      "description": "Path to a `.env` file to load before performing the action."
     }
   },
   "required": [
