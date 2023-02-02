@@ -26,7 +26,7 @@ Validate that `object` matches the specified [schema](#.schema) definition.
 
 Returns an object with the following schema:
 
-````json
+```json
 {
   "valid": boolean,
   "errors": [
@@ -39,7 +39,7 @@ Returns an object with the following schema:
     }
   ]
 }
-``
+```
 
 #### Usage
 
@@ -47,7 +47,7 @@ Returns an object with the following schema:
 const schemaKey = "runShell_v1";
 const object = {
   action: "runShell",
-  command: "echo $username"
+  command: "echo $username",
 };
 console.log(common.validate(schemaKey, object));
 ```
@@ -62,8 +62,20 @@ Schema objects are located in the [`/schema`](https://github.com/doc-detective/d
 
 ```json
 {
-  "runShell": {Object},
-  "analytics": {Object}
+  "analytics_v1": {Object},
+  "checkLink_v1": {Object},
+  "click_v1": {Object},
+  "find_v1": {Object},
+  "goTo_v1": {Object},
+  "httpRequest_v1": {Object},
+  "matchText_v1": {Object},
+  "moveMouse_v1": {Object},
+  "runShell_v1": {Object},
+  "screenshot_v1": {Object},
+  "scroll_v1": {Object},
+  "startRecording_v1": {Object},
+  "stopRecording_v1": {Object},
+  "type_v1": {Object},
+  "wait_v1": {Object}
 }
 ```
-````
