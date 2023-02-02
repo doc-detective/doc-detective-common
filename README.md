@@ -24,6 +24,23 @@ const common = require("doc-detective-common");
 
 Validate that `object` matches the specified [schema](#.schema) definition.
 
+Returns an object with the following schema:
+
+````json
+{
+  "valid": boolean,
+  "errors": [
+    {
+      "instancePath": string,
+      "schemaPath": string,
+      "keyword": string,
+      "params": [{Object}],
+      "message": string
+    }
+  ]
+}
+``
+
 #### Usage
 
 ```js
@@ -49,3 +66,4 @@ Schema objects are located in the [`/schema`](https://github.com/doc-detective/d
   "analytics": {Object}
 }
 ```
+````
