@@ -17,7 +17,7 @@
   "properties": {
     "action": {
       "type": "string",
-      "const": "moveMouse"
+      "const": "scroll"
     },
     "x": {
       "type": "integer",
