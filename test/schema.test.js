@@ -11,7 +11,7 @@ for (const [key, value] of Object.entries(schema)) {
   // Loop through and validate schema examples
   value.examples.forEach((example, index) => {
     test(`${key} example with index ${index} passes validation`, () => {
-      expect(validate(key, example)).toBe(true);
+      expect(validate(key, example).valid).toBe(true);
     });
   });
 }

@@ -12,5 +12,12 @@ for (const [key, value] of Object.entries(schema)) {
 
 // Validate that `object` matches the specified JSON schema
 function validate(schemaKey, object) {
-  return ajv.getSchema(schemaKey)(object);
+  const result = {};
+  check = ajv.getSchema(schemaKey);
+  result.valid = check(object);
+  if (!result.valid) {
+    result.valid = false;
+    result.errors = check.errors;
+  }
+  return result;
 }
