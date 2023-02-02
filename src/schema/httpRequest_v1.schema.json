@@ -37,33 +37,37 @@
     },
     "requestHeaders": {
       "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
+      "additionalProperties": true,
+      "minProperties": 1,
+      "properties": {}
+    },
+    "responseHeaders": {
+      "type": "object",
+      "additionalProperties": true,
       "minProperties": 1,
       "properties": {}
     },
     "requestParams": {
       "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
+      "additionalProperties": true,
+      "minProperties": 1,
+      "properties": {}
+    },
+    "responseParams": {
+      "type": "object",
+      "additionalProperties": true,
       "minProperties": 1,
       "properties": {}
     },
     "requestData": {
       "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
+      "additionalProperties": true,
       "minProperties": 1,
       "properties": {}
     },
     "responseData": {
       "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
+      "additionalProperties": true,
       "minProperties": 1,
       "properties": {}
     }
