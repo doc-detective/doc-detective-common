@@ -5,9 +5,7 @@
   "properties": {
     "action": {
       "type": "string",
-      "enum": [
-        "runShell"
-      ]
+      "const": "runShell"
     },
     "command": {
       "type": "string",
@@ -18,9 +16,20 @@
       "description": "Path to a `.env` file to load before performing the action."
     }
   },
+  "additionalProperties": false,
   "required": [
     "action",
     "command"
   ],
-  "additionalProperties": false
+  "examples": [
+    {
+      "action": "runShell",
+      "command": "echo $username"
+    },
+    {
+      "action": "runShell",
+      "command": "echo $username",
+      "env": "./variables.env"
+    }
+  ]
 }

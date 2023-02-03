@@ -18,21 +18,64 @@ npm i doc-detective-common
 const common = require("doc-detective-common");
 ```
 
-## Objects
+## Methods
 
-### `.schema`
+### `.validate(schemaKey: string, object: object)`
 
-JSON schema definitions for various objects used throughout Doc Detective.
+Validate that `object` matches the specified [schema](#.schemas) definition.
 
-Schema objects are located in the [`/schema`](https://github.com/doc-detective/doc-detective-common/tree/schema/schema) directory and made available through the `common.schema` object.
+Returns an object with the following schema:
 
 ```json
 {
-  "v1": {
-    "actions": {
-      "runShell": {Object}
-    },
-    "analytics": {Object}
-  }
+  "valid": boolean,
+  "errors": [
+    {
+      "instancePath": string,
+      "schemaPath": string,
+      "keyword": string,
+      "params": [{Object}],
+      "message": string
+    }
+  ]
+}
+```
+
+#### Usage
+
+```js
+const schemaKey = "runShell_v1";
+const object = {
+  action: "runShell",
+  command: "echo $username",
+};
+console.log(common.validate(schemaKey, object));
+```
+
+## Objects
+
+### `.schemas`
+
+JSON schema definitions for various objects used throughout Doc Detective.
+
+Schema objects are located in the [`/schemas`](https://github.com/doc-detective/doc-detective-common/tree/schema/schemas) directory and made available through the `.schemas` object.
+
+```json
+{
+  "analytics_v1": {Object},
+  "checkLink_v1": {Object},
+  "click_v1": {Object},
+  "find_v1": {Object},
+  "goTo_v1": {Object},
+  "httpRequest_v1": {Object},
+  "matchText_v1": {Object},
+  "moveMouse_v1": {Object},
+  "runShell_v1": {Object},
+  "screenshot_v1": {Object},
+  "scroll_v1": {Object},
+  "startRecording_v1": {Object},
+  "stopRecording_v1": {Object},
+  "type_v1": {Object},
+  "wait_v1": {Object}
 }
 ```
