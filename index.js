@@ -1,5 +1,5 @@
-const { schema } = require("./src/schema");
+const { schemas } = require("./src/schema");
 const { validate } = require("./src/validate");
 
-exports.schema = schema;
+exports.schemas = schemas;
 exports.validate = validate;

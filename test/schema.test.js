@@ -1,8 +1,8 @@
-const { schema } = require("../src/schema");
+const { schemas } = require("../src/schema");
 const { validate } = require("../src/validate");
 
 // Loop through JSON schemas
-for (const [key, value] of Object.entries(schema)) {
+for (const [key, value] of Object.entries(schemas)) {
   test(`${key} schema has one or more examples`, () => {
     // Schema needs one or more examples
     expect(value.examples).toBeTruthy();

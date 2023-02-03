@@ -1,4 +1,4 @@
-const { schema } = require("./schema");
+const { schemas } = require("./schema");
 const Ajv = require("ajv");
 const ajv = new Ajv();
 
@@ -6,7 +6,7 @@ const ajv = new Ajv();
 exports.validate = validate;
 
 // Add all schemas from `schema` object.
-for (const [key, value] of Object.entries(schema)) {
+for (const [key, value] of Object.entries(schemas)) {
   ajv.addSchema(value, key);
 }
 

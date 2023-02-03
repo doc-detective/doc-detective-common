@@ -22,7 +22,7 @@ const common = require("doc-detective-common");
 
 ### `.validate(schemaKey: string, object: object)`
 
-Validate that `object` matches the specified [schema](#.schema) definition.
+Validate that `object` matches the specified [schema](#.schemas) definition.
 
 Returns an object with the following schema:
 
@@ -54,11 +54,11 @@ console.log(common.validate(schemaKey, object));
 
 ## Objects
 
-### `.schema`
+### `.schemas`
 
 JSON schema definitions for various objects used throughout Doc Detective.
 
-Schema objects are located in the [`/schema`](https://github.com/doc-detective/doc-detective-common/tree/schema/schema) directory and made available through the `common.schema` object.
+Schema objects are located in the [`/schemas`](https://github.com/doc-detective/doc-detective-common/tree/schema/schemas) directory and made available through the `.schemas` object.
 
 ```json
 {
