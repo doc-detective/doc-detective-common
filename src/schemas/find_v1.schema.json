@@ -17,9 +17,7 @@
       "additionalProperties": false,
       "properties": {
         "duration": {
-          "type": "number",
-          "description": "Seconds to wait. If `css` is set, the maximum duration to wait for the element to become available.",
-          "default": 10000
+          "$ref": "wait_v1.schema.json#/properties/duration"
         }
       }
     },
@@ -29,8 +27,7 @@
       "additionalProperties": false,
       "properties": {
         "text": {
-          "type": "string",
-          "description": "Text that the element should display."
+          "$ref": "matchText_v1.schema.json#/properties/text"
         }
       },
       "required": [
@@ -43,30 +40,16 @@
       "additionalProperties": false,
       "properties": {
         "alignH": {
-          "type": "string",
-          "description": "Horizantal alignment of the mouse to the element.",
-          "enum": [
-            "left",
-            "center",
-            "right"
-          ]
+          "$ref": "moveMouse_v1.schema.json#/properties/alignH"
         },
         "alignV": {
-          "type": "string",
-          "description": "Vertical alignment of the mouse to the element.",
-          "enum": [
-            "left",
-            "center",
-            "right"
-          ]
+          "$ref": "moveMouse_v1.schema.json#/properties/alignV"
         },
         "offsetX": {
-          "type": "integer",
-          "description": "Number of pixels to offset the mouse along the X axis, relative to the element center. Positive values offset to the right. Negative values offset to the left."
+          "$ref": "moveMouse_v1.schema.json#/properties/offsetX"
         },
         "offsetY": {
-          "type": "integer",
-          "description": "Number of pixels to offset the mouse along the Y axis, relative to the element center. Positive values offset to the top. Negative values offset to the bottom."
+          "$ref": "moveMouse_v1.schema.json#/properties/offsetY"
         }
       }
     },
@@ -76,30 +59,16 @@
       "additionalProperties": false,
       "properties": {
         "alignH": {
-          "type": "string",
-          "description": "Horizantal alignment of the mouse to the element.",
-          "enum": [
-            "left",
-            "center",
-            "right"
-          ]
+          "$ref": "click_v1.schema.json#/properties/alignH"
         },
         "alignV": {
-          "type": "string",
-          "description": "Vertical alignment of the mouse to the element.",
-          "enum": [
-            "left",
-            "center",
-            "right"
-          ]
+          "$ref": "click_v1.schema.json#/properties/alignV"
         },
         "offsetX": {
-          "type": "integer",
-          "description": "Number of pixels to offset the mouse along the X axis, relative to the element center. Positive values offset to the right. Negative values offset to the left."
+          "$ref": "click_v1.schema.json#/properties/offsetX"
         },
         "offsetY": {
-          "type": "integer",
-          "description": "Number of pixels to offset the mouse along the Y axis, relative to the element center. Positive values offset to the top. Negative values offset to the bottom."
+          "$ref": "click_v1.schema.json#/properties/offsetY"
         }
       }
     },
@@ -121,16 +90,13 @@
       ],
       "properties": {
         "keys": {
-          "type": "string",
-          "description": "String of keys to enter."
+          "$ref": "type_v1.schema.json#/properties/keys"
         },
         "trailingSpecialKey": {
-          "type": "string",
-          "description": "Special key pressed after the 'keys' value, if present. Supported values: https://github.com/puppeteer/puppeteer/blob/main/src/common/USKeyboardLayout.ts"
+          "$ref": "type_v1.schema.json#/properties/trailingSpecialKey"
         },
         "env": {
-          "type": "string",
-          "description": "Path to a `.env` file to load before performing the action."
+          "$ref": "type_v1.schema.json#/properties/env"
         }
       }
     }
