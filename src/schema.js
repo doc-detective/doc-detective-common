@@ -6,7 +6,7 @@ const schemas = {};
 
 //// Process
 loadSchemas();
-
+// console.log(schemas.find_v1)
 //// Export
 exports.schemas = schemas;
 
@@ -15,11 +15,7 @@ exports.schemas = schemas;
 // Load schemas from file
 function loadSchemas() {
   // Read files from schema directory
-  if (require.main === module) {
-    path = `${approot}/src/schemas`;
-  } else {
-    path = `${approot}/node_modules/doc-detective-common/src/schemas`;
-  }
+  path = `${__dirname}/schemas`;
   var files = fs.readdirSync(path);
   // Loop through all schema files
   files.forEach(async (file) => {
@@ -29,9 +25,9 @@ function loadSchemas() {
     // Load schema from file
     let schema = require(`./schemas/${file}`);
     // Add dynamic ID based on file path
-    schema.$id = `file://${approot}/src/schemas/${file}`;
+    schema.$id = `file://${__dirname}/schemas/${file}`;
     // Recursively update relative references with app root path
-    updateRefPaths(schema);
+    schema = updateRefPaths(schema);
     // Load into `schema` object
     schemas[key] = schema;
   });
@@ -39,11 +35,13 @@ function loadSchemas() {
 
 // Prepend app-root path to referenced relative paths
 function updateRefPaths(schema) {
-  for (const value of Object.values(schema)) {
+  for (let [key, value] of Object.entries(schema)) {
     if (typeof value === "object") {
       updateRefPaths(value);
-    } else if (typeof value === "string" && value.includes("$ref")) {
-      value = `${approot}${value}`;
+    }
+    if (key === "$ref") {
+      schema[key] = `file://${__dirname}/schemas/${value}`;
     }
   }
+  return schema;
 }
