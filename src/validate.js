@@ -15,9 +15,7 @@ function validate(schemaKey, object) {
   const result = {};
   check = ajv.getSchema(schemaKey);
   result.valid = check(object);
-  if (!result.valid) {
-    result.valid = false;
-    result.errors = check.errors;
-  }
+  result.errors = check.errors || "";
+  
   return result;
 }
