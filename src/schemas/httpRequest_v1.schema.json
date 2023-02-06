@@ -26,7 +26,7 @@
     },
     "method": {
       "type": "string",
-      "description": "",
+      "description": "Method of the HTTP request",
       "enum": [
         "get",
         "post",
@@ -36,24 +36,28 @@
       "default": "get"
     },
     "requestHeaders": {
+      "description": "Headers to include in the HTTP request, in key/value format.",
       "type": "object",
       "additionalProperties": true,
       "minProperties": 1,
       "properties": {}
     },
     "responseHeaders": {
+      "description": "Headers expected in the response, in key/value format. If one or more `responseHeaders` entries aren't present in the response, the action fails.",
       "type": "object",
       "additionalProperties": true,
       "minProperties": 1,
       "properties": {}
     },
     "requestParams": {
+      "description": "URL parameters to include in the HTTP request, in key/value format.",
       "type": "object",
       "additionalProperties": true,
       "minProperties": 1,
       "properties": {}
     },
     "responseParams": {
+      "description": "URL parameters expected in the response, in key/value format. If one or more `responseParams` entries aren't present in the response, the action fails.",
       "type": "object",
       "additionalProperties": true,
       "minProperties": 1,
