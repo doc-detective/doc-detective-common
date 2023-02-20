@@ -1,6 +1,6 @@
 const { schemas } = require("./schema");
 const Ajv = require("ajv");
-const ajv = new Ajv();
+const ajv = new Ajv({useDefaults: true});
 
 // Exports
 exports.validate = validate;
