@@ -5,8 +5,7 @@
   "properties": {
     "id": {
       "type": "string",
-      "format": "uuid",
-      "description": "Unique ID of the step."
+      "description": "ID of the step."
     },
     "description": {
       "type": "string",
