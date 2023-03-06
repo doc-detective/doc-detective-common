@@ -33,7 +33,11 @@ function validate(schemaKey, object) {
   const result = {};
   check = ajv.getSchema(schemaKey);
   result.valid = check(object);
-  result.errors = check.errors || "";
+  result.errors = "";
+  if (check.errors) {
+    const errors = check.errors.map((error) => error.message);
+    result.errors = errors.join(", ");
+  }
 
   return result;
 }
