@@ -9,7 +9,7 @@ const addErrors = require("ajv-errors");
 const uuid = require("uuid");
 
 // Configure base Ajv
-const ajv = new Ajv({ useDefaults: true, allErrors: true });
+const ajv = new Ajv({ useDefaults: true, allErrors: true, coerceTypes: true });
 
 // Enable `uuid` dynamic defult
 const def = require("ajv-keywords/dist/definitions/dynamicDefaults");
