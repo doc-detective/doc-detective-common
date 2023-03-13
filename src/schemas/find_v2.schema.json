@@ -31,15 +31,8 @@
       }
     },
     "matchText": {
-      "type": "object",
-      "description": "Check if an element displays the expected text.",
-      "additionalProperties": false,
-      "properties": {
-        "text": {
-          "$ref": "matchText_v1.schema.json#/properties/text"
-        }
-      },
-      "required": ["text"]
+      "type": "string",
+      "description": "Text that the element shuold contain. If the element doesn't contain the text, the step fails."
     },
     "moveMouse": {
       "type": "object",
