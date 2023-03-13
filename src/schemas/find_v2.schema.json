@@ -20,15 +20,10 @@
       "description": "Selector that uniquely identifies the element.",
       "type": "string"
     },
-    "wait": {
-      "type": "object",
-      "description": "Pause before performing the next action.",
-      "additionalProperties": false,
-      "properties": {
-        "duration": {
-          "$ref": "wait_v1.schema.json#/properties/duration"
-        }
-      }
+    "timeout": {
+      "type": "integer",
+      "description": "Max duration in milliseconds to wait for the element to exist.",
+      "default": 500
     },
     "matchText": {
       "type": "string",
