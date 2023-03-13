@@ -49,12 +49,8 @@
       }
     },
     "click": {
-      "type": "object",
-      "description": "Click an element specified by a CSS sepector.",
-      "additionalProperties": false,
-      "properties": {
-        "alignH": {
-          "$ref": "click_v1.schema.json#/properties/alignH"
+      "type": "boolean",
+      "description": "Click the element."
         },
         "alignV": {
           "$ref": "click_v1.schema.json#/properties/alignV"
