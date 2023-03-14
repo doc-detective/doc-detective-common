@@ -36,41 +36,23 @@
     "click": {
       "type": "boolean",
       "description": "Click the element."
-        },
-        "alignV": {
-          "$ref": "click_v1.schema.json#/properties/alignV"
-        },
-        "offsetX": {
-          "$ref": "click_v1.schema.json#/properties/offsetX"
-        },
-        "offsetY": {
-          "$ref": "click_v1.schema.json#/properties/offsetY"
-        }
-      }
     },
-    "type": {
-      "type": "object",
-      "description": "Click an element specified by a CSS sepector.",
-      "additionalProperties": false,
-      "anyOf": [
+    "typeKeys": {
+      "description": "Type keys after finding the element. If you want to type in the element, make the element active with the `click` parameter.",
+      "oneOf": [
         {
-          "required": ["keys"]
+          "type": "string"
         },
         {
-          "required": ["trailingSpecialKey"]
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "keys": {
+              "$ref": "typeKeys_v2.schema.json#/properties/keys"
+            }
+          }
         }
-      ],
-      "properties": {
-        "keys": {
-          "$ref": "type_v1.schema.json#/properties/keys"
-        },
-        "trailingSpecialKey": {
-          "$ref": "type_v1.schema.json#/properties/trailingSpecialKey"
-        },
-        "env": {
-          "$ref": "type_v1.schema.json#/properties/env"
-        }
-      }
+      ]
     }
   },
   "required": ["action", "selector"],
@@ -81,29 +63,16 @@
   "examples": [
     {
       "action": "find",
-      "css": "[title=Search]"
+      "selector": "[title=Search]"
     },
     {
       "action": "find",
-      "css": "[title=Search]",
-      "wait": {
-        "duration": 10000
-      },
-      "matchText": {
-        "text": "Search"
-      },
-      "moveMouse": {
-        "alignH": "center",
-        "alignV": "center",
-        "offsetX": 0,
-        "offsetY": 0
-      },
-      "click": {},
-      "type": {
-        "keys": "$SHORTHAIR_CAT_SEARCH",
-        "trailingSpecialKey": "Enter",
-        "env": "./sample/variables.env"
-      }
+      "selector": "[title=Search]",
+      "timeout": 10000,
+      "matchText": "Search",
+      "moveTo": true,
+      "click": true,
+      "typeKeys": "shorthair cat" 
     }
   ]
 }
