@@ -37,7 +37,7 @@
     "method": {
       "type": "string",
       "description": "Method of the HTTP request",
-      "enum": ["get", "post", "patch", "delete"],
+      "enum": ["get", "put", "post", "patch", "delete"],
       "transform": ["trim", "toEnumCase"],
       "default": "get"
     },
