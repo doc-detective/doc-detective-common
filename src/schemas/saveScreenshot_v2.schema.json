@@ -16,7 +16,7 @@
       "const": "saveScreenshot",
       "description": "The action to perform."
     },
-    "filePath": {
+    "path": {
       "type": "string",
       "description": "File path of the PNG file. If not specified, the file path is your media directory and the file name is the ID of the step.",
       "pattern": "[A-Za-z0-9_-]*\\.(png|PNG)$"
@@ -35,7 +35,7 @@
     },
     {
       "action": "saveScreenshot",
-      "filename": "results.png"
+      "path": "results.png"
     }
   ]
 }
