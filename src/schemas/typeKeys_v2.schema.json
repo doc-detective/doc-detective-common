@@ -43,7 +43,7 @@
       "keys": "kittens"
     },
     {
-      "action": "type",
+      "action": "typeKeys",
       "keys": ["$ENTER$"]
     }
   ]
