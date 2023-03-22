@@ -24,6 +24,7 @@
     },
     "steps": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "anyOf": [
           { "$ref": "checkLink_v2.schema.json#" },
@@ -70,7 +71,7 @@
       ]
     },
     {
-      "id": "Do all the things!",
+      "id": "Do all the things! - Test",
       "description": "This test includes every property across all actions.",
       "contexts": [
         {
