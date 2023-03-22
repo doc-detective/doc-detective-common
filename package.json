@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest"
   },
+  "precommit": "test",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/doc-detective/doc-detective-common.git"
@@ -25,6 +26,7 @@
     "ajv-formats": "^2.1.1",
     "ajv-keywords": "^5.1.0",
     "app-root-path": "^3.1.0",
+    "pre-commit": "^1.2.2",
     "uuid": "^9.0.0"
   }
 }
