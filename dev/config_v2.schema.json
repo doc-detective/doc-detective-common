@@ -1,0 +1,606 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "envPath": {
+      "type": "string"
+    },
+    "input": {
+      "type": "string"
+    },
+    "recursive": {
+      "type": "boolean"
+    },
+    "output": {
+      "type": "string"
+    },
+    "runTests": {
+      "type": "object",
+      "properties": {
+        "recursive": {
+          "type": "boolean"
+        },
+        "input": {
+          "type": "string"
+        },
+        "output": {
+          "type": "string"
+        },
+        "setup": {
+          "type": "string"
+        },
+        "cleanup": {
+          "type": "string"
+        },
+        "mediaDirectory": {
+          "type": "string"
+        },
+        "downloadDirectory": {
+          "type": "string"
+        },
+        "contexts": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "app": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["name", "path"]
+                },
+                "platforms": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "required": ["app", "platforms"]
+            }
+          ]
+        }
+      },
+      "required": [
+        "recursive",
+        "input",
+        "output",
+        "setup",
+        "cleanup",
+        "mediaDirectory",
+        "downloadDirectory",
+        "contexts"
+      ]
+    },
+    "runCoverage": {
+      "type": "object",
+      "properties": {
+        "recursive": {
+          "type": "boolean"
+        },
+        "input": {
+          "type": "string"
+        },
+        "output": {
+          "type": "string"
+        },
+        "markup": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": ["recursive", "input", "output", "markup"]
+    },
+    "suggestTests": {
+      "type": "object",
+      "properties": {
+        "recursive": {
+          "type": "boolean"
+        },
+        "input": {
+          "type": "string"
+        },
+        "output": {
+          "type": "string"
+        },
+        "markup": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": ["recursive", "input", "output", "markup"]
+    },
+    "fileTypes": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "extensions": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "testStartStatementOpen": {
+              "type": "string"
+            },
+            "testStartStatementClose": {
+              "type": "string"
+            },
+            "testIgnoreStatement": {
+              "type": "string"
+            },
+            "testEndStatement": {
+              "type": "string"
+            },
+            "actionStatementOpen": {
+              "type": "string"
+            },
+            "actionStatementClose": {
+              "type": "string"
+            },
+            "markup": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "regex": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "required": ["name", "regex"]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "regex": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "required": ["name", "regex"]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "regex": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "required": ["name", "regex"]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "regex": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "required": ["name", "regex"]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "regex": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "required": ["name", "regex"]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "regex": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "required": ["name", "regex"]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "regex": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "required": ["name", "regex"]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "regex": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "required": ["name", "regex"]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "regex": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "required": ["name", "regex"]
+                }
+              ]
+            }
+          },
+          "required": [
+            "extensions",
+            "testStartStatementOpen",
+            "testStartStatementClose",
+            "testIgnoreStatement",
+            "testEndStatement",
+            "actionStatementOpen",
+            "actionStatementClose",
+            "markup"
+          ]
+        }
+      ]
+    },
+    "integrations": {
+      "type": "object",
+      "properties": {
+        "openAi": {
+          "type": "object",
+          "properties": {
+            "apiKey": {
+              "type": "string"
+            }
+          },
+          "required": ["apiKey"]
+        }
+      },
+      "required": ["openAi"]
+    },
+    "telemetry": {
+      "type": "object",
+      "properties": {
+        "send": {
+          "type": "boolean"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "detailLevel": {
+          "type": "string"
+        },
+        "customServers": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": ["send", "userId", "detailLevel", "customServers"]
+    },
+    "logLevel": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "envPath",
+    "input",
+    "recursive",
+    "output",
+    "runTests",
+    "runCoverage",
+    "suggestTests",
+    "fileTypes",
+    "integrations",
+    "telemetry",
+    "logLevel"
+  ],
+  "examples": [
+    {
+      "envPath": "",
+      "input": ".",
+      "recursive": true,
+      "output": ".",
+      "runTests": {
+        "recursive": true,
+        "input": ".",
+        "output": "./testResults.json",
+        "setup": "",
+        "cleanup": "",
+        "mediaDirectory": ".",
+        "downloadDirectory": ".",
+        "contexts": [
+          {
+            "app": {
+              "name": "firefox",
+              "path": ""
+            },
+            "platforms": ["linux", "mac", "windows"]
+          }
+        ]
+      },
+      "runCoverage": {
+        "recursive": true,
+        "input": ".",
+        "output": "./coverageReport.json",
+        "markup": [
+          "onscreenText",
+          "emphasis",
+          "image",
+          "hyperlink",
+          "orderedList",
+          "unorderedList",
+          "codeInline",
+          "clodeBlock",
+          "interaction"
+        ]
+      },
+      "suggestTests": {
+        "recursive": true,
+        "input": ".",
+        "output": "./testSuggestions.json",
+        "markup": [
+          "onscreenText",
+          "emphasis",
+          "image",
+          "hyperlink",
+          "orderedList",
+          "unorderedList",
+          "codeInline",
+          "clodeBlock",
+          "interaction"
+        ]
+      },
+      "fileTypes": [
+        {
+          "extensions": [".md", ".mdx"],
+          "testStartStatementOpen": "[comment]: # (test start",
+          "testStartStatementClose": ")",
+          "testIgnoreStatement": "[comment]: # (test ignore)",
+          "testEndStatement": "[comment]: # (test end)",
+          "actionStatementOpen": "[comment]: # (action",
+          "actionStatementClose": ")",
+          "markup": [
+            {
+              "name": "onscreenText",
+              "regex": ["\\*\\*.+?\\*\\*"]
+            },
+            {
+              "name": "emphasis",
+              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"]
+            },
+            {
+              "name": "image",
+              "regex": ["!\\[.+?\\]\\(.+?\\)"]
+            },
+            {
+              "name": "hyperlink",
+              "regex": ["(?<!!)\\[.+?\\]\\(.+?\\)"]
+            },
+            {
+              "name": "orderedList",
+              "regex": ["(?<=\n) *?[0-9][0-9]?[0-9]?.\\s*.*"]
+            },
+            {
+              "name": "unorderedList",
+              "regex": ["(?<=\n) *?\\*.\\s*.*", "(?<=\n) *?-.\\s*.*"]
+            },
+            {
+              "name": "codeInline",
+              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"]
+            },
+            {
+              "name": "codeBlock",
+              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"]
+            },
+            {
+              "name": "interaction",
+              "regex": [
+                "[cC]lick",
+                "[tT]ap",
+                "[tT]ouch",
+                "[sS]elect",
+                "[cC]hoose",
+                "[tT]oggle",
+                "[eE]nable",
+                "[dD]isable",
+                "[tT]urn [oO][ff|n]",
+                "[tT]ype",
+                "[eE]nter"
+              ]
+            }
+          ]
+        }
+      ],
+      "integrations": {
+        "openAi": {
+          "apiKey": ""
+        }
+      },
+      "telemetry": {
+        "send": false,
+        "userId": "",
+        "detailLevel": "action-detailed",
+        "customServers": []
+      },
+      "logLevel": "info"
+    }
+  ]
+}
