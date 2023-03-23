@@ -1,4 +1,3 @@
-const approot = require("app-root-path");
 const fs = require("fs");
 
 //// Init
