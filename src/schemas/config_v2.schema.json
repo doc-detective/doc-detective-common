@@ -207,12 +207,23 @@
                             ]
                           }
                         }
-                      }
+                      },
+                      "required": ["name", "regex"]
                     }
                   ]
                 }
               }
-            }
+            },
+            "required": [
+              "extensions",
+              "testStartStatementOpen",
+              "testStartStatementClose",
+              "testIgnoreStatement",
+              "testEndStatement",
+              "stepStatementOpen",
+              "stepStatementClose",
+              "markup"
+            ]
           }
         ]
       },
@@ -239,7 +250,8 @@
           "description": "Identifier for the organization, group, or individual running Doc Detective.",
           "type": "string"
         }
-      }
+      },
+      "required": ["send"]
     },
     "logLevel": {
       "description": "Amount of detail to output when performing an operation.",
