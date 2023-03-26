@@ -1,6 +1,6 @@
 {
   "name": "doc-detective-common",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Shared components for Doc Detective projects.",
   "main": "index.js",
   "scripts": {
