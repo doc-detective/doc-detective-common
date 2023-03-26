@@ -1,0 +1,532 @@
+{
+  "title": "config",
+  "description": "Configuration options for Doc Detective operations.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "input": {
+      "$ref": "config_v2.schema.json#/definitions/input"
+    },
+    "output": {
+      "$ref": "config_v2.schema.json#/definitions/output"
+    },
+    "recursive": {
+      "$ref": "config_v2.schema.json#/definitions/recursive"
+    },
+    "envVariables": {
+      "description": "Path to a `.env` file to load before performing a Doc Detective operation.",
+      "type": "string",
+      "default": ""
+    },
+    "runTests": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Options for running tests. When running tests, values set here override general configuration options.",
+      "properties": {
+        "input": {
+          "$ref": "config_v2.schema.json#/definitions/input"
+        },
+        "output": {
+          "$ref": "config_v2.schema.json#/definitions/output"
+        },
+        "setup": {
+          "description": "Path(s) to test specifications to perform before those specified by `input`. Useful for setting up testing environments.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            }
+          ],
+          "default": ""
+        },
+        "cleanup": {
+          "description": "Path(s) to test specifications to perform after those specified by `input`. Useful for cleaning up testing environments.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            }
+          ],
+          "default": ""
+        },
+        "recursive": {
+          "$ref": "config_v2.schema.json#/definitions/recursive"
+        },
+        "mediaDirectory": {
+          "description": "Path of the directory in which to store output media files.",
+          "type": "string",
+          "default": "."
+        },
+        "downloadDirectory": {
+          "description": "Path of the directory in which to store downloaded files.",
+          "type": "string",
+          "default": "."
+        },
+        "contexts": {
+          "type": "array",
+          "description": "Application/platform sets to run tests in. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. See [context](/reference/schemas/context).",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "context_v2.schema.json#"
+              }
+            ]
+          },
+          "default": [{}]
+        }
+      }
+    },
+    "runCoverage": {
+      "description": "Options for performing test coverage analysis on documentation source files.  When performing coveration analysis, values set here override general condiguration options.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input": {
+          "$ref": "config_v2.schema.json#/definitions/input"
+        },
+        "output": {
+          "$ref": "config_v2.schema.json#/definitions/output"
+        },
+        "recursive": {
+          "$ref": "config_v2.schema.json#/definitions/recursive"
+        },
+        "markup": {
+          "$ref": "config_v2.schema.json#/definitions/markupToInclude"
+        }
+      }
+    },
+    "suggestTests": {
+      "description": "Options for suggesting tests based on documentation source files.  When suggesting tests, values set here override general condiguration options.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input": {
+          "$ref": "config_v2.schema.json#/definitions/input"
+        },
+        "output": {
+          "$ref": "config_v2.schema.json#/definitions/output"
+        },
+        "recursive": {
+          "$ref": "config_v2.schema.json#/definitions/recursive"
+        },
+        "markup": {
+          "$ref": "config_v2.schema.json#/definitions/markupToInclude"
+        }
+      }
+    },
+    "fileTypes": {
+      "description": "Information on supported file types and how to parse the markup within them.",
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "extensions": {
+                "description": "File extensions to support with this configuration.",
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "testStartStatementOpen": {
+                "description": "Opening of an in-document test start statement.",
+                "type": "string",
+                "default": ""
+              },
+              "testStartStatementClose": {
+                "description": "Close of an in-document test start statement.",
+                "type": "string",
+                "default": ""
+              },
+              "testIgnoreStatement": {
+                "description": "Text for an in-document test ignore statement.",
+                "type": "string",
+                "default": ""
+              },
+              "testEndStatement": {
+                "description": "Text for an in-document test end statement.",
+                "type": "string",
+                "default": ""
+              },
+              "stepStatementOpen": {
+                "description": "Opening of an in-document step statement.",
+                "type": "string",
+                "default": ""
+              },
+              "stepStatementClose": {
+                "description": "Close of an in-document step statement.",
+                "type": "string",
+                "default": ""
+              },
+              "markup": {
+                "description": "Markup types and associated regex patterns to find in documentation source files.",
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "description": "Name of the markup type.",
+                          "type": "string"
+                        },
+                        "regex": {
+                          "description": "Regex patterns to find the markup type in documentation source files.",
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "string"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "default": []
+    },
+    "integrations": {
+      "description": "Options for connecting to external services.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {},
+      "default": {}
+    },
+    "telemetry": {
+      "description": "Options around sending telemetry for Doc Detective usage.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "send": {
+          "description": "If `true`, sends Doc Detective telemetry.",
+          "type": "boolean",
+          "default": false
+        },
+        "userId": {
+          "description": "Identifier for the organization, group, or individual running Doc Detective.",
+          "type": "string"
+        }
+      }
+    },
+    "logLevel": {
+      "description": "Amount of detail to output when performing an operation.",
+      "type": "string",
+      "enum": ["silent", "error", "warning", "info", "debug"],
+      "default": "info"
+    }
+  },
+  "definitions": {
+    "input": {
+      "description": "Path(s) to test specifications and documentation source files. May be paths to specific files or to directories to scan for files.",
+      "default": ".",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "recursive": {
+      "description": "If `true` searches `input`, `setup`, and `cleanup` paths recursively for test specificaions and source files.",
+      "type": "boolean",
+      "default": true
+    },
+    "output": {
+      "description": "Path of the directory in which to store the output of Doc Detective commands.",
+      "type": "string",
+      "default": "."
+    },
+    "markupToInclude": {
+      "description": "Markup types to include when performing this operation. If no markup types are specified, the operation includes all markup types as defined in `fileTypes`.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "oneOf": [
+          {
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "examples": [
+    {},
+    {
+      "input": ".",
+      "output": "."
+    },
+    {
+      "envVariables": "",
+      "input": ".",
+      "output": ".",
+      "recursive": true,
+      "logLevel": "info",
+      "runTests": {
+        "input": ".",
+        "output": ".",
+        "setup": "",
+        "cleanup": "",
+        "recursive": true,
+        "mediaDirectory": ".",
+        "downloadDirectory": ".",
+        "contexts": [
+          {
+            "app": {
+              "name": "firefox",
+              "path": ""
+            },
+            "platforms": ["linux", "mac", "windows"]
+          }
+        ]
+      }
+    },
+    {
+      "envVariables": "",
+      "input": ".",
+      "output": ".",
+      "recursive": true,
+      "logLevel": "info",
+      "runTests": {
+        "input": ".",
+        "output": ".",
+        "setup": "",
+        "cleanup": "",
+        "recursive": true,
+        "mediaDirectory": ".",
+        "downloadDirectory": ".",
+        "contexts": [
+          {
+            "app": {
+              "name": "firefox",
+              "path": ""
+            },
+            "platforms": ["linux", "mac", "windows"]
+          }
+        ]
+      },
+      "runCoverage": {
+        "recursive": true,
+        "input": ".",
+        "output": ".",
+        "markup": []
+      },
+      "suggestTests": {
+        "recursive": true,
+        "input": ".",
+        "output": ".",
+        "markup": []
+      },
+      "fileTypes": [
+        {
+          "extensions": [".md", ".mdx"],
+          "testStartStatementOpen": "[comment]: # (test start",
+          "testStartStatementClose": ")",
+          "testIgnoreStatement": "[comment]: # (test ignore)",
+          "testEndStatement": "[comment]: # (test end)",
+          "stepStatementOpen": "[comment]: # (action",
+          "stepStatementClose": ")",
+          "markup": [
+            {
+              "name": "onscreenText",
+              "regex": ["\\*\\*.+?\\*\\*"]
+            },
+            {
+              "name": "emphasis",
+              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"]
+            },
+            {
+              "name": "image",
+              "regex": ["!\\[.+?\\]\\(.+?\\)"]
+            },
+            {
+              "name": "hyperlink",
+              "regex": ["(?<!!)\\[.+?\\]\\(.+?\\)"]
+            },
+            {
+              "name": "orderedList",
+              "regex": ["(?<=\n) *?[0-9][0-9]?[0-9]?.\\s*.*"]
+            },
+            {
+              "name": "unorderedList",
+              "regex": ["(?<=\n) *?\\*.\\s*.*", "(?<=\n) *?-.\\s*.*"]
+            },
+            {
+              "name": "codeInline",
+              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"]
+            },
+            {
+              "name": "codeBlock",
+              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"]
+            },
+            {
+              "name": "interaction",
+              "regex": [
+                "[cC]lick",
+                "[tT]ap",
+                "[tT]ouch",
+                "[sS]elect",
+                "[cC]hoose",
+                "[tT]oggle",
+                "[eE]nable",
+                "[dD]isable",
+                "[tT]urn [oO][ff|n]",
+                "[tT]ype",
+                "[eE]nter"
+              ]
+            }
+          ]
+        }
+      ],
+      "integrations": {},
+      "telemetry": {
+        "send": false,
+        "userId": "Doc Detective"
+      }
+    },
+    {
+      "envVariables": "",
+      "input": ["."],
+      "output": ".",
+      "recursive": true,
+      "logLevel": "info",
+      "runTests": {
+        "input": ["."],
+        "output": ".",
+        "setup": ["."],
+        "cleanup": ["."],
+        "recursive": true,
+        "mediaDirectory": ".",
+        "downloadDirectory": ".",
+        "contexts": [
+          {
+            "app": {
+              "name": "firefox",
+              "path": ""
+            },
+            "platforms": ["linux", "mac", "windows"]
+          }
+        ]
+      },
+      "runCoverage": {
+        "recursive": true,
+        "input": ["."],
+        "output": ".",
+        "markup": []
+      },
+      "suggestTests": {
+        "recursive": true,
+        "input": ["."],
+        "output": ".",
+        "markup": []
+      },
+      "fileTypes": [
+        {
+          "extensions": [".md", ".mdx"],
+          "testStartStatementOpen": "[comment]: # (test start",
+          "testStartStatementClose": ")",
+          "testIgnoreStatement": "[comment]: # (test ignore)",
+          "testEndStatement": "[comment]: # (test end)",
+          "stepStatementOpen": "[comment]: # (action",
+          "stepStatementClose": ")",
+          "markup": [
+            {
+              "name": "onscreenText",
+              "regex": ["\\*\\*.+?\\*\\*"]
+            },
+            {
+              "name": "emphasis",
+              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"]
+            },
+            {
+              "name": "image",
+              "regex": ["!\\[.+?\\]\\(.+?\\)"]
+            },
+            {
+              "name": "hyperlink",
+              "regex": ["(?<!!)\\[.+?\\]\\(.+?\\)"]
+            },
+            {
+              "name": "orderedList",
+              "regex": ["(?<=\n) *?[0-9][0-9]?[0-9]?.\\s*.*"]
+            },
+            {
+              "name": "unorderedList",
+              "regex": ["(?<=\n) *?\\*.\\s*.*", "(?<=\n) *?-.\\s*.*"]
+            },
+            {
+              "name": "codeInline",
+              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"]
+            },
+            {
+              "name": "codeBlock",
+              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"]
+            },
+            {
+              "name": "interaction",
+              "regex": [
+                "[cC]lick",
+                "[tT]ap",
+                "[tT]ouch",
+                "[sS]elect",
+                "[cC]hoose",
+                "[tT]oggle",
+                "[eE]nable",
+                "[dD]isable",
+                "[tT]urn [oO][ff|n]",
+                "[tT]ype",
+                "[eE]nter"
+              ]
+            }
+          ]
+        }
+      ],
+      "integrations": {},
+      "telemetry": {
+        "send": false,
+        "userId": "Doc Detective"
+      }
+    }
+  ]
+}
