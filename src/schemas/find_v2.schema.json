@@ -38,7 +38,7 @@
       "description": "Click the element."
     },
     "typeKeys": {
-      "description": "Type keys after finding the element. If you want to type in the element, make the element active with the `click` parameter.",
+      "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](/reference/schemas/typeKeys).<br><br>To type in the element, make the element active with the `click` parameter.",
       "oneOf": [
         {
           "type": "string"

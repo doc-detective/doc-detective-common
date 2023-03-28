@@ -24,6 +24,7 @@
       "transform": ["trim"]
     },
     "statusCodes": {
+      "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
       "type": "array",
       "items": {
         "oneOf": [
@@ -101,7 +102,8 @@
                 "description": "jq filter to apply to the response data. If the filter doesn't return a value, the environment variable isn't set.",
                 "type": "string"
               }
-            }
+            },
+            "required": ["name", "jqFilter"]
           }
         ]
       }
@@ -138,10 +140,7 @@
         "name": "morpheus",
         "job": "leader"
       },
-      "statusCodes": [
-        200,
-        201
-      ]
+      "statusCodes": [200, 201]
     },
     {
       "action": "httpRequest",

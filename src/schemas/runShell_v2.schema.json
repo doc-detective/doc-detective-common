@@ -13,7 +13,8 @@
     },
     "action": {
       "type": "string",
-      "const": "runShell"
+      "const": "runShell",
+      "description": "The action to perform."
     },
     "command": {
       "type": "string",
