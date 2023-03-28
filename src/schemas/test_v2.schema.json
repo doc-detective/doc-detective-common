@@ -23,6 +23,7 @@
       }
     },
     "steps": {
+      "description": "Actions to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails.",
       "type": "array",
       "minItems": 1,
       "items": {
