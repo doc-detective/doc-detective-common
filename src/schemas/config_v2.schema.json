@@ -95,7 +95,7 @@
       }
     },
     "runCoverage": {
-      "description": "Options for performing test coverage analysis on documentation source files.  When performing coveration analysis, values set here override general condiguration options.",
+      "description": "Options for performing test coverage analysis on documentation source files.  When performing coveration analysis, values set here override general configuration options.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
