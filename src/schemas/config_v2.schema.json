@@ -24,6 +24,7 @@
       "type": "object",
       "additionalProperties": false,
       "description": "Options for running tests. When running tests, values set here override general configuration options.",
+      "default": {},
       "properties": {
         "input": {
           "$ref": "config_v2.schema.json#/definitions/input"
@@ -47,8 +48,7 @@
                 ]
               }
             }
-          ],
-          "default": ""
+          ]
         },
         "cleanup": {
           "description": "Path(s) to test specifications to perform after those specified by `input`. Useful for cleaning up testing environments.",
@@ -66,8 +66,7 @@
                 ]
               }
             }
-          ],
-          "default": ""
+          ]
         },
         "recursive": {
           "$ref": "config_v2.schema.json#/definitions/recursive"
@@ -91,8 +90,7 @@
                 "$ref": "context_v2.schema.json#"
               }
             ]
-          },
-          "default": [{}]
+          }
         }
       }
     },
@@ -156,33 +154,27 @@
               },
               "testStartStatementOpen": {
                 "description": "Opening of an in-document test start statement.",
-                "type": "string",
-                "default": ""
+                "type": "string"
               },
               "testStartStatementClose": {
                 "description": "Close of an in-document test start statement.",
-                "type": "string",
-                "default": ""
+                "type": "string"
               },
               "testIgnoreStatement": {
                 "description": "Text for an in-document test ignore statement.",
-                "type": "string",
-                "default": ""
+                "type": "string"
               },
               "testEndStatement": {
                 "description": "Text for an in-document test end statement.",
-                "type": "string",
-                "default": ""
+                "type": "string"
               },
               "stepStatementOpen": {
                 "description": "Opening of an in-document step statement.",
-                "type": "string",
-                "default": ""
+                "type": "string"
               },
               "stepStatementClose": {
                 "description": "Close of an in-document step statement.",
-                "type": "string",
-                "default": ""
+                "type": "string"
               },
               "markup": {
                 "description": "Markup types and associated regex patterns to find in documentation source files.",
