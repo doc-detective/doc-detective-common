@@ -220,7 +220,8 @@
             ]
           }
         ]
-      }
+      },
+      "default": []
     },
     "integrations": {
       "description": "Options for connecting to external services.",
