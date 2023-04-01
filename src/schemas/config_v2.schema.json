@@ -5,18 +5,20 @@
   "additionalProperties": false,
   "properties": {
     "input": {
+      "default": ".",
       "$ref": "config_v2.schema.json#/definitions/input"
     },
     "output": {
+      "default": ".",
       "$ref": "config_v2.schema.json#/definitions/output"
     },
     "recursive": {
+      "default": true,
       "$ref": "config_v2.schema.json#/definitions/recursive"
     },
     "envVariables": {
       "description": "Path to a `.env` file to load before performing a Doc Detective operation.",
-      "type": "string",
-      "default": ""
+      "type": "string"
     },
     "runTests": {
       "type": "object",
@@ -226,15 +228,13 @@
             ]
           }
         ]
-      },
-      "default": []
+      }
     },
     "integrations": {
       "description": "Options for connecting to external services.",
       "type": "object",
       "additionalProperties": false,
-      "properties": {},
-      "default": {}
+      "properties": {}
     },
     "telemetry": {
       "description": "Options around sending telemetry for Doc Detective usage.",
