@@ -10,6 +10,10 @@
       "type": "string",
       "description": "Description of the test specification."
     },
+    "file": {
+      "type": "string",
+      "description": "Path to the file that the specification is associated with."
+    },
     "contexts": {
       "type": "array",
       "description": "Application/platform sets to run tests in. Overrides `contexts` defined at the config-level.",
