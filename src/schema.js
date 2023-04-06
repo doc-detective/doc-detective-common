@@ -24,7 +24,7 @@ function loadSchemas() {
     // Load schema from file
     let schema = require(`./schemas/${file}`);
     // Add dynamic ID based on file path
-    schema.$id = `file://${__dirname}/schemas/${file}`;
+    schema.$id = `${__dirname}/schemas/${file}`;
     // Recursively update relative references with app root path
     schema = updateRefPaths(schema);
     // Load into `schema` object
@@ -39,7 +39,7 @@ function updateRefPaths(schema) {
       updateRefPaths(value);
     }
     if (key === "$ref") {
-      schema[key] = `file://${__dirname}/schemas/${value}`;
+      schema[key] = `${__dirname}/schemas/${value}`;
     }
   }
   return schema;
