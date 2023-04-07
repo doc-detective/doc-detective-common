@@ -1,0 +1,1078 @@
+{
+  "title": "specification",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the test specification."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the test specification."
+    },
+    "file": {
+      "type": "string",
+      "description": "Path to the file that the specification is associated with."
+    },
+    "contexts": {
+      "type": "array",
+      "description": "Application/platform sets to run tests in. Overrides `contexts` defined at the config-level.",
+      "items": {
+        "oneOf": [
+          {
+            "title": "context",
+            "type": "object",
+            "description": "An application and supported platforms.\n\nIf no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For browsers, context priority is Firefox > Chrome > Chromium.",
+            "properties": {
+              "app": {
+                "type": "object",
+                "description": "The application to run.",
+                "additionalProperties": false,
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the application.",
+                    "enum": [
+                      "firefox",
+                      "chrome"
+                    ]
+                  },
+                  "path": {
+                    "type": "string",
+                    "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+                  }
+                }
+              },
+              "platforms": {
+                "description": "Supported platforms for the application.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "linux",
+                    "mac",
+                    "windows"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "app",
+              "platforms"
+            ],
+            "additionalProperties": false,
+            "examples": [
+              {
+                "app": {
+                  "name": "firefox"
+                },
+                "platforms": [
+                  "linux"
+                ]
+              },
+              {
+                "app": {
+                  "name": "chrome"
+                },
+                "platforms": [
+                  "linux",
+                  "windows",
+                  "mac"
+                ]
+              },
+              {
+                "app": {
+                  "name": "firefox",
+                  "path": "/usr/bin/firefox"
+                },
+                "platforms": [
+                  "linux"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "tests": {
+      "description": "[Tests](/reference/schemas/test) to perform.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "title": "test",
+            "type": "object",
+            "description": "A Doc Detective test.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the test."
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the test."
+              },
+              "file": {
+                "type": "string",
+                "description": "Path to the file that the test is associated with."
+              },
+              "contexts": {
+                "type": "array",
+                "description": "Application/platform sets to run the test in. Overrides `contexts` defined at the config-level and spec-level.",
+                "items": {
+                  "oneOf": [
+                    {
+                      "title": "context",
+                      "type": "object",
+                      "description": "An application and supported platforms.\n\nIf no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For browsers, context priority is Firefox > Chrome > Chromium.",
+                      "properties": {
+                        "app": {
+                          "type": "object",
+                          "description": "The application to run.",
+                          "additionalProperties": false,
+                          "required": [
+                            "name"
+                          ],
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Name of the application.",
+                              "enum": [
+                                "firefox",
+                                "chrome"
+                              ]
+                            },
+                            "path": {
+                              "type": "string",
+                              "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+                            }
+                          }
+                        },
+                        "platforms": {
+                          "description": "Supported platforms for the application.",
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "linux",
+                              "mac",
+                              "windows"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "app",
+                        "platforms"
+                      ],
+                      "additionalProperties": false,
+                      "examples": [
+                        {
+                          "app": {
+                            "name": "firefox"
+                          },
+                          "platforms": [
+                            "linux"
+                          ]
+                        },
+                        {
+                          "app": {
+                            "name": "chrome"
+                          },
+                          "platforms": [
+                            "linux",
+                            "windows",
+                            "mac"
+                          ]
+                        },
+                        {
+                          "app": {
+                            "name": "firefox",
+                            "path": "/usr/bin/firefox"
+                          },
+                          "platforms": [
+                            "linux"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "steps": {
+                "description": "Actions to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails.",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "anyOf": [
+                    {
+                      "title": "checkLink",
+                      "type": "object",
+                      "description": "Check if a URL returns an acceptable status code from a GET request.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "action": {
+                          "type": "string",
+                          "const": "checkLink",
+                          "description": "Action to perform."
+                        },
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "description": "URL to check.",
+                          "pattern": "^(http://|https://).*",
+                          "transform": [
+                            "trim"
+                          ]
+                        },
+                        "statusCodes": {
+                          "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "default": [
+                            200
+                          ]
+                        }
+                      },
+                      "dynamicDefaults": {
+                        "id": "uuid"
+                      },
+                      "required": [
+                        "action",
+                        "url"
+                      ],
+                      "additionalProperties": false,
+                      "examples": [
+                        {
+                          "action": "checkLink",
+                          "url": "https://www.google.com"
+                        },
+                        {
+                          "action": "checkLink",
+                          "url": "https://www.google.com",
+                          "statusCodes": [
+                            200
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "title": "goTo",
+                      "type": "object",
+                      "description": "Navigate to a specified URL.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "action": {
+                          "type": "string",
+                          "const": "goTo",
+                          "description": "Action to perform."
+                        },
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "description": "URL to navigate to.",
+                          "transform": [
+                            "trim"
+                          ]
+                        }
+                      },
+                      "dynamicDefaults": {
+                        "id": "uuid"
+                      },
+                      "required": [
+                        "action",
+                        "url"
+                      ],
+                      "additionalProperties": false,
+                      "examples": [
+                        {
+                          "action": "goTo",
+                          "url": "https://www.google.com"
+                        },
+                        {
+                          "id": "ddec5e20-2e81-4f38-867c-92c8d9516755",
+                          "description": "This is a test!",
+                          "action": "goTo",
+                          "url": "https://www.google.com"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "httpRequest",
+                      "type": "object",
+                      "description": "Perform a generic HTTP request, for example to an API.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "action": {
+                          "type": "string",
+                          "const": "httpRequest",
+                          "description": "Aciton to perform."
+                        },
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "description": "URL for the HTTP request.",
+                          "pattern": "^(http://|https://).*",
+                          "transform": [
+                            "trim"
+                          ]
+                        },
+                        "statusCodes": {
+                          "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "default": [
+                            200
+                          ]
+                        },
+                        "method": {
+                          "type": "string",
+                          "description": "Method of the HTTP request",
+                          "enum": [
+                            "get",
+                            "put",
+                            "post",
+                            "patch",
+                            "delete"
+                          ],
+                          "transform": [
+                            "trim",
+                            "toEnumCase"
+                          ],
+                          "default": "get"
+                        },
+                        "requestHeaders": {
+                          "description": "Headers to include in the HTTP request, in key/value format.",
+                          "type": "object",
+                          "additionalProperties": true,
+                          "properties": {},
+                          "default": {}
+                        },
+                        "responseHeaders": {
+                          "description": "Headers expected in the response, in key/value format. If one or more `responseHeaders` entries aren't present in the response, the step fails.",
+                          "type": "object",
+                          "additionalProperties": true,
+                          "properties": {},
+                          "default": {}
+                        },
+                        "requestParams": {
+                          "description": "URL parameters to include in the HTTP request, in key/value format.",
+                          "type": "object",
+                          "additionalProperties": true,
+                          "default": {},
+                          "properties": {}
+                        },
+                        "responseParams": {
+                          "description": "URL parameters expected in the response, in key/value format. If one or more `responseParams` entries aren't present in the response, the step fails.",
+                          "type": "object",
+                          "additionalProperties": true,
+                          "default": {},
+                          "properties": {}
+                        },
+                        "requestData": {
+                          "description": "JSON object to include as the body of the HTTP request.",
+                          "type": "object",
+                          "additionalProperties": true,
+                          "default": {},
+                          "properties": {}
+                        },
+                        "responseData": {
+                          "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
+                          "type": "object",
+                          "additionalProperties": true,
+                          "default": {},
+                          "properties": {}
+                        },
+                        "envsFromResponseData": {
+                          "description": "Environment variables to set based on response variables, as an object of the environment variable name and the jq filter applied to the response data to identify the variable's value.",
+                          "type": "array",
+                          "default": [],
+                          "items": {
+                            "oneOf": [
+                              {
+                                "description": "",
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "description": "Name of the environment variable to set.",
+                                    "type": "string"
+                                  },
+                                  "jqFilter": {
+                                    "description": "jq filter to apply to the response data. If the filter doesn't return a value, the environment variable isn't set.",
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "name",
+                                  "jqFilter"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "dynamicDefaults": {
+                        "id": "uuid"
+                      },
+                      "required": [
+                        "action",
+                        "url"
+                      ],
+                      "additionalProperties": false,
+                      "examples": [
+                        {
+                          "action": "httpRequest",
+                          "url": "https://reqres.in/api/users"
+                        },
+                        {
+                          "action": "httpRequest",
+                          "url": "https://reqres.in/api/users/2",
+                          "method": "put",
+                          "requestData": {
+                            "name": "morpheus",
+                            "job": "zion resident"
+                          }
+                        },
+                        {
+                          "action": "httpRequest",
+                          "url": "https://reqres.in/api/users",
+                          "method": "post",
+                          "requestData": {
+                            "name": "morpheus",
+                            "job": "leader"
+                          },
+                          "responseData": {
+                            "name": "morpheus",
+                            "job": "leader"
+                          },
+                          "statusCodes": [
+                            200,
+                            201
+                          ]
+                        },
+                        {
+                          "action": "httpRequest",
+                          "url": "https://www.api-server.com",
+                          "method": "post",
+                          "requestHeaders": {
+                            "header": "value"
+                          },
+                          "requestParams": {
+                            "param": "value"
+                          },
+                          "requestData": {
+                            "field": "value"
+                          },
+                          "responseHeaders": {
+                            "header": "value"
+                          },
+                          "responseData": {
+                            "field": "value"
+                          },
+                          "statusCodes": [
+                            200
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "title": "runShell",
+                      "type": "object",
+                      "description": "Perform a native shell command.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "action": {
+                          "type": "string",
+                          "const": "runShell",
+                          "description": "The action to perform."
+                        },
+                        "command": {
+                          "type": "string",
+                          "description": "Command to perform in the machine's default shell."
+                        },
+                        "args": {
+                          "type": "array",
+                          "description": "Arguments for the command.",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "default": []
+                        }
+                      },
+                      "dynamicDefaults": {
+                        "id": "uuid"
+                      },
+                      "additionalProperties": false,
+                      "required": [
+                        "action",
+                        "command"
+                      ],
+                      "examples": [
+                        {
+                          "action": "runShell",
+                          "command": "echo",
+                          "args": [
+                            "$USER"
+                          ]
+                        },
+                        {
+                          "action": "runShell",
+                          "command": "echo",
+                          "args": [
+                            "hello-world"
+                          ],
+                          "id": "ddec5e20-2e81-4f38-867c-92c8d9516755",
+                          "description": "This is a test!"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "saveScreenshot",
+                      "type": "object",
+                      "description": "Takes a screenshot in PNG format.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "action": {
+                          "type": "string",
+                          "const": "saveScreenshot",
+                          "description": "The action to perform."
+                        },
+                        "path": {
+                          "type": "string",
+                          "description": "File path of the PNG file. If not specified, the file path is your media directory and the file name is the ID of the step.",
+                          "pattern": "[A-Za-z0-9_-]*\\.(png|PNG)$"
+                        }
+                      },
+                      "dynamicDefaults": {
+                        "id": "uuid"
+                      },
+                      "required": [
+                        "action"
+                      ],
+                      "additionalProperties": false,
+                      "examples": [
+                        {
+                          "action": "saveScreenshot"
+                        },
+                        {
+                          "action": "saveScreenshot",
+                          "path": "results.png"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "setVariables",
+                      "type": "object",
+                      "description": "Load environment variables from a `.env` file.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "action": {
+                          "type": "string",
+                          "const": "setVariables",
+                          "description": "Action to perform."
+                        },
+                        "path": {
+                          "type": "string",
+                          "description": "Path to the `.env` file."
+                        }
+                      },
+                      "dynamicDefaults": {
+                        "id": "uuid"
+                      },
+                      "required": [
+                        "action",
+                        "path"
+                      ],
+                      "additionalProperties": false,
+                      "examples": [
+                        {
+                          "action": "setVariables",
+                          "path": ".env"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "typeKeys",
+                      "type": "object",
+                      "description": "Type keys. To type special keys, begin and end the string with `$` and use the [special key's enum](). For example, to type the Escape key, enter `$ESCAPE$`.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "action": {
+                          "type": "string",
+                          "const": "typeKeys",
+                          "description": "The action to perform."
+                        },
+                        "keys": {
+                          "description": "String of keys to enter.",
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "array",
+                              "items": {
+                                "oneOf": [
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "action",
+                        "keys"
+                      ],
+                      "additionalProperties": false,
+                      "examples": [
+                        {
+                          "action": "typeKeys",
+                          "keys": "kittens"
+                        },
+                        {
+                          "action": "typeKeys",
+                          "keys": [
+                            "$ENTER$"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "title": "find",
+                      "type": "object",
+                      "description": "Check if an element exists with the specified CSS selector.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "action": {
+                          "type": "string",
+                          "const": "find",
+                          "description": "Action to perform."
+                        },
+                        "selector": {
+                          "description": "Selector that uniquely identifies the element.",
+                          "type": "string"
+                        },
+                        "timeout": {
+                          "type": "integer",
+                          "description": "Max duration in milliseconds to wait for the element to exist.",
+                          "default": 500
+                        },
+                        "matchText": {
+                          "type": "string",
+                          "description": "Text that the element shuold contain. If the element doesn't contain the text, the step fails."
+                        },
+                        "moveTo": {
+                          "type": "boolean",
+                          "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded."
+                        },
+                        "click": {
+                          "type": "boolean",
+                          "description": "Click the element."
+                        },
+                        "typeKeys": {
+                          "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](/reference/schemas/typeKeys).<br><br>To type in the element, make the element active with the `click` parameter.",
+                          "oneOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "keys": {
+                                  "description": "String of keys to enter.",
+                                  "anyOf": [
+                                    {
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "oneOf": [
+                                          {
+                                            "type": "string"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "action",
+                        "selector"
+                      ],
+                      "dynamicDefaults": {
+                        "id": "uuid"
+                      },
+                      "additionalProperties": false,
+                      "examples": [
+                        {
+                          "action": "find",
+                          "selector": "[title=Search]"
+                        },
+                        {
+                          "action": "find",
+                          "selector": "[title=Search]",
+                          "timeout": 10000,
+                          "matchText": "Search",
+                          "moveTo": true,
+                          "click": true,
+                          "typeKeys": "shorthair cat"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "wait",
+                      "type": "object",
+                      "description": "Pause before performing the next action.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "action": {
+                          "type": "string",
+                          "const": "wait",
+                          "description": "The action to perform."
+                        },
+                        "duration": {
+                          "type": "number",
+                          "description": "Milliseconds to wait.",
+                          "default": 500
+                        }
+                      },
+                      "dynamicDefaults": {
+                        "id": "uuid"
+                      },
+                      "required": [
+                        "action"
+                      ],
+                      "additionalProperties": false,
+                      "examples": [
+                        {
+                          "action": "wait"
+                        },
+                        {
+                          "action": "wait",
+                          "duration": 5000
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "dynamicDefaults": {
+              "id": "uuid"
+            },
+            "required": [
+              "steps"
+            ],
+            "additionalProperties": false,
+            "examples": [
+              {
+                "steps": [
+                  {
+                    "action": "checkLink",
+                    "url": "https://www.duckduckgo.com"
+                  }
+                ]
+              },
+              {
+                "steps": [
+                  {
+                    "action": "goTo",
+                    "url": "https://www.duckduckgo.com"
+                  },
+                  {
+                    "action": "find",
+                    "selector": "[title=Search]",
+                    "click": true,
+                    "typeKeys": {
+                      "keys": [
+                        "shorthair cats",
+                        "$ENTER$"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "Do all the things! - Test",
+                "description": "This test includes every property across all actions.",
+                "contexts": [
+                  {
+                    "app": {
+                      "name": "firefox",
+                      "path": "/usr/bin/firefox"
+                    },
+                    "platforms": [
+                      "linux"
+                    ]
+                  }
+                ],
+                "steps": [
+                  {
+                    "action": "setVariables",
+                    "path": ".env"
+                  },
+                  {
+                    "action": "runShell",
+                    "command": "echo",
+                    "args": [
+                      "$USER"
+                    ]
+                  },
+                  {
+                    "action": "checkLink",
+                    "url": "https://www.duckduckgo.com"
+                  },
+                  {
+                    "action": "httpRequest",
+                    "url": "https://reqres.in/api/users",
+                    "method": "post",
+                    "requestData": {
+                      "name": "morpheus",
+                      "job": "leader"
+                    },
+                    "responseData": {
+                      "name": "morpheus",
+                      "job": "leader"
+                    },
+                    "statusCodes": [
+                      200,
+                      201
+                    ]
+                  },
+                  {
+                    "action": "goTo",
+                    "url": "https://www.duckduckgo.com"
+                  },
+                  {
+                    "action": "find",
+                    "selector": "[title=Search]",
+                    "timeout": 10000,
+                    "matchText": "Search",
+                    "moveTo": true,
+                    "click": true,
+                    "typeKeys": {
+                      "keys": [
+                        "shorthair cat"
+                      ]
+                    }
+                  },
+                  {
+                    "action": "typeKeys",
+                    "keys": [
+                      "$ENTER$"
+                    ]
+                  },
+                  {
+                    "action": "saveScreenshot"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "tests"
+  ],
+  "examples": [
+    {
+      "tests": [
+        {
+          "steps": [
+            {
+              "action": "checkLink",
+              "url": "https://www.duckduckgo.com"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Do all the things! - Spec",
+      "contexts": [
+        {
+          "app": {
+            "name": "chrome",
+            "path": "/usr/bin/firefox"
+          },
+          "platforms": [
+            "windows",
+            "mac"
+          ]
+        }
+      ],
+      "tests": [
+        {
+          "id": "Do all the things! - Test",
+          "description": "This test includes nearly every property across all actions.",
+          "contexts": [
+            {
+              "app": {
+                "name": "firefox",
+                "path": "/usr/bin/firefox"
+              },
+              "platforms": [
+                "linux"
+              ]
+            }
+          ],
+          "steps": [
+            {
+              "action": "setVariables",
+              "path": ".env"
+            },
+            {
+              "action": "runShell",
+              "command": "echo",
+              "args": [
+                "$USER"
+              ]
+            },
+            {
+              "action": "checkLink",
+              "url": "https://www.duckduckgo.com"
+            },
+            {
+              "action": "httpRequest",
+              "url": "https://reqres.in/api/users",
+              "method": "post",
+              "requestData": {
+                "name": "morpheus",
+                "job": "leader"
+              },
+              "responseData": {
+                "name": "morpheus",
+                "job": "leader"
+              },
+              "statusCodes": [
+                200,
+                201
+              ]
+            },
+            {
+              "action": "goTo",
+              "url": "https://www.duckduckgo.com"
+            },
+            {
+              "action": "find",
+              "selector": "[title=Search]",
+              "timeout": 10000,
+              "matchText": "Search",
+              "moveTo": true,
+              "click": true,
+              "typeKeys": {
+                "keys": [
+                  "shorthair cat"
+                ]
+              }
+            },
+            {
+              "action": "typeKeys",
+              "keys": [
+                "$ENTER$"
+              ]
+            },
+            {
+              "action": "saveScreenshot"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "$id": "/home/hawkeyexl/Documents/Workspace/doc-detective-common/src/schemas/src_schemas/spec_v2.schema.json"
+}

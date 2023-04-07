@@ -1,5 +1,4 @@
-const { schemas } = require("../src/schema");
-const { validate } = require("../src/validate");
+const { validate, schemas } = require("../src/index");
 
 // Loop through JSON schemas
 for (const [key, value] of Object.entries(schemas)) {
