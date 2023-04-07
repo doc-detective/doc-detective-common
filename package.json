@@ -5,6 +5,8 @@
   "description": "Shared components for Doc Detective projects.",
   "main": "index.js",
   "scripts": {
+    "watch": "chokidar \"**/src_schemas/*.js\" -c \"npm run genSchemas && npm run test\"",
+    "dereferenceSchemas": "node ./scripts/dereferenceSchemas.js",
     "test": "jest"
   },
   "precommit": "test",
