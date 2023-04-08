@@ -32,5 +32,5 @@
       "env": "./variables.env"
     }
   ],
-  "$id": "/home/hawkeyexl/Documents/Workspace/doc-detective-common/src/schemas/src_schemas/runShell_v1.schema.json"
+  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/runShell_v1.schema.json"
 }
