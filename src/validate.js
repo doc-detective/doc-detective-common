@@ -1,4 +1,4 @@
-const { schemas } = require("./schema");
+const { schemas } = require("./schemas");
 const Ajv = require("ajv");
 // Ajv extra formats: https://ajv.js.org/packages/ajv-formats.html
 const addFormats = require("ajv-formats");
