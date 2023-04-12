@@ -167,6 +167,5 @@
         "env": "./sample/variables.env"
       }
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/find_v1.schema.json"
+  ]
 }

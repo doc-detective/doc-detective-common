@@ -27,6 +27,8 @@ async function dereferenceSchemas() {
     schema = updateRefPaths(schema, inputDir);
     // Dereference schema
     schema = await parser.dereference(schema);
+    // Delete ID
+    delete schema.$id
     // Write to file
     fs.writeFileSync(`${outputDir}/${file}`, JSON.stringify(schema, null, 2));
   }

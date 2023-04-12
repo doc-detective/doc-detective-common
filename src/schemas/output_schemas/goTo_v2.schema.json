@@ -44,6 +44,5 @@
       "action": "goTo",
       "url": "https://www.google.com"
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/goTo_v2.schema.json"
+  ]
 }

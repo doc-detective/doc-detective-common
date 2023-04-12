@@ -187,6 +187,5 @@
         200
       ]
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/httpRequest_v2.schema.json"
+  ]
 }

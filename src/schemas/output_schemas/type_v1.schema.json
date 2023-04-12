@@ -58,6 +58,5 @@
       "keys": "kittens",
       "trailingSpecialKey": "Enter"
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/type_v1.schema.json"
+  ]
 }

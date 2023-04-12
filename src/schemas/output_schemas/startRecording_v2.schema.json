@@ -43,6 +43,5 @@
       "path": "results.mp4",
       "fps": 30
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/startRecording_v2.schema.json"
+  ]
 }

@@ -38,6 +38,5 @@
       "css": "[title=Search]",
       "duration": 5000
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/wait_v1.schema.json"
+  ]
 }

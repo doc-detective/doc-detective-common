@@ -71,6 +71,5 @@
         "linux"
       ]
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/context_v2.schema.json"
+  ]
 }

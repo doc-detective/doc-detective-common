@@ -37,6 +37,5 @@
       "action": "saveScreenshot",
       "path": "results.png"
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/saveScreenshot_v2.schema.json"
+  ]
 }

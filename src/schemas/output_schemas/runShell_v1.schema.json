@@ -31,6 +31,5 @@
       "command": "echo $username",
       "env": "./variables.env"
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/runShell_v1.schema.json"
+  ]
 }

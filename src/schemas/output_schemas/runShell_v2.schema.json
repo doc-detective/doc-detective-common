@@ -58,6 +58,5 @@
       "id": "ddec5e20-2e81-4f38-867c-92c8d9516755",
       "description": "This is a test!"
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/runShell_v2.schema.json"
+  ]
 }

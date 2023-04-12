@@ -44,6 +44,5 @@
       "matchPrevious": true,
       "matchThreshold": 0.3
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/screenshot_v1.schema.json"
+  ]
 }

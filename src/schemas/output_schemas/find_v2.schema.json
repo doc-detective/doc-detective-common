@@ -92,6 +92,5 @@
       "click": true,
       "typeKeys": "shorthair cat"
     }
-  ],
-  "$id": "/home/hawkeyexl/Workspaces/doc-detective-common/src/schemas/src_schemas/find_v2.schema.json"
+  ]
 }

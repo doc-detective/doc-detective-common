@@ -24,7 +24,6 @@
       "type": "object",
       "additionalProperties": false,
       "description": "Options for running tests. When running tests, values set here override general configuration options.",
-      "default": {},
       "properties": {
         "input": {
           "$ref": "config_v2.schema.json#/definitions/input"
