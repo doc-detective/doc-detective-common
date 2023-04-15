@@ -307,6 +307,10 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+              "name": {
+                "description": "Name of the file type.",
+                "type": "string"
+              },
               "extensions": {
                 "description": "File extensions to support with this configuration.",
                 "type": "array",
@@ -366,6 +370,28 @@
                               }
                             ]
                           }
+                        },
+                        "actions": {
+                          "description": "Actions that apply to the markup type.",
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "string",
+                                "enum": [
+                                  "checkLink",
+                                  "find",
+                                  "goTo",
+                                  "httpRequest",
+                                  "runShell",
+                                  "saveScreenshot",
+                                  "setVariables",
+                                  "typeKeys",
+                                  "wait"
+                                ]
+                              }
+                            ]
+                          }
                         }
                       },
                       "required": [
@@ -390,7 +416,156 @@
           }
         ]
       },
-      "default": []
+      "default": [
+        {
+          "name": "Markdown",
+          "extensions": [
+            ".md",
+            ".mdx"
+          ],
+          "testStartStatementOpen": "[comment]: # (test start",
+          "testStartStatementClose": ")",
+          "testIgnoreStatement": "[comment]: # (test ignore)",
+          "testEndStatement": "[comment]: # (test end)",
+          "stepStatementOpen": "[comment]: # (step",
+          "stepStatementClose": ")",
+          "markup": [
+            {
+              "name": "onscreenText",
+              "regex": [
+                "\\*\\*.+?\\*\\*"
+              ],
+              "actions": [
+                "find"
+              ]
+            },
+            {
+              "name": "emphasis",
+              "regex": [
+                "(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"
+              ],
+              "actions": [
+                "find"
+              ]
+            },
+            {
+              "name": "image",
+              "regex": [
+                "!\\[.+?\\]\\(.+?\\)"
+              ],
+              "actions": [
+                "checkLink"
+              ]
+            },
+            {
+              "name": "hyperlink",
+              "regex": [
+                "(?<!!)\\[.+?\\]\\(.+?\\)"
+              ],
+              "actions": [
+                "checkLink",
+                "goTo",
+                "httpRequest"
+              ]
+            },
+            {
+              "name": "orderedList",
+              "regex": [
+                "(?<=\n) *?[0-9][0-9]?[0-9]?.\\s*.*"
+              ]
+            },
+            {
+              "name": "unorderedList",
+              "regex": [
+                "(?<=\n) *?\\*.\\s*.*",
+                "(?<=\n) *?-.\\s*.*"
+              ]
+            },
+            {
+              "name": "codeInline",
+              "regex": [
+                "(?<!`)`(?!`).+?(?<!`)`(?!`)"
+              ],
+              "actions": [
+                "runShell",
+                "setVariables",
+                "httpRequest"
+              ]
+            },
+            {
+              "name": "codeBlock",
+              "regex": [
+                "(?=(```))(\\w|\\W)*(?<=```)"
+              ],
+              "actions": [
+                "runShell",
+                "setVariables",
+                "httpRequest"
+              ]
+            },
+            {
+              "name": "interaction",
+              "regex": [
+                "[cC]lick",
+                "[tT]ap",
+                "[tT]ouch",
+                "[sS]elect",
+                "[cC]hoose",
+                "[tT]oggle",
+                "[eE]nable",
+                "[dD]isable",
+                "[tT]urn [oO][ff|n]",
+                "[tT]ype",
+                "[eE]nter",
+                "[sS]end",
+                "[aA]dd",
+                "[rR]emove",
+                "[dD]elete",
+                "[uU]pload",
+                "[dD]ownload",
+                "[sS]croll",
+                "[sS]earch",
+                "[fF]ilter",
+                "[sS]ort",
+                "[cC]opy",
+                "[pP]aste",
+                "[cC]ut",
+                "[rR]eplace",
+                "[cC]lear",
+                "[rR]efresh",
+                "[rR]evert",
+                "[rR]estore",
+                "[rR]eset",
+                "[lL]ogin",
+                "[lL]ogout",
+                "[sS]ign [iI]n",
+                "[sS]ign [oO]ut",
+                "[sS]ubmit",
+                "[cC]ancel",
+                "[cC]lose",
+                "[aA]ccept",
+                "[dD]ecline",
+                "[dD]eny",
+                "[rR]eject",
+                "[rR]etry",
+                "[rR]estart",
+                "[rR]esume"
+              ],
+              "actions": [
+                "checkLink",
+                "find",
+                "goTo",
+                "httpRequest",
+                "runShell",
+                "saveScreenshot",
+                "setVariables",
+                "typeKeys",
+                "wait"
+              ]
+            }
+          ]
+        }
+      ]
     },
     "integrations": {
       "description": "Options for connecting to external services.",
@@ -550,6 +725,7 @@
       },
       "fileTypes": [
         {
+          "name": "Markdown",
           "extensions": [
             ".md",
             ".mdx"
@@ -558,31 +734,45 @@
           "testStartStatementClose": ")",
           "testIgnoreStatement": "[comment]: # (test ignore)",
           "testEndStatement": "[comment]: # (test end)",
-          "stepStatementOpen": "[comment]: # (action",
+          "stepStatementOpen": "[comment]: # (step",
           "stepStatementClose": ")",
           "markup": [
             {
               "name": "onscreenText",
               "regex": [
                 "\\*\\*.+?\\*\\*"
+              ],
+              "actions": [
+                "find"
               ]
             },
             {
               "name": "emphasis",
               "regex": [
                 "(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"
+              ],
+              "actions": [
+                "find"
               ]
             },
             {
               "name": "image",
               "regex": [
                 "!\\[.+?\\]\\(.+?\\)"
+              ],
+              "actions": [
+                "checkLink"
               ]
             },
             {
               "name": "hyperlink",
               "regex": [
                 "(?<!!)\\[.+?\\]\\(.+?\\)"
+              ],
+              "actions": [
+                "checkLink",
+                "goTo",
+                "httpRequest"
               ]
             },
             {
@@ -602,12 +792,22 @@
               "name": "codeInline",
               "regex": [
                 "(?<!`)`(?!`).+?(?<!`)`(?!`)"
+              ],
+              "actions": [
+                "runShell",
+                "setVariables",
+                "httpRequest"
               ]
             },
             {
               "name": "codeBlock",
               "regex": [
                 "(?=(```))(\\w|\\W)*(?<=```)"
+              ],
+              "actions": [
+                "runShell",
+                "setVariables",
+                "httpRequest"
               ]
             },
             {
@@ -623,7 +823,51 @@
                 "[dD]isable",
                 "[tT]urn [oO][ff|n]",
                 "[tT]ype",
-                "[eE]nter"
+                "[eE]nter",
+                "[sS]end",
+                "[aA]dd",
+                "[rR]emove",
+                "[dD]elete",
+                "[uU]pload",
+                "[dD]ownload",
+                "[sS]croll",
+                "[sS]earch",
+                "[fF]ilter",
+                "[sS]ort",
+                "[cC]opy",
+                "[pP]aste",
+                "[cC]ut",
+                "[rR]eplace",
+                "[cC]lear",
+                "[rR]efresh",
+                "[rR]evert",
+                "[rR]estore",
+                "[rR]eset",
+                "[lL]ogin",
+                "[lL]ogout",
+                "[sS]ign [iI]n",
+                "[sS]ign [oO]ut",
+                "[sS]ubmit",
+                "[cC]ancel",
+                "[cC]lose",
+                "[aA]ccept",
+                "[dD]ecline",
+                "[dD]eny",
+                "[rR]eject",
+                "[rR]etry",
+                "[rR]estart",
+                "[rR]esume"
+              ],
+              "actions": [
+                "checkLink",
+                "find",
+                "goTo",
+                "httpRequest",
+                "runShell",
+                "saveScreenshot",
+                "setVariables",
+                "typeKeys",
+                "wait"
               ]
             }
           ]
@@ -689,6 +933,7 @@
       },
       "fileTypes": [
         {
+          "name": "Markdown",
           "extensions": [
             ".md",
             ".mdx"
@@ -697,31 +942,45 @@
           "testStartStatementClose": ")",
           "testIgnoreStatement": "[comment]: # (test ignore)",
           "testEndStatement": "[comment]: # (test end)",
-          "stepStatementOpen": "[comment]: # (action",
+          "stepStatementOpen": "[comment]: # (step",
           "stepStatementClose": ")",
           "markup": [
             {
               "name": "onscreenText",
               "regex": [
                 "\\*\\*.+?\\*\\*"
+              ],
+              "actions": [
+                "find"
               ]
             },
             {
               "name": "emphasis",
               "regex": [
                 "(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"
+              ],
+              "actions": [
+                "find"
               ]
             },
             {
               "name": "image",
               "regex": [
                 "!\\[.+?\\]\\(.+?\\)"
+              ],
+              "actions": [
+                "checkLink"
               ]
             },
             {
               "name": "hyperlink",
               "regex": [
                 "(?<!!)\\[.+?\\]\\(.+?\\)"
+              ],
+              "actions": [
+                "checkLink",
+                "goTo",
+                "httpRequest"
               ]
             },
             {
@@ -741,12 +1000,22 @@
               "name": "codeInline",
               "regex": [
                 "(?<!`)`(?!`).+?(?<!`)`(?!`)"
+              ],
+              "actions": [
+                "runShell",
+                "setVariables",
+                "httpRequest"
               ]
             },
             {
               "name": "codeBlock",
               "regex": [
                 "(?=(```))(\\w|\\W)*(?<=```)"
+              ],
+              "actions": [
+                "runShell",
+                "setVariables",
+                "httpRequest"
               ]
             },
             {
@@ -762,7 +1031,51 @@
                 "[dD]isable",
                 "[tT]urn [oO][ff|n]",
                 "[tT]ype",
-                "[eE]nter"
+                "[eE]nter",
+                "[sS]end",
+                "[aA]dd",
+                "[rR]emove",
+                "[dD]elete",
+                "[uU]pload",
+                "[dD]ownload",
+                "[sS]croll",
+                "[sS]earch",
+                "[fF]ilter",
+                "[sS]ort",
+                "[cC]opy",
+                "[pP]aste",
+                "[cC]ut",
+                "[rR]eplace",
+                "[cC]lear",
+                "[rR]efresh",
+                "[rR]evert",
+                "[rR]estore",
+                "[rR]eset",
+                "[lL]ogin",
+                "[lL]ogout",
+                "[sS]ign [iI]n",
+                "[sS]ign [oO]ut",
+                "[sS]ubmit",
+                "[cC]ancel",
+                "[cC]lose",
+                "[aA]ccept",
+                "[dD]ecline",
+                "[dD]eny",
+                "[rR]eject",
+                "[rR]etry",
+                "[rR]estart",
+                "[rR]esume"
+              ],
+              "actions": [
+                "checkLink",
+                "find",
+                "goTo",
+                "httpRequest",
+                "runShell",
+                "saveScreenshot",
+                "setVariables",
+                "typeKeys",
+                "wait"
               ]
             }
           ]
