@@ -733,7 +733,7 @@
                         "timeout": {
                           "type": "integer",
                           "description": "Max duration in milliseconds to wait for the element to exist.",
-                          "default": 500
+                          "default": 5000
                         },
                         "matchText": {
                           "type": "string",
@@ -825,7 +825,7 @@
                         "duration": {
                           "type": "number",
                           "description": "Milliseconds to wait.",
-                          "default": 500
+                          "default": 5000
                         }
                       },
                       "dynamicDefaults": {
