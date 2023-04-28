@@ -19,7 +19,7 @@
     "duration": {
       "type": "number",
       "description": "Milliseconds to wait.",
-      "default": 500
+      "default": 5000
     }
   },
   "dynamicDefaults": {
