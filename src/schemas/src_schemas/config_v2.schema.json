@@ -127,7 +127,16 @@
           "$ref": "config_v2.schema.json#/definitions/recursive"
         },
         "markup": {
-          "$ref": "config_v2.schema.json#/definitions/markupToInclude"
+          "$ref": "config_v2.schema.json#/definitions/markupToInclude",
+          "default": [
+            "onscreenText",
+            "emphasis",
+            "image",
+            "hyperlink",
+            "codeInline",
+            "codeBlock",
+            "interaction"
+          ]
         }
       }
     },
