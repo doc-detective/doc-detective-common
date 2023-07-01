@@ -6,7 +6,7 @@ exports.schemas = loadSchemas();
 function loadSchemas() {
   const schemas = {};
   // Read files from schema directory
-  path = `${__dirname}/output_schemas`;
+  const path = `${__dirname}/output_schemas`;
   var files = fs.readdirSync(path);
   // Loop through all schema files
   files.forEach(async (file) => {
