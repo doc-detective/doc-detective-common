@@ -48,9 +48,9 @@ async function dereferenceSchemas() {
     fs.writeFileSync(`${outputDir}/${file}`, JSON.stringify(schema, null, 2));
   }
   // Clean up build dir
-  fs.rm(buildDir, { recursive: true }, (err) => {
-    if (err) throw err;
-  });
+  // fs.rm(buildDir, { recursive: true }, (err) => {
+  //   if (err) throw err;
+  // });
 }
 
 // Prepend app-root path to referenced relative paths
