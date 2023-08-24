@@ -13,6 +13,9 @@ const fs = require("fs");
 async function dereferenceSchemas() {
   const inputDir = path.resolve(`${__dirname}/src_schemas`);
   const buildDir = path.resolve(`${__dirname}/build`);
+  fs.mkdir(buildDir, { recursive: true }, (err) => {
+    if (err) throw err;
+  });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
   const files = fs.readdirSync(inputDir);
   // Update schema reference paths
@@ -44,6 +47,10 @@ async function dereferenceSchemas() {
     // Write to file
     fs.writeFileSync(`${outputDir}/${file}`, JSON.stringify(schema, null, 2));
   }
+  // Clean up build dir
+  fs.rm(buildDir, { recursive: true }, (err) => {
+    if (err) throw err;
+  });
 }
 
 // Prepend app-root path to referenced relative paths
