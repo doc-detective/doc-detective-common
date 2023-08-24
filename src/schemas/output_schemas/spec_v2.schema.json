@@ -229,9 +229,8 @@
                         },
                         "url": {
                           "type": "string",
-                          "format": "uri",
                           "description": "URL to check.",
-                          "pattern": "^(http://|https://).*",
+                          "pattern": "(^(http://|https://).*|\\$[A-Za-z]+)",
                           "transform": [
                             "trim"
                           ]
@@ -293,8 +292,8 @@
                         },
                         "url": {
                           "type": "string",
-                          "format": "uri",
                           "description": "URL to navigate to.",
+                          "pattern": "(^(http://|https://).*|\\$[A-Za-z]+)",
                           "transform": [
                             "trim"
                           ]
@@ -341,9 +340,8 @@
                         },
                         "url": {
                           "type": "string",
-                          "format": "uri",
                           "description": "URL for the HTTP request.",
-                          "pattern": "^(http://|https://).*",
+                          "pattern": "(^(http://|https://).*|\\$[A-Za-z]+)",
                           "transform": [
                             "trim"
                           ]
@@ -595,7 +593,7 @@
                         "path": {
                           "type": "string",
                           "description": "File path of the PNG file. If not specified, the file path is your media directory and the file name is the ID of the step.",
-                          "pattern": "[A-Za-z0-9_-]*\\.(png|PNG)$"
+                          "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z]+)"
                         }
                       },
                       "dynamicDefaults": {

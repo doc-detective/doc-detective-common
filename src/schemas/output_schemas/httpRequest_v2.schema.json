@@ -18,9 +18,8 @@
     },
     "url": {
       "type": "string",
-      "format": "uri",
       "description": "URL for the HTTP request.",
-      "pattern": "^(http://|https://).*",
+      "pattern": "(^(http://|https://).*|\\$[A-Za-z]+)",
       "transform": [
         "trim"
       ]

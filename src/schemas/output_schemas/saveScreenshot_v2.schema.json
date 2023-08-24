@@ -19,7 +19,7 @@
     "path": {
       "type": "string",
       "description": "File path of the PNG file. If not specified, the file path is your media directory and the file name is the ID of the step.",
-      "pattern": "[A-Za-z0-9_-]*\\.(png|PNG)$"
+      "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z]+)"
     }
   },
   "dynamicDefaults": {
