@@ -17,7 +17,21 @@ async function dereferenceSchemas() {
     if (err) throw err;
   });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
-  const files = fs.readdirSync(inputDir);
+  var files = [
+    "checkLink_v2.schema.json",
+    "config_v2.schema.json",
+    "context_v2.schema.json",
+    "find_v2.schema.json",
+    "goTo_v2.schema.json",
+    "httpRequest_v2.schema.json",
+    "runShell_v2.schema.json",
+    "saveScreenshot_v2.schema.json",
+    "setVariables_v2.schema.json",
+    "spec_v2.schema.json",
+    "test_v2.schema.json",
+    "typeKeys_v2.schema.json",
+    "wait_v2.schema.json",
+  ];
   // Update schema reference paths
   for (const file of files) {
     // console.log(`File: ${file}`)
