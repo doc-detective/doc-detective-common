@@ -39,8 +39,8 @@ async function dereferenceSchemas() {
     schema = JSON.parse(schema);
     // Dereference schema
     schema = await parser.dereference(schema);
-    // Delete ID
-    delete schema.$id
+    // Delete $id attributes
+    schema = deleteDollarIds(schema);
     // Write to file
     fs.writeFileSync(`${outputDir}/${file}`, JSON.stringify(schema, null, 2));
   }
@@ -60,6 +60,19 @@ function updateRefPaths(schema) {
       valuePath = path.resolve(`${__dirname}/build/${valueFile}`);
       schema[key] = `${valuePath}#${valueAttribute}`;
       // console.log({value, valueFile, valueAttribute, final: schema[key]})
+    }
+  }
+  return schema;
+}
+
+// Prepend app-root path to referenced relative paths
+function deleteDollarIds(schema) {
+  for (let [key, value] of Object.entries(schema)) {
+    if (typeof value === "object") {
+      deleteDollarIds(value);
+    }
+    if (key === "$id") {
+      delete schema[key]
     }
   }
   return schema;

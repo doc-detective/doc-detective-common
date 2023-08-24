@@ -93,8 +93,7 @@
                   "linux"
                 ]
               }
-            ],
-            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\context_v2.schema.json"
+            ]
           }
         ]
       }
@@ -166,8 +165,7 @@
                   200
                 ]
               }
-            ],
-            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\checkLink_v2.schema.json"
+            ]
           },
           {
             "title": "goTo",
@@ -215,8 +213,7 @@
                 "action": "goTo",
                 "url": "https://www.google.com"
               }
-            ],
-            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\goTo_v2.schema.json"
+            ]
           },
           {
             "title": "httpRequest",
@@ -406,8 +403,7 @@
                   200
                 ]
               }
-            ],
-            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\httpRequest_v2.schema.json"
+            ]
           },
           {
             "title": "runShell",
@@ -469,8 +465,7 @@
                 "id": "ddec5e20-2e81-4f38-867c-92c8d9516755",
                 "description": "This is a test!"
               }
-            ],
-            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\runShell_v2.schema.json"
+            ]
           },
           {
             "title": "saveScreenshot",
@@ -511,8 +506,7 @@
                 "action": "saveScreenshot",
                 "path": "results.png"
               }
-            ],
-            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\saveScreenshot_v2.schema.json"
+            ]
           },
           {
             "title": "setVariables",
@@ -550,8 +544,7 @@
                 "action": "setVariables",
                 "path": ".env"
               }
-            ],
-            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\setVariables_v2.schema.json"
+            ]
           },
           {
             "title": "typeKeys",
@@ -606,8 +599,7 @@
                   "$ENTER$"
                 ]
               }
-            ],
-            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\typeKeys_v2.schema.json"
+            ]
           },
           {
             "title": "find",
@@ -703,8 +695,7 @@
                 "click": true,
                 "typeKeys": "shorthair cat"
               }
-            ],
-            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\find_v2.schema.json"
+            ]
           },
           {
             "title": "wait",
@@ -745,8 +736,7 @@
                 "action": "wait",
                 "duration": 5000
               }
-            ],
-            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\wait_v2.schema.json"
+            ]
           }
         ]
       }
