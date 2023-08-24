@@ -1,7 +1,6 @@
 const parser = require("@apidevtools/json-schema-ref-parser");
 const path = require("path");
 const fs = require("fs");
-const { exit } = require("process");
 
 (async () => {
   await dereferenceSchemas();
@@ -13,9 +12,12 @@ const { exit } = require("process");
  */
 async function dereferenceSchemas() {
   const inputDir = path.resolve(`${__dirname}/src_schemas`);
+  const buildDir = path.resolve(`${__dirname}/build`);
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
   const files = fs.readdirSync(inputDir);
-  for await (const file of files) {
+  // Update schema reference paths
+  for (const file of files) {
+    // console.log(`File: ${file}`)
     const filePath = path.resolve(`${inputDir}/${file}`);
     // Load from file
     let schema = fs.readFileSync(filePath).toString();
@@ -24,7 +26,17 @@ async function dereferenceSchemas() {
     // Set ID
     schema.$id = `${filePath}`;
     // Update references to current relative path
-    schema = updateRefPaths(schema, inputDir);
+    schema = updateRefPaths(schema);
+    // Write to file
+    fs.writeFileSync(`${buildDir}/${file}`, JSON.stringify(schema, null, 2));
+  }
+  // Dereference schemas
+  for await (const file of files) {
+    const filePath = path.resolve(`${buildDir}/${file}`);
+    // Load from file
+    let schema = fs.readFileSync(filePath).toString();
+    // Convert to JSON
+    schema = JSON.parse(schema);
     // Dereference schema
     schema = await parser.dereference(schema);
     // Delete ID
@@ -40,8 +52,14 @@ function updateRefPaths(schema) {
     if (typeof value === "object") {
       updateRefPaths(value);
     }
-    if (key === "$ref") {
-      schema[key] = path.resolve(`${__dirname}/src_schemas/${value}`);
+    if (key === "$ref" && !value.startsWith("#")) {
+      // File name of the referenced schema
+      valueFile = value.split("#")[0];
+      // Attribute path in the referenced schema
+      valueAttribute = value.split("#")[1];
+      valuePath = path.resolve(`${__dirname}/build/${valueFile}`);
+      schema[key] = `${valuePath}#${valueAttribute}`;
+      // console.log({value, valueFile, valueAttribute, final: schema[key]})
     }
   }
   return schema;

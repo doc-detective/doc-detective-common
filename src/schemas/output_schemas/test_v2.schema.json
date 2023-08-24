@@ -93,7 +93,8 @@
                   "linux"
                 ]
               }
-            ]
+            ],
+            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\context_v2.schema.json"
           }
         ]
       }
@@ -125,7 +126,7 @@
               "url": {
                 "type": "string",
                 "description": "URL to check.",
-                "pattern": "(^(http://|https://).*|\\$[A-Za-z]+)",
+                "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
                 "transform": [
                   "trim"
                 ]
@@ -165,7 +166,8 @@
                   200
                 ]
               }
-            ]
+            ],
+            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\checkLink_v2.schema.json"
           },
           {
             "title": "goTo",
@@ -188,7 +190,7 @@
               "url": {
                 "type": "string",
                 "description": "URL to navigate to.",
-                "pattern": "(^(http://|https://).*|\\$[A-Za-z]+)",
+                "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
                 "transform": [
                   "trim"
                 ]
@@ -213,7 +215,8 @@
                 "action": "goTo",
                 "url": "https://www.google.com"
               }
-            ]
+            ],
+            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\goTo_v2.schema.json"
           },
           {
             "title": "httpRequest",
@@ -236,7 +239,7 @@
               "url": {
                 "type": "string",
                 "description": "URL for the HTTP request.",
-                "pattern": "(^(http://|https://).*|\\$[A-Za-z]+)",
+                "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
                 "transform": [
                   "trim"
                 ]
@@ -403,7 +406,8 @@
                   200
                 ]
               }
-            ]
+            ],
+            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\httpRequest_v2.schema.json"
           },
           {
             "title": "runShell",
@@ -465,7 +469,8 @@
                 "id": "ddec5e20-2e81-4f38-867c-92c8d9516755",
                 "description": "This is a test!"
               }
-            ]
+            ],
+            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\runShell_v2.schema.json"
           },
           {
             "title": "saveScreenshot",
@@ -488,7 +493,7 @@
               "path": {
                 "type": "string",
                 "description": "File path of the PNG file. If not specified, the file path is your media directory and the file name is the ID of the step.",
-                "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z]+)"
+                "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
               }
             },
             "dynamicDefaults": {
@@ -506,7 +511,8 @@
                 "action": "saveScreenshot",
                 "path": "results.png"
               }
-            ]
+            ],
+            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\saveScreenshot_v2.schema.json"
           },
           {
             "title": "setVariables",
@@ -544,7 +550,8 @@
                 "action": "setVariables",
                 "path": ".env"
               }
-            ]
+            ],
+            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\setVariables_v2.schema.json"
           },
           {
             "title": "typeKeys",
@@ -599,7 +606,8 @@
                   "$ENTER$"
                 ]
               }
-            ]
+            ],
+            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\typeKeys_v2.schema.json"
           },
           {
             "title": "find",
@@ -695,7 +703,8 @@
                 "click": true,
                 "typeKeys": "shorthair cat"
               }
-            ]
+            ],
+            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\find_v2.schema.json"
           },
           {
             "title": "wait",
@@ -736,7 +745,8 @@
                 "action": "wait",
                 "duration": 5000
               }
-            ]
+            ],
+            "$id": "C:\\Users\\hawkeyexl\\Documents\\Workspaces\\doc-detective-common\\src\\schemas\\src_schemas\\wait_v2.schema.json"
           }
         ]
       }

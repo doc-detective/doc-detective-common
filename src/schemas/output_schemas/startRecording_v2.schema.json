@@ -19,7 +19,7 @@
     "path": {
       "type": "string",
       "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file path is your media directory, the file name is the ID of the step, and the extension is `.mp4`.",
-      "pattern": "([A-Za-z0-9_-]*\\.(mp4|MP4|webm|WEBM|gif|GIF)$|\\$[A-Za-z]+)"
+      "pattern": "([A-Za-z0-9_-]*\\.(mp4|MP4|webm|WEBM|gif|GIF)$|\\$[A-Za-z0-9_]+)"
     },
     "fps": {
       "type": "integer",

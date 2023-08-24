@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
-    "jest": "^29.6.2"
+    "jest": "^29.6.4"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^10.1.0",

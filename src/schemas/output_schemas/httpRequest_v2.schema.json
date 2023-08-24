@@ -19,7 +19,7 @@
     "url": {
       "type": "string",
       "description": "URL for the HTTP request.",
-      "pattern": "(^(http://|https://).*|\\$[A-Za-z]+)",
+      "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
       "transform": [
         "trim"
       ]

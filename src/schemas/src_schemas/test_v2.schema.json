@@ -21,7 +21,7 @@
       "items": {
         "oneOf": [
           {
-            "$ref": "context_v2.schema.json"
+            "$ref": "context_v2.schema.json#"
           }
         ]
       }
