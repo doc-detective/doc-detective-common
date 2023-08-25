@@ -5,9 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "dereferenceSchemas": "node ./src/schemas/dereferenceSchemas.js",
-    "test": "npm run dereferenceSchemas && jest"
+    "test:full": "npm run dereferenceSchemas && jest",
+    "test": "jest"
   },
-  "precommit": "test",
+  "precommit": "test:full",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/doc-detective/doc-detective-common.git"
