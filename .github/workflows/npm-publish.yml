@@ -44,11 +44,14 @@ jobs:
       - run: npm test
 
   publish-npm:
+    name: Publish to NPM
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+        with:
+          registry-url: https://registry.npmjs.org/
       - name: Cache node_modules
         uses: actions/cache@v3
         with:
