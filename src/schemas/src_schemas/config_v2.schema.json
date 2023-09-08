@@ -108,7 +108,16 @@
           "$ref": "#/definitions/recursive"
         },
         "markup": {
-          "$ref": "#/definitions/markupToInclude"
+          "$ref": "#/definitions/markupToInclude",
+          "default": [
+            "onscreenText",
+            "emphasis",
+            "image",
+            "hyperlink",
+            "codeInline",
+            "codeBlock",
+            "interaction"
+          ]
         }
       }
     },
@@ -127,7 +136,16 @@
           "$ref": "#/definitions/recursive"
         },
         "markup": {
-          "$ref": "#/definitions/markupToInclude"
+          "$ref": "#/definitions/markupToInclude",
+          "default": [
+            "onscreenText",
+            "emphasis",
+            "image",
+            "hyperlink",
+            "codeInline",
+            "codeBlock",
+            "interaction"
+          ]
         }
       }
     },
@@ -392,7 +410,6 @@
   "definitions": {
     "input": {
       "description": "Path(s) to test specifications and documentation source files. May be paths to specific files or to directories to scan for files.",
-      "default": ".",
       "anyOf": [
         {
           "type": "string"
@@ -411,8 +428,7 @@
     },
     "recursive": {
       "description": "If `true` searches `input`, `setup`, and `cleanup` paths recursively for test specificaions and source files.",
-      "type": "boolean",
-      "default": true
+      "type": "boolean"
     },
     "output": {
       "description": "Path of the directory in which to store the output of Doc Detective commands.",
@@ -422,7 +438,6 @@
     "markupToInclude": {
       "description": "Markup types to include when performing this operation. If no markup types are specified, the operation includes all markup types as defined in `fileTypes`.",
       "type": "array",
-      "default": [],
       "items": {
         "oneOf": [
           {

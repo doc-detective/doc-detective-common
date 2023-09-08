@@ -630,7 +630,7 @@
               },
               "matchText": {
                 "type": "string",
-                "description": "Text that the element shuold contain. If the element doesn't contain the text, the step fails."
+                "description": "Text that the element should contain. If the element doesn't contain the text, the step fails."
               },
               "moveTo": {
                 "type": "boolean",
