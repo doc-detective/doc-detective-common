@@ -89,7 +89,20 @@
                 "$ref": "context_v2.schema.json#"
               }
             ]
-          }
+          },
+          "default": [
+            {
+              "app": {
+                "name": "firefox",
+                "options": {
+                  "width": 1200,
+                  "height": 800,
+                  "headless": true
+                }
+              },
+              "platforms": ["linux", "mac", "windows"]
+            }
+          ]
         }
       }
     },
@@ -650,7 +663,11 @@
           {
             "app": {
               "name": "firefox",
-              "path": ""
+              "options": {
+                "width": 1200,
+                "height": 800,
+                "headless": true
+              }
             },
             "platforms": ["linux", "mac", "windows"]
           }
