@@ -17,6 +17,25 @@
         "path": {
           "type": "string",
           "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+        },
+        "options": {
+          "type": "object",
+          "description": "Options to pass to the app. Only works when `name` is `firefox` or `chrome`.",
+          "additionalProperties": false,
+          "properties": {
+            "width": {
+              "type": "integer",
+              "description": "Width of the window in pixels."
+            },
+            "height": {
+              "type": "integer",
+              "description": "Height of the window in pixels."
+            },
+            "headless": {
+              "type": "boolean",
+              "description": "If `true`, runs the browser in headless mode."
+            }
+          }
         }
       }
     },
@@ -37,6 +56,17 @@
         "name": "firefox"
       },
       "platforms": ["linux"]
+    },
+    {
+      "app": {
+        "name": "firefox",
+        "options": {
+          "width": 800,
+          "height": 600,
+          "headless": false
+        }
+      },
+      "platforms": ["linux", "windows", "mac"]
     },
     {
       "app": {
