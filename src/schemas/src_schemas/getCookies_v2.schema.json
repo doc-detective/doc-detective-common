@@ -1,0 +1,42 @@
+{
+  "title": "getCookies",
+  "type": "object",
+  "description": "Set browser cookies from the current page to an environment variable. The cookies are stored as a stringified JSON object.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "ID of the step."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the step."
+    },
+    "action": {
+      "type": "string",
+      "const": "getCookies",
+      "description": "Action to perform."
+    },
+    "variableName": {
+      "type": "string",
+      "description": "Name of the environment variable to store the cookies in."
+    },
+    "cookies": {
+      "type": "array",
+      "description": "Names of cookies to get."
+    }
+  },
+  "dynamicDefaults": {
+    "id": "uuid"
+  },
+  "required": [
+    "action",
+    "variableName"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "action": "getCookies",
+      "variableName": "myCookies"
+    }
+  ]
+}

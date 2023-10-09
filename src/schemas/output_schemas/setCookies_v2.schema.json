@@ -1,0 +1,104 @@
+{
+  "title": "setCookies",
+  "type": "object",
+  "description": "Set cookies in the current browser page. This is useful for setting cookies that are required for the page to work properly, such as session cookies. Cookie domains must match the current browser page.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "ID of the step."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the step."
+    },
+    "action": {
+      "type": "string",
+      "const": "setCookies",
+      "description": "Action to perform."
+    },
+    "variableName": {
+      "type": "string",
+      "description": "Name of the environment variable to store the cookies in."
+    },
+    "cookies": {
+      "description": "Cookies to set.",
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Stringified JSON array of cookies to set."
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the cookie."
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "Value of the cookie."
+                  },
+                  "path": {
+                    "type": "string",
+                    "description": "Cookie path. Defaults to \"/\" if omitted when adding a cookie."
+                  },
+                  "domain": {
+                    "type": "string",
+                    "description": "Domain the cookie is visible to. Defaults to the current browsing context's active document's URL domain if omitted when adding a cookie."
+                  },
+                  "secure": {
+                    "type": "boolean",
+                    "description": "Whether the cookie is a secure cookie. Defaults to false if omitted when adding a cookie."
+                  },
+                  "httpOnly": {
+                    "type": "boolean",
+                    "description": "Whether the cookie is an HTTP only cookie. Defaults to false if omitted when adding a cookie."
+                  },
+                  "expiry": {
+                    "type": "integer",
+                    "description": "When the cookie expires, specified in seconds since Unix Epoch. Must not be set if omitted when adding a cookie."
+                  },
+                  "sameSite": {
+                    "type": "string",
+                    "description": "Whether the cookie applies to a SameSite policy. Defaults to None if omitted when adding a cookie. Can be set to \"Strict\" or \"Lax\"."
+                  }
+                },
+                "required": [
+                  "name",
+                  "value"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "dynamicDefaults": {
+    "id": "uuid"
+  },
+  "required": [
+    "action",
+    "cookies"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "action": "setCookies",
+      "cookies": "[{\"name\":\"foo\",\"value\":\"bar\"}]"
+    },
+    {
+      "action": "setCookies",
+      "cookies": [
+        {
+          "name": "foo",
+          "value": "bar"
+        }
+      ]
+    }
+  ]
+}
