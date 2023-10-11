@@ -972,6 +972,8 @@
                     ]
                   }
                 ],
+                "setup": "setup.json",
+                "cleanup": "cleanup.json",
                 "steps": [
                   {
                     "action": "setVariables",
