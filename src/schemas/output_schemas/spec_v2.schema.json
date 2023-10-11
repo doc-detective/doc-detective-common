@@ -271,6 +271,14 @@
                   ]
                 }
               },
+              "setup": {
+                "type": "string",
+                "description": "Path to a test specification to perform before this test, while maintaining this test's context. Useful for setting up testing environments. Only the `steps` property is used from the first test in the setup spec."
+              },
+              "cleanup": {
+                "type": "string",
+                "description": "Path to a test specification to perform after this test, while maintaining this test's context. Useful for cleaning up testing environments. Only the `steps` property is used from the first test in the cleanup spec."
+              },
               "steps": {
                 "description": "Actions to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails.",
                 "type": "array",
