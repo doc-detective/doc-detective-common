@@ -277,14 +277,9 @@
                                     "description": "Parameters for the action.",
                                     "type": "object",
                                     "additionalProperties": true
-                                  },
-                                  "prefixes": {
-                                    "description": "Prefix regular expressions that must immediately preceed the markup regex to associate the instance of markup with this action. Assists action auto-detection when parsing source documentation.",
-                                    "type": "array",
-                                    "items": true
                                   }
                                 },
-                                "required": ["name", "prefixes"]
+                                "required": ["name"]
                               }
                             ]
                           }
@@ -578,16 +573,7 @@
                 "params": {
                   "moveTo": true,
                   "click": true
-                },
-                "prefixes": [
-                  "[cC]lick",
-                  "[tT]ap",
-                  "[tT]ouch",
-                  "[sS]elect",
-                  "[cC]hoose",
-                  "[cC]heck",
-                  "[tT]oggle"
-                  ]
+                }
               }]
             },
             {
