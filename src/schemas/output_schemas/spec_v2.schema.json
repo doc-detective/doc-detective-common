@@ -154,6 +154,10 @@
                 "type": "string",
                 "description": "Path to the file that the test is associated with."
               },
+              "detectSteps": {
+                "type": "boolean",
+                "description": "Whether or not to detect steps in input files based on markup regex. Defaults to `true`."
+              },
               "contexts": {
                 "type": "array",
                 "description": "Application/platform sets to run the test in. Overrides `contexts` defined at the config-level and spec-level.",
