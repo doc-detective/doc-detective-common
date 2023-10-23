@@ -19,7 +19,14 @@
     "url": {
       "type": "string",
       "description": "URL to navigate to.",
-      "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
+      "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
+      "transform": [
+        "trim"
+      ]
+    },
+    "hostname": {
+      "type": "string",
+      "description": "Domain to navigate to. Prepended to `url`.",
       "transform": [
         "trim"
       ]
@@ -43,6 +50,13 @@
       "description": "This is a test!",
       "action": "goTo",
       "url": "https://www.google.com"
+    },
+    {
+      "id": "ddec5e20-2e81-4f38-867c-92c8d9516756",
+      "description": "This is a test!",
+      "action": "goTo",
+      "url": "/search",
+      "hostname": "https://www.google.com"
     }
   ]
 }
