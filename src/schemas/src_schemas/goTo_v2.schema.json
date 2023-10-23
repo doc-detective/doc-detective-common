@@ -22,9 +22,9 @@
       "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
       "transform": ["trim"]
     },
-    "hostname": {
+    "origin": {
       "type": "string",
-      "description": "Domain to navigate to. Prepended to `url`.",
+      "description": "Protocol and domain to navigate to. Prepended to `url`.",
       "transform": ["trim"]
     }
   },
@@ -52,7 +52,7 @@
       "description": "This is a test!",
       "action": "goTo",
       "url": "/search",
-      "hostname": "https://www.google.com"
+      "origin": "https://www.google.com"
     }
   ]
 }

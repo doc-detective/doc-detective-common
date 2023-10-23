@@ -24,9 +24,9 @@
         "trim"
       ]
     },
-    "hostname": {
+    "origin": {
       "type": "string",
-      "description": "Domain to navigate to. Prepended to `url`.",
+      "description": "Protocol and domain to navigate to. Prepended to `url`.",
       "transform": [
         "trim"
       ]
@@ -71,7 +71,7 @@
     {
       "action": "checkLink",
       "url": "/search",
-      "hostname": "www.google.com",
+      "origin": "www.google.com",
       "statusCodes": [
         200
       ]
