@@ -19,7 +19,12 @@
     "url": {
       "type": "string",
       "description": "URL to check.",
-      "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
+      "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
+      "transform": ["trim"]
+    },
+    "hostname": {
+      "type": "string",
+      "description": "Domain to navigate to. Prepended to `url`.",
       "transform": ["trim"]
     },
     "statusCodes": {
@@ -32,7 +37,7 @@
           }
         ]
       },
-      "default": [200]
+      "default": [200, 201, 202]
     }
   },
   "dynamicDefaults": {
@@ -48,6 +53,12 @@
     {
       "action": "checkLink",
       "url": "https://www.google.com",
+      "statusCodes": [200]
+    },
+    {
+      "action": "checkLink",
+      "url": "/search",
+      "hostname": "www.google.com",
       "statusCodes": [200]
     }
   ]
