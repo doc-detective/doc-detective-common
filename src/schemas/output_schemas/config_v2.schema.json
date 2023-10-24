@@ -105,6 +105,11 @@
           "description": "If `true` searches `input`, `setup`, and `cleanup` paths recursively for test specificaions and source files.",
           "type": "boolean"
         },
+        "detectSteps": {
+          "type": "boolean",
+          "description": "Whether or not to detect steps in input files based on markup regex.",
+          "default": true
+        },
         "mediaDirectory": {
           "description": "Path of the directory in which to store output media files.",
           "type": "string",
