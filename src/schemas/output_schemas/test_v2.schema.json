@@ -564,8 +564,12 @@
               },
               "path": {
                 "type": "string",
-                "description": "File path of the PNG file. If not specified, the file path is your media directory and the file name is the ID of the step.",
+                "description": "Relative file path of the PNG file from `directory`. If not specified, the file name is the ID of the step.",
                 "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
+              },
+              "directory": {
+                "type": "string",
+                "description": "Directory of the PNG file. Attempts to creatr the directory if it doesn't exist. If not specified, the directory is your media directory."
               }
             },
             "dynamicDefaults": {
@@ -582,6 +586,11 @@
               {
                 "action": "saveScreenshot",
                 "path": "results.png"
+              },
+              {
+                "action": "saveScreenshot",
+                "path": "results.png",
+                "directory": "static/images"
               }
             ]
           },
