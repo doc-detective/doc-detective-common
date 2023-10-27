@@ -709,6 +709,18 @@
                         "directory": {
                           "type": "string",
                           "description": "Directory of the PNG file. Attempts to creatr the directory if it doesn't exist. If not specified, the directory is your media directory."
+                        },
+                        "allowedVarience": {
+                          "type": "number",
+                          "description": "Allowed varience in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than this value, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
+                          "minimum": 0,
+                          "maximum": 100,
+                          "default": 5
+                        },
+                        "overwrite": {
+                          "type": "boolean",
+                          "description": "If `true`, overwrites the existing screenshot at `path` if it exists.",
+                          "default": false
                         }
                       },
                       "dynamicDefaults": {
@@ -730,6 +742,13 @@
                           "action": "saveScreenshot",
                           "path": "results.png",
                           "directory": "static/images"
+                        },
+                        {
+                          "action": "saveScreenshot",
+                          "path": "results.png",
+                          "directory": "static/images",
+                          "allowedVarience": 10,
+                          "overwrite": true
                         }
                       ]
                     },
