@@ -710,15 +710,15 @@
                           "type": "string",
                           "description": "Directory of the PNG file. Attempts to creatr the directory if it doesn't exist. If not specified, the directory is your media directory."
                         },
-                        "allowedVarience": {
+                        "allowedVariance": {
                           "type": "number",
-                          "description": "Allowed varience in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `allowedVarience`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
+                          "description": "Allowed variance in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `allowedVariance`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
                           "minimum": 0,
                           "maximum": 100
                         },
                         "overwrite": {
                           "type": "string",
-                          "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `byVarience`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `allowedVarience`.",
+                          "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `byVarience`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `allowedVariance`.",
                           "enum": [
                             "true",
                             "false",
@@ -751,7 +751,7 @@
                           "action": "saveScreenshot",
                           "path": "results.png",
                           "directory": "static/images",
-                          "allowedVarience": 10,
+                          "allowedVariance": 10,
                           "overwrite": true
                         }
                       ]
