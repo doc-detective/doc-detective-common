@@ -710,19 +710,19 @@
                           "type": "string",
                           "description": "Directory of the PNG file. Attempts to creatr the directory if it doesn't exist. If not specified, the directory is your media directory."
                         },
-                        "allowedVariance": {
+                        "maxVariation": {
                           "type": "number",
-                          "description": "Allowed variance in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `allowedVariance`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
+                          "description": "Allowed variation in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `maxVariation`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
                           "minimum": 0,
                           "maximum": 100
                         },
                         "overwrite": {
                           "type": "string",
-                          "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `byVarience`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `allowedVariance`.",
+                          "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `byVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
                           "enum": [
                             "true",
                             "false",
-                            "byVarience"
+                            "byVariation"
                           ],
                           "default": false
                         }
@@ -751,8 +751,8 @@
                           "action": "saveScreenshot",
                           "path": "results.png",
                           "directory": "static/images",
-                          "allowedVariance": 10,
-                          "overwrite": true
+                          "maxVariation": 10,
+                          "overwrite": "byVariation"
                         }
                       ]
                     },
