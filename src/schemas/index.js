@@ -12,6 +12,8 @@ var files = [
   "runShell_v2.schema.json",
   "saveScreenshot_v2.schema.json",
   "setVariables_v2.schema.json",
+  "startRecording_v2.schema.json",
+  "stopRecording_v2.schema.json",
   "spec_v2.schema.json",
   "test_v2.schema.json",
   "typeKeys_v2.schema.json",
