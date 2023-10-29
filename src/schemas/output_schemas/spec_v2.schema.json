@@ -809,6 +809,89 @@
                       ]
                     },
                     {
+                      "title": "startRecording",
+                      "type": "object",
+                      "description": "Start recording the current browser viewport. Must be followed by a `stopeRecording` action. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "action": {
+                          "type": "string",
+                          "const": "startRecording",
+                          "description": "The action to perform."
+                        },
+                        "path": {
+                          "type": "string",
+                          "description": "File path of the recording relative to `directory`. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+                          "pattern": "([A-Za-z0-9_-]*\\.(mp4|MP4|webm|WEBM|gif|GIF)$|\\$[A-Za-z0-9_]+)"
+                        },
+                        "directory": {
+                          "type": "string",
+                          "description": "Directory of the recording. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
+                        },
+                        "overwrite": {
+                          "type": "boolean",
+                          "description": "If `true`, overwrites the existing file at `path` if it exists.",
+                          "default": false
+                        },
+                        "fps": {
+                          "type": "integer",
+                          "description": "Target frames-per-second for the recording.",
+                          "default": 30
+                        }
+                      },
+                      "dynamicDefaults": {
+                        "id": "uuid"
+                      },
+                      "required": [
+                        "action"
+                      ],
+                      "additionalProperties": false,
+                      "examples": [
+                        {
+                          "action": "startRecording"
+                        },
+                        {
+                          "action": "startRecording",
+                          "path": "results.mp4",
+                          "fps": 30
+                        },
+                        {
+                          "action": "startRecording",
+                          "path": "results.mp4",
+                          "directory": "media",
+                          "overwrite": true,
+                          "fps": 30
+                        }
+                      ]
+                    },
+                    {
+                      "title": "stopRecording",
+                      "type": "object",
+                      "description": "Stop the recording for the current test and context.",
+                      "properties": {
+                        "action": {
+                          "type": "string",
+                          "const": "stopRecording"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "required": [
+                        "action"
+                      ],
+                      "examples": [
+                        {
+                          "action": "stopRecording"
+                        }
+                      ]
+                    },
+                    {
                       "title": "typeKeys",
                       "type": "object",
                       "description": "Type keys. To type special keys, begin and end the string with `$` and use the [special key's enum](). For example, to type the Escape key, enter `$ESCAPE$`.",
@@ -1089,6 +1172,9 @@
                     ]
                   },
                   {
+                    "action": "startRecording"
+                  },
+                  {
                     "action": "goTo",
                     "url": "https://www.duckduckgo.com"
                   },
@@ -1110,6 +1196,13 @@
                     "keys": [
                       "$ENTER$"
                     ]
+                  },
+                  {
+                    "action": "wait",
+                    "duration": 10000
+                  },
+                  {
+                    "action": "stopRecording"
                   },
                   {
                     "action": "saveScreenshot"
