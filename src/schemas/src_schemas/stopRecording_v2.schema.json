@@ -1,0 +1,20 @@
+{
+  "title": "stopRecording",
+  "type": "object",
+  "description": "Stop the recording for the current test and context.",
+  "properties": {
+    "action": {
+      "type": "string",
+      "const": "stopRecording"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "action"
+  ],
+  "examples": [
+    {
+      "action": "stopRecording"
+    }
+  ]
+}
