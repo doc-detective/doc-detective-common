@@ -61,6 +61,17 @@ async function dereferenceSchemas() {
     // Write to file
     fs.writeFileSync(`${outputDir}/${file}`, JSON.stringify(schema, null, 2));
   }
+  // Build final schemas.json file
+  const schemas = {};
+  files.forEach(async (file) => {
+    const key = file.replace(".schema.json", "");
+    // Load schema from file
+    let schema = require(`${outputDir}/${file}`);
+    // Load into `schema` object
+    schemas[key] = schema;
+  });
+  fs.writeFileSync(`${__dirname}/schemas.json`, JSON.stringify(schemas,null,2));
+  
   // Clean up build dir
   // fs.rm(buildDir, { recursive: true }, (err) => {
   //   if (err) throw err;
