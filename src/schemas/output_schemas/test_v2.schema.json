@@ -692,6 +692,9 @@
                 ]
               }
             },
+            "dynamicDefaults": {
+              "id": "uuid"
+            },
             "required": [
               "action",
               "keys"
