@@ -17,6 +17,9 @@ async function dereferenceSchemas() {
     if (err) throw err;
   });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
+  fs.mkdir(outputDir, { recursive: true }, (err) => {
+    if (err) throw err;
+  });
   var files = [
     "checkLink_v2.schema.json",
     "config_v2.schema.json",
