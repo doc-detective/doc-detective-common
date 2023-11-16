@@ -33,7 +33,8 @@
             },
             "headless": {
               "type": "boolean",
-              "description": "If `true`, runs the browser in headless mode."
+              "description": "If `true`, runs the browser in headless mode.",
+              "default": true
             }
           }
         }
