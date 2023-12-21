@@ -31,7 +31,54 @@
     },
     "moveTo": {
       "type": "boolean",
-      "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded."
+      "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded.",
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "alignment": {
+              "description": "Alignment of the element to move to.",
+              "type": "string",
+              "enum": [
+                "top",
+                "bottom",
+                "left",
+                "right",
+                "center"
+              ],
+              "default": "center"
+            },
+            "offset": {
+              "description": "Offset from the element to move to.",
+              "type": "object",
+              "properties": {
+                "x": {
+                  "description": "Offset from the element to move to in x direction. Negative values move left, positive values move right.",
+                  "type": "number",
+                  "default": 0
+                },
+                "y": {
+                  "description": "Offset from the element to move to in y direction. Negative values move up, positive values move down.",
+                  "type": "number",
+                  "default": 0
+                }
+              },
+              "default": {},
+              "additionalProperties": false
+            },
+            "duration": {
+              "description": "Duration of the move in milliseconds.",
+              "type": "number",
+              "minimum": 0,
+              "default": 500
+            }
+          }
+        }
+      ]
     },
     "click": {
       "type": "boolean",
