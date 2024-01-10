@@ -30,7 +30,6 @@
       "description": "Text that the element should contain. If the element doesn't contain the text, the step fails."
     },
     "moveTo": {
-      "type": "boolean",
       "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded.",
       "oneOf": [
         {
@@ -50,12 +49,15 @@
               "$ref": "moveTo_v2.schema.json#/properties/duration"
             }
           }
+          
         }
-      ]
+      ],
+      "default": false
     },
     "click": {
       "type": "boolean",
-      "description": "Click the element."
+      "description": "Click the element.",
+      "default": false
     },
     "typeKeys": {
       "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](/reference/schemas/typeKeys).<br><br>To type in the element, make the element active with the `click` parameter.",
@@ -69,6 +71,9 @@
           "properties": {
             "keys": {
               "$ref": "typeKeys_v2.schema.json#/properties/keys"
+            },
+            "delay": {
+              "$ref": "typeKeys_v2.schema.json#/properties/delay"
             }
           }
         }
@@ -92,7 +97,38 @@
       "matchText": "Search",
       "moveTo": true,
       "click": true,
-      "typeKeys": "shorthair cat" 
+      "typeKeys": "shorthair cat"
+    },
+    {
+      "action": "find",
+      "selector": "[title=Search]",
+      "timeout": 10000,
+      "matchText": "Search",
+      "moveTo": true,
+      "click": true,
+      "typeKeys": {
+        "keys": ["shorthair cat"],
+        "delay": 100
+      }
+    },
+    {
+      "action": "find",
+      "selector": "[title=Search]",
+      "timeout": 10000,
+      "matchText": "Search",
+      "moveTo": {
+        "alignment": "top",
+        "offset": {
+          "x": -1,
+          "y": 1
+        },
+        "duration": 1000
+      },
+      "click": true,
+      "typeKeys": {
+        "keys": ["shorthair cat"],
+        "delay": 100
+      }
     }
   ]
 }
