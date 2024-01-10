@@ -30,7 +30,6 @@
       "description": "Text that the element should contain. If the element doesn't contain the text, the step fails."
     },
     "moveTo": {
-      "type": "boolean",
       "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded.",
       "oneOf": [
         {
@@ -78,11 +77,13 @@
             }
           }
         }
-      ]
+      ],
+      "default": false
     },
     "click": {
       "type": "boolean",
-      "description": "Click the element."
+      "description": "Click the element.",
+      "default": false
     },
     "typeKeys": {
       "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](/reference/schemas/typeKeys).<br><br>To type in the element, make the element active with the `click` parameter.",
@@ -111,6 +112,11 @@
                   }
                 }
               ]
+            },
+            "delay": {
+              "type": "number",
+              "description": "Delay in milliseconds between each key press. Only valid during a recording.",
+              "default": 100
             }
           }
         }
@@ -138,6 +144,41 @@
       "moveTo": true,
       "click": true,
       "typeKeys": "shorthair cat"
+    },
+    {
+      "action": "find",
+      "selector": "[title=Search]",
+      "timeout": 10000,
+      "matchText": "Search",
+      "moveTo": true,
+      "click": true,
+      "typeKeys": {
+        "keys": [
+          "shorthair cat"
+        ],
+        "delay": 100
+      }
+    },
+    {
+      "action": "find",
+      "selector": "[title=Search]",
+      "timeout": 10000,
+      "matchText": "Search",
+      "moveTo": {
+        "alignment": "top",
+        "offset": {
+          "x": -1,
+          "y": 1
+        },
+        "duration": 1000
+      },
+      "click": true,
+      "typeKeys": {
+        "keys": [
+          "shorthair cat"
+        ],
+        "delay": 100
+      }
     }
   ]
 }
