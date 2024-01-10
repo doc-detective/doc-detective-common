@@ -19,12 +19,16 @@
     "path": {
       "type": "string",
       "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file path is your media directory, the file name is the ID of the step, and the extension is `.mp4`.",
-      "pattern": "([A-Za-z0-9_-]*\\.(mp4|MP4|webm|WEBM|gif|GIF)$|\\$[A-Za-z0-9_]+)"
+      "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)"
     },
-    "fps": {
-      "type": "integer",
-      "description": "Target frames-per-second for the recording.",
-      "default": 30
+    "directory": {
+      "type": "string",
+      "description": "Directory of the file. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "If `true`, overwrites the existing file at `path` if it exists.",
+      "default": false
     }
   },
   "dynamicDefaults": {
@@ -40,8 +44,13 @@
     },
     {
       "action": "startRecording",
+      "path": "results.mp4"
+    },
+    {
+      "action": "startRecording",
       "path": "results.mp4",
-      "fps": 30
+      "directory": "static/media",
+      "overwrite": true
     }
   ]
 }
