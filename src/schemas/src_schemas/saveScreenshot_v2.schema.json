@@ -23,7 +23,7 @@
     },
     "directory": {
       "type": "string",
-      "description": "Directory of the PNG file. Attempts to creatr the directory if it doesn't exist. If not specified, the directory is your media directory."
+      "description": "Directory of the PNG file. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
     },
     "maxVariation": {
       "type": "number",
