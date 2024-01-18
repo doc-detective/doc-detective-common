@@ -2091,7 +2091,7 @@
   "startRecording_v2": {
     "title": "startRecording",
     "type": "object",
-    "description": "Start recording the current browser viewport. Must be followed by a `stopeRecording` action. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
+    "description": "Start recording the current browser viewport. Must be followed by a `stopRecording` action. Only runs when the context `app` is `chrome` and `headless` is `false`. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
     "properties": {
       "id": {
         "type": "string",
@@ -2975,7 +2975,7 @@
                       {
                         "title": "startRecording",
                         "type": "object",
-                        "description": "Start recording the current browser viewport. Must be followed by a `stopeRecording` action. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
+                        "description": "Start recording the current browser viewport. Must be followed by a `stopRecording` action. Only runs when the context `app` is `chrome` and `headless` is `false`. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
                         "properties": {
                           "id": {
                             "type": "string",
@@ -4248,7 +4248,7 @@
             {
               "title": "startRecording",
               "type": "object",
-              "description": "Start recording the current browser viewport. Must be followed by a `stopeRecording` action. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
+              "description": "Start recording the current browser viewport. Must be followed by a `stopRecording` action. Only runs when the context `app` is `chrome` and `headless` is `false`. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
               "properties": {
                 "id": {
                   "type": "string",
