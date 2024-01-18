@@ -33,6 +33,11 @@
           }
         }
       ]
+    },
+    "delay": {
+      "type": "number",
+      "description": "Delay in milliseconds between each key press. Only valid during a recording.",
+      "default": 100
     }
   },
   "dynamicDefaults": {
@@ -48,6 +53,11 @@
     {
       "action": "typeKeys",
       "keys": ["$ENTER$"]
+    },
+    {
+      "action": "typeKeys",
+      "keys": ["kittens","$ENTER$"],
+      "delay": 500
     }
   ]
 }

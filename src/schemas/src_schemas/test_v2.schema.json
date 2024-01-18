@@ -50,6 +50,8 @@
           { "$ref": "runShell_v2.schema.json#" },
           { "$ref": "saveScreenshot_v2.schema.json#" },
           { "$ref": "setVariables_v2.schema.json#" },
+          { "$ref": "startRecording_v2.schema.json#" },
+          { "$ref": "stopRecording_v2.schema.json#" },
           { "$ref": "typeKeys_v2.schema.json#" },
           { "$ref": "find_v2.schema.json#" },
           { "$ref": "wait_v2.schema.json#" }

@@ -1413,12 +1413,60 @@
         "description": "Text that the element should contain. If the element doesn't contain the text, the step fails."
       },
       "moveTo": {
-        "type": "boolean",
-        "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded."
+        "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded.",
+        "oneOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "alignment": {
+                "description": "Alignment of the element to move to.",
+                "type": "string",
+                "enum": [
+                  "top",
+                  "bottom",
+                  "left",
+                  "right",
+                  "center"
+                ],
+                "default": "center"
+              },
+              "offset": {
+                "description": "Offset from the element to move to.",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "description": "Offset from the element to move to in x direction. Negative values move left, positive values move right.",
+                    "type": "number",
+                    "default": 0
+                  },
+                  "y": {
+                    "description": "Offset from the element to move to in y direction. Negative values move up, positive values move down.",
+                    "type": "number",
+                    "default": 0
+                  }
+                },
+                "default": {},
+                "additionalProperties": false
+              },
+              "duration": {
+                "description": "Duration of the move in milliseconds.",
+                "type": "number",
+                "minimum": 0,
+                "default": 500
+              }
+            }
+          }
+        ],
+        "default": false
       },
       "click": {
         "type": "boolean",
-        "description": "Click the element."
+        "description": "Click the element.",
+        "default": false
       },
       "typeKeys": {
         "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](/reference/schemas/typeKeys).<br><br>To type in the element, make the element active with the `click` parameter.",
@@ -1447,6 +1495,11 @@
                     }
                   }
                 ]
+              },
+              "delay": {
+                "type": "number",
+                "description": "Delay in milliseconds between each key press. Only valid during a recording.",
+                "default": 100
               }
             }
           }
@@ -1474,6 +1527,41 @@
         "moveTo": true,
         "click": true,
         "typeKeys": "shorthair cat"
+      },
+      {
+        "action": "find",
+        "selector": "[title=Search]",
+        "timeout": 10000,
+        "matchText": "Search",
+        "moveTo": true,
+        "click": true,
+        "typeKeys": {
+          "keys": [
+            "shorthair cat"
+          ],
+          "delay": 100
+        }
+      },
+      {
+        "action": "find",
+        "selector": "[title=Search]",
+        "timeout": 10000,
+        "matchText": "Search",
+        "moveTo": {
+          "alignment": "top",
+          "offset": {
+            "x": -1,
+            "y": 1
+          },
+          "duration": 1000
+        },
+        "click": true,
+        "typeKeys": {
+          "keys": [
+            "shorthair cat"
+          ],
+          "delay": 100
+        }
       }
     ]
   },
@@ -1729,6 +1817,104 @@
       }
     ]
   },
+  "moveTo_v2": {
+    "title": "moveTo",
+    "type": "object",
+    "description": "Move the mouse to a specific location.",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "ID of the step."
+      },
+      "description": {
+        "type": "string",
+        "description": "Description of the step."
+      },
+      "action": {
+        "type": "string",
+        "const": "moveTo",
+        "description": "The action to perform."
+      },
+      "selector": {
+        "description": "Selector for the element to move to.",
+        "type": "string"
+      },
+      "alignment": {
+        "description": "Alignment of the element to move to.",
+        "type": "string",
+        "enum": [
+          "top",
+          "bottom",
+          "left",
+          "right",
+          "center"
+        ],
+        "default": "center"
+      },
+      "offset": {
+        "description": "Offset from the element to move to.",
+        "type": "object",
+        "properties": {
+          "x": {
+            "description": "Offset from the element to move to in x direction. Negative values move left, positive values move right.",
+            "type": "number",
+            "default": 0
+          },
+          "y": {
+            "description": "Offset from the element to move to in y direction. Negative values move up, positive values move down.",
+            "type": "number",
+            "default": 0
+          }
+        },
+        "default": {},
+        "additionalProperties": false
+      },
+      "duration": {
+        "description": "Duration of the move in milliseconds.",
+        "type": "number",
+        "minimum": 0,
+        "default": 500
+      }
+    },
+    "dynamicDefaults": {
+      "id": "uuid"
+    },
+    "required": [
+      "action",
+      "selector"
+    ],
+    "additionalProperties": false,
+    "examples": [
+      {
+        "action": "moveTo",
+        "selector": "#searchInput"
+      },
+      {
+        "action": "moveTo",
+        "selector": "#searchInput",
+        "alignment": "left"
+      },
+      {
+        "action": "moveTo",
+        "selector": "#searchInput",
+        "alignment": "left",
+        "offset": {
+          "x": 10,
+          "y": 10
+        }
+      },
+      {
+        "action": "moveTo",
+        "selector": "#searchInput",
+        "alignment": "left",
+        "offset": {
+          "x": 10,
+          "y": 10
+        },
+        "duration": 1000
+      }
+    ]
+  },
   "runShell_v2": {
     "title": "runShell",
     "type": "object",
@@ -1816,7 +2002,7 @@
       },
       "directory": {
         "type": "string",
-        "description": "Directory of the PNG file. Attempts to creatr the directory if it doesn't exist. If not specified, the directory is your media directory."
+        "description": "Directory of the PNG file. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
       },
       "maxVariation": {
         "type": "number",
@@ -1899,6 +2085,94 @@
       {
         "action": "setVariables",
         "path": ".env"
+      }
+    ]
+  },
+  "startRecording_v2": {
+    "title": "startRecording",
+    "type": "object",
+    "description": "Start recording the current browser viewport. Must be followed by a `stopRecording` action. Only runs when the context `app` is `chrome` and `headless` is `false`. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "ID of the step."
+      },
+      "description": {
+        "type": "string",
+        "description": "Description of the step."
+      },
+      "action": {
+        "type": "string",
+        "const": "startRecording",
+        "description": "The action to perform."
+      },
+      "path": {
+        "type": "string",
+        "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file path is your media directory, the file name is the ID of the step, and the extension is `.mp4`.",
+        "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)"
+      },
+      "directory": {
+        "type": "string",
+        "description": "Directory of the file. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
+      },
+      "overwrite": {
+        "type": "boolean",
+        "description": "If `true`, overwrites the existing file at `path` if it exists.",
+        "default": false
+      }
+    },
+    "dynamicDefaults": {
+      "id": "uuid"
+    },
+    "required": [
+      "action"
+    ],
+    "additionalProperties": false,
+    "examples": [
+      {
+        "action": "startRecording"
+      },
+      {
+        "action": "startRecording",
+        "path": "results.mp4"
+      },
+      {
+        "action": "startRecording",
+        "path": "results.mp4",
+        "directory": "static/media",
+        "overwrite": true
+      }
+    ]
+  },
+  "stopRecording_v2": {
+    "title": "stopRecording",
+    "type": "object",
+    "description": "Stop the current recording.",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "ID of the step."
+      },
+      "description": {
+        "type": "string",
+        "description": "Description of the step."
+      },
+      "action": {
+        "type": "string",
+        "const": "stopRecording",
+        "description": "The action to perform."
+      }
+    },
+    "dynamicDefaults": {
+      "id": "uuid"
+    },
+    "required": [
+      "action"
+    ],
+    "additionalProperties": false,
+    "examples": [
+      {
+        "action": "stopRecording"
       }
     ]
   },
@@ -2612,7 +2886,7 @@
                           },
                           "directory": {
                             "type": "string",
-                            "description": "Directory of the PNG file. Attempts to creatr the directory if it doesn't exist. If not specified, the directory is your media directory."
+                            "description": "Directory of the PNG file. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
                           },
                           "maxVariation": {
                             "type": "number",
@@ -2699,6 +2973,94 @@
                         ]
                       },
                       {
+                        "title": "startRecording",
+                        "type": "object",
+                        "description": "Start recording the current browser viewport. Must be followed by a `stopRecording` action. Only runs when the context `app` is `chrome` and `headless` is `false`. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "ID of the step."
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "Description of the step."
+                          },
+                          "action": {
+                            "type": "string",
+                            "const": "startRecording",
+                            "description": "The action to perform."
+                          },
+                          "path": {
+                            "type": "string",
+                            "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file path is your media directory, the file name is the ID of the step, and the extension is `.mp4`.",
+                            "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)"
+                          },
+                          "directory": {
+                            "type": "string",
+                            "description": "Directory of the file. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
+                          },
+                          "overwrite": {
+                            "type": "boolean",
+                            "description": "If `true`, overwrites the existing file at `path` if it exists.",
+                            "default": false
+                          }
+                        },
+                        "dynamicDefaults": {
+                          "id": "uuid"
+                        },
+                        "required": [
+                          "action"
+                        ],
+                        "additionalProperties": false,
+                        "examples": [
+                          {
+                            "action": "startRecording"
+                          },
+                          {
+                            "action": "startRecording",
+                            "path": "results.mp4"
+                          },
+                          {
+                            "action": "startRecording",
+                            "path": "results.mp4",
+                            "directory": "static/media",
+                            "overwrite": true
+                          }
+                        ]
+                      },
+                      {
+                        "title": "stopRecording",
+                        "type": "object",
+                        "description": "Stop the current recording.",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "ID of the step."
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "Description of the step."
+                          },
+                          "action": {
+                            "type": "string",
+                            "const": "stopRecording",
+                            "description": "The action to perform."
+                          }
+                        },
+                        "dynamicDefaults": {
+                          "id": "uuid"
+                        },
+                        "required": [
+                          "action"
+                        ],
+                        "additionalProperties": false,
+                        "examples": [
+                          {
+                            "action": "stopRecording"
+                          }
+                        ]
+                      },
+                      {
                         "title": "typeKeys",
                         "type": "object",
                         "description": "Type keys. To type special keys, begin and end the string with `$` and use the [special key's enum](). For example, to type the Escape key, enter `$ESCAPE$`.",
@@ -2733,6 +3095,11 @@
                                 }
                               }
                             ]
+                          },
+                          "delay": {
+                            "type": "number",
+                            "description": "Delay in milliseconds between each key press. Only valid during a recording.",
+                            "default": 100
                           }
                         },
                         "dynamicDefaults": {
@@ -2753,6 +3120,14 @@
                             "keys": [
                               "$ENTER$"
                             ]
+                          },
+                          {
+                            "action": "typeKeys",
+                            "keys": [
+                              "kittens",
+                              "$ENTER$"
+                            ],
+                            "delay": 500
                           }
                         ]
                       },
@@ -2788,12 +3163,60 @@
                             "description": "Text that the element should contain. If the element doesn't contain the text, the step fails."
                           },
                           "moveTo": {
-                            "type": "boolean",
-                            "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded."
+                            "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded.",
+                            "oneOf": [
+                              {
+                                "type": "boolean"
+                              },
+                              {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "alignment": {
+                                    "description": "Alignment of the element to move to.",
+                                    "type": "string",
+                                    "enum": [
+                                      "top",
+                                      "bottom",
+                                      "left",
+                                      "right",
+                                      "center"
+                                    ],
+                                    "default": "center"
+                                  },
+                                  "offset": {
+                                    "description": "Offset from the element to move to.",
+                                    "type": "object",
+                                    "properties": {
+                                      "x": {
+                                        "description": "Offset from the element to move to in x direction. Negative values move left, positive values move right.",
+                                        "type": "number",
+                                        "default": 0
+                                      },
+                                      "y": {
+                                        "description": "Offset from the element to move to in y direction. Negative values move up, positive values move down.",
+                                        "type": "number",
+                                        "default": 0
+                                      }
+                                    },
+                                    "default": {},
+                                    "additionalProperties": false
+                                  },
+                                  "duration": {
+                                    "description": "Duration of the move in milliseconds.",
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "default": 500
+                                  }
+                                }
+                              }
+                            ],
+                            "default": false
                           },
                           "click": {
                             "type": "boolean",
-                            "description": "Click the element."
+                            "description": "Click the element.",
+                            "default": false
                           },
                           "typeKeys": {
                             "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](/reference/schemas/typeKeys).<br><br>To type in the element, make the element active with the `click` parameter.",
@@ -2822,6 +3245,11 @@
                                         }
                                       }
                                     ]
+                                  },
+                                  "delay": {
+                                    "type": "number",
+                                    "description": "Delay in milliseconds between each key press. Only valid during a recording.",
+                                    "default": 100
                                   }
                                 }
                               }
@@ -2849,6 +3277,41 @@
                             "moveTo": true,
                             "click": true,
                             "typeKeys": "shorthair cat"
+                          },
+                          {
+                            "action": "find",
+                            "selector": "[title=Search]",
+                            "timeout": 10000,
+                            "matchText": "Search",
+                            "moveTo": true,
+                            "click": true,
+                            "typeKeys": {
+                              "keys": [
+                                "shorthair cat"
+                              ],
+                              "delay": 100
+                            }
+                          },
+                          {
+                            "action": "find",
+                            "selector": "[title=Search]",
+                            "timeout": 10000,
+                            "matchText": "Search",
+                            "moveTo": {
+                              "alignment": "top",
+                              "offset": {
+                                "x": -1,
+                                "y": 1
+                              },
+                              "duration": 1000
+                            },
+                            "click": true,
+                            "typeKeys": {
+                              "keys": [
+                                "shorthair cat"
+                              ],
+                              "delay": 100
+                            }
                           }
                         ]
                       },
@@ -3696,7 +4159,7 @@
                 },
                 "directory": {
                   "type": "string",
-                  "description": "Directory of the PNG file. Attempts to creatr the directory if it doesn't exist. If not specified, the directory is your media directory."
+                  "description": "Directory of the PNG file. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
                 },
                 "maxVariation": {
                   "type": "number",
@@ -3783,6 +4246,94 @@
               ]
             },
             {
+              "title": "startRecording",
+              "type": "object",
+              "description": "Start recording the current browser viewport. Must be followed by a `stopRecording` action. Only runs when the context `app` is `chrome` and `headless` is `false`. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "ID of the step."
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Description of the step."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "startRecording",
+                  "description": "The action to perform."
+                },
+                "path": {
+                  "type": "string",
+                  "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file path is your media directory, the file name is the ID of the step, and the extension is `.mp4`.",
+                  "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)"
+                },
+                "directory": {
+                  "type": "string",
+                  "description": "Directory of the file. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
+                },
+                "overwrite": {
+                  "type": "boolean",
+                  "description": "If `true`, overwrites the existing file at `path` if it exists.",
+                  "default": false
+                }
+              },
+              "dynamicDefaults": {
+                "id": "uuid"
+              },
+              "required": [
+                "action"
+              ],
+              "additionalProperties": false,
+              "examples": [
+                {
+                  "action": "startRecording"
+                },
+                {
+                  "action": "startRecording",
+                  "path": "results.mp4"
+                },
+                {
+                  "action": "startRecording",
+                  "path": "results.mp4",
+                  "directory": "static/media",
+                  "overwrite": true
+                }
+              ]
+            },
+            {
+              "title": "stopRecording",
+              "type": "object",
+              "description": "Stop the current recording.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "ID of the step."
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Description of the step."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "stopRecording",
+                  "description": "The action to perform."
+                }
+              },
+              "dynamicDefaults": {
+                "id": "uuid"
+              },
+              "required": [
+                "action"
+              ],
+              "additionalProperties": false,
+              "examples": [
+                {
+                  "action": "stopRecording"
+                }
+              ]
+            },
+            {
               "title": "typeKeys",
               "type": "object",
               "description": "Type keys. To type special keys, begin and end the string with `$` and use the [special key's enum](). For example, to type the Escape key, enter `$ESCAPE$`.",
@@ -3817,6 +4368,11 @@
                       }
                     }
                   ]
+                },
+                "delay": {
+                  "type": "number",
+                  "description": "Delay in milliseconds between each key press. Only valid during a recording.",
+                  "default": 100
                 }
               },
               "dynamicDefaults": {
@@ -3837,6 +4393,14 @@
                   "keys": [
                     "$ENTER$"
                   ]
+                },
+                {
+                  "action": "typeKeys",
+                  "keys": [
+                    "kittens",
+                    "$ENTER$"
+                  ],
+                  "delay": 500
                 }
               ]
             },
@@ -3872,12 +4436,60 @@
                   "description": "Text that the element should contain. If the element doesn't contain the text, the step fails."
                 },
                 "moveTo": {
-                  "type": "boolean",
-                  "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded."
+                  "description": "Move to the element. If the element isn't visible, it's scrolled into view. Only runs the if the test is being recorded.",
+                  "oneOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "alignment": {
+                          "description": "Alignment of the element to move to.",
+                          "type": "string",
+                          "enum": [
+                            "top",
+                            "bottom",
+                            "left",
+                            "right",
+                            "center"
+                          ],
+                          "default": "center"
+                        },
+                        "offset": {
+                          "description": "Offset from the element to move to.",
+                          "type": "object",
+                          "properties": {
+                            "x": {
+                              "description": "Offset from the element to move to in x direction. Negative values move left, positive values move right.",
+                              "type": "number",
+                              "default": 0
+                            },
+                            "y": {
+                              "description": "Offset from the element to move to in y direction. Negative values move up, positive values move down.",
+                              "type": "number",
+                              "default": 0
+                            }
+                          },
+                          "default": {},
+                          "additionalProperties": false
+                        },
+                        "duration": {
+                          "description": "Duration of the move in milliseconds.",
+                          "type": "number",
+                          "minimum": 0,
+                          "default": 500
+                        }
+                      }
+                    }
+                  ],
+                  "default": false
                 },
                 "click": {
                   "type": "boolean",
-                  "description": "Click the element."
+                  "description": "Click the element.",
+                  "default": false
                 },
                 "typeKeys": {
                   "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](/reference/schemas/typeKeys).<br><br>To type in the element, make the element active with the `click` parameter.",
@@ -3906,6 +4518,11 @@
                               }
                             }
                           ]
+                        },
+                        "delay": {
+                          "type": "number",
+                          "description": "Delay in milliseconds between each key press. Only valid during a recording.",
+                          "default": 100
                         }
                       }
                     }
@@ -3933,6 +4550,41 @@
                   "moveTo": true,
                   "click": true,
                   "typeKeys": "shorthair cat"
+                },
+                {
+                  "action": "find",
+                  "selector": "[title=Search]",
+                  "timeout": 10000,
+                  "matchText": "Search",
+                  "moveTo": true,
+                  "click": true,
+                  "typeKeys": {
+                    "keys": [
+                      "shorthair cat"
+                    ],
+                    "delay": 100
+                  }
+                },
+                {
+                  "action": "find",
+                  "selector": "[title=Search]",
+                  "timeout": 10000,
+                  "matchText": "Search",
+                  "moveTo": {
+                    "alignment": "top",
+                    "offset": {
+                      "x": -1,
+                      "y": 1
+                    },
+                    "duration": 1000
+                  },
+                  "click": true,
+                  "typeKeys": {
+                    "keys": [
+                      "shorthair cat"
+                    ],
+                    "delay": 100
+                  }
                 }
               ]
             },
@@ -4130,6 +4782,11 @@
             }
           }
         ]
+      },
+      "delay": {
+        "type": "number",
+        "description": "Delay in milliseconds between each key press. Only valid during a recording.",
+        "default": 100
       }
     },
     "dynamicDefaults": {
@@ -4150,6 +4807,14 @@
         "keys": [
           "$ENTER$"
         ]
+      },
+      {
+        "action": "typeKeys",
+        "keys": [
+          "kittens",
+          "$ENTER$"
+        ],
+        "delay": 500
       }
     ]
   },
