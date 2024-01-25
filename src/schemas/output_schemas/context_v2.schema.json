@@ -16,7 +16,9 @@
           "description": "Name of the application.",
           "enum": [
             "firefox",
-            "chrome"
+            "chrome",
+            "chromium",
+            "safari"
           ]
         },
         "path": {
