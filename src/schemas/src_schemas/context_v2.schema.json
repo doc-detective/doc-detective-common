@@ -12,7 +12,7 @@
         "name": {
           "type": "string",
           "description": "Name of the application.",
-          "enum": ["firefox", "chrome", "chromium", "safari"]
+          "enum": ["chrome", "chromium", "edge", "firefox", "safari"]
         },
         "path": {
           "type": "string",

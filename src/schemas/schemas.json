@@ -223,9 +223,10 @@
                           "type": "string",
                           "description": "Name of the application.",
                           "enum": [
-                            "firefox",
                             "chrome",
                             "chromium",
+                            "edge",
+                            "firefox",
                             "safari"
                           ]
                         },
@@ -1291,9 +1292,10 @@
             "type": "string",
             "description": "Name of the application.",
             "enum": [
-              "firefox",
               "chrome",
               "chromium",
+              "edge",
+              "firefox",
               "safari"
             ]
           },
@@ -2218,9 +2220,10 @@
                       "type": "string",
                       "description": "Name of the application.",
                       "enum": [
-                        "firefox",
                         "chrome",
                         "chromium",
+                        "edge",
+                        "firefox",
                         "safari"
                       ]
                     },
@@ -2364,9 +2367,10 @@
                                 "type": "string",
                                 "description": "Name of the application.",
                                 "enum": [
-                                  "firefox",
                                   "chrome",
                                   "chromium",
+                                  "edge",
+                                  "firefox",
                                   "safari"
                                 ]
                               },
@@ -3639,9 +3643,10 @@
                       "type": "string",
                       "description": "Name of the application.",
                       "enum": [
-                        "firefox",
                         "chrome",
                         "chromium",
+                        "edge",
+                        "firefox",
                         "safari"
                       ]
                     },
