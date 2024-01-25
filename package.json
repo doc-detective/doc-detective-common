@@ -1,14 +1,14 @@
 {
   "name": "doc-detective-common",
-  "version": "1.12.0-dev.0",
+  "version": "1.12.0-dev.1",
   "description": "Shared components for Doc Detective projects. ",
   "main": "src/index.js",
   "scripts": {
     "dereferenceSchemas": "node ./src/schemas/dereferenceSchemas.js",
-    "test:full": "npm run dereferenceSchemas && jest",
+    "pretest": "npm run dereferenceSchemas",
     "test": "jest"
   },
-  "precommit": "test:full",
+  "precommit": "test",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/doc-detective/doc-detective-common.git"
