@@ -16,8 +16,6 @@
           "description": "Name of the application.",
           "enum": [
             "chrome",
-            "chromium",
-            "edge",
             "firefox",
             "safari"
           ]
@@ -41,7 +39,11 @@
             },
             "headless": {
               "type": "boolean",
-              "description": "If `true`, runs the browser in headless mode."
+              "description": "If `true`, runs the browser in headless mode. Not supported by Safari."
+            },
+            "driverPath": {
+              "type": "string",
+              "description": "Path to the browser driver. If not specified, defaults to internally managed dependencies."
             }
           }
         }
@@ -68,7 +70,7 @@
   "examples": [
     {
       "app": {
-        "name": "firefox"
+        "name": "chrome"
       },
       "platforms": [
         "linux"
@@ -80,7 +82,8 @@
         "options": {
           "width": 800,
           "height": 600,
-          "headless": false
+          "headless": false,
+          "driverPath": "/usr/bin/geckodriver"
         }
       },
       "platforms": [
@@ -91,11 +94,9 @@
     },
     {
       "app": {
-        "name": "chrome"
+        "name": "safari"
       },
       "platforms": [
-        "linux",
-        "windows",
         "mac"
       ]
     },
