@@ -43,7 +43,8 @@
                     "enum": [
                       "chrome",
                       "firefox",
-                      "safari"
+                      "safari",
+                      "edge"
                     ]
                   },
                   "path": {
