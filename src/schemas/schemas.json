@@ -189,7 +189,7 @@
           "detectSteps": {
             "type": "boolean",
             "description": "Whether or not to detect steps in input files based on markup regex.",
-            "default": true
+            "default": false
           },
           "mediaDirectory": {
             "description": "Path of the directory in which to store output media files.",
@@ -602,6 +602,7 @@
             "name": "Markdown",
             "extensions": [
               ".md",
+              ".markdown",
               ".mdx"
             ],
             "testStartStatementOpen": "[comment]: # (test start",
@@ -610,141 +611,21 @@
             "testEndStatement": "[comment]: # (test end)",
             "stepStatementOpen": "[comment]: # (step",
             "stepStatementClose": ")",
-            "markup": [
-              {
-                "name": "onscreenText",
-                "regex": [
-                  "\\*\\*.+?\\*\\*"
-                ],
-                "actions": [
-                  "find"
-                ]
-              },
-              {
-                "name": "emphasis",
-                "regex": [
-                  "(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"
-                ],
-                "actions": [
-                  "find"
-                ]
-              },
-              {
-                "name": "image",
-                "regex": [
-                  "!\\[.+?\\]\\(.+?\\)"
-                ],
-                "actions": [
-                  "checkLink"
-                ]
-              },
-              {
-                "name": "hyperlink",
-                "regex": [
-                  "(?<!!)\\[.+?\\]\\(.+?\\)"
-                ],
-                "actions": [
-                  "checkLink",
-                  "goTo",
-                  "httpRequest"
-                ]
-              },
-              {
-                "name": "orderedList",
-                "regex": [
-                  "(?<=\n) *?[0-9][0-9]?[0-9]?.\\s*.*"
-                ]
-              },
-              {
-                "name": "unorderedList",
-                "regex": [
-                  "(?<=\n) *?\\*.\\s*.*",
-                  "(?<=\n) *?-.\\s*.*"
-                ]
-              },
-              {
-                "name": "codeInline",
-                "regex": [
-                  "(?<!`)`(?!`).+?(?<!`)`(?!`)"
-                ],
-                "actions": [
-                  "runShell",
-                  "setVariables",
-                  "httpRequest"
-                ]
-              },
-              {
-                "name": "codeBlock",
-                "regex": [
-                  "(?=(```))(\\w|\\W)*(?<=```)"
-                ],
-                "actions": [
-                  "runShell",
-                  "setVariables",
-                  "httpRequest"
-                ]
-              },
-              {
-                "name": "interaction",
-                "regex": [
-                  "[cC]lick",
-                  "[tT]ap",
-                  "[tT]ouch",
-                  "[sS]elect",
-                  "[cC]hoose",
-                  "[tT]oggle",
-                  "[eE]nable",
-                  "[dD]isable",
-                  "[tT]urn [oO][ff|n]",
-                  "[tT]ype",
-                  "[eE]nter",
-                  "[sS]end",
-                  "[aA]dd",
-                  "[rR]emove",
-                  "[dD]elete",
-                  "[uU]pload",
-                  "[dD]ownload",
-                  "[sS]croll",
-                  "[sS]earch",
-                  "[fF]ilter",
-                  "[sS]ort",
-                  "[cC]opy",
-                  "[pP]aste",
-                  "[cC]ut",
-                  "[rR]eplace",
-                  "[cC]lear",
-                  "[rR]efresh",
-                  "[rR]evert",
-                  "[rR]estore",
-                  "[rR]eset",
-                  "[lL]ogin",
-                  "[lL]ogout",
-                  "[sS]ign [iI]n",
-                  "[sS]ign [oO]ut",
-                  "[sS]ubmit",
-                  "[cC]ancel",
-                  "[cC]lose",
-                  "[aA]ccept",
-                  "[dD]ecline",
-                  "[dD]eny",
-                  "[rR]eject",
-                  "[rR]etry",
-                  "[rR]estart",
-                  "[rR]esume"
-                ],
-                "actions": [
-                  "checkLink",
-                  "find",
-                  "goTo",
-                  "httpRequest",
-                  "runShell",
-                  "saveScreenshot",
-                  "setVariables",
-                  "typeKeys",
-                  "wait"
-                ]
-              }
-            ]
+            "markup": []
+          },
+          {
+            "name": "AsciiDoc",
+            "extensions": [
+              ".adoc",
+              ".asciidoc, .asc"
+            ],
+            "testStartStatementOpen": "// (test start",
+            "testStartStatementClose": ")",
+            "testIgnoreStatement": "// (test ignore)",
+            "testEndStatement": "// (test end)",
+            "stepStatementOpen": "// (step",
+            "stepStatementClose": ")",
+            "markup": []
           }
         ]
       },
