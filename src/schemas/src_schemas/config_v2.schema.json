@@ -331,6 +331,17 @@
           "stepStatementOpen": "// (step",
           "stepStatementClose": ")",
           "markup": []
+        },
+        {
+          "name": "HTML/XML",
+          "extensions": [".html", ".htm", ".xml", ".xhtml"],
+          "testStartStatementOpen": "<!-- test start",
+          "testStartStatementClose": "-->",
+          "testIgnoreStatement": "<!-- test ignore -->",
+          "testEndStatement": "<!-- test end -->",
+          "stepStatementOpen": "<!-- step",
+          "stepStatementClose": "-->",
+          "markup": []
         }
       ]
     },
