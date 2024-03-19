@@ -738,6 +738,14 @@
                         },
                         {
                           "action": "runShell",
+                          "command": "docker run hello-world",
+                          "exitCodes": [
+                            0
+                          ],
+                          "output": "Hello from Docker!"
+                        },
+                        {
+                          "action": "runShell",
                           "command": "echo",
                           "args": [
                             "setup"

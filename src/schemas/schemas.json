@@ -2000,6 +2000,14 @@
       },
       {
         "action": "runShell",
+        "command": "docker run hello-world",
+        "exitCodes": [
+          0
+        ],
+        "output": "Hello from Docker!"
+      },
+      {
+        "action": "runShell",
         "command": "echo",
         "args": [
           "setup"
@@ -2953,6 +2961,14 @@
                             ],
                             "id": "ddec5e20-2e81-4f38-867c-92c8d9516755",
                             "description": "This is a test!"
+                          },
+                          {
+                            "action": "runShell",
+                            "command": "docker run hello-world",
+                            "exitCodes": [
+                              0
+                            ],
+                            "output": "Hello from Docker!"
                           },
                           {
                             "action": "runShell",
@@ -4230,6 +4246,14 @@
                   ],
                   "id": "ddec5e20-2e81-4f38-867c-92c8d9516755",
                   "description": "This is a test!"
+                },
+                {
+                  "action": "runShell",
+                  "command": "docker run hello-world",
+                  "exitCodes": [
+                    0
+                  ],
+                  "output": "Hello from Docker!"
                 },
                 {
                   "action": "runShell",
