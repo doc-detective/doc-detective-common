@@ -108,7 +108,7 @@
         "detectSteps": {
           "type": "boolean",
           "description": "Whether or not to detect steps in input files based on markup regex.",
-          "default": true
+          "default": false
         },
         "mediaDirectory": {
           "description": "Path of the directory in which to store output media files.",
@@ -521,6 +521,7 @@
           "name": "Markdown",
           "extensions": [
             ".md",
+            ".markdown",
             ".mdx"
           ],
           "testStartStatementOpen": "[comment]: # (test start",
@@ -664,6 +665,36 @@
               ]
             }
           ]
+        },
+        {
+          "name": "AsciiDoc",
+          "extensions": [
+            ".adoc",
+            ".asciidoc, .asc"
+          ],
+          "testStartStatementOpen": "// (test start",
+          "testStartStatementClose": ")",
+          "testIgnoreStatement": "// (test ignore)",
+          "testEndStatement": "// (test end)",
+          "stepStatementOpen": "// (step",
+          "stepStatementClose": ")",
+          "markup": []
+        },
+        {
+          "name": "HTML/XML",
+          "extensions": [
+            ".html",
+            ".htm",
+            ".xml",
+            ".xhtml"
+          ],
+          "testStartStatementOpen": "<!-- test start",
+          "testStartStatementClose": "-->",
+          "testIgnoreStatement": "<!-- test ignore -->",
+          "testEndStatement": "<!-- test end -->",
+          "stepStatementOpen": "<!-- step",
+          "stepStatementClose": "-->",
+          "markup": []
         }
       ]
     },

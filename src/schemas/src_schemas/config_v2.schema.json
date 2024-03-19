@@ -73,7 +73,7 @@
         "detectSteps": {
           "type": "boolean",
           "description": "Whether or not to detect steps in input files based on markup regex.",
-          "default": true
+          "default": false
         },
         "mediaDirectory": {
           "description": "Path of the directory in which to store output media files.",
@@ -312,7 +312,7 @@
       "default": [
         {
           "name": "Markdown",
-          "extensions": [".md", ".mdx"],
+          "extensions": [".md", ".markdown", ".mdx"],
           "testStartStatementOpen": "[comment]: # (test start",
           "testStartStatementClose": ")",
           "testIgnoreStatement": "[comment]: # (test ignore)",
@@ -419,6 +419,28 @@
               ]
             }
           ]
+        },
+        {
+          "name": "AsciiDoc",
+          "extensions": [".adoc", ".asciidoc, .asc"],
+          "testStartStatementOpen": "// (test start",
+          "testStartStatementClose": ")",
+          "testIgnoreStatement": "// (test ignore)",
+          "testEndStatement": "// (test end)",
+          "stepStatementOpen": "// (step",
+          "stepStatementClose": ")",
+          "markup": []
+        },
+        {
+          "name": "HTML/XML",
+          "extensions": [".html", ".htm", ".xml", ".xhtml"],
+          "testStartStatementOpen": "<!-- test start",
+          "testStartStatementClose": "-->",
+          "testIgnoreStatement": "<!-- test ignore -->",
+          "testEndStatement": "<!-- test end -->",
+          "stepStatementOpen": "<!-- step",
+          "stepStatementClose": "-->",
+          "markup": []
         }
       ]
     },
@@ -573,13 +595,15 @@
             {
               "name": "onscreenText",
               "regex": ["\\*\\*.+?\\*\\*"],
-              "actions": [{
-                "name": "find",
-                "params": {
-                  "moveTo": true,
-                  "click": true
+              "actions": [
+                {
+                  "name": "find",
+                  "params": {
+                    "moveTo": true,
+                    "click": true
+                  }
                 }
-              }]
+              ]
             },
             {
               "name": "emphasis",
