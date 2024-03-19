@@ -2008,6 +2008,13 @@
       },
       {
         "action": "runShell",
+        "command": "false",
+        "exitCodes": [
+          1
+        ]
+      },
+      {
+        "action": "runShell",
         "command": "echo",
         "args": [
           "setup"
@@ -2969,6 +2976,13 @@
                               0
                             ],
                             "output": "Hello from Docker!"
+                          },
+                          {
+                            "action": "runShell",
+                            "command": "false",
+                            "exitCodes": [
+                              1
+                            ]
                           },
                           {
                             "action": "runShell",
@@ -4254,6 +4268,13 @@
                     0
                   ],
                   "output": "Hello from Docker!"
+                },
+                {
+                  "action": "runShell",
+                  "command": "false",
+                  "exitCodes": [
+                    1
+                  ]
                 },
                 {
                   "action": "runShell",

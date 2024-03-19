@@ -746,6 +746,13 @@
                         },
                         {
                           "action": "runShell",
+                          "command": "false",
+                          "exitCodes": [
+                            1
+                          ]
+                        },
+                        {
+                          "action": "runShell",
                           "command": "echo",
                           "args": [
                             "setup"
