@@ -79,6 +79,33 @@
           }
         }
       ]
+    },
+    "setVariables": {
+      "type": "array",
+      "description": "Extract environment variables from the element's text.",
+      "items": {
+        "oneOf": [
+          {
+            "description": "",
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "Name of the environment variable to set.",
+                "type": "string"
+              },
+              "regex": {
+                "description": "Regex to extract the environment variable from the element's text.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "regex"
+            ]
+          }
+        ]
+      },
+      "default": []
     }
   },
   "required": [
@@ -116,6 +143,16 @@
         ],
         "delay": 100
       }
+    },
+    {
+      "action": "find",
+      "selector": "[title=ResultsCount]",
+      "setVariables": [
+        {
+          "name": "resultsCount",
+          "regex": ".*"
+        }
+      ]
     }
   ]
 }
