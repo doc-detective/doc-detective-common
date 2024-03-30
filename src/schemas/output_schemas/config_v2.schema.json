@@ -712,7 +712,7 @@
         "send": {
           "description": "If `true`, sends Doc Detective telemetry.",
           "type": "boolean",
-          "default": false
+          "default": true
         },
         "userId": {
           "description": "Identifier for the organization, group, or individual running Doc Detective.",
