@@ -4,6 +4,11 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "defaultCommand": {
+      "description": "Default command to run when no command is specified.",
+      "type": "string",
+      "enum": ["runTests", "runCoverage"]
+    },
     "input": {
       "default": ".",
       "$ref": "#/definitions/input"
@@ -465,7 +470,10 @@
           "type": "string"
         }
       },
-      "required": ["send"]
+      "required": ["send"],
+      "default": {
+        "send": true
+      }
     },
     "logLevel": {
       "description": "Amount of detail to output when performing an operation.",
@@ -521,6 +529,7 @@
       "output": "."
     },
     {
+      "defaultCommand": "runTests",
       "envVariables": "",
       "input": ".",
       "output": ".",
@@ -570,12 +579,6 @@
         ]
       },
       "runCoverage": {
-        "recursive": true,
-        "input": ".",
-        "output": ".",
-        "markup": []
-      },
-      "suggestTests": {
         "recursive": true,
         "input": ".",
         "output": ".",
@@ -736,12 +739,6 @@
         ]
       },
       "runCoverage": {
-        "recursive": true,
-        "input": ["."],
-        "output": ".",
-        "markup": []
-      },
-      "suggestTests": {
         "recursive": true,
         "input": ["."],
         "output": ".",
