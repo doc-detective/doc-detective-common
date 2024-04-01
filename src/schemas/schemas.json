@@ -85,6 +85,14 @@
     "type": "object",
     "additionalProperties": false,
     "properties": {
+      "defaultCommand": {
+        "description": "Default command to run when no command is specified.",
+        "type": "string",
+        "enum": [
+          "runTests",
+          "runCoverage"
+        ]
+      },
       "input": {
         "default": ".",
         "description": "Path(s) to test specifications and documentation source files. May be paths to specific files or to directories to scan for files.",
@@ -793,7 +801,7 @@
           "send": {
             "description": "If `true`, sends Doc Detective telemetry.",
             "type": "boolean",
-            "default": false
+            "default": true
           },
           "userId": {
             "description": "Identifier for the organization, group, or individual running Doc Detective.",
@@ -802,7 +810,10 @@
         },
         "required": [
           "send"
-        ]
+        ],
+        "default": {
+          "send": true
+        }
       },
       "logLevel": {
         "description": "Amount of detail to output when performing an operation.",
@@ -864,6 +875,7 @@
         "output": "."
       },
       {
+        "defaultCommand": "runTests",
         "envVariables": "",
         "input": ".",
         "output": ".",
@@ -921,12 +933,6 @@
           ]
         },
         "runCoverage": {
-          "recursive": true,
-          "input": ".",
-          "output": ".",
-          "markup": []
-        },
-        "suggestTests": {
           "recursive": true,
           "input": ".",
           "output": ".",
@@ -1090,7 +1096,7 @@
         ],
         "integrations": {},
         "telemetry": {
-          "send": false,
+          "send": true,
           "userId": "Doc Detective"
         }
       },
@@ -1135,14 +1141,6 @@
           ]
         },
         "runCoverage": {
-          "recursive": true,
-          "input": [
-            "."
-          ],
-          "output": ".",
-          "markup": []
-        },
-        "suggestTests": {
           "recursive": true,
           "input": [
             "."
@@ -1302,7 +1300,7 @@
         ],
         "integrations": {},
         "telemetry": {
-          "send": false,
+          "send": true,
           "userId": "Doc Detective"
         }
       }
