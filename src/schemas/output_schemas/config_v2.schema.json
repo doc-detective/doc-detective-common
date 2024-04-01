@@ -1015,7 +1015,7 @@
       ],
       "integrations": {},
       "telemetry": {
-        "send": false,
+        "send": true,
         "userId": "Doc Detective"
       }
     },
@@ -1219,7 +1219,7 @@
       ],
       "integrations": {},
       "telemetry": {
-        "send": false,
+        "send": true,
         "userId": "Doc Detective"
       }
     }
