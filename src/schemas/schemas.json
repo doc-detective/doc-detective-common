@@ -1562,6 +1562,15 @@
                 ]
               },
               {
+                "name": "navigationLink",
+                "regex": [
+                  "(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"
+                ],
+                "actions": [
+                  "goTo"
+                ]
+              },
+              {
                 "name": "orderedList",
                 "regex": [
                   "(?<=\n) *?[0-9][0-9]?[0-9]?.\\s*.*"
@@ -1633,17 +1642,6 @@
                   "[rR]etry",
                   "[rR]estart",
                   "[rR]esume"
-                ],
-                "actions": [
-                  "checkLink",
-                  "find",
-                  "goTo",
-                  "httpRequest",
-                  "runShell",
-                  "saveScreenshot",
-                  "setVariables",
-                  "typeKeys",
-                  "wait"
                 ]
               }
             ]
@@ -1836,6 +1834,7 @@
             "name": "Markdown",
             "extensions": [
               ".md",
+              ".markdown",
               ".mdx"
             ],
             "testStartStatementOpen": "[comment]: # (test start",
@@ -1851,21 +1850,13 @@
                   "\\*\\*.+?\\*\\*"
                 ],
                 "actions": [
-                  {
-                    "action": "find",
-                    "selector": "$0",
-                    "moveTo": true,
-                    "click": true
-                  }
+                  "find"
                 ]
               },
               {
                 "name": "emphasis",
                 "regex": [
                   "(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"
-                ],
-                "actions": [
-                  "find"
                 ]
               },
               {
@@ -1883,9 +1874,16 @@
                   "(?<!!)\\[.+?\\]\\(.+?\\)"
                 ],
                 "actions": [
-                  "checkLink",
-                  "goTo",
-                  "httpRequest"
+                  "checkLink"
+                ]
+              },
+              {
+                "name": "navigationLink",
+                "regex": [
+                  "(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"
+                ],
+                "actions": [
+                  "goTo"
                 ]
               },
               {
@@ -1905,22 +1903,12 @@
                 "name": "codeInline",
                 "regex": [
                   "(?<!`)`(?!`).+?(?<!`)`(?!`)"
-                ],
-                "actions": [
-                  "runShell",
-                  "setVariables",
-                  "httpRequest"
                 ]
               },
               {
                 "name": "codeBlock",
                 "regex": [
                   "(?=(```))(\\w|\\W)*(?<=```)"
-                ],
-                "actions": [
-                  "runShell",
-                  "setVariables",
-                  "httpRequest"
                 ]
               },
               {
@@ -1970,17 +1958,6 @@
                   "[rR]etry",
                   "[rR]estart",
                   "[rR]esume"
-                ],
-                "actions": [
-                  "checkLink",
-                  "find",
-                  "goTo",
-                  "httpRequest",
-                  "runShell",
-                  "saveScreenshot",
-                  "setVariables",
-                  "typeKeys",
-                  "wait"
                 ]
               }
             ]
@@ -2045,6 +2022,7 @@
             "name": "Markdown",
             "extensions": [
               ".md",
+              ".markdown",
               ".mdx"
             ],
             "testStartStatementOpen": "[comment]: # (test start",
@@ -2067,9 +2045,6 @@
                 "name": "emphasis",
                 "regex": [
                   "(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"
-                ],
-                "actions": [
-                  "find"
                 ]
               },
               {
@@ -2087,9 +2062,16 @@
                   "(?<!!)\\[.+?\\]\\(.+?\\)"
                 ],
                 "actions": [
-                  "checkLink",
-                  "goTo",
-                  "httpRequest"
+                  "checkLink"
+                ]
+              },
+              {
+                "name": "navigationLink",
+                "regex": [
+                  "(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"
+                ],
+                "actions": [
+                  "goTo"
                 ]
               },
               {
@@ -2109,22 +2091,12 @@
                 "name": "codeInline",
                 "regex": [
                   "(?<!`)`(?!`).+?(?<!`)`(?!`)"
-                ],
-                "actions": [
-                  "runShell",
-                  "setVariables",
-                  "httpRequest"
                 ]
               },
               {
                 "name": "codeBlock",
                 "regex": [
                   "(?=(```))(\\w|\\W)*(?<=```)"
-                ],
-                "actions": [
-                  "runShell",
-                  "setVariables",
-                  "httpRequest"
                 ]
               },
               {
@@ -2174,20 +2146,39 @@
                   "[rR]etry",
                   "[rR]estart",
                   "[rR]esume"
-                ],
-                "actions": [
-                  "checkLink",
-                  "find",
-                  "goTo",
-                  "httpRequest",
-                  "runShell",
-                  "saveScreenshot",
-                  "setVariables",
-                  "typeKeys",
-                  "wait"
                 ]
               }
             ]
+          },
+          {
+            "name": "AsciiDoc",
+            "extensions": [
+              ".adoc",
+              ".asciidoc, .asc"
+            ],
+            "testStartStatementOpen": "// (test start",
+            "testStartStatementClose": ")",
+            "testIgnoreStatement": "// (test ignore)",
+            "testEndStatement": "// (test end)",
+            "stepStatementOpen": "// (step",
+            "stepStatementClose": ")",
+            "markup": []
+          },
+          {
+            "name": "HTML/XML",
+            "extensions": [
+              ".html",
+              ".htm",
+              ".xml",
+              ".xhtml"
+            ],
+            "testStartStatementOpen": "<!-- test start",
+            "testStartStatementClose": "-->",
+            "testIgnoreStatement": "<!-- test ignore -->",
+            "testEndStatement": "<!-- test end -->",
+            "stepStatementOpen": "<!-- step",
+            "stepStatementClose": "-->",
+            "markup": []
           }
         ],
         "integrations": {},
