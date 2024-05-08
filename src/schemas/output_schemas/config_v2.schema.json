@@ -474,6 +474,7 @@
                               {
                                 "type": "object",
                                 "additionalProperties": false,
+                                "deprecated": true,
                                 "properties": {
                                   "name": {
                                     "description": "Name of the action.",
@@ -1459,9 +1460,6 @@
               "name": "emphasis",
               "regex": [
                 "(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"
-              ],
-              "actions": [
-                "find"
               ]
             },
             {
@@ -1479,9 +1477,7 @@
                 "(?<!!)\\[.+?\\]\\(.+?\\)"
               ],
               "actions": [
-                "checkLink",
-                "goTo",
-                "httpRequest"
+                "checkLink"
               ]
             },
             {
@@ -1501,22 +1497,12 @@
               "name": "codeInline",
               "regex": [
                 "(?<!`)`(?!`).+?(?<!`)`(?!`)"
-              ],
-              "actions": [
-                "runShell",
-                "setVariables",
-                "httpRequest"
               ]
             },
             {
               "name": "codeBlock",
               "regex": [
                 "(?=(```))(\\w|\\W)*(?<=```)"
-              ],
-              "actions": [
-                "runShell",
-                "setVariables",
-                "httpRequest"
               ]
             },
             {
@@ -1785,11 +1771,10 @@
               ],
               "actions": [
                 {
-                  "name": "find",
-                  "params": {
-                    "moveTo": true,
-                    "click": true
-                  }
+                  "action": "find",
+                  "selector": "$0",
+                  "moveTo": true,
+                  "click": true
                 }
               ]
             },

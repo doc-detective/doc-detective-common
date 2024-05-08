@@ -269,6 +269,7 @@
                               {
                                 "type": "object",
                                 "additionalProperties": false,
+                                "deprecated": true,
                                 "properties": {
                                   "name": {
                                     "description": "Name of the action.",
@@ -369,8 +370,7 @@
             },
             {
               "name": "emphasis",
-              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"],
-              "actions": ["find"]
+              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"]
             },
             {
               "name": "image",
@@ -380,7 +380,7 @@
             {
               "name": "hyperlink",
               "regex": ["(?<!!)\\[.+?\\]\\(.+?\\)"],
-              "actions": ["checkLink", "goTo", "httpRequest"]
+              "actions": ["checkLink"]
             },
             {
               "name": "orderedList",
@@ -392,13 +392,11 @@
             },
             {
               "name": "codeInline",
-              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"],
-              "actions": ["runShell", "setVariables", "httpRequest"]
+              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"]
             },
             {
               "name": "codeBlock",
-              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"],
-              "actions": ["runShell", "setVariables", "httpRequest"]
+              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"]
             },
             {
               "name": "interaction",
@@ -637,11 +635,10 @@
               "regex": ["\\*\\*.+?\\*\\*"],
               "actions": [
                 {
-                  "name": "find",
-                  "params": {
-                    "moveTo": true,
-                    "click": true
-                  }
+                  "action": "find",
+                  "selector": "$0",
+                  "moveTo": true,
+                  "click": true
                 }
               ]
             },
