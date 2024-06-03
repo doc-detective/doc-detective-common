@@ -375,7 +375,7 @@
                 "properties": {}
               },
               "responseParams": {
-                "description": "Deprecated.",
+                "description": "",
                 "deprecated": true,
                 "type": "object",
                 "additionalProperties": true,
