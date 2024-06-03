@@ -76,7 +76,8 @@
       "properties": {}
     },
     "responseParams": {
-      "description": "URL parameters expected in the response, in key/value format. If one or more `responseParams` entries aren't present in the response, the step fails.",
+      "description": "Deprecated.",
+      "deprecated": true,
       "type": "object",
       "additionalProperties": true,
       "default": {},
