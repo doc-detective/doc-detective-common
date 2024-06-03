@@ -863,7 +863,7 @@
                                     "action": {
                                       "type": "string",
                                       "const": "httpRequest",
-                                      "description": "Aciton to perform."
+                                      "description": "Action to perform."
                                     },
                                     "url": {
                                       "type": "string",
@@ -2503,7 +2503,7 @@
       "action": {
         "type": "string",
         "const": "httpRequest",
-        "description": "Aciton to perform."
+        "description": "Action to perform."
       },
       "url": {
         "type": "string",
@@ -3573,7 +3573,7 @@
                           "action": {
                             "type": "string",
                             "const": "httpRequest",
-                            "description": "Aciton to perform."
+                            "description": "Action to perform."
                           },
                           "url": {
                             "type": "string",
@@ -4866,7 +4866,7 @@
                 "action": {
                   "type": "string",
                   "const": "httpRequest",
-                  "description": "Aciton to perform."
+                  "description": "Action to perform."
                 },
                 "url": {
                   "type": "string",
