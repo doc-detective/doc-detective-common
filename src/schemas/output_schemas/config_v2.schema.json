@@ -844,8 +844,7 @@
                                     "properties": {}
                                   },
                                   "responseParams": {
-                                    "description": "",
-                                    "deprecated": true,
+                                    "description": "Deprecated.",
                                     "type": "object",
                                     "additionalProperties": true,
                                     "default": {},
