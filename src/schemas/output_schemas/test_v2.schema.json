@@ -313,7 +313,7 @@
               "action": {
                 "type": "string",
                 "const": "httpRequest",
-                "description": "Aciton to perform."
+                "description": "Action to perform."
               },
               "url": {
                 "type": "string",
@@ -375,7 +375,7 @@
                 "properties": {}
               },
               "responseParams": {
-                "description": "URL parameters expected in the response, in key/value format. If one or more `responseParams` entries aren't present in the response, the step fails.",
+                "description": "Deprecated.",
                 "type": "object",
                 "additionalProperties": true,
                 "default": {},
