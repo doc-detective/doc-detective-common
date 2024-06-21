@@ -260,6 +260,8 @@
                                   "runShell",
                                   "saveScreenshot",
                                   "setVariables",
+                                  "startRecording",
+                                  "stopRecording",
                                   "typeKeys",
                                   "wait"
                                 ]
@@ -279,6 +281,8 @@
                                       "runShell",
                                       "saveScreenshot",
                                       "setVariables",
+                                      "startRecording",
+                                      "stopRecording",
                                       "typeKeys",
                                       "wait"
                                     ]
@@ -290,6 +294,39 @@
                                   }
                                 },
                                 "required": ["name"]
+                              },
+                              {
+                                "$ref": "checkLink_v2.schema.json#"
+                              },
+                              {
+                                "$ref": "find_v2.schema.json#"
+                              },
+                              {
+                                "$ref": "goTo_v2.schema.json#"
+                              },
+                              {
+                                "$ref": "httpRequest_v2.schema.json#"
+                              },
+                              {
+                                "$ref": "runShell_v2.schema.json#"
+                              },
+                              {
+                                "$ref": "saveScreenshot_v2.schema.json#"
+                              },
+                              {
+                                "$ref": "setVariables_v2.schema.json#"
+                              },
+                              {
+                                "$ref": "startRecording_v2.schema.json#"
+                              },
+                              {
+                                "$ref": "stopRecording_v2.schema.json#"
+                              },
+                              {
+                                "$ref": "typeKeys_v2.schema.json#"
+                              },
+                              {
+                                "$ref": "wait_v2.schema.json#"
                               }
                             ]
                           }
@@ -332,8 +369,7 @@
             },
             {
               "name": "emphasis",
-              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"],
-              "actions": ["find"]
+              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"]
             },
             {
               "name": "image",
@@ -343,7 +379,12 @@
             {
               "name": "hyperlink",
               "regex": ["(?<!!)\\[.+?\\]\\(.+?\\)"],
-              "actions": ["checkLink", "goTo", "httpRequest"]
+              "actions": ["checkLink"]
+            },
+            {
+              "name": "navigationLink",
+              "regex": ["(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"],
+              "actions": ["goTo"]
             },
             {
               "name": "orderedList",
@@ -355,13 +396,11 @@
             },
             {
               "name": "codeInline",
-              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"],
-              "actions": ["runShell", "setVariables", "httpRequest"]
+              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"]
             },
             {
               "name": "codeBlock",
-              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"],
-              "actions": ["runShell", "setVariables", "httpRequest"]
+              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"]
             },
             {
               "name": "interaction",
@@ -410,17 +449,6 @@
                 "[rR]etry",
                 "[rR]estart",
                 "[rR]esume"
-              ],
-              "actions": [
-                "checkLink",
-                "find",
-                "goTo",
-                "httpRequest",
-                "runShell",
-                "saveScreenshot",
-                "setVariables",
-                "typeKeys",
-                "wait"
               ]
             }
           ]
@@ -587,7 +615,7 @@
       "fileTypes": [
         {
           "name": "Markdown",
-          "extensions": [".md", ".mdx"],
+          "extensions": [".md", ".markdown", ".mdx"],
           "testStartStatementOpen": "[comment]: # (test start",
           "testStartStatementClose": ")",
           "testIgnoreStatement": "[comment]: # (test ignore)",
@@ -598,20 +626,11 @@
             {
               "name": "onscreenText",
               "regex": ["\\*\\*.+?\\*\\*"],
-              "actions": [
-                {
-                  "name": "find",
-                  "params": {
-                    "moveTo": true,
-                    "click": true
-                  }
-                }
-              ]
+              "actions": ["find"]
             },
             {
               "name": "emphasis",
-              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"],
-              "actions": ["find"]
+              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"]
             },
             {
               "name": "image",
@@ -621,7 +640,12 @@
             {
               "name": "hyperlink",
               "regex": ["(?<!!)\\[.+?\\]\\(.+?\\)"],
-              "actions": ["checkLink", "goTo", "httpRequest"]
+              "actions": ["checkLink"]
+            },
+            {
+              "name": "navigationLink",
+              "regex": ["(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"],
+              "actions": ["goTo"]
             },
             {
               "name": "orderedList",
@@ -633,13 +657,11 @@
             },
             {
               "name": "codeInline",
-              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"],
-              "actions": ["runShell", "setVariables", "httpRequest"]
+              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"]
             },
             {
               "name": "codeBlock",
-              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"],
-              "actions": ["runShell", "setVariables", "httpRequest"]
+              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"]
             },
             {
               "name": "interaction",
@@ -688,17 +710,6 @@
                 "[rR]etry",
                 "[rR]estart",
                 "[rR]esume"
-              ],
-              "actions": [
-                "checkLink",
-                "find",
-                "goTo",
-                "httpRequest",
-                "runShell",
-                "saveScreenshot",
-                "setVariables",
-                "typeKeys",
-                "wait"
               ]
             }
           ]
@@ -747,7 +758,7 @@
       "fileTypes": [
         {
           "name": "Markdown",
-          "extensions": [".md", ".mdx"],
+          "extensions": [".md", ".markdown", ".mdx"],
           "testStartStatementOpen": "[comment]: # (test start",
           "testStartStatementClose": ")",
           "testIgnoreStatement": "[comment]: # (test ignore)",
@@ -762,8 +773,7 @@
             },
             {
               "name": "emphasis",
-              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"],
-              "actions": ["find"]
+              "regex": ["(?<!\\*)\\*(?!\\*).+?(?<!\\*)\\*(?!\\*)"]
             },
             {
               "name": "image",
@@ -773,7 +783,12 @@
             {
               "name": "hyperlink",
               "regex": ["(?<!!)\\[.+?\\]\\(.+?\\)"],
-              "actions": ["checkLink", "goTo", "httpRequest"]
+              "actions": ["checkLink"]
+            },
+            {
+              "name": "navigationLink",
+              "regex": ["(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"],
+              "actions": ["goTo"]
             },
             {
               "name": "orderedList",
@@ -785,13 +800,11 @@
             },
             {
               "name": "codeInline",
-              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"],
-              "actions": ["runShell", "setVariables", "httpRequest"]
+              "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"]
             },
             {
               "name": "codeBlock",
-              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"],
-              "actions": ["runShell", "setVariables", "httpRequest"]
+              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"]
             },
             {
               "name": "interaction",
@@ -840,20 +853,31 @@
                 "[rR]etry",
                 "[rR]estart",
                 "[rR]esume"
-              ],
-              "actions": [
-                "checkLink",
-                "find",
-                "goTo",
-                "httpRequest",
-                "runShell",
-                "saveScreenshot",
-                "setVariables",
-                "typeKeys",
-                "wait"
               ]
             }
           ]
+        },
+        {
+          "name": "AsciiDoc",
+          "extensions": [".adoc", ".asciidoc, .asc"],
+          "testStartStatementOpen": "// (test start",
+          "testStartStatementClose": ")",
+          "testIgnoreStatement": "// (test ignore)",
+          "testEndStatement": "// (test end)",
+          "stepStatementOpen": "// (step",
+          "stepStatementClose": ")",
+          "markup": []
+        },
+        {
+          "name": "HTML/XML",
+          "extensions": [".html", ".htm", ".xml", ".xhtml"],
+          "testStartStatementOpen": "<!-- test start",
+          "testStartStatementClose": "-->",
+          "testIgnoreStatement": "<!-- test ignore -->",
+          "testEndStatement": "<!-- test end -->",
+          "stepStatementOpen": "<!-- step",
+          "stepStatementClose": "-->",
+          "markup": []
         }
       ],
       "integrations": {},
