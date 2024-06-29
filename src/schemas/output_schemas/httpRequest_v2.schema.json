@@ -116,7 +116,7 @@
       "minimum": 0,
       "maximum": 100
     },
-    "overwriteOutput": {
+    "overwrite": {
       "type": "string",
       "description": "If `true`, overwrites the existing output at `savePath` if it exists.\nIf `byVariation`, overwrites the existing output at `savePath` if the difference between the new output and the existing output is greater than `maxVariation`.",
       "enum": [
@@ -236,7 +236,7 @@
       "savePath": "response.json",
       "saveDirectory": "media",
       "maxVariation": 5,
-      "overwriteOutput": "byVariation"
+      "overwrite": "byVariation"
     }
   ]
 }
