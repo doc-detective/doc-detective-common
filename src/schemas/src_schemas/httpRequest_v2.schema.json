@@ -41,6 +41,11 @@
       "transform": ["trim", "toEnumCase"],
       "default": "get"
     },
+    "timeout": {
+      "type": "integer",
+      "description": "Timeout for the HTTP request, in milliseconds.",
+      "default": 60000
+    },
     "requestHeaders": {
       "description": "Headers to include in the HTTP request, in key/value format.",
       "type": "object",
@@ -145,6 +150,7 @@
       "action": "httpRequest",
       "url": "https://www.api-server.com",
       "method": "post",
+      "timeout": 30000,
       "requestHeaders": {
         "header": "value"
       },
