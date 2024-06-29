@@ -402,7 +402,7 @@
               },
               "savePath": {
                 "type": "string",
-                "description": "File path to save the command's output, relative to `saveDirectory`. If not specified, the file name is the ID of the step with a `.json` if the response is valid JSON or a `.txt` extension otherwise."
+                "description": "File path to save the command's output, relative to `saveDirectory`. Specify a file extension that matches the expected response type, such as `.json` for JSON content or `.txt` for strings."
               },
               "saveDirectory": {
                 "type": "string",
@@ -593,7 +593,7 @@
               },
               "savePath": {
                 "type": "string",
-                "description": "File path to save the command's output, relative to `saveDirectory`. If not specified, the file name is the ID of the step with a `.txt` extension."
+                "description": "File path to save the command's output, relative to `saveDirectory`."
               },
               "saveDirectory": {
                 "type": "string",

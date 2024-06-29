@@ -52,7 +52,7 @@
     },
     "savePath": {
       "type": "string",
-      "description": "File path to save the command's output, relative to `saveDirectory`. If not specified, the file name is the ID of the step with a `.txt` extension."
+      "description": "File path to save the command's output, relative to `saveDirectory`."
     },
     "saveDirectory": {
       "type": "string",
