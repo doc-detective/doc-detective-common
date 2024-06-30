@@ -353,6 +353,11 @@
                 ],
                 "default": "get"
               },
+              "timeout": {
+                "type": "integer",
+                "description": "Timeout for the HTTP request, in milliseconds.",
+                "default": 60000
+              },
               "requestHeaders": {
                 "description": "Headers to include in the HTTP request, in key/value format.",
                 "type": "object",
@@ -394,6 +399,31 @@
                 "additionalProperties": true,
                 "default": {},
                 "properties": {}
+              },
+              "savePath": {
+                "type": "string",
+                "description": "File path to save the command's output, relative to `saveDirectory`. Specify a file extension that matches the expected response type, such as `.json` for JSON content or `.txt` for strings."
+              },
+              "saveDirectory": {
+                "type": "string",
+                "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
+              },
+              "maxVariation": {
+                "type": "integer",
+                "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `savePath`, this value is ignored.",
+                "default": 0,
+                "minimum": 0,
+                "maximum": 100
+              },
+              "overwrite": {
+                "type": "string",
+                "description": "If `true`, overwrites the existing output at `savePath` if it exists.\nIf `byVariation`, overwrites the existing output at `savePath` if the difference between the new output and the existing output is greater than `maxVariation`.",
+                "enum": [
+                  "true",
+                  "false",
+                  "byVariation"
+                ],
+                "default": "false"
               },
               "envsFromResponseData": {
                 "description": "Environment variables to set based on response variables, as an object of the environment variable name and the jq filter applied to the response data to identify the variable's value.",
@@ -466,6 +496,7 @@
                 "action": "httpRequest",
                 "url": "https://www.api-server.com",
                 "method": "post",
+                "timeout": 30000,
                 "requestHeaders": {
                   "header": "value"
                 },
@@ -484,6 +515,27 @@
                 "statusCodes": [
                   200
                 ]
+              },
+              {
+                "action": "httpRequest",
+                "url": "https://reqres.in/api/users",
+                "method": "post",
+                "requestData": {
+                  "name": "morpheus",
+                  "job": "leader"
+                },
+                "responseData": {
+                  "name": "morpheus",
+                  "job": "leader"
+                },
+                "statusCodes": [
+                  200,
+                  201
+                ],
+                "savePath": "response.json",
+                "saveDirectory": "media",
+                "maxVariation": 5,
+                "overwrite": "byVariation"
               }
             ]
           },
@@ -538,6 +590,36 @@
               "output": {
                 "type": "string",
                 "description": "Content expected in the command's output. If the expected content can't be found in the command's output (either stdout or stderr), the step fails. Supports strings and regular expressions. To use a regular expression, the string must start and end with a forward slash, like in `/^hello-world.*/`."
+              },
+              "savePath": {
+                "type": "string",
+                "description": "File path to save the command's output, relative to `saveDirectory`."
+              },
+              "saveDirectory": {
+                "type": "string",
+                "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
+              },
+              "maxVariation": {
+                "type": "integer",
+                "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `savePath`, this value is ignored.",
+                "default": 0,
+                "minimum": 0,
+                "maximum": 100
+              },
+              "overwrite": {
+                "type": "string",
+                "description": "If `true`, overwrites the existing output at `savePath` if it exists.\nIf `byVariation`, overwrites the existing output at `savePath` if the difference between the new output and the existing output is greater than `maxVariation`.",
+                "enum": [
+                  "true",
+                  "false",
+                  "byVariation"
+                ],
+                "default": "false"
+              },
+              "timeout": {
+                "type": "integer",
+                "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
+                "default": 60000
               },
               "setVariables": {
                 "type": "array",
@@ -595,6 +677,7 @@
               {
                 "action": "runShell",
                 "command": "docker run hello-world",
+                "timeout": 20000,
                 "exitCodes": [
                   0
                 ],
@@ -623,6 +706,18 @@
                     "regex": ".*"
                   }
                 ]
+              },
+              {
+                "action": "runShell",
+                "command": "docker run hello-world",
+                "exitCodes": [
+                  0
+                ],
+                "output": "Hello from Docker!",
+                "savePath": "docker-output.txt",
+                "saveDirectory": "output",
+                "maxVariation": 10,
+                "overwrite": "byVariation"
               }
             ]
           },
@@ -646,16 +741,17 @@
               },
               "path": {
                 "type": "string",
-                "description": "Relative file path of the PNG file from `directory`. If not specified, the file name is the ID of the step.",
+                "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
                 "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
               },
               "directory": {
                 "type": "string",
-                "description": "Directory of the PNG file. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
+                "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
               },
               "maxVariation": {
                 "type": "number",
                 "description": "Allowed variation in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `maxVariation`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
+                "default": 5,
                 "minimum": 0,
                 "maximum": 100
               },
@@ -667,7 +763,7 @@
                   "false",
                   "byVariation"
                 ],
-                "default": false
+                "default": "false"
               }
             },
             "dynamicDefaults": {

@@ -18,16 +18,17 @@
     },
     "path": {
       "type": "string",
-      "description": "Relative file path of the PNG file from `directory`. If not specified, the file name is the ID of the step.",
+      "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
       "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
     },
     "directory": {
       "type": "string",
-      "description": "Directory of the PNG file. Attempts to create the directory if it doesn't exist. If not specified, the directory is your media directory."
+      "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
     },
     "maxVariation": {
       "type": "number",
       "description": "Allowed variation in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `maxVariation`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
+      "default": 5,
       "minimum": 0,
       "maximum": 100
     },
@@ -39,7 +40,7 @@
         "false",
         "byVariation"
       ],
-      "default": false
+      "default": "false"
     }
   },
   "dynamicDefaults": {
