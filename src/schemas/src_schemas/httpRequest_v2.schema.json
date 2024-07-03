@@ -41,6 +41,11 @@
       "transform": ["trim", "toEnumCase"],
       "default": "get"
     },
+    "timeout": {
+      "type": "integer",
+      "description": "Timeout for the HTTP request, in milliseconds.",
+      "default": 60000
+    },
     "requestHeaders": {
       "description": "Headers to include in the HTTP request, in key/value format.",
       "type": "object",
@@ -82,6 +87,36 @@
       "additionalProperties": true,
       "default": {},
       "properties": {}
+    },
+    "allowAdditionalFields": {
+      "type": "boolean",
+      "description": "If `false`, the step fails when the response data contains fields not specified in `responseData`.",
+      "default": true
+    },
+    "savePath": {
+      "type": "string",
+      "description": "File path to save the command's output, relative to `saveDirectory`. Specify a file extension that matches the expected response type, such as `.json` for JSON content or `.txt` for strings."
+    },
+    "saveDirectory": {
+      "type": "string",
+      "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
+    },
+    "maxVariation": {
+      "type": "integer",
+      "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `savePath`, this value is ignored.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 100
+    },
+    "overwrite": {
+      "type": "string",
+      "description": "If `true`, overwrites the existing output at `savePath` if it exists.\nIf `byVariation`, overwrites the existing output at `savePath` if the difference between the new output and the existing output is greater than `maxVariation`.",
+      "enum": [
+        "true",
+        "false",
+        "byVariation"
+      ],
+      "default": "false"
     },
     "envsFromResponseData": {
       "description": "Environment variables to set based on response variables, as an object of the environment variable name and the jq filter applied to the response data to identify the variable's value.",
@@ -145,6 +180,7 @@
       "action": "httpRequest",
       "url": "https://www.api-server.com",
       "method": "post",
+      "timeout": 30000,
       "requestHeaders": {
         "header": "value"
       },
@@ -161,6 +197,24 @@
         "field": "value"
       },
       "statusCodes": [200]
+    },
+    {
+      "action": "httpRequest",
+      "url": "https://reqres.in/api/users",
+      "method": "post",
+      "requestData": {
+        "name": "morpheus",
+        "job": "leader"
+      },
+      "responseData": {
+        "name": "morpheus",
+        "job": "leader"
+      },
+      "statusCodes": [200, 201],
+      "savePath": "response.json",
+      "saveDirectory": "media",
+      "maxVariation": 5,
+      "overwrite": "byVariation"
     }
   ]
 }
