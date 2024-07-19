@@ -114,7 +114,7 @@
       },
       "output": {
         "default": ".",
-        "description": "Path of the directory in which to store the output of Doc Detective commands.",
+        "description": "Path of the of the file or directory in which to store the output of Doc Detective commands. If a file path is specified, the output is written to that file. If a file of that name already exists, Doc Detective creates appends an integer to the result file name. If a directory path is specified, the output file name is dependent on the command being run.",
         "type": "string"
       },
       "recursive": {
@@ -150,7 +150,7 @@
             ]
           },
           "output": {
-            "description": "Path of the directory in which to store the output of Doc Detective commands.",
+            "description": "Path of the of the file or directory in which to store the output of Doc Detective commands. If a file path is specified, the output is written to that file. If a file of that name already exists, Doc Detective creates appends an integer to the result file name. If a directory path is specified, the output file name is dependent on the command being run.",
             "type": "string",
             "default": "."
           },
@@ -374,7 +374,7 @@
             ]
           },
           "output": {
-            "description": "Path of the directory in which to store the output of Doc Detective commands.",
+            "description": "Path of the of the file or directory in which to store the output of Doc Detective commands. If a file path is specified, the output is written to that file. If a file of that name already exists, Doc Detective creates appends an integer to the result file name. If a directory path is specified, the output file name is dependent on the command being run.",
             "type": "string",
             "default": "."
           },
@@ -428,7 +428,7 @@
             ]
           },
           "output": {
-            "description": "Path of the directory in which to store the output of Doc Detective commands.",
+            "description": "Path of the of the file or directory in which to store the output of Doc Detective commands. If a file path is specified, the output is written to that file. If a file of that name already exists, Doc Detective creates appends an integer to the result file name. If a directory path is specified, the output file name is dependent on the command being run.",
             "type": "string",
             "default": "."
           },
@@ -966,7 +966,7 @@
                                       "properties": {}
                                     },
                                     "responseParams": {
-                                      "description": "URL parameters expected in the response, in key/value format. If one or more `responseParams` entries aren't present in the response, the step fails.",
+                                      "description": "DEPRECATED.",
                                       "type": "object",
                                       "additionalProperties": true,
                                       "default": {},
@@ -1880,7 +1880,7 @@
         "type": "boolean"
       },
       "output": {
-        "description": "Path of the directory in which to store the output of Doc Detective commands.",
+        "description": "Path of the of the file or directory in which to store the output of Doc Detective commands. If a file path is specified, the output is written to that file. If a file of that name already exists, Doc Detective creates appends an integer to the result file name. If a directory path is specified, the output file name is dependent on the command being run.",
         "type": "string",
         "default": "."
       },
@@ -2743,7 +2743,7 @@
         "properties": {}
       },
       "responseParams": {
-        "description": "URL parameters expected in the response, in key/value format. If one or more `responseParams` entries aren't present in the response, the step fails.",
+        "description": "DEPRECATED.",
         "type": "object",
         "additionalProperties": true,
         "default": {},
@@ -3913,7 +3913,7 @@
                             "properties": {}
                           },
                           "responseParams": {
-                            "description": "URL parameters expected in the response, in key/value format. If one or more `responseParams` entries aren't present in the response, the step fails.",
+                            "description": "DEPRECATED.",
                             "type": "object",
                             "additionalProperties": true,
                             "default": {},
@@ -5343,7 +5343,7 @@
                   "properties": {}
                 },
                 "responseParams": {
-                  "description": "URL parameters expected in the response, in key/value format. If one or more `responseParams` entries aren't present in the response, the step fails.",
+                  "description": "DEPRECATED.",
                   "type": "object",
                   "additionalProperties": true,
                   "default": {},
