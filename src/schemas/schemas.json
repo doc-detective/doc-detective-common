@@ -248,7 +248,7 @@
                         },
                         "path": {
                           "type": "string",
-                          "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+                          "description": "Absolute path or command for the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
                         },
                         "options": {
                           "type": "object",
@@ -2385,7 +2385,7 @@
           },
           "path": {
             "type": "string",
-            "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+            "description": "Absolute path or command for the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
           },
           "options": {
             "type": "object",
@@ -3467,7 +3467,7 @@
                     },
                     "path": {
                       "type": "string",
-                      "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+                      "description": "Absolute path or command for the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
                     },
                     "options": {
                       "type": "object",
@@ -3616,7 +3616,7 @@
                               },
                               "path": {
                                 "type": "string",
-                                "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+                                "description": "Absolute path or command for the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
                               },
                               "options": {
                                 "type": "object",
@@ -5046,7 +5046,7 @@
                     },
                     "path": {
                       "type": "string",
-                      "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+                      "description": "Absolute path or command for the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
                     },
                     "options": {
                       "type": "object",
