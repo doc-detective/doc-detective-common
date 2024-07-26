@@ -247,21 +247,6 @@
                             "oneOf": [
                               {
                                 "type": "string"
-                              },
-                              {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "properties": {
-                                  "open": {
-                                    "description": "Pattern that matches the beginning of a multi-line markup instance. `open` patterns aren't included in the match.",
-                                    "type": "string"
-                                  },
-                                  "close": {
-                                    "description": "Pattern that matches the end of a multi-line markup instance. `close` patterns aren't included in the match.",
-                                    "type": "string"
-                                  }
-                                },
-                                "required": ["open", "close"]
                               }
                             ]
                           }
