@@ -422,16 +422,6 @@
               "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"]
             },
             {
-              "name": "bashCodeBlock",
-              "regex": [
-                {
-                  "open": "```bash",
-                  "close": "```"
-                }
-              ],
-              "actions": ["runShell"]
-            },
-            {
               "name": "interaction",
               "regex": [
                 "[cC]lick",
