@@ -41,6 +41,15 @@
       "description": "If `true` searches `input`, `setup`, and `cleanup` paths recursively for test specificaions and source files.",
       "type": "boolean"
     },
+    "relativePathBase": {
+      "description": "Whether paths should be interpreted as relative to the current working directory (`cwd`) or to the file in which they're specified (`file`).",
+      "type": "string",
+      "enum": [
+        "cwd",
+        "file"
+      ],
+      "default": "cwd"
+    },
     "envVariables": {
       "description": "Path to a `.env` file to load before performing a Doc Detective operation.",
       "type": "string"
@@ -158,7 +167,7 @@
                       },
                       "path": {
                         "type": "string",
-                        "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+                        "description": "Absolute path or command for the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
                       },
                       "options": {
                         "type": "object",
@@ -446,6 +455,24 @@
                             "oneOf": [
                               {
                                 "type": "string"
+                              },
+                              {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "open": {
+                                    "description": "Pattern that matches the beginning of a multi-line markup instance. `open` patterns aren't included in the match.",
+                                    "type": "string"
+                                  },
+                                  "close": {
+                                    "description": "Pattern that matches the end of a multi-line markup instance. `close` patterns aren't included in the match.",
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "open",
+                                  "close"
+                                ]
                               }
                             ]
                           }
@@ -1646,12 +1673,6 @@
               ]
             },
             {
-              "name": "codeBlock",
-              "regex": [
-                "(?=(```))(\\w|\\W)*(?<=```)"
-              ]
-            },
-            {
               "name": "interaction",
               "regex": [
                 "[cC]lick",
@@ -2032,6 +2053,7 @@
       ],
       "output": ".",
       "recursive": true,
+      "relativePathBase": "cwd",
       "logLevel": "info",
       "runTests": {
         "input": [
