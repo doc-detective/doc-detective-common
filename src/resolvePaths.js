@@ -41,6 +41,7 @@ async function resolvePaths(
     "cleanup",
     "savePath",
     "saveDirectory",
+    "workingDirectory",
   ];
 
   /**
@@ -52,6 +53,10 @@ async function resolvePaths(
    * @returns {string} - The resolved path.
    */
   function resolve(baseType, relativePath, filePath) {
+    // If path is already absolute, return it
+    if (path.isAbsolute(relativePath)) {
+      return relativePath;
+    }
     // If filePath is a file, use its directory as the base path
     filePath = fs.lstatSync(filePath).isFile()
       ? path.dirname(filePath)
