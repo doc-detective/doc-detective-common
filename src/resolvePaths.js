@@ -72,13 +72,13 @@ async function resolvePaths(
   let pathProperties;
   if (!nested && !objectType) {
     // Check if object matches the config schema
-    const validation = validate("config_v2", object);
+    const validation = validate("config_v2", { ...object });
     if (validation.valid) {
       pathProperties = configPaths;
       objectType = "config";
     } else {
       // Check if object matches the spec schema
-      const validation = validate("spec_v2", object);
+      const validation = validate("spec_v2", { ...object });
       if (validation.valid) {
         pathProperties = specPaths;
         objectType = "spec";
