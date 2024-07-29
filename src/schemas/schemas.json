@@ -1173,6 +1173,11 @@
                                       },
                                       "default": []
                                     },
+                                    "workingDirectory": {
+                                      "type": "string",
+                                      "description": "Working directory for the command.",
+                                      "default": "."
+                                    },
                                     "exitCodes": {
                                       "type": "array",
                                       "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
@@ -1310,6 +1315,7 @@
                                     {
                                       "action": "runShell",
                                       "command": "docker run hello-world",
+                                      "workingDirectory": ".",
                                       "exitCodes": [
                                         0
                                       ],
@@ -3043,6 +3049,11 @@
         },
         "default": []
       },
+      "workingDirectory": {
+        "type": "string",
+        "description": "Working directory for the command.",
+        "default": "."
+      },
       "exitCodes": {
         "type": "array",
         "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
@@ -3180,6 +3191,7 @@
       {
         "action": "runShell",
         "command": "docker run hello-world",
+        "workingDirectory": ".",
         "exitCodes": [
           0
         ],
@@ -4115,6 +4127,11 @@
                             },
                             "default": []
                           },
+                          "workingDirectory": {
+                            "type": "string",
+                            "description": "Working directory for the command.",
+                            "default": "."
+                          },
                           "exitCodes": {
                             "type": "array",
                             "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
@@ -4252,6 +4269,7 @@
                           {
                             "action": "runShell",
                             "command": "docker run hello-world",
+                            "workingDirectory": ".",
                             "exitCodes": [
                               0
                             ],
@@ -5545,6 +5563,11 @@
                   },
                   "default": []
                 },
+                "workingDirectory": {
+                  "type": "string",
+                  "description": "Working directory for the command.",
+                  "default": "."
+                },
                 "exitCodes": {
                   "type": "array",
                   "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
@@ -5682,6 +5705,7 @@
                 {
                   "action": "runShell",
                   "command": "docker run hello-world",
+                  "workingDirectory": ".",
                   "exitCodes": [
                     0
                   ],
