@@ -49,7 +49,7 @@
                   },
                   "path": {
                     "type": "string",
-                    "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+                    "description": "Absolute path or command for the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
                   },
                   "options": {
                     "type": "object",
@@ -578,6 +578,11 @@
                 },
                 "default": []
               },
+              "workingDirectory": {
+                "type": "string",
+                "description": "Working directory for the command.",
+                "default": "."
+              },
               "exitCodes": {
                 "type": "array",
                 "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
@@ -715,6 +720,7 @@
               {
                 "action": "runShell",
                 "command": "docker run hello-world",
+                "workingDirectory": ".",
                 "exitCodes": [
                   0
                 ],

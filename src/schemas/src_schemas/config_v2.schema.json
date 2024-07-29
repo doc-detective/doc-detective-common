@@ -21,6 +21,12 @@
       "default": true,
       "$ref": "#/definitions/recursive"
     },
+    "relativePathBase": {
+      "description": "Whether paths should be interpreted as relative to the current working directory (`cwd`) or to the file in which they're specified (`file`).",
+      "type": "string",
+      "enum": ["cwd", "file"],
+      "default": "cwd"
+    },
     "envVariables": {
       "description": "Path to a `.env` file to load before performing a Doc Detective operation.",
       "type": "string"
@@ -383,7 +389,9 @@
             },
             {
               "name": "navigationLink",
-              "regex": ["(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"],
+              "regex": [
+                "(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"
+              ],
               "actions": ["goTo"]
             },
             {
@@ -397,10 +405,6 @@
             {
               "name": "codeInline",
               "regex": ["(?<!`)`(?!`).+?(?<!`)`(?!`)"]
-            },
-            {
-              "name": "codeBlock",
-              "regex": ["(?=(```))(\\w|\\W)*(?<=```)"]
             },
             {
               "name": "interaction",
@@ -644,7 +648,9 @@
             },
             {
               "name": "navigationLink",
-              "regex": ["(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"],
+              "regex": [
+                "(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"
+              ],
               "actions": ["goTo"]
             },
             {
@@ -726,6 +732,7 @@
       "input": ["."],
       "output": ".",
       "recursive": true,
+      "relativePathBase": "cwd",
       "logLevel": "info",
       "runTests": {
         "input": ["."],
@@ -787,7 +794,9 @@
             },
             {
               "name": "navigationLink",
-              "regex": ["(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"],
+              "regex": [
+                "(?:[Cc]hose|[Oo]pen|[Cc]lick|[Nn]avigate to|[Gg]o to)(?<!!)\\[.+?\\]\\(.+?\\)"
+              ],
               "actions": ["goTo"]
             },
             {

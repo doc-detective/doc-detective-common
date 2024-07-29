@@ -38,6 +38,7 @@ function validate(schemaKey, object) {
     const errors = check.errors.map((error) => error.message);
     result.errors = errors.join(", ");
   }
+  result.object = object;
 
   return result;
 }

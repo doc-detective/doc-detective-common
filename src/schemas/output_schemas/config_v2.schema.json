@@ -41,6 +41,15 @@
       "description": "If `true` searches `input`, `setup`, and `cleanup` paths recursively for test specificaions and source files.",
       "type": "boolean"
     },
+    "relativePathBase": {
+      "description": "Whether paths should be interpreted as relative to the current working directory (`cwd`) or to the file in which they're specified (`file`).",
+      "type": "string",
+      "enum": [
+        "cwd",
+        "file"
+      ],
+      "default": "cwd"
+    },
     "envVariables": {
       "description": "Path to a `.env` file to load before performing a Doc Detective operation.",
       "type": "string"
@@ -158,7 +167,7 @@
                       },
                       "path": {
                         "type": "string",
-                        "description": "Path to the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+                        "description": "Absolute path or command for the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
                       },
                       "options": {
                         "type": "object",
@@ -1083,6 +1092,11 @@
                                     },
                                     "default": []
                                   },
+                                  "workingDirectory": {
+                                    "type": "string",
+                                    "description": "Working directory for the command.",
+                                    "default": "."
+                                  },
                                   "exitCodes": {
                                     "type": "array",
                                     "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
@@ -1220,6 +1234,7 @@
                                   {
                                     "action": "runShell",
                                     "command": "docker run hello-world",
+                                    "workingDirectory": ".",
                                     "exitCodes": [
                                       0
                                     ],
@@ -1646,12 +1661,6 @@
               ]
             },
             {
-              "name": "codeBlock",
-              "regex": [
-                "(?=(```))(\\w|\\W)*(?<=```)"
-              ]
-            },
-            {
               "name": "interaction",
               "regex": [
                 "[cC]lick",
@@ -2032,6 +2041,7 @@
       ],
       "output": ".",
       "recursive": true,
+      "relativePathBase": "cwd",
       "logLevel": "info",
       "runTests": {
         "input": [
