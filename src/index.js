@@ -1,7 +1,9 @@
-const { schemas } = require("./schemas");
-const { validate } = require("./validate");
-const { resolvePaths } = require("./resolvePaths");
+import { schemas } from "./schemas";
+import { validate } from "./validate";
+import { resolvePaths } from "./resolvePaths";
+import { components } from "./components";
 
 exports.schemas = schemas;
 exports.validate = validate;
 exports.resolvePaths = resolvePaths;
+exports.components = components;
