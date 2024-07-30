@@ -8,4 +8,4 @@ const components = {
     SchemaForm,
 };
 
-exports.components = components;
+export { components };

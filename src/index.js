@@ -1,9 +1,4 @@
-import { schemas } from "./schemas";
-import { validate } from "./validate";
-import { resolvePaths } from "./resolvePaths";
-import { components } from "./components";
-
-exports.schemas = schemas;
-exports.validate = validate;
-exports.resolvePaths = resolvePaths;
-exports.components = components;
+export { schemas } from "./schemas";
+export { validate } from "./validate";
+export { resolvePaths } from "./resolvePaths";
+export { components } from "./components";

@@ -1,5 +1,6 @@
 import Ajv from "ajv";
-import React, { useState, useEffect } from "react";
+import * as React from "react";
+import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import {
   TextField,
@@ -49,7 +50,7 @@ const SchemaField = ({
   // passValueToParent: A function that passes the value of the field to the parent component.
 
   // If the field is marked as const, pass the value to the parent component and return null.
-  if (propertyValue.const) {
+  if (propertyValue && propertyValue.const) {
     useEffect(() => {
       passValueToParent(propertyValue.const);
     }, []);
@@ -58,11 +59,11 @@ const SchemaField = ({
 
   // Run custom logic.
   const fieldPath = propertyKey;
-  const label = propertyValue.title || propertyValue.name || propertyKey;
-  const helperText = propertyValue.description || "";
-  const required = schema.required?.includes(propertyKey);
+  const label = propertyValue?.title || propertyValue?.name || propertyKey;
+  const helperText = propertyValue?.description || "";
+  const required = schema?.required?.includes(propertyKey);
   const placeholder =
-    propertyValue.examples && propertyValue.examples.length > 0
+    propertyValue?.examples && propertyValue.examples.length > 0
       ? propertyValue.examples[0]
       : null;
 
@@ -70,42 +71,41 @@ const SchemaField = ({
   // If type is not defined, check if anyOf or oneOf is defined
   // Prefer string types. If no string types, use first type.
   // TODO: Add support for multiple types per field
-  let type = getType(propertyValue);
+  let type = propertyValue ? getType(propertyValue) : undefined;
 
   // Get default value
-  const defaultValue =
-    propertyValue.default !== undefined
-      ? propertyValue.default
-      : schema.dynamicDefaults?.[propertyKey] === "uuid"
-      ? uuidv4()
-      : type === "array"
-      ? []
-      : type === "object"
-      ? // Crawl object properties to get default values
-        // TODO: Add support for nested objects
-        Object.keys(propertyValue.properties).reduce((acc, key) => {
-          acc[key] = propertyValue.properties[key].default;
-          return acc;
-        }, {})
-      : type === "boolean"
-      ? false
-      : "";
+  const defaultValue = propertyValue?.default !== undefined
+    ? propertyValue.default
+    : schema.dynamicDefaults?.[propertyKey] === "uuid"
+    ? uuidv4()
+    : type === "array"
+    ? []
+    : type === "object"
+    ? // Crawl object properties to get default values
+      // TODO: Add support for nested objects
+      Object.keys(propertyValue?.properties || {}).reduce((acc, key) => {
+        acc[key] = propertyValue.properties[key].default;
+        return acc;
+      }, {})
+    : type === "boolean"
+    ? false
+    : "";
 
   // Add validation rules
   let validationRules = {};
-  if (propertyValue.minLength !== undefined) {
+  if (propertyValue?.minLength !== undefined) {
     validationRules.minLength = propertyValue.minLength;
   }
-  if (propertyValue.maxLength !== undefined) {
+  if (propertyValue?.maxLength !== undefined) {
     validationRules.maxLength = propertyValue.maxLength;
   }
-  if (propertyValue.minimum !== undefined) {
+  if (propertyValue?.minimum !== undefined) {
     validationRules.minimum = propertyValue.minimum;
   }
-  if (propertyValue.maximum !== undefined) {
+  if (propertyValue?.maximum !== undefined) {
     validationRules.maximum = propertyValue.maximum;
   }
-  if (propertyValue.pattern !== undefined) {
+  if (propertyValue?.pattern !== undefined) {
     validationRules.pattern = propertyValue.pattern;
   }
   if (type === "number" || type === "integer") {
@@ -194,7 +194,7 @@ const SchemaField = ({
     useEffect(() => {
       passValueToParent(fieldValue);
     }, []);
-    if (propertyValue.enum?.[0] !== "") propertyValue.enum?.unshift("");
+    if (propertyValue?.enum?.[0] !== "") propertyValue.enum?.unshift("");
     return (
       <div class="field" key={fieldPath}>
         {label && (
@@ -221,7 +221,7 @@ const SchemaField = ({
           margin="normal"
           fullWidth
         >
-          {propertyValue.enum?.map((option) => (
+          {propertyValue?.enum?.map((option) => (
             <option
               key={option}
               value={option}
@@ -349,7 +349,7 @@ const SchemaField = ({
         {/* {label && <ReactMarkdown>{JSON.stringify(fieldValue)}</ReactMarkdown>} */}
         {helperText && <ReactMarkdown>{helperText}</ReactMarkdown>}
         <div class="objectChildren">
-          {Object.keys(propertyValue.properties).map((key) => (
+          {Object.keys(propertyValue?.properties || {}).map((key) => (
             <SchemaField
               {...{
                 schema: propertyValue,
@@ -360,7 +360,7 @@ const SchemaField = ({
               }}
             />
           ))}
-          {propertyValue.additionalProperties && (
+          {propertyValue?.additionalProperties && (
             <div>
               {pairs.map((pair, index) => (
                 <div
@@ -498,7 +498,7 @@ const SchemaField = ({
             return { _key: uuidv4(), value: value, schema: arraySchema };
         } else if (typeof value === "object") {
           // Find all schemas with type object
-          const objectSchemas = items.filter((item) => item.type === "object");
+          const objectSchemas = items.filter((item) => item?.type === "object");
           const ajv = new Ajv({
             strictSchema: false,
             useDefaults: true,
@@ -519,19 +519,19 @@ const SchemaField = ({
             return { _key: uuidv4(), value: value, schema: objectSchema };
         } else if (typeof value === "number") {
           // Find schema with type number or integer
-          const numberSchema = items.find(
-            (item) => item.type === "number" || item.type === "integer"
+          const numberSchema = items.find((item) =>
+            item?.type === "number" || item?.type === "integer"
           );
           if (numberSchema)
             return { _key: uuidv4(), value: value, schema: numberSchema };
         } else if (typeof value === "string") {
           // Find schema with type string
-          const stringSchema = items.find((item) => item.type === "string");
+          const stringSchema = items.find((item) => item?.type === "string");
           if (stringSchema)
             return { _key: uuidv4(), value: value, schema: stringSchema };
         } else if (typeof value === "boolean") {
           // Find schema with type boolean
-          const booleanSchema = items.find((item) => item.type === "boolean");
+          const booleanSchema = items.find((item) => item?.type === "boolean");
           if (booleanSchema)
             return { _key: uuidv4(), value: value, schema: booleanSchema };
         } else {
