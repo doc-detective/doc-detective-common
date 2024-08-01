@@ -87,7 +87,7 @@
           "default": false
         },
         "mediaDirectory": {
-          "description": "Path of the directory in which to store output media files.",
+          "description": "DEPRECATED.",
           "type": "string",
           "default": "."
         },
@@ -573,7 +573,6 @@
         "setup": "",
         "cleanup": "",
         "recursive": true,
-        "mediaDirectory": ".",
         "downloadDirectory": ".",
         "contexts": [
           {
@@ -598,7 +597,6 @@
         "setup": "",
         "cleanup": "",
         "recursive": true,
-        "mediaDirectory": ".",
         "downloadDirectory": ".",
         "contexts": [
           {
@@ -740,7 +738,6 @@
         "setup": ["."],
         "cleanup": ["."],
         "recursive": true,
-        "mediaDirectory": ".",
         "downloadDirectory": ".",
         "contexts": [
           {
