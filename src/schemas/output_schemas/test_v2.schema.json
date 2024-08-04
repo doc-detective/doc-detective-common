@@ -935,7 +935,7 @@
           {
             "title": "typeKeys",
             "type": "object",
-            "description": "Type keys. To type special keys, begin and end the string with `$` and use the [special key's enum](). For example, to type the Escape key, enter `$ESCAPE$`.",
+            "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's enum. For example, to type the Escape key, enter `$ESCAPE$`.",
             "properties": {
               "id": {
                 "type": "string",
@@ -1049,7 +1049,7 @@
                 "default": false
               },
               "typeKeys": {
-                "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](/reference/schemas/typeKeys).<br><br>To type in the element, make the element active with the `click` parameter.",
+                "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](typeKeys). To type in the element, make the element active with the `click` parameter.",
                 "oneOf": [
                   {
                     "type": "string"

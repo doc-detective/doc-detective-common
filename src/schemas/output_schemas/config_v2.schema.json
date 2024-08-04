@@ -139,7 +139,7 @@
         },
         "contexts": {
           "type": "array",
-          "description": "Application/platform sets to run tests in. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. See [context](/reference/schemas/context).",
+          "description": "Application/platform sets to run tests in. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it.",
           "items": {
             "oneOf": [
               {
@@ -637,7 +637,7 @@
                                     "default": false
                                   },
                                   "typeKeys": {
-                                    "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](/reference/schemas/typeKeys).<br><br>To type in the element, make the element active with the `click` parameter.",
+                                    "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](typeKeys). To type in the element, make the element active with the `click` parameter.",
                                     "oneOf": [
                                       {
                                         "type": "string"
@@ -1449,7 +1449,7 @@
                               {
                                 "title": "typeKeys",
                                 "type": "object",
-                                "description": "Type keys. To type special keys, begin and end the string with `$` and use the [special key's enum](). For example, to type the Escape key, enter `$ESCAPE$`.",
+                                "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's enum. For example, to type the Escape key, enter `$ESCAPE$`.",
                                 "properties": {
                                   "id": {
                                     "type": "string",

@@ -1,7 +1,7 @@
 {
   "title": "typeKeys",
   "type": "object",
-  "description": "Type keys. To type special keys, begin and end the string with `$` and use the [special key's enum](). For example, to type the Escape key, enter `$ESCAPE$`.",
+  "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's enum. For example, to type the Escape key, enter `$ESCAPE$`.",
   "properties": {
     "id": {
       "type": "string",

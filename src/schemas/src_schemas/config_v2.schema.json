@@ -98,7 +98,7 @@
         },
         "contexts": {
           "type": "array",
-          "description": "Application/platform sets to run tests in. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. See [context](/reference/schemas/context).",
+          "description": "Application/platform sets to run tests in. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it.",
           "items": {
             "oneOf": [
               {
