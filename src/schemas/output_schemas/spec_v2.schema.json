@@ -467,6 +467,43 @@
                             "trim"
                           ]
                         },
+                        "openApi": {
+                          "type": "object",
+                          "description": "OpenAPI definition to use for the request.",
+                          "additionalProperties": false,
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "description": "Path to the OpenAPI definition."
+                            },
+                            "operationId": {
+                              "type": "string",
+                              "description": "ID of the operation to use for the request."
+                            },
+                            "validateSchema": {
+                              "type": "string",
+                              "description": "Validates the request and/or response against the schema in the OpenAPI definition. If the request or response doesn't match the schema, the step fails.",
+                              "enum": [
+                                "request",
+                                "response",
+                                "both"
+                              ],
+                              "default": "both"
+                            },
+                            "useRequestExample": {
+                              "type": [
+                                "string",
+                                "boolean"
+                              ],
+                              "description": "Uses the example from the OpenAPI definition as the request data. If the request has multiple examples, specify the example name. Uses the first example if a name isn't specified. `requestData`, `requestParams`, and `requestHeaders` override portions of examples when specified.",
+                              "default": true
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "operationId"
+                          ]
+                        },
                         "statusCodes": {
                           "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                           "type": "array",
@@ -605,9 +642,20 @@
                       "dynamicDefaults": {
                         "id": "uuid"
                       },
+                      "oneOf": [
+                        {
+                          "required": [
+                            "url"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "openApi"
+                          ]
+                        }
+                      ],
                       "required": [
-                        "action",
-                        "url"
+                        "action"
                       ],
                       "additionalProperties": false,
                       "examples": [
@@ -685,6 +733,32 @@
                           "saveDirectory": "media",
                           "maxVariation": 5,
                           "overwrite": "byVariation"
+                        },
+                        {
+                          "action": "httpRequest",
+                          "openApi": {
+                            "path": "https://api.example.com/openapi.json",
+                            "operationId": "getUserById"
+                          },
+                          "requestParams": {
+                            "id": 123
+                          }
+                        },
+                        {
+                          "action": "httpRequest",
+                          "openApi": {
+                            "path": "https://api.example.com/openapi.json",
+                            "operationId": "createUser",
+                            "useRequestExample": true
+                          }
+                        },
+                        {
+                          "action": "httpRequest",
+                          "openApi": {
+                            "path": "https://api.example.com/openapi.json",
+                            "operationId": "updateUser",
+                            "useRequestExample": "partialUpdate"
+                          }
                         }
                       ]
                     },
