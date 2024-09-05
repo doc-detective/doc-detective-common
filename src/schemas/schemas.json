@@ -923,7 +923,7 @@
                                       "description": "OpenAPI definition to use for the request.",
                                       "additionalProperties": false,
                                       "properties": {
-                                        "path": {
+                                        "definitionPath": {
                                           "type": "string",
                                           "description": "Path to the OpenAPI definition."
                                         },
@@ -941,17 +941,29 @@
                                           ],
                                           "default": "both"
                                         },
+                                        "responseCode": {
+                                          "type": "integer",
+                                          "description": "Expected response code. If the response code doesn't match, the step fails. `statusCodes` overrides this value when specified."
+                                        },
                                         "useRequestExample": {
                                           "type": [
                                             "string",
                                             "boolean"
                                           ],
                                           "description": "Uses the example from the OpenAPI definition as the request data. If the request has multiple examples, specify the example name. Uses the first example if a name isn't specified. `requestData`, `requestParams`, and `requestHeaders` override portions of examples when specified.",
-                                          "default": true
+                                          "default": false
+                                        },
+                                        "useResponseExample": {
+                                          "type": [
+                                            "string",
+                                            "boolean"
+                                          ],
+                                          "description": "Uses the example from the specified `responseCode` as the response data. If the response has multiple examples, specify the example name. Uses the first example if a name isn't specified. `responseData` overrides portions of examples when specified.",
+                                          "default": false
                                         }
                                       },
                                       "required": [
-                                        "path",
+                                        "definitionPath",
                                         "operationId"
                                       ]
                                     },
@@ -1188,7 +1200,7 @@
                                     {
                                       "action": "httpRequest",
                                       "openApi": {
-                                        "path": "https://api.example.com/openapi.json",
+                                        "definitionPath": "https://api.example.com/openapi.json",
                                         "operationId": "getUserById"
                                       },
                                       "requestParams": {
@@ -1198,7 +1210,7 @@
                                     {
                                       "action": "httpRequest",
                                       "openApi": {
-                                        "path": "https://api.example.com/openapi.json",
+                                        "definitionPath": "https://api.example.com/openapi.json",
                                         "operationId": "createUser",
                                         "useRequestExample": true
                                       }
@@ -1206,7 +1218,7 @@
                                     {
                                       "action": "httpRequest",
                                       "openApi": {
-                                        "path": "https://api.example.com/openapi.json",
+                                        "definitionPath": "https://api.example.com/openapi.json",
                                         "operationId": "updateUser",
                                         "useRequestExample": "partialUpdate"
                                       }
@@ -2847,7 +2859,7 @@
         "description": "OpenAPI definition to use for the request.",
         "additionalProperties": false,
         "properties": {
-          "path": {
+          "definitionPath": {
             "type": "string",
             "description": "Path to the OpenAPI definition."
           },
@@ -2865,17 +2877,29 @@
             ],
             "default": "both"
           },
+          "responseCode": {
+            "type": "integer",
+            "description": "Expected response code. If the response code doesn't match, the step fails. `statusCodes` overrides this value when specified."
+          },
           "useRequestExample": {
             "type": [
               "string",
               "boolean"
             ],
             "description": "Uses the example from the OpenAPI definition as the request data. If the request has multiple examples, specify the example name. Uses the first example if a name isn't specified. `requestData`, `requestParams`, and `requestHeaders` override portions of examples when specified.",
-            "default": true
+            "default": false
+          },
+          "useResponseExample": {
+            "type": [
+              "string",
+              "boolean"
+            ],
+            "description": "Uses the example from the specified `responseCode` as the response data. If the response has multiple examples, specify the example name. Uses the first example if a name isn't specified. `responseData` overrides portions of examples when specified.",
+            "default": false
           }
         },
         "required": [
-          "path",
+          "definitionPath",
           "operationId"
         ]
       },
@@ -3112,7 +3136,7 @@
       {
         "action": "httpRequest",
         "openApi": {
-          "path": "https://api.example.com/openapi.json",
+          "definitionPath": "https://api.example.com/openapi.json",
           "operationId": "getUserById"
         },
         "requestParams": {
@@ -3122,7 +3146,7 @@
       {
         "action": "httpRequest",
         "openApi": {
-          "path": "https://api.example.com/openapi.json",
+          "definitionPath": "https://api.example.com/openapi.json",
           "operationId": "createUser",
           "useRequestExample": true
         }
@@ -3130,7 +3154,7 @@
       {
         "action": "httpRequest",
         "openApi": {
-          "path": "https://api.example.com/openapi.json",
+          "definitionPath": "https://api.example.com/openapi.json",
           "operationId": "updateUser",
           "useRequestExample": "partialUpdate"
         }
@@ -4172,7 +4196,7 @@
                             "description": "OpenAPI definition to use for the request.",
                             "additionalProperties": false,
                             "properties": {
-                              "path": {
+                              "definitionPath": {
                                 "type": "string",
                                 "description": "Path to the OpenAPI definition."
                               },
@@ -4190,17 +4214,29 @@
                                 ],
                                 "default": "both"
                               },
+                              "responseCode": {
+                                "type": "integer",
+                                "description": "Expected response code. If the response code doesn't match, the step fails. `statusCodes` overrides this value when specified."
+                              },
                               "useRequestExample": {
                                 "type": [
                                   "string",
                                   "boolean"
                                 ],
                                 "description": "Uses the example from the OpenAPI definition as the request data. If the request has multiple examples, specify the example name. Uses the first example if a name isn't specified. `requestData`, `requestParams`, and `requestHeaders` override portions of examples when specified.",
-                                "default": true
+                                "default": false
+                              },
+                              "useResponseExample": {
+                                "type": [
+                                  "string",
+                                  "boolean"
+                                ],
+                                "description": "Uses the example from the specified `responseCode` as the response data. If the response has multiple examples, specify the example name. Uses the first example if a name isn't specified. `responseData` overrides portions of examples when specified.",
+                                "default": false
                               }
                             },
                             "required": [
-                              "path",
+                              "definitionPath",
                               "operationId"
                             ]
                           },
@@ -4437,7 +4473,7 @@
                           {
                             "action": "httpRequest",
                             "openApi": {
-                              "path": "https://api.example.com/openapi.json",
+                              "definitionPath": "https://api.example.com/openapi.json",
                               "operationId": "getUserById"
                             },
                             "requestParams": {
@@ -4447,7 +4483,7 @@
                           {
                             "action": "httpRequest",
                             "openApi": {
-                              "path": "https://api.example.com/openapi.json",
+                              "definitionPath": "https://api.example.com/openapi.json",
                               "operationId": "createUser",
                               "useRequestExample": true
                             }
@@ -4455,7 +4491,7 @@
                           {
                             "action": "httpRequest",
                             "openApi": {
-                              "path": "https://api.example.com/openapi.json",
+                              "definitionPath": "https://api.example.com/openapi.json",
                               "operationId": "updateUser",
                               "useRequestExample": "partialUpdate"
                             }
@@ -5757,7 +5793,7 @@
                   "description": "OpenAPI definition to use for the request.",
                   "additionalProperties": false,
                   "properties": {
-                    "path": {
+                    "definitionPath": {
                       "type": "string",
                       "description": "Path to the OpenAPI definition."
                     },
@@ -5775,17 +5811,29 @@
                       ],
                       "default": "both"
                     },
+                    "responseCode": {
+                      "type": "integer",
+                      "description": "Expected response code. If the response code doesn't match, the step fails. `statusCodes` overrides this value when specified."
+                    },
                     "useRequestExample": {
                       "type": [
                         "string",
                         "boolean"
                       ],
                       "description": "Uses the example from the OpenAPI definition as the request data. If the request has multiple examples, specify the example name. Uses the first example if a name isn't specified. `requestData`, `requestParams`, and `requestHeaders` override portions of examples when specified.",
-                      "default": true
+                      "default": false
+                    },
+                    "useResponseExample": {
+                      "type": [
+                        "string",
+                        "boolean"
+                      ],
+                      "description": "Uses the example from the specified `responseCode` as the response data. If the response has multiple examples, specify the example name. Uses the first example if a name isn't specified. `responseData` overrides portions of examples when specified.",
+                      "default": false
                     }
                   },
                   "required": [
-                    "path",
+                    "definitionPath",
                     "operationId"
                   ]
                 },
@@ -6022,7 +6070,7 @@
                 {
                   "action": "httpRequest",
                   "openApi": {
-                    "path": "https://api.example.com/openapi.json",
+                    "definitionPath": "https://api.example.com/openapi.json",
                     "operationId": "getUserById"
                   },
                   "requestParams": {
@@ -6032,7 +6080,7 @@
                 {
                   "action": "httpRequest",
                   "openApi": {
-                    "path": "https://api.example.com/openapi.json",
+                    "definitionPath": "https://api.example.com/openapi.json",
                     "operationId": "createUser",
                     "useRequestExample": true
                   }
@@ -6040,7 +6088,7 @@
                 {
                   "action": "httpRequest",
                   "openApi": {
-                    "path": "https://api.example.com/openapi.json",
+                    "definitionPath": "https://api.example.com/openapi.json",
                     "operationId": "updateUser",
                     "useRequestExample": "partialUpdate"
                   }
