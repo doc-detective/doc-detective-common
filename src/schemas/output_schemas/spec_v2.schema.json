@@ -510,7 +510,8 @@
                             },
                             "exampleKey": {
                               "type": "string",
-                              "description": "Key of the example to use from the `examples` property in the OpenAPI definition. If an `examples` key isn't specified or isn't available for a given parameter or object, the `example` property value is used."
+                              "description": "Key of the example to use from the `examples` property in the OpenAPI definition. If an `examples` key isn't specified or isn't available for a given parameter or object, the `example` property value is used.",
+                              "default": ""
                             }
                           },
                           "required": [
