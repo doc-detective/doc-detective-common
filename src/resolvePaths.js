@@ -41,6 +41,7 @@ async function resolvePaths(
     "cleanup",
     "savePath",
     "saveDirectory",
+    "definitionPath",
     "workingDirectory",
   ];
 
