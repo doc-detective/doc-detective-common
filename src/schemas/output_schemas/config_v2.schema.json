@@ -856,29 +856,31 @@
                                         "enum": [
                                           "request",
                                           "response",
-                                          "both"
+                                          "both",
+                                          "none"
                                         ],
                                         "default": "both"
                                       },
                                       "responseCode": {
                                         "type": "integer",
-                                        "description": "Expected response code. If the response code doesn't match, the step fails. `statusCodes` overrides this value when specified."
+                                        "description": "Response code to use for validation, examples, and status code checking. If the response code doesn't match, the step fails. `statusCodes` overrides this value when specified."
                                       },
-                                      "useRequestExample": {
+                                      "useExample": {
                                         "type": [
-                                          "string",
-                                          "boolean"
+                                          "string"
                                         ],
-                                        "description": "Uses the example from the OpenAPI definition as the request data. If the request has multiple examples, specify the example name. Uses the first example if a name isn't specified. `requestData`, `requestParams`, and `requestHeaders` override portions of examples when specified.",
-                                        "default": false
+                                        "description": "Uses the example from the OpenAPI definition as the request and response data. If the request or response has multiple examples, specify `exampleKey`. If `responseCode` isn't specified, uses the first defined response code. `requestData`, `requestParams`, and `requestHeaders` override portions of request examples when specified. `responseData` overrides portions of response examples when specified.",
+                                        "enum": [
+                                          "request",
+                                          "response",
+                                          "both",
+                                          "none"
+                                        ],
+                                        "default": "none"
                                       },
-                                      "useResponseExample": {
-                                        "type": [
-                                          "string",
-                                          "boolean"
-                                        ],
-                                        "description": "Uses the example from the specified `responseCode` as the response data. If the response has multiple examples, specify the example name. Uses the first example if a name isn't specified. `responseData` overrides portions of examples when specified.",
-                                        "default": false
+                                      "exampleKey": {
+                                        "type": "string",
+                                        "description": "Key of the example to use from the `examples` property in the OpenAPI definition. If an `examples` key isn't specified or isn't available for a given parameter or object, the `example` property value is used."
                                       }
                                     },
                                     "required": [
@@ -1131,7 +1133,7 @@
                                     "openApi": {
                                       "definitionPath": "https://api.example.com/openapi.json",
                                       "operationId": "createUser",
-                                      "useRequestExample": true
+                                      "useExample": "both"
                                     }
                                   },
                                   {
@@ -1139,7 +1141,8 @@
                                     "openApi": {
                                       "definitionPath": "https://api.example.com/openapi.json",
                                       "operationId": "updateUser",
-                                      "useRequestExample": "partialUpdate"
+                                      "useExample": "request",
+                                      "exampleKey": "acme"
                                     }
                                   }
                                 ]
