@@ -844,11 +844,11 @@
                                     "properties": {
                                       "name": {
                                         "type": "string",
-                                        "description": "Name of the OpenAPI definition."
+                                        "description": "Name of the OpenAPI definition, as defined in your configuration."
                                       },
                                       "definitionPath": {
                                         "type": "string",
-                                        "description": "Path to the OpenAPI definition."
+                                        "description": "URL or local path to the OpenAPI definition."
                                       },
                                       "operationId": {
                                         "type": "string",
@@ -1937,7 +1937,32 @@
       "description": "Options for connecting to external services.",
       "type": "object",
       "additionalProperties": false,
-      "properties": {}
+      "properties": {
+        "openApi": {
+          "description": "OpenAPI definitions for services to connect to.",
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "description": "Name of the service.",
+                  "type": "string"
+                },
+                "definitinonPath": {
+                  "description": "URL or local path to the OpenAPI definition.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "definitionPath"
+              ]
+            }
+          ]
+        }
+      }
     },
     "telemetry": {
       "description": "Options around sending telemetry for Doc Detective usage.",

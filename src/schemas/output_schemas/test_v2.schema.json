@@ -330,11 +330,11 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "Name of the OpenAPI definition."
+                    "description": "Name of the OpenAPI definition, as defined in your configuration."
                   },
                   "definitionPath": {
                     "type": "string",
-                    "description": "Path to the OpenAPI definition."
+                    "description": "URL or local path to the OpenAPI definition."
                   },
                   "operationId": {
                     "type": "string",
