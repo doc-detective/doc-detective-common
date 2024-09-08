@@ -29,6 +29,10 @@
       "description": "OpenAPI definition to use for the request.",
       "additionalProperties": false,
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the OpenAPI definition."
+        },
         "definitionPath": {
           "type": "string",
           "description": "Path to the OpenAPI definition."
@@ -72,8 +76,19 @@
         }
       },
       "required": [
-        "definitionPath",
         "operationId"
+      ],
+      "oneOf": [
+        {
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "required": [
+            "definitionPath"
+          ]
+        }
       ]
     },
     "statusCodes": {
@@ -305,6 +320,16 @@
       "saveDirectory": "media",
       "maxVariation": 5,
       "overwrite": "byVariation"
+    },
+    {
+      "action": "httpRequest",
+      "openApi": {
+        "name": "Reqres",
+        "operationId": "getUserById"
+      },
+      "requestParams": {
+        "id": 123
+      }
     },
     {
       "action": "httpRequest",
