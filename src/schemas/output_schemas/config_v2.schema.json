@@ -1950,7 +1950,7 @@
                   "description": "Name of the service.",
                   "type": "string"
                 },
-                "definitinonPath": {
+                "definitionPath": {
                   "description": "URL or local path to the OpenAPI definition.",
                   "type": "string"
                 }
@@ -2070,6 +2070,16 @@
               "mac",
               "windows"
             ]
+          }
+        ]
+      }
+    },
+    {
+      "integrations": {
+        "openApi": [
+          {
+            "name": "Acme",
+            "definitionPath": "https://www.acme.com/openapi.json"
           }
         ]
       }
