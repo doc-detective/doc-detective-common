@@ -495,7 +495,7 @@
                               ],
                               "default": "both"
                             },
-                            "responseCode": {
+                            "statusCode": {
                               "type": "integer",
                               "description": "Response code to use for validation, examples, and status code checking. If the response code doesn't match, the step fails. `statusCodes` overrides this value when specified."
                             },
@@ -503,7 +503,7 @@
                               "type": [
                                 "string"
                               ],
-                              "description": "Uses the example from the OpenAPI definition as the request and response data. If the request or response has multiple examples, specify `exampleKey`. If `responseCode` isn't specified, uses the first defined response code. `requestData`, `requestParams`, and `requestHeaders` override portions of request examples when specified. `responseData` overrides portions of response examples when specified.",
+                              "description": "Uses the example from the OpenAPI definition as the request and response data. If the request or response has multiple examples, specify `exampleKey`. If `statusCode` isn't specified, uses the first defined response code. `requestData`, `requestParams`, and `requestHeaders` override portions of request examples when specified. `responseData` overrides portions of response examples when specified.",
                               "enum": [
                                 "request",
                                 "response",
