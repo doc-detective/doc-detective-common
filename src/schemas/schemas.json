@@ -2022,6 +2022,8 @@
           "openApi": {
             "description": "OpenAPI definitions for services to connect to.",
             "type": "array",
+            "minItems": 1,
+            "additionalItems": false,
             "items": [
               {
                 "type": "object",
