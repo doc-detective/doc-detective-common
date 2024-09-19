@@ -2040,6 +2040,10 @@
                   "definitionPath": {
                     "description": "URL or local path to the OpenAPI definition.",
                     "type": "string"
+                  },
+                  "server": {
+                    "description": "Server to use for the service. If not specified, uses the first server defined in the OpenAPI definition.",
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -2166,7 +2170,8 @@
           "openApi": [
             {
               "name": "Acme",
-              "definitionPath": "https://www.acme.com/openapi.json"
+              "definitionPath": "https://www.acme.com/openapi.json",
+              "server": "https://api.acme.com"
             }
           ]
         }
