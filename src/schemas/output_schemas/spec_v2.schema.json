@@ -484,6 +484,10 @@
                               "type": "string",
                               "description": "ID of the operation to use for the request."
                             },
+                            "server": {
+                              "type": "string",
+                              "description": "Server to use for the request. If not specified, uses the first server defined in the OpenAPI definition."
+                            },
                             "validateAgainstSchema": {
                               "type": "string",
                               "description": "Validates the request and/or response against the schema in the OpenAPI definition. If the request or response doesn't match the schema, the step fails.",
