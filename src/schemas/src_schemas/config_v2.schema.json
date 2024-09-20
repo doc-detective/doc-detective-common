@@ -487,31 +487,24 @@
       "additionalProperties": false,
       "properties": {
         "openApi": {
-          "description": "OpenAPI definitions for services to connect to.",
           "type": "array",
-          "minItems": 1,
-          "additionalItems": false,
-          "items": [
-            {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "name": {
-                  "description": "Name of the service.",
-                  "type": "string"
-                },
-                "definitionPath": {
-                  "description": "URL or local path to the OpenAPI definition.",
-                  "type": "string"
-                },
-                "server": {
-                  "description": "Server to use for example requests. If not specified, uses the first server defined in the OpenAPI definition.",
-                  "type": "string"
-                }
+          "items": {
+            "allOf": [
+              {
+                "$ref": "openApi_v2.schema.json#"
               },
-              "required": ["name", "definitionPath"]
-            }
-          ]
+              {
+                "type": "object",
+                "properties": {
+                  "operationId": {
+                    "type": "null",
+                    "$commment": "Only allow operationId at the step level."
+                  }
+                },
+                "required": ["name", "definitionPath"]
+              }
+            ]
+          }
         }
       }
     },
