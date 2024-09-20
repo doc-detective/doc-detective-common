@@ -2141,6 +2141,7 @@
       "integrations": {
         "openApi": [
           {
+            "name": "Acme",
             "definitionPath": "https://www.acme.com/openapi.json",
             "server": "https://api.acme.com"
           }
