@@ -30,6 +30,7 @@ async function resolvePaths(
     "cleanup",
     "mediaDirectory",
     "downloadDirectory",
+    "definitionPath",
     "path",
   ];
   // Spec properties that contain paths
