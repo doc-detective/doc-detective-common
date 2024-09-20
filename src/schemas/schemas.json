@@ -937,7 +937,7 @@
                                         },
                                         "server": {
                                           "type": "string",
-                                          "description": "Server to use for the request. If not specified, uses the first server defined in the OpenAPI definition."
+                                          "description": "Server to use for example requests. Only valid if `useExample` is `request` or `both`. If not specified but an example is used for the request, uses the first server defined in the OpenAPI definition."
                                         },
                                         "validateAgainstSchema": {
                                           "type": "string",
@@ -2042,7 +2042,7 @@
                     "type": "string"
                   },
                   "server": {
-                    "description": "Server to use for the service. If not specified, uses the first server defined in the OpenAPI definition.",
+                    "description": "Server to use for example requests. If not specified, uses the first server defined in the OpenAPI definition.",
                     "type": "string"
                   }
                 },
@@ -2948,7 +2948,7 @@
           },
           "server": {
             "type": "string",
-            "description": "Server to use for the request. If not specified, uses the first server defined in the OpenAPI definition."
+            "description": "Server to use for example requests. Only valid if `useExample` is `request` or `both`. If not specified but an example is used for the request, uses the first server defined in the OpenAPI definition."
           },
           "validateAgainstSchema": {
             "type": "string",
@@ -4318,7 +4318,7 @@
                               },
                               "server": {
                                 "type": "string",
-                                "description": "Server to use for the request. If not specified, uses the first server defined in the OpenAPI definition."
+                                "description": "Server to use for example requests. Only valid if `useExample` is `request` or `both`. If not specified but an example is used for the request, uses the first server defined in the OpenAPI definition."
                               },
                               "validateAgainstSchema": {
                                 "type": "string",
@@ -5948,7 +5948,7 @@
                     },
                     "server": {
                       "type": "string",
-                      "description": "Server to use for the request. If not specified, uses the first server defined in the OpenAPI definition."
+                      "description": "Server to use for example requests. Only valid if `useExample` is `request` or `both`. If not specified but an example is used for the request, uses the first server defined in the OpenAPI definition."
                     },
                     "validateAgainstSchema": {
                       "type": "string",

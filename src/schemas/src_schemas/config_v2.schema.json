@@ -505,7 +505,7 @@
                   "type": "string"
                 },
                 "server": {
-                  "description": "Server to use for the service. If not specified, uses the first server defined in the OpenAPI definition.",
+                  "description": "Server to use for example requests. If not specified, uses the first server defined in the OpenAPI definition.",
                   "type": "string"
                 }
               },
