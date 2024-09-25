@@ -872,6 +872,10 @@
                                             ],
                                             "default": "both"
                                           },
+                                          "mockResponse": {
+                                            "type": "boolean",
+                                            "description": "If `true`, doesn't make the HTTP request, but instead uses the response example or schema from the OpenAPI definition as the response data. Useful for creating tests when an API isn't fully implemented yet. If `statusCode` isn't specified, uses the first defined response code."
+                                          },
                                           "statusCode": {
                                             "type": "integer",
                                             "description": "Response code to use for validation, examples, and status code checking. If the response code doesn't match, the step fails. `statusCodes` overrides this value when specified."
@@ -1999,6 +2003,10 @@
                     ],
                     "default": "both"
                   },
+                  "mockResponse": {
+                    "type": "boolean",
+                    "description": "If `true`, doesn't make the HTTP request, but instead uses the response example or schema from the OpenAPI definition as the response data. Useful for creating tests when an API isn't fully implemented yet. If `statusCode` isn't specified, uses the first defined response code."
+                  },
                   "statusCode": {
                     "type": "integer",
                     "description": "Response code to use for validation, examples, and status code checking. If the response code doesn't match, the step fails. `statusCodes` overrides this value when specified."
@@ -2169,7 +2177,8 @@
           {
             "name": "Acme",
             "definitionPath": "https://www.acme.com/openapi.json",
-            "server": "https://api.acme.com"
+            "server": "https://api.acme.com",
+            "mockResponse": true
           }
         ]
       }
