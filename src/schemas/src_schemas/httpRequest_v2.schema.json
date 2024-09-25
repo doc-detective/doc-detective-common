@@ -267,6 +267,18 @@
         "useExample": "request",
         "exampleKey": "acme"
       }
+    },
+    {
+      "action": "httpRequest",
+      "openApi": {
+        "definitionPath": "https://api.example.com/openapi.json",
+        "operationId": "updateUser",
+        "useExample": "request",
+        "exampleKey": "acme",
+        "requestHeaders": {
+          "Authorization": "Bearer $TOKEN"
+        }
+      }
     }
   ]
 }

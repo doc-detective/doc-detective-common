@@ -893,6 +893,13 @@
                                             "type": "string",
                                             "description": "Key of the example to use from the `examples` property in the OpenAPI definition. If an `examples` key isn't specified or isn't available for a given parameter or object, the `example` property value is used.",
                                             "default": ""
+                                          },
+                                          "requestHeaders": {
+                                            "type": "object",
+                                            "description": "Request headers to add to the request. If specified in both a config and a step, the step value overrides the config value.",
+                                            "additionalProperties": {
+                                              "type": "string"
+                                            }
                                           }
                                         },
                                         "examples": [
@@ -1174,6 +1181,18 @@
                                       "operationId": "updateUser",
                                       "useExample": "request",
                                       "exampleKey": "acme"
+                                    }
+                                  },
+                                  {
+                                    "action": "httpRequest",
+                                    "openApi": {
+                                      "definitionPath": "https://api.example.com/openapi.json",
+                                      "operationId": "updateUser",
+                                      "useExample": "request",
+                                      "exampleKey": "acme",
+                                      "requestHeaders": {
+                                        "Authorization": "Bearer $TOKEN"
+                                      }
                                     }
                                   }
                                 ]
@@ -2001,6 +2020,13 @@
                     "type": "string",
                     "description": "Key of the example to use from the `examples` property in the OpenAPI definition. If an `examples` key isn't specified or isn't available for a given parameter or object, the `example` property value is used.",
                     "default": ""
+                  },
+                  "requestHeaders": {
+                    "type": "object",
+                    "description": "Request headers to add to the request. If specified in both a config and a step, the step value overrides the config value.",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
                   }
                 },
                 "examples": [
