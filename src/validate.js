@@ -47,7 +47,7 @@ function validate(schemaKey = "", object = {}, addDefaults = true) {
   result.valid = check(validationObject);
   result.errors = "";
   if (check.errors) {
-    const errors = check.errors.map((error) => error.message);
+    const errors = check.errors.map((error) => `${error.instancePath} ${error.message} (${JSON.stringify(error.params)})`);
     result.errors = errors.join(", ");
   }
   result.object = object;
