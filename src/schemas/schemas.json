@@ -1139,7 +1139,7 @@
                                   "dynamicDefaults": {
                                     "id": "uuid"
                                   },
-                                  "oneOf": [
+                                  "anyOf": [
                                     {
                                       "required": [
                                         "url"
@@ -3238,7 +3238,7 @@
     "dynamicDefaults": {
       "id": "uuid"
     },
-    "oneOf": [
+    "anyOf": [
       {
         "required": [
           "url"
@@ -4705,7 +4705,7 @@
                         "dynamicDefaults": {
                           "id": "uuid"
                         },
-                        "oneOf": [
+                        "anyOf": [
                           {
                             "required": [
                               "url"
@@ -6359,7 +6359,7 @@
               "dynamicDefaults": {
                 "id": "uuid"
               },
-              "oneOf": [
+              "anyOf": [
                 {
                   "required": [
                     "url"

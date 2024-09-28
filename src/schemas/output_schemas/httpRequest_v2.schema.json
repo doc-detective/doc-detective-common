@@ -245,7 +245,7 @@
   "dynamicDefaults": {
     "id": "uuid"
   },
-  "oneOf": [
+  "anyOf": [
     {
       "required": [
         "url"
