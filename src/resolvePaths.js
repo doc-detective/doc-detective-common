@@ -45,6 +45,15 @@ async function resolvePaths(
     "definitionPath",
     "workingDirectory",
   ];
+  // Spec objects that are configurable by the user and shouldn't be resolved
+  const specNoResolve = [
+    "requestData",
+    "responseData",
+    "requestHeaders",
+    "responseHeaders",
+    "requestParams",
+    "responseParams",
+  ];
 
   /**
    * Resolves a path based on the provided base type, relative path, and file path.
@@ -70,7 +79,7 @@ async function resolvePaths(
   }
 
   const relativePathBase = config.relativePathBase;
-  
+
   let pathProperties;
   if (!nested && !objectType) {
     // Check if object matches the config schema
@@ -100,7 +109,11 @@ async function resolvePaths(
   }
 
   for (const property of Object.keys(object)) {
-    if (typeof object[property] === "object") {
+    if (
+      typeof object[property] === "object" &&
+      ((objectType === "spec" && !specNoResolve.includes(property)) ||
+        objectType === "config")
+    ) {
       // If the property is an object, recursively call resolvePaths to resolve paths within the object
       object[property] = await resolvePaths(
         config,
@@ -114,20 +127,38 @@ async function resolvePaths(
       pathProperties.forEach((pathProperty) => {
         if (object[pathProperty]) {
           if (pathProperty === "path" && object.directory) {
-            if (path.isAbsolute(object.directory)){
-              object[pathProperty] = resolve(relativePathBase, object[pathProperty], object.directory);
+            if (path.isAbsolute(object.directory)) {
+              object[pathProperty] = resolve(
+                relativePathBase,
+                object[pathProperty],
+                object.directory
+              );
             } else {
-              object[pathProperty] = path.join(object.directory, object[pathProperty]);
+              object[pathProperty] = path.join(
+                object.directory,
+                object[pathProperty]
+              );
             }
           }
           if (pathProperty === "savePath" && object.saveDirectory) {
-            if (path.isAbsolute(object.saveDirectory)){
-              object[pathProperty] = resolve(relativePathBase, object[pathProperty], object.saveDirectory);
+            if (path.isAbsolute(object.saveDirectory)) {
+              object[pathProperty] = resolve(
+                relativePathBase,
+                object[pathProperty],
+                object.saveDirectory
+              );
             } else {
-              object[pathProperty] = path.join(object.saveDirectory, object[pathProperty]);
+              object[pathProperty] = path.join(
+                object.saveDirectory,
+                object[pathProperty]
+              );
             }
           }
-          object[pathProperty] = resolve(relativePathBase, object[pathProperty], filePath);
+          object[pathProperty] = resolve(
+            relativePathBase,
+            object[pathProperty],
+            filePath
+          );
         }
       });
     }
