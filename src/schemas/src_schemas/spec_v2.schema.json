@@ -25,6 +25,26 @@
         ]
       }
     },
+    "openApi": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "openApi_v2.schema.json#"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operationId": {
+                "type": "null",
+                "$commment": "Only allow operationId at the step level."
+              }
+            },
+            "required": ["name", "definitionPath"]
+          }
+        ]
+      }
+    },
     "tests": {
       "description": "[Tests](test) to perform.",
       "type": "array",
@@ -121,6 +141,31 @@
             },
             {
               "action": "saveScreenshot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Make a request from an OpenAPI definition",
+      "openApi": [
+        {
+          "name": "Acme",
+          "definitionPath": "https://www.acme.com/openapi.json",
+          "server": "https://api.acme.com"
+        }
+      ],
+      "tests": [
+        {
+          "steps": [
+            {
+              "action": "httpRequest",
+              "openApi": {
+                "operationId": "getUserById"
+              },
+              "requestParams": {
+                "id": 123
+              }
             }
           ]
         }
