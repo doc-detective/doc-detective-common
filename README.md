@@ -52,6 +52,10 @@ const object = {
 console.log(common.validate(schemaKey, object));
 ```
 
+### `.readFile(fileURL)`
+
+Load file contents from a URL or a file path. If a JSON or YAML file, returns an object. If a different file, returns a string.
+
 ## Objects
 
 ### `.schemas`
