@@ -30,7 +30,7 @@ async function resolvePaths(
     "cleanup",
     "mediaDirectory",
     "downloadDirectory",
-    "definitionPath",
+    "descriptionPath",
     "path",
   ];
   // Spec properties that contain paths
@@ -42,7 +42,7 @@ async function resolvePaths(
     "cleanup",
     "savePath",
     "saveDirectory",
-    "definitionPath",
+    "descriptionPath",
     "workingDirectory",
   ];
   // Spec objects that are configurable by the user and shouldn't be resolved

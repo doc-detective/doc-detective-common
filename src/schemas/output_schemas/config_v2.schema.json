@@ -849,7 +849,7 @@
                                             "type": "string",
                                             "description": "Name of the OpenAPI definition, as defined in your configuration."
                                           },
-                                          "definitionPath": {
+                                          "descriptionPath": {
                                             "type": "string",
                                             "description": "URL or local path to the OpenAPI definition."
                                           },
@@ -908,7 +908,7 @@
                                         },
                                         "examples": [
                                           {
-                                            "definitionPath": "https://petstore.swagger.io/v2/swagger.json"
+                                            "descriptionPath": "https://petstore.swagger.io/v2/swagger.json"
                                           }
                                         ]
                                       },
@@ -1163,7 +1163,7 @@
                                   {
                                     "action": "httpRequest",
                                     "openApi": {
-                                      "definitionPath": "https://api.example.com/openapi.json",
+                                      "descriptionPath": "https://api.example.com/openapi.json",
                                       "operationId": "getUserById"
                                     },
                                     "requestParams": {
@@ -1173,7 +1173,7 @@
                                   {
                                     "action": "httpRequest",
                                     "openApi": {
-                                      "definitionPath": "https://api.example.com/openapi.json",
+                                      "descriptionPath": "https://api.example.com/openapi.json",
                                       "operationId": "createUser",
                                       "useExample": "both"
                                     }
@@ -1181,7 +1181,7 @@
                                   {
                                     "action": "httpRequest",
                                     "openApi": {
-                                      "definitionPath": "https://api.example.com/openapi.json",
+                                      "descriptionPath": "https://api.example.com/openapi.json",
                                       "operationId": "updateUser",
                                       "useExample": "request",
                                       "exampleKey": "acme"
@@ -1190,7 +1190,7 @@
                                   {
                                     "action": "httpRequest",
                                     "openApi": {
-                                      "definitionPath": "https://api.example.com/openapi.json",
+                                      "descriptionPath": "https://api.example.com/openapi.json",
                                       "operationId": "updateUser",
                                       "useExample": "request",
                                       "exampleKey": "acme",
@@ -1980,7 +1980,7 @@
                     "type": "string",
                     "description": "Name of the OpenAPI definition, as defined in your configuration."
                   },
-                  "definitionPath": {
+                  "descriptionPath": {
                     "type": "string",
                     "description": "URL or local path to the OpenAPI definition."
                   },
@@ -2039,7 +2039,7 @@
                 },
                 "examples": [
                   {
-                    "definitionPath": "https://petstore.swagger.io/v2/swagger.json"
+                    "descriptionPath": "https://petstore.swagger.io/v2/swagger.json"
                   }
                 ]
               },
@@ -2053,7 +2053,7 @@
                 },
                 "required": [
                   "name",
-                  "definitionPath"
+                  "descriptionPath"
                 ]
               }
             ]
@@ -2176,7 +2176,7 @@
         "openApi": [
           {
             "name": "Acme",
-            "definitionPath": "https://www.acme.com/openapi.json",
+            "descriptionPath": "https://www.acme.com/openapi.json",
             "server": "https://api.acme.com",
             "mockResponse": true
           }

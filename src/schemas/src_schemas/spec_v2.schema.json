@@ -40,7 +40,7 @@
                 "$commment": "Only allow operationId at the step level."
               }
             },
-            "required": ["name", "definitionPath"]
+            "required": ["name", "descriptionPath"]
           }
         ]
       }
@@ -151,7 +151,7 @@
       "openApi": [
         {
           "name": "Acme",
-          "definitionPath": "https://www.acme.com/openapi.json",
+          "descriptionPath": "https://www.acme.com/openapi.json",
           "server": "https://api.acme.com"
         }
       ],

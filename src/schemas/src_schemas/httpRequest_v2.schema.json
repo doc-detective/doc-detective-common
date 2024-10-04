@@ -244,7 +244,7 @@
     {
       "action": "httpRequest",
       "openApi": {
-        "definitionPath": "https://api.example.com/openapi.json",
+        "descriptionPath": "https://api.example.com/openapi.json",
         "operationId": "getUserById"
       },
       "requestParams": {
@@ -254,7 +254,7 @@
     {
       "action": "httpRequest",
       "openApi": {
-        "definitionPath": "https://api.example.com/openapi.json",
+        "descriptionPath": "https://api.example.com/openapi.json",
         "operationId": "createUser",
         "useExample": "both"
       }
@@ -262,7 +262,7 @@
     {
       "action": "httpRequest",
       "openApi": {
-        "definitionPath": "https://api.example.com/openapi.json",
+        "descriptionPath": "https://api.example.com/openapi.json",
         "operationId": "updateUser",
         "useExample": "request",
         "exampleKey": "acme"
@@ -271,7 +271,7 @@
     {
       "action": "httpRequest",
       "openApi": {
-        "definitionPath": "https://api.example.com/openapi.json",
+        "descriptionPath": "https://api.example.com/openapi.json",
         "operationId": "updateUser",
         "useExample": "request",
         "exampleKey": "acme",

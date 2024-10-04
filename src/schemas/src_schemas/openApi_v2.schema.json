@@ -8,7 +8,7 @@
       "type": "string",
       "description": "Name of the OpenAPI definition, as defined in your configuration."
     },
-    "definitionPath": {
+    "descriptionPath": {
       "type": "string",
       "description": "URL or local path to the OpenAPI definition."
     },
@@ -55,7 +55,7 @@
   },
   "examples":[
     {
-      "definitionPath": "https://petstore.swagger.io/v2/swagger.json"
+      "descriptionPath": "https://petstore.swagger.io/v2/swagger.json"
     }
   ]
 }
