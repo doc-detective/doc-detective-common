@@ -30,6 +30,26 @@
         ]
       }
     },
+    "openApi": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "openApi_v2.schema.json#"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operationId": {
+                "type": "null",
+                "$commment": "Only allow operationId at the step level."
+              }
+            },
+            "required": ["name", "descriptionPath"]
+          }
+        ]
+      }
+    },
     "setup": {
       "type": "string",
       "description": "Path to a test specification to perform before this test, while maintaining this test's context. Useful for setting up testing environments. Only the `steps` property is used from the first test in the setup spec."
@@ -154,6 +174,26 @@
           "action": "saveScreenshot"
         }
       ]
+    },
+    {
+      "openApi": [
+        {
+          "name": "Acme",
+          "descriptionPath": "https://www.acme.com/openapi.json",
+          "server": "https://api.acme.com"
+        }
+      ],
+      "steps": [
+        {
+          "action": "httpRequest",
+          "openApi": {
+            "operationId": "getUserById"
+          },
+          "requestParams": {
+            "id": 123
+          }
+        }
+      ]
     }
-  ]
+]
 }
