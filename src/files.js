@@ -1,6 +1,7 @@
 const fs = require("fs");
 const YAML = require("yaml");
 const axios = require("axios");
+const { URL } = require("url");
 
 /**
  * Reads a file from a given URL or local file path and returns its content.
@@ -14,7 +15,16 @@ const axios = require("axios");
 async function readFile(fileURL) {
 
   let content;
-  if (fileURL.match(/^(https:\/\/|http:\/\/)/)) {
+  let isRemote = false;
+
+  try {
+    const parsedURL = new URL(fileURL);
+    isRemote = parsedURL.protocol === "http:" || parsedURL.protocol === "https:";
+  } catch (error) {
+    // Not a valid URL, assume local file path
+  }
+
+  if (isRemote) {
     try {
       const response = await axios.get(fileURL);
       content = response.data;
