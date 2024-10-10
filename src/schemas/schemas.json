@@ -921,6 +921,8 @@
                                     "openApi": {
                                       "allOf": [
                                         {
+                                          "version": "1.0.0",
+                                          "$schema": "http://json-schema.org/draft-07/schema#",
                                           "title": "openApi",
                                           "type": "object",
                                           "description": "OpenAPI definition and configuration.",
@@ -2052,6 +2054,8 @@
             "items": {
               "allOf": [
                 {
+                  "version": "1.0.0",
+                  "$schema": "http://json-schema.org/draft-07/schema#",
                   "title": "openApi",
                   "type": "object",
                   "description": "OpenAPI definition and configuration.",
@@ -3020,6 +3024,8 @@
       "openApi": {
         "allOf": [
           {
+            "version": "1.0.0",
+            "$schema": "http://json-schema.org/draft-07/schema#",
             "title": "openApi",
             "type": "object",
             "description": "OpenAPI definition and configuration.",
@@ -3480,6 +3486,8 @@
     ]
   },
   "openApi_v2": {
+    "version": "1.0.0",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "openApi",
     "type": "object",
     "description": "OpenAPI definition and configuration.",
@@ -4158,6 +4166,8 @@
         "items": {
           "allOf": [
             {
+              "version": "1.0.0",
+              "$schema": "http://json-schema.org/draft-07/schema#",
               "title": "openApi",
               "type": "object",
               "description": "OpenAPI definition and configuration.",
@@ -4400,6 +4410,8 @@
                   "items": {
                     "allOf": [
                       {
+                        "version": "1.0.0",
+                        "$schema": "http://json-schema.org/draft-07/schema#",
                         "title": "openApi",
                         "type": "object",
                         "description": "OpenAPI definition and configuration.",
@@ -4673,6 +4685,8 @@
                           "openApi": {
                             "allOf": [
                               {
+                                "version": "1.0.0",
+                                "$schema": "http://json-schema.org/draft-07/schema#",
                                 "title": "openApi",
                                 "type": "object",
                                 "description": "OpenAPI definition and configuration.",
@@ -6192,6 +6206,8 @@
         "items": {
           "allOf": [
             {
+              "version": "1.0.0",
+              "$schema": "http://json-schema.org/draft-07/schema#",
               "title": "openApi",
               "type": "object",
               "description": "OpenAPI definition and configuration.",
@@ -6465,6 +6481,8 @@
                 "openApi": {
                   "allOf": [
                     {
+                      "version": "1.0.0",
+                      "$schema": "http://json-schema.org/draft-07/schema#",
                       "title": "openApi",
                       "type": "object",
                       "description": "OpenAPI definition and configuration.",
