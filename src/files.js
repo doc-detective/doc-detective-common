@@ -29,7 +29,7 @@ async function readFile(fileURL) {
       const response = await axios.get(fileURL);
       content = response.data;
     } catch (error) {
-      console.warn(`Error reading file: ${error.message}`);
+      console.warn(`Error reading remote file from ${fileURL}: ${error.message}`);
       return null;
     }
   } else {  
