@@ -139,8 +139,7 @@ async function resolvePaths(
                 object[pathProperty]
               );
             }
-          }
-          if (pathProperty === "savePath" && object.saveDirectory) {
+          } else if (pathProperty === "savePath" && object.saveDirectory) {
             if (path.isAbsolute(object.saveDirectory)) {
               object[pathProperty] = resolve(
                 relativePathBase,
@@ -153,12 +152,13 @@ async function resolvePaths(
                 object[pathProperty]
               );
             }
+          } else {
+            object[pathProperty] = resolve(
+              relativePathBase,
+              object[pathProperty],
+              filePath
+            );
           }
-          object[pathProperty] = resolve(
-            relativePathBase,
-            object[pathProperty],
-            filePath
-          );
         }
       });
     }
