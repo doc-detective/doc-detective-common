@@ -22,24 +22,33 @@ async function readFile(fileURL) {
       console.warn(`Error reading file: ${error}`);
       return null;
     }
-  } else {
+  } else {  
+    try {  
+      content = await fs.promises.readFile(fileURL, "utf8");  
+    } catch (error) {  
+      if (error.code === 'ENOENT') {  
+        console.warn(`File not found: ${fileURL}`);  
+      } else {  
+        console.warn(`Error reading file: ${error.message}`);  
+      }  
+      return null;  
+    }  
+  }
+
+  // Parse based on file content, and return either object or string
+  try {
+    // Try to parse as JSON
+    return JSON.parse(content);
+  } catch (error) {
     try {
-      content = fs.readFileSync(fileURL, "utf8");
+      // Try to parse as YAML
+      return YAML.parse(content);
     } catch (error) {
-      console.warn(`Error reading file: ${error}`);
-      return null;
+      // Return raw content if not JSON or YAML
+      return content;
     }
   }
 
-  // Parse JSON or YAML content
-  if (fileURL.endsWith(".json")) {
-    return JSON.parse(content);
-  } else if (fileURL.endsWith(".yaml") || fileURL.endsWith(".yml")) {
-    return YAML.parse(content);
-  } else {
-    // Return raw content for other file formats
-    return content;
-  }
 }
 
 module.exports = { readFile };
