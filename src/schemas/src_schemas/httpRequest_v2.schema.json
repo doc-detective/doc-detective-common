@@ -22,6 +22,17 @@
       "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
       "transform": ["trim"]
     },
+    "openApi": {
+      "allOf": [
+        {
+          "$ref": "openApi_v2.schema.json#"
+        },
+        {
+          "type": "object",
+          "required": ["operationId"]
+        }
+      ]
+    },
     "statusCodes": {
       "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
       "type": "array",
@@ -111,11 +122,7 @@
     "overwrite": {
       "type": "string",
       "description": "If `true`, overwrites the existing output at `savePath` if it exists.\nIf `byVariation`, overwrites the existing output at `savePath` if the difference between the new output and the existing output is greater than `maxVariation`.",
-      "enum": [
-        "true",
-        "false",
-        "byVariation"
-      ],
+      "enum": ["true", "false", "byVariation"],
       "default": "false"
     },
     "envsFromResponseData": {
@@ -146,7 +153,15 @@
   "dynamicDefaults": {
     "id": "uuid"
   },
-  "required": ["action", "url"],
+  "anyOf": [
+    {
+      "required": ["url"]
+    },
+    {
+      "required": ["openApi"]
+    }
+  ],
+  "required": ["action"],
   "additionalProperties": false,
   "examples": [
     {
@@ -215,6 +230,55 @@
       "saveDirectory": "media",
       "maxVariation": 5,
       "overwrite": "byVariation"
+    },
+    {
+      "action": "httpRequest",
+      "openApi": {
+        "name": "Reqres",
+        "operationId": "getUserById"
+      },
+      "requestParams": {
+        "id": 123
+      }
+    },
+    {
+      "action": "httpRequest",
+      "openApi": {
+        "descriptionPath": "https://api.example.com/openapi.json",
+        "operationId": "getUserById"
+      },
+      "requestParams": {
+        "id": 123
+      }
+    },
+    {
+      "action": "httpRequest",
+      "openApi": {
+        "descriptionPath": "https://api.example.com/openapi.json",
+        "operationId": "createUser",
+        "useExample": "both"
+      }
+    },
+    {
+      "action": "httpRequest",
+      "openApi": {
+        "descriptionPath": "https://api.example.com/openapi.json",
+        "operationId": "updateUser",
+        "useExample": "request",
+        "exampleKey": "acme"
+      }
+    },
+    {
+      "action": "httpRequest",
+      "openApi": {
+        "descriptionPath": "https://api.example.com/openapi.json",
+        "operationId": "updateUser",
+        "useExample": "request",
+        "exampleKey": "acme",
+        "requestHeaders": {
+          "Authorization": "Bearer $TOKEN"
+        }
+      }
     }
   ]
 }

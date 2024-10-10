@@ -25,6 +25,7 @@ async function dereferenceSchemas() {
     "goTo_v2.schema.json",
     "httpRequest_v2.schema.json",
     "moveTo_v2.schema.json",
+    "openApi_v2.schema.json",
     "runShell_v2.schema.json",
     "saveScreenshot_v2.schema.json",
     "setVariables_v2.schema.json",

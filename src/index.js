@@ -1,7 +1,11 @@
 const { schemas } = require("./schemas");
 const { validate } = require("./validate");
 const { resolvePaths } = require("./resolvePaths");
+const { readFile } = require("./files");
 
-exports.schemas = schemas;
-exports.validate = validate;
-exports.resolvePaths = resolvePaths;
+module.exports = {
+  schemas,
+  validate,
+  resolvePaths,
+  readFile,
+};

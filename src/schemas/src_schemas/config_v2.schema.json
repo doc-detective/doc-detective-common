@@ -485,7 +485,28 @@
       "description": "Options for connecting to external services.",
       "type": "object",
       "additionalProperties": false,
-      "properties": {}
+      "properties": {
+        "openApi": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "openApi_v2.schema.json#"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "operationId": {
+                    "type": "null",
+                    "$commment": "Only allow operationId at the step level."
+                  }
+                },
+                "required": ["name", "descriptionPath"]
+              }
+            ]
+          }
+        }
+      }
     },
     "telemetry": {
       "description": "Options around sending telemetry for Doc Detective usage.",
@@ -581,6 +602,18 @@
               "path": ""
             },
             "platforms": ["linux", "mac", "windows"]
+          }
+        ]
+      }
+    },
+    {
+      "integrations": {
+        "openApi": [
+          {
+            "name": "Acme",
+            "descriptionPath": "https://www.acme.com/openapi.json",
+            "server": "https://api.acme.com",
+            "mockResponse": true
           }
         ]
       }
