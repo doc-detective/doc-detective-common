@@ -9,7 +9,7 @@ const addErrors = require("ajv-errors");
 const uuid = require("uuid");
 
 // Configure base Ajv
-const ajv = new Ajv({ strictSchema: false, useDefaults: true, allErrors: true, coerceTypes: true });
+const ajv = new Ajv({ strictSchema: false, useDefaults: true, allErrors: true, allowUnionTypes: true, coerceTypes: true });
 
 // Enable `uuid` dynamic defult
 const def = require("ajv-keywords/dist/definitions/dynamicDefaults");
@@ -29,13 +29,25 @@ for (const [key, value] of Object.entries(schemas)) {
 }
 
 // Validate that `object` matches the specified JSON schema
-function validate(schemaKey, object) {
+function validate(schemaKey = "", object = {}, addDefaults = true) {
   const result = {};
+  let validationObject;
   check = ajv.getSchema(schemaKey);
-  result.valid = check(object);
+  if (!check) {
+    result.valid = false;
+    result.errors = `Schema not found: ${schemaKey}`;
+    result.object = object;
+    return result;
+  }
+  if (addDefaults) {
+    validationObject = object;
+  } else {
+    validationObject = JSON.parse(JSON.stringify(object));
+  }
+  result.valid = check(validationObject);
   result.errors = "";
   if (check.errors) {
-    const errors = check.errors.map((error) => error.message);
+    const errors = check.errors.map((error) => `${error.instancePath} ${error.message} (${JSON.stringify(error.params)})`);
     result.errors = errors.join(", ");
   }
   result.object = object;

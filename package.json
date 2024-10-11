@@ -1,12 +1,12 @@
 {
   "name": "doc-detective-common",
-  "version": "1.20.0",
+  "version": "1.21.0",
   "description": "Shared components for Doc Detective projects.",
   "main": "src/index.js",
   "scripts": {
     "dereferenceSchemas": "node ./src/schemas/dereferenceSchemas.js",
     "test:full": "npm run dereferenceSchemas && npm run test",
-    "test": "jest"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -19,14 +19,18 @@
   },
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "chai": "^5.1.1",
+    "mocha": "^10.7.3",
+    "sinon": "^19.0.2"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^11.7.0",
+    "@apidevtools/json-schema-ref-parser": "^11.7.2",
     "ajv": "8.16.0",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.1.0",
-    "uuid": "^10.0.0"
+    "axios": "^1.7.7",
+    "uuid": "^10.0.0",
+    "yaml": "^2.5.1"
   }
 }
