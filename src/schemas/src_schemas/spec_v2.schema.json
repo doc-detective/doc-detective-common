@@ -14,6 +14,12 @@
       "type": "string",
       "description": "Path to the file that the specification is associated with."
     },
+    "onFail": {
+      "description": "The default action to take when a step fails. `continue` moves to the next step in the test despite the failure. `stop` stops the current test and begins the next test.",
+      "type": "string",
+      "enum": ["continue", "stop"],
+      "default": "continue"
+    },
     "contexts": {
       "type": "array",
       "description": "Application/platform sets to run tests in. Overrides `contexts` defined at the config-level.",
@@ -166,6 +172,20 @@
               "requestParams": {
                 "id": 123
               }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Stop on failure",
+      "onFail": "stop",
+      "tests": [
+        {
+          "steps": [
+            {
+              "action": "goTo",
+              "url": "https://www.duckduckgo.com"
             }
           ]
         }

@@ -42,6 +42,12 @@
         "output": {
           "$ref": "#/definitions/output"
         },
+        "onFail": {
+          "description": "The default action to take when a step fails. `continue` moves to the next step in the test despite the failure. `stop` stops the current test and begins the next test.",
+          "type": "string",
+          "enum": ["continue", "stop"],
+          "default": "continue"
+        },
         "setup": {
           "description": "Path(s) to test specifications to perform before those specified by `input`. Useful for setting up testing environments.",
           "anyOf": [
@@ -768,6 +774,7 @@
       "runTests": {
         "input": ["."],
         "output": ".",
+        "onFail": "continue",
         "setup": ["."],
         "cleanup": ["."],
         "recursive": true,
