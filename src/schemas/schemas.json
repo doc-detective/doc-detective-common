@@ -4055,8 +4055,7 @@
         "enum": [
           "continue",
           "stop"
-        ],
-        "default": "continue"
+        ]
       },
       "contexts": {
         "type": "array",
@@ -4308,8 +4307,7 @@
                   "enum": [
                     "continue",
                     "stop"
-                  ],
-                  "default": "continue"
+                  ]
                 },
                 "contexts": {
                   "type": "array",
@@ -6147,8 +6145,7 @@
         "enum": [
           "continue",
           "stop"
-        ],
-        "default": "continue"
+        ]
       },
       "contexts": {
         "type": "array",

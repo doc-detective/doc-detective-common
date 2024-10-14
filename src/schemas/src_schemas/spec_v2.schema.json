@@ -17,8 +17,7 @@
     "onFail": {
       "description": "The default action to take when a step fails. `continue` moves to the next step in the test despite the failure. `stop` stops the current test and begins the next test.",
       "type": "string",
-      "enum": ["continue", "stop"],
-      "default": "continue"
+      "enum": ["continue", "stop"]
     },
     "contexts": {
       "type": "array",
