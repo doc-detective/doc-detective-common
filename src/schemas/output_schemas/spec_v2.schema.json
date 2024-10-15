@@ -22,6 +22,16 @@
         "stop"
       ]
     },
+    "retries": {
+      "type": "integer",
+      "description": "Maximum number of times to retry a step if it fails.",
+      "default": 0
+    },
+    "retryAfter": {
+      "type": "integer",
+      "description": "Number of milliseconds to wait before retrying a step.",
+      "default": 0
+    },
     "contexts": {
       "type": "array",
       "description": "Application/platform sets to run tests in. Overrides `contexts` defined at the config-level.",
@@ -499,6 +509,16 @@
                 "type": "string",
                 "description": "Path to a test specification to perform after this test, while maintaining this test's context. Useful for cleaning up testing environments. Only the `steps` property is used from the first test in the cleanup spec."
               },
+              "retries": {
+                "type": "integer",
+                "description": "Maximum number of times to retry a step if it fails.",
+                "default": 0
+              },
+              "retryAfter": {
+                "type": "integer",
+                "description": "Number of milliseconds to wait before retrying a step.",
+                "default": 0
+              },
               "steps": {
                 "description": "Actions to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails.",
                 "type": "array",
@@ -522,6 +542,16 @@
                           "type": "string",
                           "const": "checkLink",
                           "description": "Action to perform."
+                        },
+                        "retries": {
+                          "type": "integer",
+                          "description": "Maximum number of times to retry a step if it fails.",
+                          "default": 0
+                        },
+                        "retryAfter": {
+                          "type": "integer",
+                          "description": "Number of milliseconds to wait before retrying a step.",
+                          "default": 0
                         },
                         "url": {
                           "type": "string",
@@ -603,6 +633,16 @@
                           "const": "goTo",
                           "description": "Action to perform."
                         },
+                        "retries": {
+                          "type": "integer",
+                          "description": "Maximum number of times to retry a step if it fails.",
+                          "default": 0
+                        },
+                        "retryAfter": {
+                          "type": "integer",
+                          "description": "Number of milliseconds to wait before retrying a step.",
+                          "default": 0
+                        },
                         "url": {
                           "type": "string",
                           "description": "URL to navigate to.",
@@ -664,6 +704,16 @@
                           "type": "string",
                           "const": "httpRequest",
                           "description": "Aciton to perform."
+                        },
+                        "retries": {
+                          "type": "integer",
+                          "description": "Maximum number of times to retry a step if it fails.",
+                          "default": 0
+                        },
+                        "retryAfter": {
+                          "type": "integer",
+                          "description": "Number of milliseconds to wait before retrying a step.",
+                          "default": 0
                         },
                         "url": {
                           "type": "string",
@@ -1057,6 +1107,16 @@
                           "const": "runShell",
                           "description": "The action to perform."
                         },
+                        "retries": {
+                          "type": "integer",
+                          "description": "Maximum number of times to retry a step if it fails.",
+                          "default": 0
+                        },
+                        "retryAfter": {
+                          "type": "integer",
+                          "description": "Number of milliseconds to wait before retrying a step.",
+                          "default": 0
+                        },
                         "command": {
                           "type": "string",
                           "description": "Command to perform in the machine's default shell."
@@ -1245,6 +1305,16 @@
                           "const": "saveScreenshot",
                           "description": "The action to perform."
                         },
+                        "retries": {
+                          "type": "integer",
+                          "description": "Maximum number of times to retry a step if it fails.",
+                          "default": 0
+                        },
+                        "retryAfter": {
+                          "type": "integer",
+                          "description": "Number of milliseconds to wait before retrying a step.",
+                          "default": 0
+                        },
                         "path": {
                           "type": "string",
                           "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
@@ -1394,6 +1464,16 @@
                           "const": "setVariables",
                           "description": "Action to perform."
                         },
+                        "retries": {
+                          "type": "integer",
+                          "description": "Maximum number of times to retry a step if it fails.",
+                          "default": 0
+                        },
+                        "retryAfter": {
+                          "type": "integer",
+                          "description": "Number of milliseconds to wait before retrying a step.",
+                          "default": 0
+                        },
                         "path": {
                           "type": "string",
                           "description": "Path to the `.env` file."
@@ -1431,6 +1511,16 @@
                           "type": "string",
                           "const": "startRecording",
                           "description": "The action to perform."
+                        },
+                        "retries": {
+                          "type": "integer",
+                          "description": "Maximum number of times to retry a step if it fails.",
+                          "default": 0
+                        },
+                        "retryAfter": {
+                          "type": "integer",
+                          "description": "Number of milliseconds to wait before retrying a step.",
+                          "default": 0
                         },
                         "path": {
                           "type": "string",
@@ -1487,6 +1577,16 @@
                           "type": "string",
                           "const": "stopRecording",
                           "description": "The action to perform."
+                        },
+                        "retries": {
+                          "type": "integer",
+                          "description": "Maximum number of times to retry a step if it fails.",
+                          "default": 0
+                        },
+                        "retryAfter": {
+                          "type": "integer",
+                          "description": "Number of milliseconds to wait before retrying a step.",
+                          "default": 0
                         }
                       },
                       "dynamicDefaults": {
@@ -1519,6 +1619,16 @@
                           "type": "string",
                           "const": "typeKeys",
                           "description": "The action to perform."
+                        },
+                        "retries": {
+                          "type": "integer",
+                          "description": "Maximum number of times to retry a step if it fails.",
+                          "default": 0
+                        },
+                        "retryAfter": {
+                          "type": "integer",
+                          "description": "Number of milliseconds to wait before retrying a step.",
+                          "default": 0
                         },
                         "keys": {
                           "description": "String of keys to enter.",
@@ -1590,6 +1700,16 @@
                           "type": "string",
                           "const": "find",
                           "description": "Action to perform."
+                        },
+                        "retries": {
+                          "type": "integer",
+                          "description": "Maximum number of times to retry a step if it fails.",
+                          "default": 0
+                        },
+                        "retryAfter": {
+                          "type": "integer",
+                          "description": "Number of milliseconds to wait before retrying a step.",
+                          "default": 0
                         },
                         "selector": {
                           "description": "Selector that uniquely identifies the element.",
@@ -1910,6 +2030,8 @@
               },
               {
                 "onFail": "stop",
+                "retries": 3,
+                "retryAfter": 1000,
                 "steps": [
                   {
                     "action": "goTo",

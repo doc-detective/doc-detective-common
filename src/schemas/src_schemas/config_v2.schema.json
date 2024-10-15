@@ -48,6 +48,16 @@
           "enum": ["continue", "stop"],
           "default": "continue"
         },
+        "retries": {
+          "type": "integer",
+          "description": "Maximum number of times to retry a step if it fails.",
+          "default": 0
+        },
+        "retryAfter": {
+          "type": "integer",
+          "description": "Number of milliseconds to wait before retrying a step.",
+          "default": 0
+        },
         "setup": {
           "description": "Path(s) to test specifications to perform before those specified by `input`. Useful for setting up testing environments.",
           "anyOf": [

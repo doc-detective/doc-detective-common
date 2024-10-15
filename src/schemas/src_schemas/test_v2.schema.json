@@ -63,6 +63,16 @@
       "type": "string",
       "description": "Path to a test specification to perform after this test, while maintaining this test's context. Useful for cleaning up testing environments. Only the `steps` property is used from the first test in the cleanup spec."
     },
+    "retries": {
+      "type": "integer",
+      "description": "Maximum number of times to retry a step if it fails.",
+      "default": 0
+    },
+    "retryAfter": {
+      "type": "integer",
+      "description": "Number of milliseconds to wait before retrying a step.",
+      "default": 0
+    },
     "steps": {
       "description": "Actions to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails.",
       "type": "array",
@@ -202,6 +212,8 @@
     },
     {
       "onFail": "stop",
+      "retries": 3,
+      "retryAfter": 1000,
       "steps": [
         {
           "action": "goTo",
