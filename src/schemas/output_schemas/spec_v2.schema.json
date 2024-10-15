@@ -27,7 +27,7 @@
       "description": "Maximum number of times to retry a step if it fails.",
       "default": 0
     },
-    "retryAfter": {
+    "retryDelay": {
       "type": "integer",
       "description": "Number of milliseconds to wait before retrying a step.",
       "default": 0
@@ -514,7 +514,7 @@
                 "description": "Maximum number of times to retry a step if it fails.",
                 "default": 0
               },
-              "retryAfter": {
+              "retryDelay": {
                 "type": "integer",
                 "description": "Number of milliseconds to wait before retrying a step.",
                 "default": 0
@@ -548,7 +548,7 @@
                           "description": "Maximum number of times to retry a step if it fails.",
                           "default": 0
                         },
-                        "retryAfter": {
+                        "retryDelay": {
                           "type": "integer",
                           "description": "Number of milliseconds to wait before retrying a step.",
                           "default": 0
@@ -638,7 +638,7 @@
                           "description": "Maximum number of times to retry a step if it fails.",
                           "default": 0
                         },
-                        "retryAfter": {
+                        "retryDelay": {
                           "type": "integer",
                           "description": "Number of milliseconds to wait before retrying a step.",
                           "default": 0
@@ -710,7 +710,7 @@
                           "description": "Maximum number of times to retry a step if it fails.",
                           "default": 0
                         },
-                        "retryAfter": {
+                        "retryDelay": {
                           "type": "integer",
                           "description": "Number of milliseconds to wait before retrying a step.",
                           "default": 0
@@ -1112,7 +1112,7 @@
                           "description": "Maximum number of times to retry a step if it fails.",
                           "default": 0
                         },
-                        "retryAfter": {
+                        "retryDelay": {
                           "type": "integer",
                           "description": "Number of milliseconds to wait before retrying a step.",
                           "default": 0
@@ -1310,7 +1310,7 @@
                           "description": "Maximum number of times to retry a step if it fails.",
                           "default": 0
                         },
-                        "retryAfter": {
+                        "retryDelay": {
                           "type": "integer",
                           "description": "Number of milliseconds to wait before retrying a step.",
                           "default": 0
@@ -1469,7 +1469,7 @@
                           "description": "Maximum number of times to retry a step if it fails.",
                           "default": 0
                         },
-                        "retryAfter": {
+                        "retryDelay": {
                           "type": "integer",
                           "description": "Number of milliseconds to wait before retrying a step.",
                           "default": 0
@@ -1517,7 +1517,7 @@
                           "description": "Maximum number of times to retry a step if it fails.",
                           "default": 0
                         },
-                        "retryAfter": {
+                        "retryDelay": {
                           "type": "integer",
                           "description": "Number of milliseconds to wait before retrying a step.",
                           "default": 0
@@ -1583,7 +1583,7 @@
                           "description": "Maximum number of times to retry a step if it fails.",
                           "default": 0
                         },
-                        "retryAfter": {
+                        "retryDelay": {
                           "type": "integer",
                           "description": "Number of milliseconds to wait before retrying a step.",
                           "default": 0
@@ -1625,7 +1625,7 @@
                           "description": "Maximum number of times to retry a step if it fails.",
                           "default": 0
                         },
-                        "retryAfter": {
+                        "retryDelay": {
                           "type": "integer",
                           "description": "Number of milliseconds to wait before retrying a step.",
                           "default": 0
@@ -1706,7 +1706,7 @@
                           "description": "Maximum number of times to retry a step if it fails.",
                           "default": 0
                         },
-                        "retryAfter": {
+                        "retryDelay": {
                           "type": "integer",
                           "description": "Number of milliseconds to wait before retrying a step.",
                           "default": 0
@@ -2031,7 +2031,7 @@
               {
                 "onFail": "stop",
                 "retries": 3,
-                "retryAfter": 1000,
+                "retryDelay": 1000,
                 "steps": [
                   {
                     "action": "goTo",
