@@ -15,19 +15,83 @@
       "description": "Path to the file that the specification is associated with."
     },
     "onFail": {
-      "description": "The default action to take when a step fails. `continue` moves to the next step in the test despite the failure. `stop` stops the current test and begins the next test.",
-      "type": "string",
-      "enum": ["continue", "stop"]
+      "oneOf": [
+        {
+          "description": "The default action to take if the spec, test, or step fails. `continue` moves on despite the failure. `retry` attempts the spec, test, or step again, up to `retryLimit` times. `stop` stops running all specs and outputs test results.",
+          "type": "string",
+          "enum": ["continue", "retry", "stop"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "spec": {
+              "description": "The default action to take if the spec fails. `continue` moves to the next spec despite the failure. `retry` attempts the spec again, up to `retryLimit` times. `stop` stops running all specs and outputs test results.",
+              "type": "string",
+              "enum": ["continue", "retry", "stop"]
+            },
+            "test": {
+              "description": "The default action to take if a test fails. `continue` moves to the next test in the spec despite the failure. `retry` attempts the test again, up to `retryLimit` times. `stop` stops the current spec and begins the next spec.",
+              "type": "string",
+              "enum": ["continue", "retry", "stop"]
+            },
+            "step": {
+              "description": "The default action to take when a step fails. `continue` moves to the next step in the test despite the failure. `stop` stops the current test and begins the next test.",
+              "type": "string",
+              "enum": ["continue", "retry", "stop"]
+            }
+          }
+        }
+      ]
     },
-    "retries": {
-      "type": "integer",
-      "description": "Maximum number of times to retry a step if it fails.",
-      "default": 0
+    "retryLimit": {
+      "oneOf": [
+        {
+          "type": "integer",
+          "description": "Maximum number of times to retry a spec, test, or step if it fails."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "spec": {
+              "type": "integer",
+              "description": "Maximum number of times to retry a spec if it fails."
+            },
+            "test": {
+              "type": "integer",
+              "description": "Maximum number of times to retry a test if it fails."
+            },
+            "step": {
+              "type": "integer",
+              "description": "Maximum number of times to retry a step if it fails."
+            }
+          }
+        }
+      ]
     },
     "retryDelay": {
-      "type": "integer",
-      "description": "Number of milliseconds to wait before retrying a step.",
-      "default": 0
+      "oneOf": [
+        {
+          "type": "integer",
+          "description": "Number of milliseconds to wait before retrying a spec, test, or step."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "spec": {
+              "type": "integer",
+              "description": "Number of milliseconds to wait before retrying a spec."
+            },
+            "test": {
+              "type": "integer",
+              "description": "Number of milliseconds to wait before retrying a test."
+            },
+            "step": {
+              "type": "integer",
+              "description": "Number of milliseconds to wait before retrying a step."
+            }
+          }
+        }
+      ]
     },
     "contexts": {
       "type": "array",

@@ -20,9 +20,71 @@
       "description": "Whether or not to detect steps in input files based on markup regex. Defaults to `true`."
     },
     "onFail": {
-      "description": "The default action to take when a step fails. `continue` moves to the next step in the test despite the failure. `stop` stops the current test and begins the next test.",
-      "type": "string",
-      "enum": ["continue", "stop"]
+      "oneOf": [
+        {
+          "description": "The default action to take if a test or step fails. `continue` moves on despite the failure. `retry` attempts the test or step again, up to `retryLimit` times. `stop` stops the current test and begins the next test.",
+          "type": "string",
+          "enum": ["continue", "stop", "retry"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "test": {
+              "description": "The default action to take if a test fails. `continue` moves to the next test in the spec despite the failure. `retry` attempts the test again, up to `retryLimit` times. `stop` stops the current spec and begins the next spec.",
+              "type": "string",
+              "enum": ["continue", "retry", "stop"]
+            },
+            "step": {
+              "description": "The default action to take when a step fails. `continue` moves to the next step in the test despite the failure. `stop` stops the current test and begins the next test.",
+              "type": "string",
+              "enum": ["continue", "retry", "stop"]
+            }
+          }
+        }
+      ]
+    },
+    "retryLimit": {
+      "oneOf": [
+        {
+          "type": "integer",
+          "description": "Maximum number of times to retry a spec, test, or step if it fails."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "test": {
+              "type": "integer",
+              "description": "Maximum number of times to retry a test if it fails."
+            },
+            "step": {
+              "type": "integer",
+              "description": "Maximum number of times to retry a step if it fails."
+            }
+          }
+        }
+      ]
+    },
+    "retryDelay": {
+      "oneOf": [
+        {
+          "type": "integer",
+          "description": "Number of milliseconds to wait before retrying a spec, test, or step."
+        },
+        {
+          "type": "object",
+          "properties": {
+            "test": {
+              "type": "integer",
+              "description": "Number of milliseconds to wait before retrying a test."
+            },
+            "step": {
+              "type": "integer",
+              "description": "Number of milliseconds to wait before retrying a step."
+            }
+          }
+        }
+      ],
+      "default": 0
     },
     "contexts": {
       "type": "array",
@@ -62,16 +124,6 @@
     "cleanup": {
       "type": "string",
       "description": "Path to a test specification to perform after this test, while maintaining this test's context. Useful for cleaning up testing environments. Only the `steps` property is used from the first test in the cleanup spec."
-    },
-    "retries": {
-      "type": "integer",
-      "description": "Maximum number of times to retry a step if it fails.",
-      "default": 0
-    },
-    "retryDelay": {
-      "type": "integer",
-      "description": "Number of milliseconds to wait before retrying a step.",
-      "default": 0
     },
     "steps": {
       "description": "Actions to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails.",
@@ -211,8 +263,8 @@
       ]
     },
     {
-      "onFail": "stop",
-      "retries": 3,
+      "onFail": "retry",
+      "retryLimit": 3,
       "retryDelay": 1000,
       "steps": [
         {

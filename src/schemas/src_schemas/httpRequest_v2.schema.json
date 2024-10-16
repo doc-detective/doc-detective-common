@@ -16,15 +16,13 @@
       "const": "httpRequest",
       "description": "Aciton to perform."
     },
-    "retries": {
+    "retryLimit": {
       "type": "integer",
-      "description": "Maximum number of times to retry a step if it fails.",
-      "default": 0
+      "description": "Maximum number of times to retry the step if it fails."
     },
     "retryDelay": {
       "type": "integer",
-      "description": "Number of milliseconds to wait before retrying a step.",
-      "default": 0
+      "description": "Number of milliseconds to wait before retrying the step."
     },
     "url": {
       "type": "string",
