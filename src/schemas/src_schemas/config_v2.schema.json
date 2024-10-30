@@ -505,6 +505,12 @@
               }
             ]
           }
+        },
+        "arazzo": {
+          "type": "array",
+          "items": {
+            "$ref": "arazzo_v2.schema.json#"
+          }
         }
       }
     },
@@ -615,7 +621,15 @@
             "server": "https://api.acme.com",
             "mockResponse": true
           }
-        ]
+        ],
+        "arazzo": {
+          "name": "CreateUser",
+          "descriptionPath": "https://www.acme.com/create-user.arazzo.json",
+          "inputs": {
+            "name": "John Doe",
+            "email": "johndoe@acme.com"
+          }
+        }
       }
     },
     {

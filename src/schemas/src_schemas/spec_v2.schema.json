@@ -50,7 +50,10 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "oneOf": [{ "$ref": "test_v2.schema.json#" }]
+        "anyOf": [
+          { "$ref": "test_v2.schema.json#" },
+          { "$ref": "arrazo_v2.schema.json#" }
+        ]
       }
     }
   },
@@ -165,6 +168,24 @@
               },
               "requestParams": {
                 "id": 123
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Create a user",
+      "tests": [
+        {
+          "steps": [
+            {
+              "action": "arazzo",
+              "name": "CreateUser",
+              "descriptionPath": "https://www.acme.com/create-user.arazzo.json",
+              "inputs": {
+                "name": "John Doe",
+                "email": "johndoe@acme.com"
               }
             }
           ]

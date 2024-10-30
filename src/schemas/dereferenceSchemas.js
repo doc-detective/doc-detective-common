@@ -18,6 +18,7 @@ async function dereferenceSchemas() {
   });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
   var files = [
+    "arazzo_v2.schema.json",
     "checkLink_v2.schema.json",
     "config_v2.schema.json",
     "context_v2.schema.json",
