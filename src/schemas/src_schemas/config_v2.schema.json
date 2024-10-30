@@ -509,7 +509,19 @@
         "arazzo": {
           "type": "array",
           "items": {
-            "$ref": "arazzo_v2.schema.json#"
+            "allOf": [
+              { "$ref": "arazzo_v2.schema.json#" },
+              {
+                "type": "object",
+                "properties": {
+                  "inputs": {
+                    "type": "null",
+                    "$commment": "Only allow inputs at the spec level."
+                  }
+                },
+                "required": ["name", "descriptionPath"]
+              }
+            ]
           }
         }
       }
@@ -622,14 +634,12 @@
             "mockResponse": true
           }
         ],
-        "arazzo": {
-          "name": "CreateUser",
-          "descriptionPath": "https://www.acme.com/create-user.arazzo.json",
-          "inputs": {
-            "name": "John Doe",
-            "email": "johndoe@acme.com"
+        "arazzo": [
+          {
+            "name": "CreateUser",
+            "descriptionPath": "https://www.acme.com/create-user.arazzo.json"
           }
-        }
+        ]
       }
     },
     {

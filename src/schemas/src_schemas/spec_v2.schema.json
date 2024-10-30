@@ -52,7 +52,7 @@
       "items": {
         "anyOf": [
           { "$ref": "test_v2.schema.json#" },
-          { "$ref": "arrazo_v2.schema.json#" }
+          { "$ref": "arazzo_v2.schema.json#" }
         ]
       }
     }
@@ -178,17 +178,12 @@
       "id": "Create a user",
       "tests": [
         {
-          "steps": [
-            {
-              "action": "arazzo",
-              "name": "CreateUser",
-              "descriptionPath": "https://www.acme.com/create-user.arazzo.json",
-              "inputs": {
-                "name": "John Doe",
-                "email": "johndoe@acme.com"
-              }
-            }
-          ]
+          "name": "CreateUser",
+          "descriptionPath": "https://www.acme.com/create-user.arazzo.json",
+          "inputs": {
+            "name": "John Doe",
+            "email": "johndoe@acme.com"
+          }
         }
       ]
     }
