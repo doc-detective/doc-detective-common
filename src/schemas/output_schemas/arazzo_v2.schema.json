@@ -14,6 +14,10 @@
       "type": "string",
       "description": "URL or local path to the Arazzo description."
     },
+    "workflowId": {
+      "type": "string",
+      "description": "Unique identifier for the workflow to run. If not specified, runs the first workflow in the Arazzo description."
+    },
     "inputs": {
       "type": "object",
       "description": "Input parameters for the Arazzo description.",

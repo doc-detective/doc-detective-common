@@ -15,6 +15,10 @@
         "type": "string",
         "description": "URL or local path to the Arazzo description."
       },
+      "workflowId": {
+        "type": "string",
+        "description": "Unique identifier for the workflow to run. If not specified, runs the first workflow in the Arazzo description."
+      },
       "inputs": {
         "type": "object",
         "description": "Input parameters for the Arazzo description.",
@@ -2200,6 +2204,10 @@
                       "type": "string",
                       "description": "URL or local path to the Arazzo description."
                     },
+                    "workflowId": {
+                      "type": "string",
+                      "description": "Unique identifier for the workflow to run. If not specified, runs the first workflow in the Arazzo description."
+                    },
                     "inputs": {
                       "type": "object",
                       "description": "Input parameters for the Arazzo description.",
@@ -2223,6 +2231,10 @@
                 {
                   "type": "object",
                   "properties": {
+                    "workflowId": {
+                      "type": "null",
+                      "$commment": "Only allow workflowId at the spec level."
+                    },
                     "inputs": {
                       "type": "null",
                       "$commment": "Only allow inputs at the spec level."
@@ -6033,6 +6045,10 @@
                   "type": "string",
                   "description": "URL or local path to the Arazzo description."
                 },
+                "workflowId": {
+                  "type": "string",
+                  "description": "Unique identifier for the workflow to run. If not specified, runs the first workflow in the Arazzo description."
+                },
                 "inputs": {
                   "type": "object",
                   "description": "Input parameters for the Arazzo description.",
@@ -6196,6 +6212,18 @@
           {
             "name": "CreateUser",
             "descriptionPath": "https://www.acme.com/create-user.arazzo.json",
+            "inputs": {
+              "name": "John Doe",
+              "email": "johndoe@acme.com"
+            }
+          }
+        ]
+      },
+      {
+        "id": "Create a user",
+        "tests": [
+          {
+            "workflowId": "createUser",
             "inputs": {
               "name": "John Doe",
               "email": "johndoe@acme.com"

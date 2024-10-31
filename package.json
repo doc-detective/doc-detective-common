@@ -20,12 +20,12 @@
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
     "chai": "^5.1.2",
-    "mocha": "^10.8.1",
+    "mocha": "^10.8.2",
     "sinon": "^19.0.2"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.7.2",
-    "ajv": "8.16.0",
+    "ajv": "8.17.1",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.1.0",

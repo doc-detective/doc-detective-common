@@ -186,6 +186,18 @@
           }
         }
       ]
+    },
+    {
+      "id": "Create a user",
+      "tests": [
+        {
+          "workflowId": "createUser",
+          "inputs": {
+            "name": "John Doe",
+            "email": "johndoe@acme.com"
+          }
+        }
+      ]
     }
   ]
 }

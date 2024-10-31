@@ -514,6 +514,10 @@
               {
                 "type": "object",
                 "properties": {
+                  "workflowId": {
+                    "type": "null",
+                    "$commment": "Only allow workflowId at the spec level."
+                  },
                   "inputs": {
                     "type": "null",
                     "$commment": "Only allow inputs at the spec level."
