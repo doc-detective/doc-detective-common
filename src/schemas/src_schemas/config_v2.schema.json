@@ -516,11 +516,11 @@
                 "properties": {
                   "workflowId": {
                     "type": "null",
-                    "$commment": "Only allow workflowId at the spec level."
+                    "$commment": "Only allow workflowId at the test level."
                   },
                   "inputs": {
                     "type": "null",
-                    "$commment": "Only allow inputs at the spec level."
+                    "$commment": "Only allow inputs at the test level."
                   }
                 },
                 "required": ["name", "descriptionPath"]

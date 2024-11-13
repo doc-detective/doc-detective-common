@@ -45,6 +45,28 @@
         ]
       }
     },
+    "arazzo": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          { "$ref": "arazzo_v2.schema.json#" },
+          {
+            "type": "object",
+            "properties": {
+              "workflowId": {
+                "type": "null",
+                "$commment": "Only allow workflowId at the test level."
+              },
+              "inputs": {
+                "type": "null",
+                "$commment": "Only allow inputs at the test level."
+              }
+            },
+            "required": ["name", "descriptionPath"]
+          }
+        ]
+      }
+    },
     "tests": {
       "description": "[Tests](test) to perform.",
       "type": "array",
