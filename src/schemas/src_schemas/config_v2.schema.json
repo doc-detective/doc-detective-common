@@ -505,6 +505,28 @@
               }
             ]
           }
+        },
+        "arazzo": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              { "$ref": "arazzo_v2.schema.json#" },
+              {
+                "type": "object",
+                "properties": {
+                  "workflowId": {
+                    "type": "null",
+                    "$commment": "Only allow workflowId at the test level."
+                  },
+                  "inputs": {
+                    "type": "null",
+                    "$commment": "Only allow inputs at the test level."
+                  }
+                },
+                "required": ["name", "descriptionPath"]
+              }
+            ]
+          }
         }
       }
     },
@@ -614,6 +636,12 @@
             "descriptionPath": "https://www.acme.com/openapi.json",
             "server": "https://api.acme.com",
             "mockResponse": true
+          }
+        ],
+        "arazzo": [
+          {
+            "name": "CreateUser",
+            "descriptionPath": "https://www.acme.com/create-user.arazzo.json"
           }
         ]
       }

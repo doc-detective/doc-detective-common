@@ -236,7 +236,7 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "oneOf": [
+        "anyOf": [
           {
             "title": "test",
             "type": "object",
@@ -1904,6 +1904,46 @@
                 ]
               }
             ]
+          },
+          {
+            "version": "1.0.0",
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "arazzo",
+            "type": "object",
+            "description": "Arazzo description and configuration.",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the Arazzo description, as defined in your configuration."
+              },
+              "descriptionPath": {
+                "type": "string",
+                "description": "URL or local path to the Arazzo description."
+              },
+              "workflowId": {
+                "type": "string",
+                "description": "Unique identifier for the workflow to run. If not specified, runs the first workflow in the Arazzo description."
+              },
+              "inputs": {
+                "type": "object",
+                "description": "Input parameters for the Arazzo description.",
+                "additionalProperties": true
+              }
+            },
+            "examples": [
+              {
+                "descriptionPath": "https://example.com/arazzo.json"
+              },
+              {
+                "name": "CreateUser",
+                "descriptionPath": "https://www.acme.com/create-user.arazzo.json",
+                "inputs": {
+                  "name": "John Doe",
+                  "email": "johndoe@acme.com"
+                }
+              }
+            ]
           }
         ]
       }
@@ -2039,6 +2079,31 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "Create a user",
+      "tests": [
+        {
+          "name": "CreateUser",
+          "descriptionPath": "https://www.acme.com/create-user.arazzo.json",
+          "inputs": {
+            "name": "John Doe",
+            "email": "johndoe@acme.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Create a user",
+      "tests": [
+        {
+          "workflowId": "createUser",
+          "inputs": {
+            "name": "John Doe",
+            "email": "johndoe@acme.com"
+          }
         }
       ]
     }

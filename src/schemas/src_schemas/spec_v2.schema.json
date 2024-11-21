@@ -45,12 +45,37 @@
         ]
       }
     },
+    "arazzo": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          { "$ref": "arazzo_v2.schema.json#" },
+          {
+            "type": "object",
+            "properties": {
+              "workflowId": {
+                "type": "null",
+                "$commment": "Only allow workflowId at the test level."
+              },
+              "inputs": {
+                "type": "null",
+                "$commment": "Only allow inputs at the test level."
+              }
+            },
+            "required": ["name", "descriptionPath"]
+          }
+        ]
+      }
+    },
     "tests": {
       "description": "[Tests](test) to perform.",
       "type": "array",
       "minItems": 1,
       "items": {
-        "oneOf": [{ "$ref": "test_v2.schema.json#" }]
+        "anyOf": [
+          { "$ref": "test_v2.schema.json#" },
+          { "$ref": "arazzo_v2.schema.json#" }
+        ]
       }
     }
   },
@@ -168,6 +193,31 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "Create a user",
+      "tests": [
+        {
+          "name": "CreateUser",
+          "descriptionPath": "https://www.acme.com/create-user.arazzo.json",
+          "inputs": {
+            "name": "John Doe",
+            "email": "johndoe@acme.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Create a user",
+      "tests": [
+        {
+          "workflowId": "createUser",
+          "inputs": {
+            "name": "John Doe",
+            "email": "johndoe@acme.com"
+          }
         }
       ]
     }
