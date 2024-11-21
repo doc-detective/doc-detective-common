@@ -4618,6 +4618,16 @@
                   "type": "string",
                   "description": "Path to a test specification to perform after this test, while maintaining this test's context. Useful for cleaning up testing environments. Only the `steps` property is used from the first test in the cleanup spec."
                 },
+                "onStepFail": {
+                  "type": "string",
+                  "description": "**Note**: This field is in beta and subject to change.<br/><br/>Action to take on the workflow when a step fails.",
+                  "enum": [
+                    "continue",
+                    "stop"
+                  ],
+                  "default": "stop",
+                  "readOnly": true
+                },
                 "steps": {
                   "description": "Actions to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails.",
                   "type": "array",
@@ -5946,6 +5956,7 @@
                   ],
                   "setup": "setup.json",
                   "cleanup": "cleanup.json",
+                  "onStepFail": "stop",
                   "steps": [
                     {
                       "action": "setVariables",
@@ -6478,6 +6489,16 @@
       "cleanup": {
         "type": "string",
         "description": "Path to a test specification to perform after this test, while maintaining this test's context. Useful for cleaning up testing environments. Only the `steps` property is used from the first test in the cleanup spec."
+      },
+      "onStepFail": {
+        "type": "string",
+        "description": "**Note**: This field is in beta and subject to change.<br/><br/>Action to take on the workflow when a step fails.",
+        "enum": [
+          "continue",
+          "stop"
+        ],
+        "default": "stop",
+        "readOnly": true
       },
       "steps": {
         "description": "Actions to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails.",
@@ -7807,6 +7828,7 @@
         ],
         "setup": "setup.json",
         "cleanup": "cleanup.json",
+        "onStepFail": "stop",
         "steps": [
           {
             "action": "setVariables",
