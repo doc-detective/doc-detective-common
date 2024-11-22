@@ -12,6 +12,16 @@
     },
     "file": {
       "type": "string",
+      "description": "Path to the specification file or the file that the specification is generated from.",
+      "readOnly": true
+    },
+    "directory": {
+      "type": "string",
+      "description": "Directory containing the spec.",
+      "readOnly": true
+    },
+    "contentFile": {
+      "type": "string",
       "description": "Path to the file that the specification is associated with."
     },
     "contexts": {
@@ -66,6 +76,65 @@
           }
         ]
       }
+    },
+    "outputs": {
+      "type": "object",
+      "description": "User-specified output values.",
+      "readOnly": true
+    },
+    "errors": {
+      "type": "array",
+      "description": "Errors the spec ran into during the run.",
+      "readOnly": true,
+      "items": {
+        "type": "object",
+        "required": ["message", "code", "timestamp"],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Description of the error."
+          },
+          "code": {
+            "type": "string",
+            "description": "Unique error code, if applicable."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the error occurred, in ISO 8601 format."
+          },
+          "details": {
+            "type": "object",
+            "description": "Additional details about the error, such as stack traces or specific error data."
+          }
+        }
+      }
+    },
+    "startTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start time of the spec run.",
+      "readOnly": true
+    },
+    "duration": {
+      "type": "number",
+      "description": "Duration of the spec run in milliseconds.",
+      "readOnly": true
+    },
+    "testsTotal": {
+      "type": "integer",
+      "description": "Total number of tests.",
+      "readOnly": true
+    },
+    "testsPassed": {
+      "type": "integer",
+      "description": "Number of tests passed.",
+      "readOnly": true
+    },
+    "testsFailed": {
+      "type": "integer",
+      "description": "Number of tests failed.",
+      "readOnly": true
     },
     "tests": {
       "description": "[Tests](test) to perform.",
