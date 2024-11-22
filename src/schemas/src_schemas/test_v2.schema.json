@@ -84,6 +84,65 @@
           { "$ref": "wait_v2.schema.json#" }
         ]
       }
+    },
+    "outputs": {
+      "type": "object",
+      "description": "User-specified output values.",
+      "readOnly": true
+    },
+    "errors": {
+      "type": "array",
+      "description": "Errors the spec ran into during the run.",
+      "readOnly": true,
+      "items": {
+        "type": "object",
+        "required": ["message", "code", "timestamp"],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Description of the error."
+          },
+          "code": {
+            "type": "string",
+            "description": "Unique error code, if applicable."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the error occurred, in ISO 8601 format."
+          },
+          "details": {
+            "type": "object",
+            "description": "Additional details about the error, such as stack traces or specific error data."
+          }
+        }
+      }
+    },
+    "startTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the test started.",
+      "readOnly": true
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the test in milliseconds.",
+      "readOnly": true
+    },
+    "stepsTotal": {
+      "type": "integer",
+      "description": "Total number of steps in the test.",
+      "readOnly": true
+    },
+    "stepsPassed": {
+      "type": "integer",
+      "description": "Number of steps that passed in the test.",
+      "readOnly": true
+    },
+    "stepsFailed": {
+      "type": "integer",
+      "description": "Number of steps that failed in the test.",
+      "readOnly": true
     }
   },
   "dynamicDefaults": {
@@ -203,5 +262,5 @@
         }
       ]
     }
-]
+  ]
 }
