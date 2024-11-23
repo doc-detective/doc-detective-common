@@ -106,6 +106,21 @@
         ]
       },
       "default": []
+    },
+    "stdout": {
+      "type": "string",
+      "description": "Standard output of the command.",
+      "readOnly": true
+    },
+    "stderr": {
+      "type": "string",
+      "description": "Standard error of the command.",
+      "readOnly": true
+    },
+    "exitCode": {
+      "type": "integer",
+      "description": "Exit code of the command.",
+      "readOnly": true
     }
   },
   "dynamicDefaults": {
