@@ -148,6 +148,80 @@
           }
         ]
       }
+    },
+    "output": {
+      "type": "object",
+      "description": "Output object that accepts additional properties.",
+      "additionalProperties": true,
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "URL of the request.",
+          "readOnly": true
+        },
+        "method": {
+          "type": "string",
+          "description": "HTTP method of the request.",
+          "readOnly": true
+        },
+        "statusCode": {
+          "type": "integer",
+          "description": "Status code of the response.",
+          "readOnly": true
+        },
+        "request": {
+          "type": "object",
+          "description": "Request object.",
+          "properties": {
+            "header": {
+              "type": "object",
+              "description": "Request headers.",
+              "readOnly": true
+            },
+            "query": {
+              "type": "object",
+              "description": "Request query parameters.",
+              "readOnly": true
+            },
+            "path": {
+              "type": "object",
+              "description": "Request path parameters.",
+              "readOnly": true
+            },
+            "body": {
+              "type": "object",
+              "description": "Request body.",
+              "readOnly": true
+            }
+          }
+        },
+        "response": {
+          "type": "object",
+          "description": "Response object.",
+          "properties": {
+            "header": {
+              "type": "object",
+              "description": "Response headers.",
+              "readOnly": true
+            },
+            "query": {
+              "type": "object",
+              "description": "Response query parameters.",
+              "readOnly": true
+            },
+            "path": {
+              "type": "object",
+              "description": "Response path parameters.",
+              "readOnly": true
+            },
+            "body": {
+              "type": "object",
+              "description": "Response body.",
+              "readOnly": true
+            }
+          }
+        }
+      }
     }
   },
   "dynamicDefaults": {
