@@ -71,11 +71,7 @@
     "overwrite": {
       "type": "string",
       "description": "If `true`, overwrites the existing output at `savePath` if it exists.\nIf `byVariation`, overwrites the existing output at `savePath` if the difference between the new output and the existing output is greater than `maxVariation`.",
-      "enum": [
-        "true",
-        "false",
-        "byVariation"
-      ],
+      "enum": ["true", "false", "byVariation"],
       "default": "false"
     },
     "timeout": {
@@ -107,20 +103,32 @@
       },
       "default": []
     },
-    "stdout": {
-      "type": "string",
-      "description": "Standard output of the command.",
-      "readOnly": true
-    },
-    "stderr": {
-      "type": "string",
-      "description": "Standard error of the command.",
-      "readOnly": true
-    },
-    "exitCode": {
-      "type": "integer",
-      "description": "Exit code of the command.",
-      "readOnly": true
+    "outputs": {
+      "type": "object",
+      "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+      "patternProperties": {
+        "^[A-Za-z0-9_]+$": {
+          "type": "string",
+          "description": "Runtime expression for a user-defined output value."
+        }
+      },
+      "properties": {
+        "stdout": {
+          "type": "string",
+          "description": "Standard output of the command.",
+          "readOnly": true
+        },
+        "stderr": {
+          "type": "string",
+          "description": "Standard error of the command.",
+          "readOnly": true
+        },
+        "exitCode": {
+          "type": "integer",
+          "description": "Exit code of the command.",
+          "readOnly": true
+        }
+      }
     }
   },
   "dynamicDefaults": {
