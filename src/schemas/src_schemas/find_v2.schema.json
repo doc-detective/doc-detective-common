@@ -86,6 +86,78 @@
         ]
       },
       "default": []
+    },
+    "outputs": {
+      "type": "object",
+      "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+      "patternProperties": {
+        "^[A-Za-z0-9_]+$": {
+          "type": "string",
+          "description": "Runtime expression for a user-defined output value."
+        }
+      },
+      "properties": {
+        "element": {
+          "type": "object",
+          "description": "Details of the found element.",
+          "readOnly": true,
+          "properties": {
+            "tagName": {
+              "type": "string",
+              "description": "The tag name of the element."
+            },
+            "attributes": {
+              "type": "object",
+              "description": "An object containing the element's attributes and their values."
+            },
+            "cssClasses": {
+              "type": "array",
+              "description": "An array of CSS classes applied to the element.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "id": {
+              "type": "string",
+              "description": "The id attribute of the element, if present."
+            },
+            "boundingBox": {
+              "type": "object",
+              "description": "An object containing the element's position and dimensions.",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "isDisplayed": {
+              "type": "boolean",
+              "description": "A boolean indicating whether the element is currently displayed on the page."
+            },
+            "isEnabled": {
+              "type": "boolean",
+              "description": "A boolean indicating whether the element is enabled and can be interacted with."
+            },
+            "isSelected": {
+              "type": "boolean",
+              "description": "A boolean indicating whether the element is selected."
+            },
+            "text": {
+              "type": "string",
+              "description": "The text content of the element."
+            }
+          }
+        }
+      }
     }
   },
   "required": ["action", "selector"],
