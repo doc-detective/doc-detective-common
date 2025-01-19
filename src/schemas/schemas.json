@@ -713,9 +713,28 @@
                                       "default": false
                                     },
                                     "click": {
-                                      "type": "boolean",
                                       "description": "Click the element.",
-                                      "default": false
+                                      "oneOf": [
+                                        {
+                                          "type": "boolean",
+                                          "default": false
+                                        },
+                                        {
+                                          "type": "object",
+                                          "additionalProperties": false,
+                                          "properties": {
+                                            "button": {
+                                              "description": "Kind of click to perform.",
+                                              "type": "string",
+                                              "enum": [
+                                                "left",
+                                                "right",
+                                                "middle"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      ]
                                     },
                                     "typeKeys": {
                                       "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](typeKeys). To type in the element, make the element active with the `click` parameter.",
@@ -803,6 +822,13 @@
                                       "moveTo": true,
                                       "click": true,
                                       "typeKeys": "shorthair cat"
+                                    },
+                                    {
+                                      "action": "find",
+                                      "selector": "[title=Search]",
+                                      "click": {
+                                        "button": "right"
+                                      }
                                     },
                                     {
                                       "action": "find",
@@ -2816,9 +2842,28 @@
         "default": false
       },
       "click": {
-        "type": "boolean",
         "description": "Click the element.",
-        "default": false
+        "oneOf": [
+          {
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "button": {
+                "description": "Kind of click to perform.",
+                "type": "string",
+                "enum": [
+                  "left",
+                  "right",
+                  "middle"
+                ]
+              }
+            }
+          }
+        ]
       },
       "typeKeys": {
         "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](typeKeys). To type in the element, make the element active with the `click` parameter.",
@@ -2906,6 +2951,13 @@
         "moveTo": true,
         "click": true,
         "typeKeys": "shorthair cat"
+      },
+      {
+        "action": "find",
+        "selector": "[title=Search]",
+        "click": {
+          "button": "right"
+        }
       },
       {
         "action": "find",
@@ -5623,9 +5675,28 @@
                             "default": false
                           },
                           "click": {
-                            "type": "boolean",
                             "description": "Click the element.",
-                            "default": false
+                            "oneOf": [
+                              {
+                                "type": "boolean",
+                                "default": false
+                              },
+                              {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "button": {
+                                    "description": "Kind of click to perform.",
+                                    "type": "string",
+                                    "enum": [
+                                      "left",
+                                      "right",
+                                      "middle"
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
                           },
                           "typeKeys": {
                             "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](typeKeys). To type in the element, make the element active with the `click` parameter.",
@@ -5713,6 +5784,13 @@
                             "moveTo": true,
                             "click": true,
                             "typeKeys": "shorthair cat"
+                          },
+                          {
+                            "action": "find",
+                            "selector": "[title=Search]",
+                            "click": {
+                              "button": "right"
+                            }
                           },
                           {
                             "action": "find",
@@ -7419,9 +7497,28 @@
                   "default": false
                 },
                 "click": {
-                  "type": "boolean",
                   "description": "Click the element.",
-                  "default": false
+                  "oneOf": [
+                    {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "button": {
+                          "description": "Kind of click to perform.",
+                          "type": "string",
+                          "enum": [
+                            "left",
+                            "right",
+                            "middle"
+                          ]
+                        }
+                      }
+                    }
+                  ]
                 },
                 "typeKeys": {
                   "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`typeKeys`](typeKeys). To type in the element, make the element active with the `click` parameter.",
@@ -7509,6 +7606,13 @@
                   "moveTo": true,
                   "click": true,
                   "typeKeys": "shorthair cat"
+                },
+                {
+                  "action": "find",
+                  "selector": "[title=Search]",
+                  "click": {
+                    "button": "right"
+                  }
                 },
                 {
                   "action": "find",
