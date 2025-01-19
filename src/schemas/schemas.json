@@ -263,6 +263,14 @@
                               "type": "integer",
                               "description": "Height of the window in pixels."
                             },
+                            "viewport_height": {
+                              "type": "integer",
+                              "description": "Height of the viewport in pixels. Overrides `height`."
+                            },
+                            "viewport_width": {
+                              "type": "integer",
+                              "description": "Width of the viewport in pixels. Overrides `width`."
+                            },
                             "headless": {
                               "type": "boolean",
                               "description": "If `true`, runs the browser in headless mode. Not supported by Safari."
@@ -297,6 +305,18 @@
                     {
                       "app": {
                         "name": "chrome"
+                      },
+                      "platforms": [
+                        "linux"
+                      ]
+                    },
+                    {
+                      "app": {
+                        "name": "chrome",
+                        "options": {
+                          "viewport_width": 800,
+                          "viewport_height": 600
+                        }
                       },
                       "platforms": [
                         "linux"
@@ -2701,6 +2721,14 @@
                 "type": "integer",
                 "description": "Height of the window in pixels."
               },
+              "viewport_height": {
+                "type": "integer",
+                "description": "Height of the viewport in pixels. Overrides `height`."
+              },
+              "viewport_width": {
+                "type": "integer",
+                "description": "Width of the viewport in pixels. Overrides `width`."
+              },
               "headless": {
                 "type": "boolean",
                 "description": "If `true`, runs the browser in headless mode. Not supported by Safari."
@@ -2735,6 +2763,18 @@
       {
         "app": {
           "name": "chrome"
+        },
+        "platforms": [
+          "linux"
+        ]
+      },
+      {
+        "app": {
+          "name": "chrome",
+          "options": {
+            "viewport_width": 800,
+            "viewport_height": 600
+          }
         },
         "platforms": [
           "linux"
@@ -4084,6 +4124,14 @@
                           "type": "integer",
                           "description": "Height of the window in pixels."
                         },
+                        "viewport_height": {
+                          "type": "integer",
+                          "description": "Height of the viewport in pixels. Overrides `height`."
+                        },
+                        "viewport_width": {
+                          "type": "integer",
+                          "description": "Width of the viewport in pixels. Overrides `width`."
+                        },
                         "headless": {
                           "type": "boolean",
                           "description": "If `true`, runs the browser in headless mode. Not supported by Safari."
@@ -4118,6 +4166,18 @@
                 {
                   "app": {
                     "name": "chrome"
+                  },
+                  "platforms": [
+                    "linux"
+                  ]
+                },
+                {
+                  "app": {
+                    "name": "chrome",
+                    "options": {
+                      "viewport_width": 800,
+                      "viewport_height": 600
+                    }
                   },
                   "platforms": [
                     "linux"
@@ -4328,6 +4388,14 @@
                                     "type": "integer",
                                     "description": "Height of the window in pixels."
                                   },
+                                  "viewport_height": {
+                                    "type": "integer",
+                                    "description": "Height of the viewport in pixels. Overrides `height`."
+                                  },
+                                  "viewport_width": {
+                                    "type": "integer",
+                                    "description": "Width of the viewport in pixels. Overrides `width`."
+                                  },
                                   "headless": {
                                     "type": "boolean",
                                     "description": "If `true`, runs the browser in headless mode. Not supported by Safari."
@@ -4362,6 +4430,18 @@
                           {
                             "app": {
                               "name": "chrome"
+                            },
+                            "platforms": [
+                              "linux"
+                            ]
+                          },
+                          {
+                            "app": {
+                              "name": "chrome",
+                              "options": {
+                                "viewport_width": 800,
+                                "viewport_height": 600
+                              }
                             },
                             "platforms": [
                               "linux"
@@ -6124,6 +6204,14 @@
                           "type": "integer",
                           "description": "Height of the window in pixels."
                         },
+                        "viewport_height": {
+                          "type": "integer",
+                          "description": "Height of the viewport in pixels. Overrides `height`."
+                        },
+                        "viewport_width": {
+                          "type": "integer",
+                          "description": "Width of the viewport in pixels. Overrides `width`."
+                        },
                         "headless": {
                           "type": "boolean",
                           "description": "If `true`, runs the browser in headless mode. Not supported by Safari."
@@ -6158,6 +6246,18 @@
                 {
                   "app": {
                     "name": "chrome"
+                  },
+                  "platforms": [
+                    "linux"
+                  ]
+                },
+                {
+                  "app": {
+                    "name": "chrome",
+                    "options": {
+                      "viewport_width": 800,
+                      "viewport_height": 600
+                    }
                   },
                   "platforms": [
                     "linux"
