@@ -3751,7 +3751,7 @@
   "runCode_v2": {
     "title": "runCode",
     "type": "object",
-    "description": "Perform a native shell command.",
+    "description": "Assemble and run code.",
     "properties": {
       "id": {
         "type": "string",
