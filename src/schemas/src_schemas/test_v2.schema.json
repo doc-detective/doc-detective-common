@@ -67,6 +67,7 @@
           { "$ref": "checkLink_v2.schema.json#" },
           { "$ref": "goTo_v2.schema.json#" },
           { "$ref": "httpRequest_v2.schema.json#" },
+          { "$ref": "runCode_v2.schema.json#" },
           { "$ref": "runShell_v2.schema.json#" },
           { "$ref": "saveScreenshot_v2.schema.json#" },
           { "$ref": "setVariables_v2.schema.json#" },
