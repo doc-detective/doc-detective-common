@@ -826,14 +826,9 @@
                 "type": "string",
                 "description": "Language of the code to run. If not specified, the code is run in the shell.",
                 "enum": [
-                  "shell",
                   "python",
-                  "py",
-                  "node",
                   "bash",
-                  "sh",
-                  "javascript",
-                  "js"
+                  "javascript"
                 ]
               },
               "code": {
