@@ -24,6 +24,14 @@
         }
       },
       "required": ["checkLink"]
+    },
+    {
+      "properties": {
+        "goTo": {
+          "$ref": "goTo_v3.schema.json#"
+        }
+      },
+      "required": ["goTo"]
     }
   ],
   "examples": [
@@ -40,6 +48,14 @@
         "url": "https://www.google.com",
         "statusCodes": [200]
       }
+    },
+    {
+      "goTo": {
+        "url": "https://www.google.com"
+      }
+    },
+    {
+      "goTo": "https://www.google.com"
     }
   ]
 }
