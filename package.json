@@ -19,13 +19,15 @@
   },
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
+    "@stoplight/spectral-cli": "^6.14.2",
+    "@stoplight/spectral-core": "^1.19.4",
     "chai": "^5.1.2",
     "mocha": "^11.1.0",
     "sinon": "^19.0.2"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.9.0",
-    "ajv": "8.16.0",
+    "ajv": "^8.17.1",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.1.0",

@@ -1,0 +1,20 @@
+rules:
+  descriptions-required:
+    description: Schemas should have descriptions.
+    given: $..[?(@.type)]
+    severity: error
+    then:
+      field: description
+      function: truthy
+
+  properties-kebab-case:
+    description: Field names should be in kebab-case.
+    given: $..properties
+    severity: error
+    recommended: true
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^[a-z]+(-[a-z]+)*[a-z]+$"
+  
