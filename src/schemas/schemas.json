@@ -2,8 +2,11 @@
   "step_v3": {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "step",
-    "type": "object",
     "description": "A step in a test.",
+    "type": "object",
+    "dynamicDefaults": {
+      "stepId": "uuid"
+    },
     "properties": {
       "stepId": {
         "type": "string",

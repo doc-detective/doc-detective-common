@@ -17,7 +17,6 @@ for (const [key, value] of Object.entries(schemas)) {
           const validityCheck = validate(key, example);
           assert.ok(
             validityCheck.valid,
-            true,
             `Validation failed for ${key}, example ${index}: ${validityCheck.errors}`
           );
         } catch (error) {
