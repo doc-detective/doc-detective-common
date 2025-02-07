@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "step",
+  "type": "object",
+  "description": "A step in a test.",
+  "properties": {
+    "stepId": {
+      "type": "string",
+      "description": "ID of the step."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the step."
+    }
+  },
+  "anyOf": [
+    {
+      "properties": {
+        "checkLink": {
+          "$ref": "checkLink_v3.schema.json#"
+        }
+      },
+      "required": ["checkLink"]
+    }
+  ],
+  "examples": [
+    {
+      "checkLink": "https://www.google.com"
+    },
+    {
+      "stepId": "path-only",
+      "checkLink": "/search"
+    },
+    {
+      "stepId": "status-code",
+      "checkLink": {
+        "url": "https://www.google.com",
+        "statusCodes": [200]
+      }
+    }
+  ]
+}

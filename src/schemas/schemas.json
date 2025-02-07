@@ -1,81 +1,169 @@
 {
-  "checkLink_v2": {
-    "title": "checkLink",
+  "step_v3": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "step",
     "type": "object",
-    "description": "Check if a URL returns an acceptable status code from a GET request.",
+    "description": "A step in a test.",
     "properties": {
-      "id": {
+      "stepId": {
         "type": "string",
         "description": "ID of the step."
       },
       "description": {
         "type": "string",
         "description": "Description of the step."
-      },
-      "action": {
-        "type": "string",
-        "const": "checkLink",
-        "description": "Action to perform."
-      },
-      "url": {
-        "type": "string",
-        "description": "URL to check.",
-        "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
-        "transform": [
-          "trim"
-        ]
-      },
-      "origin": {
-        "type": "string",
-        "description": "Protocol and domain to navigate to. Prepended to `url`.",
-        "transform": [
-          "trim"
-        ]
-      },
-      "statusCodes": {
-        "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "default": [
-          200,
-          201,
-          202
-        ]
       }
     },
-    "dynamicDefaults": {
-      "id": "uuid"
-    },
-    "required": [
-      "action",
-      "url"
+    "anyOf": [
+      {
+        "properties": {
+          "checkLink": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "checkLink",
+            "anyOf": [
+              {
+                "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
+                "type": "string",
+                "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
+                "transform": [
+                  "trim"
+                ]
+              },
+              {
+                "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "url"
+                ],
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "URL to check. Can be a full URL or a path. If a path is provided, `origin` must be specified.",
+                    "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
+                    "transform": [
+                      "trim"
+                    ]
+                  },
+                  "origin": {
+                    "type": "string",
+                    "description": "Protocol and domain to navigate to. Prepended to `url`.",
+                    "transform": [
+                      "trim"
+                    ]
+                  },
+                  "statusCodes": {
+                    "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
+                    "type": "array",
+                    "items": {
+                      "oneOf": [
+                        {
+                          "type": "integer"
+                        }
+                      ]
+                    },
+                    "default": [
+                      200,
+                      201,
+                      202
+                    ]
+                  }
+                }
+              }
+            ],
+            "components": {
+              "schemas": {
+                "string": {
+                  "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
+                  "type": "string",
+                  "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
+                  "transform": [
+                    "trim"
+                  ]
+                },
+                "object": {
+                  "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "url"
+                  ],
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "URL to check. Can be a full URL or a path. If a path is provided, `origin` must be specified.",
+                      "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "origin": {
+                      "type": "string",
+                      "description": "Protocol and domain to navigate to. Prepended to `url`.",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "statusCodes": {
+                      "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "type": "integer"
+                          }
+                        ]
+                      },
+                      "default": [
+                        200,
+                        201,
+                        202
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "examples": [
+              "https://www.google.com",
+              "/search",
+              {
+                "url": "https://www.google.com",
+                "statusCodes": [
+                  200
+                ]
+              },
+              {
+                "url": "/search",
+                "origin": "www.google.com",
+                "statusCodes": [
+                  200
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "checkLink"
+        ]
+      }
     ],
-    "additionalProperties": false,
     "examples": [
       {
-        "action": "checkLink",
-        "url": "https://www.google.com"
+        "checkLink": "https://www.google.com"
       },
       {
-        "action": "checkLink",
-        "url": "https://www.google.com",
-        "statusCodes": [
-          200
-        ]
+        "stepId": "path-only",
+        "checkLink": "/search"
       },
       {
-        "action": "checkLink",
-        "url": "/search",
-        "origin": "www.google.com",
-        "statusCodes": [
-          200
-        ]
+        "stepId": "status-code",
+        "checkLink": {
+          "url": "https://www.google.com",
+          "statusCodes": [
+            200
+          ]
+        }
       }
     ]
   },
@@ -196,6 +284,86 @@
         ]
       },
       {
+        "url": "/search",
+        "origin": "www.google.com",
+        "statusCodes": [
+          200
+        ]
+      }
+    ]
+  },
+  "checkLink_v2": {
+    "title": "checkLink",
+    "type": "object",
+    "description": "Check if a URL returns an acceptable status code from a GET request.",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "ID of the step."
+      },
+      "description": {
+        "type": "string",
+        "description": "Description of the step."
+      },
+      "action": {
+        "type": "string",
+        "const": "checkLink",
+        "description": "Action to perform."
+      },
+      "url": {
+        "type": "string",
+        "description": "URL to check.",
+        "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
+        "transform": [
+          "trim"
+        ]
+      },
+      "origin": {
+        "type": "string",
+        "description": "Protocol and domain to navigate to. Prepended to `url`.",
+        "transform": [
+          "trim"
+        ]
+      },
+      "statusCodes": {
+        "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "default": [
+          200,
+          201,
+          202
+        ]
+      }
+    },
+    "dynamicDefaults": {
+      "id": "uuid"
+    },
+    "required": [
+      "action",
+      "url"
+    ],
+    "additionalProperties": false,
+    "examples": [
+      {
+        "action": "checkLink",
+        "url": "https://www.google.com"
+      },
+      {
+        "action": "checkLink",
+        "url": "https://www.google.com",
+        "statusCodes": [
+          200
+        ]
+      },
+      {
+        "action": "checkLink",
         "url": "/search",
         "origin": "www.google.com",
         "statusCodes": [

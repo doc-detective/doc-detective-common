@@ -18,8 +18,9 @@ async function dereferenceSchemas() {
   });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
   var files = [
-    "checkLink_v2.schema.json",
+    "step_v3.schema.json",
     "checkLink_v3.schema.json",
+    "checkLink_v2.schema.json",
     "config_v2.schema.json",
     "context_v2.schema.json",
     "find_v2.schema.json",
