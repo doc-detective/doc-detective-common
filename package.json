@@ -2,11 +2,15 @@
   "name": "doc-detective-common",
   "version": "3.0.0-dev.0",
   "description": "Shared components for Doc Detective projects.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
     "dereferenceSchemas": "node ./src/schemas/dereferenceSchemas.js",
     "test:full": "npm run dereferenceSchemas && npm run test",
-    "test": "mocha"
+    "test": "mocha",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -19,9 +23,17 @@
   },
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
+    "@types/chai": "^5.0.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.13.1",
+    "@types/sinon": "^17.0.3",
+    "@types/uuid": "^10.0.0",
+    "@types/yaml": "^1.9.7",
     "chai": "^5.1.2",
     "mocha": "^11.1.0",
-    "sinon": "^19.0.2"
+    "sinon": "^19.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.9.0",

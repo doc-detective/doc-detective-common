@@ -1,5 +1,5 @@
 const sinon = require("sinon");
-const axios = require("axios");
+const axios = require("axios").defaults;
 const fs = require("fs");
 const { readFile } = require("../src/files");
 
@@ -11,7 +11,7 @@ const { readFile } = require("../src/files");
     let fsReadFileStub;
 
     beforeEach(function () {
-      axiosGetStub = sinon.stub(axios, "get");
+      axiosGetStub = sinon.stub(axios).get;
       fsReadFileStub = sinon.stub(fs.promises, "readFile");
     });
 

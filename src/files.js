@@ -1,6 +1,6 @@
 const fs = require("fs");
 const YAML = require("yaml");
-const axios = require("axios");
+const axios = require("axios").default;
 const { URL } = require("url");
 
 /**
