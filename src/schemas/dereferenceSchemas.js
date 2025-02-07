@@ -19,6 +19,7 @@ async function dereferenceSchemas() {
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
   var files = [
     "checkLink_v2.schema.json",
+    "checkLink_v3.schema.json",
     "config_v2.schema.json",
     "context_v2.schema.json",
     "find_v2.schema.json",
@@ -75,8 +76,11 @@ async function dereferenceSchemas() {
     // Load into `schema` object
     schemas[key] = schema;
   });
-  fs.writeFileSync(`${__dirname}/schemas.json`, JSON.stringify(schemas,null,2));
-  
+  fs.writeFileSync(
+    `${__dirname}/schemas.json`,
+    JSON.stringify(schemas, null, 2)
+  );
+
   // Clean up build dir
   // fs.rm(buildDir, { recursive: true }, (err) => {
   //   if (err) throw err;
@@ -109,7 +113,7 @@ function deleteDollarIds(schema) {
       deleteDollarIds(value);
     }
     if (key === "$id") {
-      delete schema[key]
+      delete schema[key];
     }
   }
   return schema;
