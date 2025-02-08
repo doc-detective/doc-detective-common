@@ -49,24 +49,36 @@ function validate({ schemaKey = "", object = {}, addDefaults = true }) {
     result.object = object;
     return result;
   }
-  if (addDefaults) {
-    validationObject = object;
-  } else {
-    validationObject = JSON.parse(JSON.stringify(object));
-  }
+
+  // Clone the object to avoid modifying the original object
+  validationObject = JSON.parse(JSON.stringify(object));
+
+  // Check if the object is compatible with the schema
   result.valid = check(validationObject);
   result.errors = "";
+
   if (check.errors) {
-    // Check if the object is compatible with the schema
-    const matchedSchemaKey = findSchemaKey({ object });
-    if (matchedSchemaKey) {
+    // Check if the object is compatible with another schema
+    validationObject = JSON.parse(JSON.stringify(object));
+    const matchedSchemaKey = compatibleSchemas[schemaKey].find((key) => {
+      const check = ajv.getSchema(key);
+      if (check(validationObject)) return key;
+    });
+    if (!matchedSchemaKey) {
+      result.errors = `Schema not found.`;
+      result.object = object;
+      result.valid = false;
+      return result;
+    } else {
       const transformedObject = transformToSchemaKey({
         currentSchema: matchedSchemaKey,
         targetSchema: schemaKey,
-        object,
+        object: validationObject,
       });
+      
       result.valid = check(transformedObject);
       if (result.valid) {
+        validationObject = transformedObject;
         object = transformedObject;
       } else if (check.errors) {
         const errors = check.errors.map(
@@ -78,26 +90,15 @@ function validate({ schemaKey = "", object = {}, addDefaults = true }) {
         result.errors = errors.join(", ");
         return result;
       }
-    } else {
-      result.errors = `Schema not found.`;
-      result.object = object;
-      result.valid = false;
-      return result;
     }
   }
-  result.object = object;
+  if (addDefaults) {
+    result.object = validationObject;
+  } else {
+    result.object = object;
+  }
 
   return result;
-}
-
-function findSchemaKey({ object = {} }) {
-  for (const [key, value] of Object.entries(schemas)) {
-    const check = ajv.getSchema(key);
-    if (check(object)) {
-      return key;
-    }
-  }
-  return null;
 }
 
 function transformToSchemaKey({
@@ -143,7 +144,7 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    action: "goTo",
+    action: "checkLink",
     url: "https://www.example.com",
   };
   result = validate({ schemaKey: "step_v3", object: example });
