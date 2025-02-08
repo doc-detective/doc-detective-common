@@ -34,11 +34,15 @@ for (const [key, value] of Object.entries(schemas)) {
   ajv.addSchema(value, key);
 }
 
+const compatibleSchemas = {
+  step_v3: ["goTo_v2", "checkLink_v2"],
+};
+
 // Validate that `object` matches the specified JSON schema
 function validate({ schemaKey = "", object = {}, addDefaults = true }) {
   const result = {};
   let validationObject;
-  check = ajv.getSchema(schemaKey);
+  let check = ajv.getSchema(schemaKey);
   if (!check) {
     result.valid = false;
     result.errors = `Schema not found: ${schemaKey}`;
@@ -53,17 +57,47 @@ function validate({ schemaKey = "", object = {}, addDefaults = true }) {
   result.valid = check(validationObject);
   result.errors = "";
   if (check.errors) {
-    const errors = check.errors.map(
-      (error) =>
-        `${error.instancePath} ${error.message} (${JSON.stringify(
-          error.params
-        )})`
-    );
-    result.errors = errors.join(", ");
+    // Check if the object is compatible with the schema
+    const matchedSchemaKey = findSchemaKey({ object });
+    if (matchedSchemaKey) {
+      const transformedObject = transformToSchemaKey({
+        currentSchema: matchedSchemaKey,
+        targetSchema: schemaKey,
+        object,
+      });
+      result.valid = check(transformedObject);
+      if (result.valid) {
+        object = transformedObject;
+      } else if (check.errors) {
+        const errors = check.errors.map(
+          (error) =>
+            `${error.instancePath} ${error.message} (${JSON.stringify(
+              error.params
+            )})`
+        );
+        result.errors = errors.join(", ");
+        return result;
+      }
+    } else {
+      result.errors = `Schema not found.`;
+      result.object = object;
+      result.valid = false;
+      return result;
+    }
   }
   result.object = object;
 
   return result;
+}
+
+function findSchemaKey({ object = {} }) {
+  for (const [key, value] of Object.entries(schemas)) {
+    const check = ajv.getSchema(key);
+    if (check(object)) {
+      return key;
+    }
+  }
+  return null;
 }
 
 function transformToSchemaKey({
@@ -112,7 +146,6 @@ if (require.main === module) {
     action: "goTo",
     url: "https://www.example.com",
   };
-  let result = transformToSchemaKey({currentSchema: "goTo_v2", targetSchema: "step_v3", object: example});
-  result = validate({ schemaKey: "step_v3", object: result });
+  result = validate({ schemaKey: "step_v3", object: example });
   console.log(result);
 }
