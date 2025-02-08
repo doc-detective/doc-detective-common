@@ -9,7 +9,13 @@ const addErrors = require("ajv-errors");
 const uuid = require("uuid");
 
 // Configure base Ajv
-const ajv = new Ajv({ strictSchema: false, useDefaults: true, allErrors: true, allowUnionTypes: true, coerceTypes: true });
+const ajv = new Ajv({
+  strictSchema: false,
+  useDefaults: true,
+  allErrors: true,
+  allowUnionTypes: true,
+  coerceTypes: true,
+});
 
 // Enable `uuid` dynamic defult
 const def = require("ajv-keywords/dist/definitions/dynamicDefaults");
@@ -29,7 +35,7 @@ for (const [key, value] of Object.entries(schemas)) {
 }
 
 // Validate that `object` matches the specified JSON schema
-function validate(schemaKey = "", object = {}, addDefaults = true) {
+function validate({ schemaKey = "", object = {}, addDefaults = true }) {
   const result = {};
   let validationObject;
   check = ajv.getSchema(schemaKey);
@@ -47,10 +53,66 @@ function validate(schemaKey = "", object = {}, addDefaults = true) {
   result.valid = check(validationObject);
   result.errors = "";
   if (check.errors) {
-    const errors = check.errors.map((error) => `${error.instancePath} ${error.message} (${JSON.stringify(error.params)})`);
+    const errors = check.errors.map(
+      (error) =>
+        `${error.instancePath} ${error.message} (${JSON.stringify(
+          error.params
+        )})`
+    );
     result.errors = errors.join(", ");
   }
   result.object = object;
 
   return result;
+}
+
+function transformToSchemaKey({
+  currentSchema = "",
+  targetSchema = "",
+  object = {},
+}) {
+  // Check if the current schema is the same as the target schema
+  if (currentSchema === targetSchema) {
+    return object;
+  }
+  // Check if the current schema is compatible with the target schema
+  const supportedTransformations = {
+    step_v3: ["goTo_v2", "checkLink_v2"],
+  };
+  if (!supportedTransformations[targetSchema].includes(currentSchema)) {
+    throw new Error(
+      `Can't transform from ${currentSchema} to ${targetSchema}.`
+    );
+  }
+  // Transform the object
+  const transformedObject = {};
+  if (targetSchema === "step_v3") {
+    transformedObject.stepId = object.id;
+    transformedObject.description = object.description;
+    if (currentSchema === "goTo_v2") {
+      transformedObject.goTo = {
+        url: object.url,
+        origin: object.origin,
+      };
+    } else if (currentSchema === "checkLink_v2") {
+      transformedObject.checkLink = {
+        url: object.url,
+        origin: object.origin,
+        statusCodes: object.statusCodes,
+      };
+    }
+  }
+
+  return transformedObject;
+}
+
+// If called directly, validate an example object
+if (require.main === module) {
+  const example = {
+    action: "goTo",
+    url: "https://www.example.com",
+  };
+  let result = transformToSchemaKey({currentSchema: "goTo_v2", targetSchema: "step_v3", object: example});
+  result = validate({ schemaKey: "step_v3", object: result });
+  console.log(result);
 }
