@@ -332,33 +332,6 @@
                   "type": "integer",
                   "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                   "default": 60000
-                },
-                "setVariables": {
-                  "type": "array",
-                  "description": "Extract environment variables from the command's output.",
-                  "items": {
-                    "oneOf": [
-                      {
-                        "description": "",
-                        "type": "object",
-                        "properties": {
-                          "name": {
-                            "description": "Name of the environment variable to set.",
-                            "type": "string"
-                          },
-                          "regex": {
-                            "description": "Regex to extract the environment variable from the command's output.",
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "name",
-                          "regex"
-                        ]
-                      }
-                    ]
-                  },
-                  "default": []
                 }
               }
             }
@@ -449,33 +422,6 @@
                     "type": "integer",
                     "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                     "default": 60000
-                  },
-                  "setVariables": {
-                    "type": "array",
-                    "description": "Extract environment variables from the command's output.",
-                    "items": {
-                      "oneOf": [
-                        {
-                          "description": "",
-                          "type": "object",
-                          "properties": {
-                            "name": {
-                              "description": "Name of the environment variable to set.",
-                              "type": "string"
-                            },
-                            "regex": {
-                              "description": "Regex to extract the environment variable from the command's output.",
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "name",
-                            "regex"
-                          ]
-                        }
-                      ]
-                    },
-                    "default": []
                   }
                 }
               }
@@ -519,13 +465,7 @@
               "exitCodes": [
                 0
               ],
-              "output": "/.*?/",
-              "setVariables": [
-                {
-                  "name": "TEST",
-                  "regex": ".*"
-                }
-              ]
+              "output": "/.*?/"
             },
             {
               "command": "docker run hello-world",
