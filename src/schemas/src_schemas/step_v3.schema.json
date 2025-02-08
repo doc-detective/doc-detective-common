@@ -32,6 +32,14 @@
         }
       },
       "required": ["goTo"]
+    },
+    {
+      "properties": {
+        "runShell": {
+          "$ref": "runShell_v3.schema.json#"
+        }
+      },
+      "required": ["runShell"]
     }
   ],
   "examples": [
