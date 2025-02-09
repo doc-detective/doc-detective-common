@@ -18,7 +18,7 @@
       "object": {
         "type": "object",
         "description": "Perform a native shell command.",
-        "required": ["action", "command"],
+        "required": ["command"],
         "additionalProperties": false,
         "properties": {
           "command": {

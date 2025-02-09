@@ -35,7 +35,7 @@ for (const [key, value] of Object.entries(schemas)) {
 }
 
 const compatibleSchemas = {
-  step_v3: ["goTo_v2", "checkLink_v2"],
+  step_v3: ["goTo_v2", "checkLink_v2", "runShell_v2"],
 };
 
 // Validate that `object` matches the specified JSON schema
@@ -59,8 +59,8 @@ function validate({ schemaKey = "", object = {}, addDefaults = true }) {
 
   if (check.errors) {
     // Check if the object is compatible with another schema
-    validationObject = JSON.parse(JSON.stringify(object));
     const matchedSchemaKey = compatibleSchemas[schemaKey].find((key) => {
+      validationObject = JSON.parse(JSON.stringify(object));
       const check = ajv.getSchema(key);
       if (check(validationObject)) return key;
     });
@@ -75,7 +75,7 @@ function validate({ schemaKey = "", object = {}, addDefaults = true }) {
         targetSchema: schemaKey,
         object: validationObject,
       });
-      
+
       result.valid = check(transformedObject);
       if (result.valid) {
         validationObject = transformedObject;
@@ -111,10 +111,7 @@ function transformToSchemaKey({
     return object;
   }
   // Check if the current schema is compatible with the target schema
-  const supportedTransformations = {
-    step_v3: ["goTo_v2", "checkLink_v2"],
-  };
-  if (!supportedTransformations[targetSchema].includes(currentSchema)) {
+  if (!compatibleSchemas[targetSchema].includes(currentSchema)) {
     throw new Error(
       `Can't transform from ${currentSchema} to ${targetSchema}.`
     );
@@ -135,6 +132,23 @@ function transformToSchemaKey({
         origin: object.origin,
         statusCodes: object.statusCodes,
       };
+    } else if (currentSchema === "runShell_v2") {
+      transformedObject.runShell = {
+        command: object.command,
+        args: object.args,
+        workingDirectory: object.workingDirectory,
+        exitCodes: object.exitCodes,
+        stdio: object.output,
+        path: object.savePath,
+        directory: object.saveDirectory,
+        maxVariation: object.maxVariation,
+        overwrite: object.overwrite = "byVariation" ? "aboveVariation" : object.overwrite,
+        timeout: object.timeout,
+      };
+      transformedObject.variables = {};
+      object.setVariables.forEach((variable) => {
+        transformedObject.variables[variable.name] = variable.value;
+      });
     }
   }
 
@@ -144,8 +158,15 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    action: "checkLink",
-    url: "https://www.example.com",
+    action: "runShell",
+    command: "docker run hello-world",
+    workingDirectory: ".",
+    exitCodes: [0],
+    output: "Hello from Docker!",
+    savePath: "docker-output.txt",
+    saveDirectory: "output",
+    maxVariation: 10,
+    overwrite: "byVariation",
   };
   result = validate({ schemaKey: "step_v3", object: example });
   console.log(result);

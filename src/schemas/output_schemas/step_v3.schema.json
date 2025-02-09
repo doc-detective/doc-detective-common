@@ -14,6 +14,26 @@
     "description": {
       "type": "string",
       "description": "Description of the step."
+    },
+    "outputs": {
+      "type": "object",
+      "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+      "patternProperties": {
+        "^[A-Za-z0-9_]+$": {
+          "type": "string",
+          "description": "Runtime expression for a user-defined output value."
+        }
+      }
+    },
+    "variables": {
+      "type": "object",
+      "description": "Environment variables to set from user-defined expressions.",
+      "patternProperties": {
+        "^[A-Za-z0-9_]+$": {
+          "type": "string",
+          "description": "Runtime expression for a user-defined output value."
+        }
+      }
     }
   },
   "anyOf": [
@@ -259,7 +279,6 @@
               "type": "object",
               "description": "Perform a native shell command.",
               "required": [
-                "action",
                 "command"
               ],
               "additionalProperties": false,
@@ -349,7 +368,6 @@
                 "type": "object",
                 "description": "Perform a native shell command.",
                 "required": [
-                  "action",
                   "command"
                 ],
                 "additionalProperties": false,

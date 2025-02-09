@@ -12,7 +12,6 @@
       "type": "object",
       "description": "Perform a native shell command.",
       "required": [
-        "action",
         "command"
       ],
       "additionalProperties": false,
@@ -102,7 +101,6 @@
         "type": "object",
         "description": "Perform a native shell command.",
         "required": [
-          "action",
           "command"
         ],
         "additionalProperties": false,
