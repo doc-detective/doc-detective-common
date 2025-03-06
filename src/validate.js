@@ -149,6 +149,8 @@ function transformToSchemaKey({
       object.setVariables.forEach((variable) => {
         transformedObject.variables[variable.name] = variable.value;
       });
+    } else if (currentSchema === "wait_v2") {
+      transformedObject.wait = object.duration
     }
   }
 
@@ -158,15 +160,8 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    action: "runShell",
-    command: "docker run hello-world",
-    workingDirectory: ".",
-    exitCodes: [0],
-    output: "Hello from Docker!",
-    savePath: "docker-output.txt",
-    saveDirectory: "output",
-    maxVariation: 10,
-    overwrite: "byVariation",
+    action: "wait",
+    duration: 1000
   };
   result = validate({ schemaKey: "step_v3", object: example });
   console.log(result);
