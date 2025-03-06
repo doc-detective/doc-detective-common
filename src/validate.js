@@ -35,7 +35,7 @@ for (const [key, value] of Object.entries(schemas)) {
 }
 
 const compatibleSchemas = {
-  step_v3: ["goTo_v2", "checkLink_v2", "runShell_v2"],
+  step_v3: ["goTo_v2", "checkLink_v2", "runShell_v2", "wait_v2"],
 };
 
 // Validate that `object` matches the specified JSON schema

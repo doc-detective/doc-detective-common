@@ -22,6 +22,7 @@ async function dereferenceSchemas() {
     "checkLink_v3.schema.json",
     "goTo_v3.schema.json",
     "runShell_v3.schema.json",
+    "wait_v3.schema.json",
     "checkLink_v2.schema.json",
     "config_v2.schema.json",
     "context_v2.schema.json",

@@ -62,6 +62,14 @@
         }
       },
       "required": ["runShell"]
+    },
+    {
+      "properties": {
+        "wait": {
+          "$ref": "wait_v3.schema.json#"
+        }
+      },
+      "required": ["wait"]
     }
   ],
   "examples": [
@@ -86,6 +94,9 @@
     },
     {
       "goTo": "https://www.google.com"
+    },
+    {
+      "wait": 5000
     }
   ]
 }
