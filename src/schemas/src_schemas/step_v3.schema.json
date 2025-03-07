@@ -73,6 +73,14 @@
     },
     {
       "properties": {
+        "type": {
+          "$ref": "type_v3.schema.json#"
+        }
+      },
+      "required": ["type"]
+    },
+    {
+      "properties": {
         "wait": {
           "$ref": "wait_v3.schema.json#"
         }

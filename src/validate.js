@@ -35,7 +35,14 @@ for (const [key, value] of Object.entries(schemas)) {
 }
 
 const compatibleSchemas = {
-  step_v3: ["goTo_v2", "checkLink_v2", "runShell_v2", "runCode_v2", "wait_v2"],
+  step_v3: [
+    "goTo_v2",
+    "checkLink_v2",
+    "runShell_v2",
+    "runCode_v2",
+    "typeKeys_v2",
+    "wait_v2",
+  ],
 };
 
 // Validate that `object` matches the specified JSON schema
@@ -173,27 +180,24 @@ function transformToSchemaKey({
         transformedObject.variables[variable.name] = variable.value;
       });
       // TODO: Handle v2 outputs
+    } else if (currentSchema === "typeKeys_v2") {
+      transformedObject.type = {
+        keys: object.keys,
+        inputDelay: object.delay,
+      };
     } else if (currentSchema === "wait_v2") {
       transformedObject.wait = object;
     }
   }
-
   return transformedObject;
 }
 
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    action: "runCode",
-    language: "python",
-    code: "print('Hello from Python')",
-    workingDirectory: ".",
-    exitCodes: [0],
-    output: "Hello from Python!",
-    savePath: "python-output.txt",
-    saveDirectory: "output",
-    maxVariation: 10,
-    overwrite: "byVariation",
+    action: "typeKeys",
+    keys: ["kittens", "$ENTER$"],
+    delay: 500,
   };
   result = validate({ schemaKey: "step_v3", object: example });
   console.log(result);
