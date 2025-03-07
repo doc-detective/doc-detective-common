@@ -42,6 +42,7 @@ const compatibleSchemas = {
     "runCode_v2",
     "typeKeys_v2",
     "saveScreenshot_v2",
+    "startRecording_v2",
     "stopRecording_v2",
     "wait_v2",
   ],
@@ -74,7 +75,7 @@ function validate({ schemaKey = "", object = {}, addDefaults = true }) {
       if (check(validationObject)) return key;
     });
     if (!matchedSchemaKey) {
-      result.errors = `Schema not found.`;
+      result.errors = `Invalid object`;
       result.object = object;
       result.valid = false;
       return result;
@@ -197,6 +198,12 @@ function transformToSchemaKey({
           : object.overwrite),
         crop: object.crop,
       };
+    } else if (currentSchema === "startRecording_v2") {
+      transformedObject.record = {
+        path: object.path,
+        directory: object.directory,
+        overwrite: object.overwrite,
+      };
     } else if (currentSchema === "stopRecording_v2") {
       transformedObject.stopRecord = true;
     } else if (currentSchema === "wait_v2") {
@@ -209,7 +216,12 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    action: "saveScreenshot",
+    screenshot: {
+      path: "image.png",
+      directory: "static/images",
+      maxVariation: 0.1,
+      overwrite: "aboveVariation"
+    },
   };
   result = validate({ schemaKey: "step_v3", object: example });
   console.log(JSON.stringify(result, null, 2));

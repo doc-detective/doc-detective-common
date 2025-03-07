@@ -89,6 +89,14 @@
     },
     {
       "properties": {
+        "record": {
+          "$ref": "record_v3.schema.json#"
+        }
+      },
+      "required": ["record"]
+    },
+    {
+      "properties": {
         "stopRecord": {
           "$ref": "stopRecord_v3.schema.json#"
         }
@@ -166,13 +174,7 @@
         "path": "image.png",
         "directory": "static/images",
         "maxVariation": 0.1,
-        "overwrite": "aboveVariation",
-        "crop": {
-          "top": 0,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
-        }
+        "overwrite": "aboveVariation"
       }
     },
     {
@@ -191,6 +193,19 @@
             "left": 0
           }
         }
+      }
+    },
+    { "record": true },
+    { "record": "video.mp4" },
+    { "record": "static/media/video.mp4" },
+    {
+      "record": "/User/manny/projects/doc-detective/static/media/video.mp4"
+    },
+    {
+      "record": {
+        "path": "image.png",
+        "directory": "static/media",
+        "overwrite": true
       }
     }
   ]

@@ -5,7 +5,7 @@
     {
       "description": "File path of the PNG file, relative to your media directory. Accepts absolute paths. If not specified, the file name is the ID of the step.",
       "type": "string",
-      "pattern": "(^.*$)",
+      "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
       "transform": [
         "trim"
       ]
@@ -16,11 +16,17 @@
         "path": {
           "type": "string",
           "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
-          "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
+          "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
+          "transform": [
+            "trim"
+          ]
         },
         "directory": {
           "type": "string",
-          "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory."
+          "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory.",
+          "transform": [
+            "trim"
+          ]
         },
         "maxVariation": {
           "type": "number",
@@ -119,7 +125,7 @@
       "string": {
         "description": "File path of the PNG file, relative to your media directory. Accepts absolute paths. If not specified, the file name is the ID of the step.",
         "type": "string",
-        "pattern": "(^.*$)",
+        "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
         "transform": [
           "trim"
         ]
@@ -130,11 +136,17 @@
           "path": {
             "type": "string",
             "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
-            "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
+            "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
+            "transform": [
+              "trim"
+            ]
           },
           "directory": {
             "type": "string",
-            "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory."
+            "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory.",
+            "transform": [
+              "trim"
+            ]
           },
           "maxVariation": {
             "type": "number",
@@ -322,13 +334,7 @@
       "path": "image.png",
       "directory": "static/images",
       "maxVariation": 0.1,
-      "overwrite": "aboveVariation",
-      "crop": {
-        "top": 0,
-        "right": 0,
-        "bottom": 0,
-        "left": 0
-      }
+      "overwrite": "byVariation"
     },
     {
       "path": "image.png",

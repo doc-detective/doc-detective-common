@@ -890,7 +890,7 @@
               {
                 "description": "File path of the PNG file, relative to your media directory. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                 "type": "string",
-                "pattern": "(^.*$)",
+                "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
                 "transform": [
                   "trim"
                 ]
@@ -901,11 +901,17 @@
                   "path": {
                     "type": "string",
                     "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
-                    "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
+                    "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
+                    "transform": [
+                      "trim"
+                    ]
                   },
                   "directory": {
                     "type": "string",
-                    "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory."
+                    "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory.",
+                    "transform": [
+                      "trim"
+                    ]
                   },
                   "maxVariation": {
                     "type": "number",
@@ -1004,7 +1010,7 @@
                 "string": {
                   "description": "File path of the PNG file, relative to your media directory. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                   "type": "string",
-                  "pattern": "(^.*$)",
+                  "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
                   "transform": [
                     "trim"
                   ]
@@ -1015,11 +1021,17 @@
                     "path": {
                       "type": "string",
                       "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
-                      "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
+                      "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
+                      "transform": [
+                        "trim"
+                      ]
                     },
                     "directory": {
                       "type": "string",
-                      "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory."
+                      "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory.",
+                      "transform": [
+                        "trim"
+                      ]
                     },
                     "maxVariation": {
                       "type": "number",
@@ -1207,13 +1219,7 @@
                 "path": "image.png",
                 "directory": "static/images",
                 "maxVariation": 0.1,
-                "overwrite": "aboveVariation",
-                "crop": {
-                  "top": 0,
-                  "right": 0,
-                  "bottom": 0,
-                  "left": 0
-                }
+                "overwrite": "byVariation"
               },
               {
                 "path": "image.png",
@@ -1236,6 +1242,125 @@
         },
         "required": [
           "screenshot"
+        ]
+      },
+      {
+        "properties": {
+          "record": {
+            "title": "record",
+            "type": "object",
+            "description": "Start recording the current browser viewport. Must be followed by a `stopRecord` step. Only runs in Chrome browsers when they are visible. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+                "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
+                "transform": [
+                  "trim"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+                    "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
+                    "transform": [
+                      "trim"
+                    ]
+                  },
+                  "directory": {
+                    "type": "string",
+                    "description": "Directory of the file. If the directory doesn't exist, creates the directory.",
+                    "transform": [
+                      "trim"
+                    ]
+                  },
+                  "overwrite": {
+                    "type": "string",
+                    "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+                    "enum": [
+                      "true",
+                      "false"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "boolean",
+                "nullable": true
+              }
+            ],
+            "components": {
+              "schemas": {
+                "string": {
+                  "type": "string",
+                  "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+                  "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
+                  "transform": [
+                    "trim"
+                  ]
+                },
+                "object": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+                      "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "directory": {
+                      "type": "string",
+                      "description": "Directory of the file. If the directory doesn't exist, creates the directory.",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "overwrite": {
+                      "type": "string",
+                      "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+                      "enum": [
+                        "true",
+                        "false"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+                "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)"
+              },
+              "directory": {
+                "type": "string",
+                "description": "Directory of the file. Attempts to create the directory if it doesn't exist."
+              },
+              "overwrite": {
+                "type": "boolean",
+                "description": "If `true`, overwrites the existing file at `path` if it exists.",
+                "default": false
+              }
+            },
+            "examples": [
+              true,
+              "results.mp4",
+              {
+                "path": "results.mp4",
+                "directory": "static/media",
+                "overwrite": true
+              }
+            ]
+          }
+        },
+        "required": [
+          "record"
         ]
       },
       {
@@ -1377,13 +1502,7 @@
           "path": "image.png",
           "directory": "static/images",
           "maxVariation": 0.1,
-          "overwrite": "aboveVariation",
-          "crop": {
-            "top": 0,
-            "right": 0,
-            "bottom": 0,
-            "left": 0
-          }
+          "overwrite": "aboveVariation"
         }
       },
       {
@@ -1402,6 +1521,25 @@
               "left": 0
             }
           }
+        }
+      },
+      {
+        "record": true
+      },
+      {
+        "record": "video.mp4"
+      },
+      {
+        "record": "static/media/video.mp4"
+      },
+      {
+        "record": "/User/manny/projects/doc-detective/static/media/video.mp4"
+      },
+      {
+        "record": {
+          "path": "image.png",
+          "directory": "static/media",
+          "overwrite": true
         }
       }
     ]
@@ -2219,7 +2357,7 @@
       {
         "description": "File path of the PNG file, relative to your media directory. Accepts absolute paths. If not specified, the file name is the ID of the step.",
         "type": "string",
-        "pattern": "(^.*$)",
+        "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
         "transform": [
           "trim"
         ]
@@ -2230,11 +2368,17 @@
           "path": {
             "type": "string",
             "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
-            "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
+            "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
+            "transform": [
+              "trim"
+            ]
           },
           "directory": {
             "type": "string",
-            "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory."
+            "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory.",
+            "transform": [
+              "trim"
+            ]
           },
           "maxVariation": {
             "type": "number",
@@ -2333,7 +2477,7 @@
         "string": {
           "description": "File path of the PNG file, relative to your media directory. Accepts absolute paths. If not specified, the file name is the ID of the step.",
           "type": "string",
-          "pattern": "(^.*$)",
+          "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
           "transform": [
             "trim"
           ]
@@ -2344,11 +2488,17 @@
             "path": {
               "type": "string",
               "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
-              "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
+              "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
+              "transform": [
+                "trim"
+              ]
             },
             "directory": {
               "type": "string",
-              "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory."
+              "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory.",
+              "transform": [
+                "trim"
+              ]
             },
             "maxVariation": {
               "type": "number",
@@ -2536,13 +2686,7 @@
         "path": "image.png",
         "directory": "static/images",
         "maxVariation": 0.1,
-        "overwrite": "aboveVariation",
-        "crop": {
-          "top": 0,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
-        }
+        "overwrite": "byVariation"
       },
       {
         "path": "image.png",
@@ -2559,6 +2703,118 @@
             "left": 0
           }
         }
+      }
+    ]
+  },
+  "record_v3": {
+    "title": "record",
+    "type": "object",
+    "description": "Start recording the current browser viewport. Must be followed by a `stopRecord` step. Only runs in Chrome browsers when they are visible. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
+    "anyOf": [
+      {
+        "type": "string",
+        "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+        "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
+        "transform": [
+          "trim"
+        ]
+      },
+      {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+            "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
+            "transform": [
+              "trim"
+            ]
+          },
+          "directory": {
+            "type": "string",
+            "description": "Directory of the file. If the directory doesn't exist, creates the directory.",
+            "transform": [
+              "trim"
+            ]
+          },
+          "overwrite": {
+            "type": "string",
+            "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+            "enum": [
+              "true",
+              "false"
+            ]
+          }
+        }
+      },
+      {
+        "type": "boolean",
+        "nullable": true
+      }
+    ],
+    "components": {
+      "schemas": {
+        "string": {
+          "type": "string",
+          "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+          "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
+          "transform": [
+            "trim"
+          ]
+        },
+        "object": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+              "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
+              "transform": [
+                "trim"
+              ]
+            },
+            "directory": {
+              "type": "string",
+              "description": "Directory of the file. If the directory doesn't exist, creates the directory.",
+              "transform": [
+                "trim"
+              ]
+            },
+            "overwrite": {
+              "type": "string",
+              "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
+        "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)"
+      },
+      "directory": {
+        "type": "string",
+        "description": "Directory of the file. Attempts to create the directory if it doesn't exist."
+      },
+      "overwrite": {
+        "type": "boolean",
+        "description": "If `true`, overwrites the existing file at `path` if it exists.",
+        "default": false
+      }
+    },
+    "examples": [
+      true,
+      "results.mp4",
+      {
+        "path": "results.mp4",
+        "directory": "static/media",
+        "overwrite": true
       }
     ]
   },
