@@ -337,7 +337,7 @@
                   "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
                   "default": 0,
                   "minimum": 0,
-                  "maximum": 100
+                  "maximum": 1
                 },
                 "overwrite": {
                   "type": "string",
@@ -347,7 +347,7 @@
                     "false",
                     "aboveVariation"
                   ],
-                  "default": "false"
+                  "default": "aboveVariation"
                 },
                 "timeout": {
                   "type": "integer",
@@ -424,7 +424,7 @@
                     "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
                     "default": 0,
                     "minimum": 0,
-                    "maximum": 100
+                    "maximum": 1
                   },
                   "overwrite": {
                     "type": "string",
@@ -434,7 +434,7 @@
                       "false",
                       "aboveVariation"
                     ],
-                    "default": "false"
+                    "default": "aboveVariation"
                   },
                   "timeout": {
                     "type": "integer",
@@ -579,7 +579,7 @@
                   "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
                   "default": 0,
                   "minimum": 0,
-                  "maximum": 100
+                  "maximum": 1
                 },
                 "overwrite": {
                   "type": "string",
@@ -589,7 +589,7 @@
                     "false",
                     "aboveVariation"
                   ],
-                  "default": "false"
+                  "default": "aboveVariation"
                 },
                 "timeout": {
                   "type": "integer",
@@ -669,7 +669,7 @@
                     "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
                     "default": 0,
                     "minimum": 0,
-                    "maximum": 100
+                    "maximum": 1
                   },
                   "overwrite": {
                     "type": "string",
@@ -679,7 +679,7 @@
                       "false",
                       "aboveVariation"
                     ],
-                    "default": "false"
+                    "default": "aboveVariation"
                   },
                   "timeout": {
                     "type": "integer",
@@ -882,6 +882,363 @@
     },
     {
       "properties": {
+        "screenshot": {
+          "title": "screenshot",
+          "description": "Takes a screenshot in PNG format.",
+          "anyOf": [
+            {
+              "description": "File path of the PNG file, relative to your media directory. Accepts absolute paths. If not specified, the file name is the ID of the step.",
+              "type": "string",
+              "pattern": "(^.*$)",
+              "transform": [
+                "trim"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
+                  "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
+                },
+                "directory": {
+                  "type": "string",
+                  "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory."
+                },
+                "maxVariation": {
+                  "type": "number",
+                  "description": "Allowed variation in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `maxVariation`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
+                  "default": 0.05,
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "overwrite": {
+                  "type": "string",
+                  "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+                  "enum": [
+                    "true",
+                    "false",
+                    "aboveVariation"
+                  ],
+                  "default": "aboveVariation"
+                },
+                "crop": {
+                  "anyOf": [
+                    {
+                      "title": "Crop by element",
+                      "type": "string",
+                      "description": "Display text or selector of the element to screenshot."
+                    },
+                    {
+                      "title": "Crop by element (detailed)",
+                      "type": "object",
+                      "description": "Crop the screenshot to a specific element.",
+                      "additionalProperties": false,
+                      "properties": {
+                        "selector": {
+                          "type": "string",
+                          "description": "Selector of the element to screenshot."
+                        },
+                        "elementText": {
+                          "type": "string",
+                          "description": "Display text of the element to screenshot."
+                        },
+                        "padding": {
+                          "anyOf": [
+                            {
+                              "type": "number",
+                              "description": "Padding in pixels to add to the bounds of the element.",
+                              "minimum": 0
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "top": {
+                                  "type": "number",
+                                  "minimum": 0
+                                },
+                                "right": {
+                                  "type": "number",
+                                  "minimum": 0
+                                },
+                                "bottom": {
+                                  "type": "number",
+                                  "minimum": 0
+                                },
+                                "left": {
+                                  "type": "number",
+                                  "minimum": 0
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "anyOf": [
+                        {
+                          "required": [
+                            "selector"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "elementText"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "boolean",
+              "nullable": true
+            }
+          ],
+          "components": {
+            "schemas": {
+              "string": {
+                "description": "File path of the PNG file, relative to your media directory. Accepts absolute paths. If not specified, the file name is the ID of the step.",
+                "type": "string",
+                "pattern": "(^.*$)",
+                "transform": [
+                  "trim"
+                ]
+              },
+              "object": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
+                    "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)"
+                  },
+                  "directory": {
+                    "type": "string",
+                    "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory."
+                  },
+                  "maxVariation": {
+                    "type": "number",
+                    "description": "Allowed variation in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `maxVariation`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
+                    "default": 0.05,
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "overwrite": {
+                    "type": "string",
+                    "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+                    "enum": [
+                      "true",
+                      "false",
+                      "aboveVariation"
+                    ],
+                    "default": "aboveVariation"
+                  },
+                  "crop": {
+                    "anyOf": [
+                      {
+                        "title": "Crop by element",
+                        "type": "string",
+                        "description": "Display text or selector of the element to screenshot."
+                      },
+                      {
+                        "title": "Crop by element (detailed)",
+                        "type": "object",
+                        "description": "Crop the screenshot to a specific element.",
+                        "additionalProperties": false,
+                        "properties": {
+                          "selector": {
+                            "type": "string",
+                            "description": "Selector of the element to screenshot."
+                          },
+                          "elementText": {
+                            "type": "string",
+                            "description": "Display text of the element to screenshot."
+                          },
+                          "padding": {
+                            "anyOf": [
+                              {
+                                "type": "number",
+                                "description": "Padding in pixels to add to the bounds of the element.",
+                                "minimum": 0
+                              },
+                              {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "top": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  },
+                                  "right": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  },
+                                  "bottom": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  },
+                                  "left": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "anyOf": [
+                          {
+                            "required": [
+                              "selector"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "elementText"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "crop_element": {
+                "title": "Crop by element (detailed)",
+                "type": "object",
+                "description": "Crop the screenshot to a specific element.",
+                "additionalProperties": false,
+                "properties": {
+                  "selector": {
+                    "type": "string",
+                    "description": "Selector of the element to screenshot."
+                  },
+                  "elementText": {
+                    "type": "string",
+                    "description": "Display text of the element to screenshot."
+                  },
+                  "padding": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "description": "Padding in pixels to add to the bounds of the element.",
+                        "minimum": 0
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "top": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "right": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "bottom": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "left": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": [
+                      "selector"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "elementText"
+                    ]
+                  }
+                ]
+              },
+              "padding": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "top": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "right": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "bottom": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "left": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          },
+          "examples": [
+            true,
+            "image.png",
+            "static/images/image.png",
+            "/User/manny/projects/doc-detective/static/images/image.png",
+            {
+              "path": "image.png",
+              "directory": "static/images",
+              "maxVariation": 0.1,
+              "overwrite": "aboveVariation",
+              "crop": "#elementToScreenshot"
+            },
+            {
+              "path": "image.png",
+              "directory": "static/images",
+              "maxVariation": 0.1,
+              "overwrite": "aboveVariation",
+              "crop": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            },
+            {
+              "path": "image.png",
+              "directory": "static/images",
+              "maxVariation": 0.1,
+              "overwrite": "aboveVariation",
+              "crop": {
+                "selector": "#elementToScreenshot",
+                "elementText": "Element text",
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            }
+          ]
+        }
+      },
+      "required": [
+        "screenshot"
+      ]
+    },
+    {
+      "properties": {
         "stopRecord": {
           "$schema": "http://json-schema.org/draft-07/schema#",
           "title": "stopRecord",
@@ -988,6 +1345,62 @@
         "directory": "output",
         "maxVariation": 10,
         "overwrite": "aboveVariation"
+      }
+    },
+    {
+      "stopRecord": true
+    },
+    {
+      "screenshot": true
+    },
+    {
+      "screenshot": "image.png"
+    },
+    {
+      "screenshot": "static/images/image.png"
+    },
+    {
+      "screenshot": "/User/manny/projects/doc-detective/static/images/image.png"
+    },
+    {
+      "screenshot": {
+        "path": "image.png",
+        "directory": "static/images",
+        "maxVariation": 0.1,
+        "overwrite": "aboveVariation",
+        "crop": "#elementToScreenshot"
+      }
+    },
+    {
+      "screenshot": {
+        "path": "image.png",
+        "directory": "static/images",
+        "maxVariation": 0.1,
+        "overwrite": "aboveVariation",
+        "crop": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      }
+    },
+    {
+      "screenshot": {
+        "path": "image.png",
+        "directory": "static/images",
+        "maxVariation": 0.1,
+        "overwrite": "aboveVariation",
+        "crop": {
+          "selector": "#elementToScreenshot",
+          "elementText": "Element text",
+          "padding": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          }
+        }
       }
     }
   ]

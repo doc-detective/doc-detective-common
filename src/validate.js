@@ -41,6 +41,7 @@ const compatibleSchemas = {
     "runShell_v2",
     "runCode_v2",
     "typeKeys_v2",
+    "saveScreenshot_v2",
     "stopRecording_v2",
     "wait_v2",
   ],
@@ -186,6 +187,16 @@ function transformToSchemaKey({
         keys: object.keys,
         inputDelay: object.delay,
       };
+    } else if (currentSchema === "saveScreenshot_v2") {
+      transformedObject.screenshot = {
+        path: object.path,
+        directory: object.directory,
+        maxVariation: object.maxVariation / 100,
+        overwrite: (object.overwrite = "byVariation"
+          ? "aboveVariation"
+          : object.overwrite),
+        crop: object.crop,
+      };
     } else if (currentSchema === "stopRecording_v2") {
       transformedObject.stopRecord = true;
     } else if (currentSchema === "wait_v2") {
@@ -198,8 +209,8 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    action: "stopRecording",
+    action: "saveScreenshot",
   };
   result = validate({ schemaKey: "step_v3", object: example });
-  console.log(result);
+  console.log(JSON.stringify(result, null, 2));
 }

@@ -81,6 +81,14 @@
     },
     {
       "properties": {
+        "screenshot": {
+          "$ref": "screenshot_v3.schema.json#"
+        }
+      },
+      "required": ["screenshot"]
+    },
+    {
+      "properties": {
         "stopRecord": {
           "$ref": "stopRecord_v3.schema.json#"
         }
@@ -133,6 +141,56 @@
         "directory": "output",
         "maxVariation": 10,
         "overwrite": "aboveVariation"
+      }
+    },
+    {
+      "stopRecord": true
+    },
+    { "screenshot": true },
+    { "screenshot": "image.png" },
+    { "screenshot": "static/images/image.png" },
+    {
+      "screenshot": "/User/manny/projects/doc-detective/static/images/image.png"
+    },
+    {
+      "screenshot": {
+        "path": "image.png",
+        "directory": "static/images",
+        "maxVariation": 0.1,
+        "overwrite": "aboveVariation",
+        "crop": "#elementToScreenshot"
+      }
+    },
+    {
+      "screenshot": {
+        "path": "image.png",
+        "directory": "static/images",
+        "maxVariation": 0.1,
+        "overwrite": "aboveVariation",
+        "crop": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      }
+    },
+    {
+      "screenshot": {
+        "path": "image.png",
+        "directory": "static/images",
+        "maxVariation": 0.1,
+        "overwrite": "aboveVariation",
+        "crop": {
+          "selector": "#elementToScreenshot",
+          "elementText": "Element text",
+          "padding": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          }
+        }
       }
     }
   ]

@@ -68,13 +68,13 @@
             "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
             "default": 0,
             "minimum": 0,
-            "maximum": 100
+            "maximum": 1
           },
           "overwrite": {
             "type": "string",
             "description": "If `true`, overwrites the existing output at `path` if it exists.\nIf `aboveVariation`, overwrites the existing output at `path` if the difference between the new output and the existing output is greater than `maxVariation`.",
             "enum": ["true", "false", "aboveVariation"],
-            "default": "false"
+            "default": "aboveVariation"
           },
           "timeout": {
             "type": "integer",
