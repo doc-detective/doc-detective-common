@@ -1,24 +1,27 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "runShell",
-  "description": "Perform a native shell command.",
+  "title": "runCode",
+  "description": "Assemble and run code.",
   "anyOf": [
-    {
-      "type": "string",
-      "transform": [
-        "trim"
-      ]
-    },
     {
       "type": "object",
       "required": [
-        "command"
+        "code",
+        "language"
       ],
-      "additionalProperties": false,
       "properties": {
-        "command": {
+        "language": {
           "type": "string",
-          "description": "Command to perform in the machine's default shell."
+          "description": "Language of the code to run. If not specified, the code is run in the shell.",
+          "enum": [
+            "python",
+            "bash",
+            "javascript"
+          ]
+        },
+        "code": {
+          "description": "Code to run.",
+          "type": "string"
         },
         "args": {
           "type": "array",
@@ -53,7 +56,7 @@
         },
         "stdio": {
           "type": "string",
-          "description": "Content expected in the command's stdout or stderr. If the expected content can't be found in the command's stdout or stderr, the step fails. Supports strings and regular expressions. To use a regular expression, the string must start and end with a forward slash, like in `/^hello-world.*/`."
+          "description": "Content expected in the command's output. If the expected content can't be found in the command's output (either stdout or stderr), the step fails. Supports strings and regular expressions. To use a regular expression, the string must start and end with a forward slash, like in `/^hello-world.*/`."
         },
         "path": {
           "type": "string",
@@ -90,22 +93,25 @@
   ],
   "components": {
     "schemas": {
-      "string": {
-        "type": "string",
-        "transform": [
-          "trim"
-        ]
-      },
       "object": {
         "type": "object",
         "required": [
-          "command"
+          "code",
+          "language"
         ],
-        "additionalProperties": false,
         "properties": {
-          "command": {
+          "language": {
             "type": "string",
-            "description": "Command to perform in the machine's default shell."
+            "description": "Language of the code to run. If not specified, the code is run in the shell.",
+            "enum": [
+              "python",
+              "bash",
+              "javascript"
+            ]
+          },
+          "code": {
+            "description": "Code to run.",
+            "type": "string"
           },
           "args": {
             "type": "array",
@@ -140,7 +146,7 @@
           },
           "stdio": {
             "type": "string",
-            "description": "Content expected in the command's stdout or stderr. If the expected content can't be found in the command's stdout or stderr, the step fails. Supports strings and regular expressions. To use a regular expression, the string must start and end with a forward slash, like in `/^hello-world.*/`."
+            "description": "Content expected in the command's output. If the expected content can't be found in the command's output (either stdout or stderr), the step fails. Supports strings and regular expressions. To use a regular expression, the string must start and end with a forward slash, like in `/^hello-world.*/`."
           },
           "path": {
             "type": "string",
@@ -177,23 +183,13 @@
     }
   },
   "examples": [
-    "docker run hello-world",
     {
-      "command": "echo",
-      "args": [
-        "$USER"
-      ]
+      "language": "javascript",
+      "code": "console.log('Hello, ${process.env.USER}!');"
     },
     {
-      "command": "echo",
-      "args": [
-        "hello-world"
-      ],
-      "id": "ddec5e20-2e81-4f38-867c-92c8d9516755",
-      "description": "This is a test!"
-    },
-    {
-      "command": "docker run hello-world",
+      "language": "bash",
+      "code": "docker run hello-world",
       "timeout": 20000,
       "exitCodes": [
         0
@@ -201,30 +197,22 @@
       "output": "Hello from Docker!"
     },
     {
-      "command": "false",
+      "language": "javascript",
+      "code": "return false",
       "exitCodes": [
         1
       ]
     },
     {
-      "command": "echo",
-      "args": [
-        "setup"
-      ],
-      "exitCodes": [
-        0
-      ],
-      "output": "/.*?/"
-    },
-    {
-      "command": "docker run hello-world",
+      "language": "python",
+      "code": "print('Hello from Python')",
       "workingDirectory": ".",
       "exitCodes": [
         0
       ],
-      "output": "Hello from Docker!",
-      "path": "docker-output.txt",
-      "saveDirectory": "output",
+      "output": "Hello from Python!",
+      "path": "python-output.txt",
+      "directory": "output",
       "maxVariation": 10,
       "overwrite": "aboveVariation"
     }

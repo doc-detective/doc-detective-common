@@ -35,7 +35,7 @@ for (const [key, value] of Object.entries(schemas)) {
 }
 
 const compatibleSchemas = {
-  step_v3: ["goTo_v2", "checkLink_v2", "runShell_v2", "wait_v2"],
+  step_v3: ["goTo_v2", "checkLink_v2", "runShell_v2", "runCode_v2", "wait_v2"],
 };
 
 // Validate that `object` matches the specified JSON schema
@@ -142,15 +142,39 @@ function transformToSchemaKey({
         path: object.savePath,
         directory: object.saveDirectory,
         maxVariation: object.maxVariation,
-        overwrite: object.overwrite = "byVariation" ? "aboveVariation" : object.overwrite,
+        overwrite: (object.overwrite = "byVariation"
+          ? "aboveVariation"
+          : object.overwrite),
         timeout: object.timeout,
       };
       transformedObject.variables = {};
       object.setVariables.forEach((variable) => {
         transformedObject.variables[variable.name] = variable.value;
       });
+      // TODO: Handle v2 outputs
+    } else if (currentSchema === "runCode_v2") {
+      transformedObject.runCode = {
+        language: object.language,
+        code: object.code,
+        args: object.args,
+        workingDirectory: object.workingDirectory,
+        exitCodes: object.exitCodes,
+        stdio: object.output,
+        path: object.savePath,
+        directory: object.saveDirectory,
+        maxVariation: object.maxVariation,
+        overwrite: (object.overwrite = "byVariation"
+          ? "aboveVariation"
+          : object.overwrite),
+        timeout: object.timeout,
+      };
+      transformedObject.variables = {};
+      object.setVariables.forEach((variable) => {
+        transformedObject.variables[variable.name] = variable.value;
+      });
+      // TODO: Handle v2 outputs
     } else if (currentSchema === "wait_v2") {
-      transformedObject.wait = object.duration
+      transformedObject.wait = object;
     }
   }
 
@@ -160,8 +184,16 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    action: "wait",
-    duration: 1000
+    action: "runCode",
+    language: "python",
+    code: "print('Hello from Python')",
+    workingDirectory: ".",
+    exitCodes: [0],
+    output: "Hello from Python!",
+    savePath: "python-output.txt",
+    saveDirectory: "output",
+    maxVariation: 10,
+    overwrite: "byVariation",
   };
   result = validate({ schemaKey: "step_v3", object: example });
   console.log(result);
