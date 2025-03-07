@@ -81,6 +81,14 @@
     },
     {
       "properties": {
+        "endRecord": {
+          "$ref": "endRecord_v3.schema.json#"
+        }
+      },
+      "required": ["endRecord"]
+    },
+    {
+      "properties": {
         "wait": {
           "$ref": "wait_v3.schema.json#"
         }

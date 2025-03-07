@@ -41,6 +41,7 @@ const compatibleSchemas = {
     "runShell_v2",
     "runCode_v2",
     "typeKeys_v2",
+    "stopRecording_v2",
     "wait_v2",
   ],
 };
@@ -185,6 +186,8 @@ function transformToSchemaKey({
         keys: object.keys,
         inputDelay: object.delay,
       };
+    } else if (currentSchema === "stopRecording_v2") {
+      transformedObject.endRecord = true;
     } else if (currentSchema === "wait_v2") {
       transformedObject.wait = object;
     }
@@ -195,9 +198,7 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    action: "typeKeys",
-    keys: ["kittens", "$ENTER$"],
-    delay: 500,
+    action: "stopRecording",
   };
   result = validate({ schemaKey: "step_v3", object: example });
   console.log(result);
