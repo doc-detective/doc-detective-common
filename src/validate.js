@@ -187,7 +187,7 @@ function transformToSchemaKey({
         inputDelay: object.delay,
       };
     } else if (currentSchema === "stopRecording_v2") {
-      transformedObject.endRecord = true;
+      transformedObject.stopRecord = true;
     } else if (currentSchema === "wait_v2") {
       transformedObject.wait = object;
     }

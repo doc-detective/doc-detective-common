@@ -882,9 +882,9 @@
     },
     {
       "properties": {
-        "endRecord": {
+        "stopRecord": {
           "$schema": "http://json-schema.org/draft-07/schema#",
-          "title": "endRecord",
+          "title": "stopRecord",
           "description": "Stop the current recording.",
           "anyOf": [
             {
@@ -898,7 +898,7 @@
         }
       },
       "required": [
-        "endRecord"
+        "stopRecord"
       ]
     },
     {

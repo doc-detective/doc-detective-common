@@ -81,11 +81,11 @@
     },
     {
       "properties": {
-        "endRecord": {
-          "$ref": "endRecord_v3.schema.json#"
+        "stopRecord": {
+          "$ref": "stopRecord_v3.schema.json#"
         }
       },
-      "required": ["endRecord"]
+      "required": ["stopRecord"]
     },
     {
       "properties": {
