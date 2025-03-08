@@ -1246,7 +1246,6 @@
         "properties": {
           "record": {
             "title": "record",
-            "type": "object",
             "description": "Start recording the current browser viewport. Must be followed by a `stopRecord` step. Only runs in Chrome browsers when they are visible. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
             "anyOf": [
               {
@@ -1464,7 +1463,7 @@
           "exitCodes": [
             0
           ],
-          "output": "Hello from Python!",
+          "stdio": "Hello from Python!",
           "path": "python-output.txt",
           "directory": "output",
           "maxVariation": 0.1,
@@ -2704,7 +2703,6 @@
   },
   "record_v3": {
     "title": "record",
-    "type": "object",
     "description": "Start recording the current browser viewport. Must be followed by a `stopRecord` step. Only runs in Chrome browsers when they are visible. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
     "anyOf": [
       {

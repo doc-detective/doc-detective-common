@@ -144,7 +144,7 @@
         "code": "print('Hello from Python')",
         "workingDirectory": ".",
         "exitCodes": [0],
-        "output": "Hello from Python!",
+        "stdio": "Hello from Python!",
         "path": "python-output.txt",
         "directory": "output",
         "maxVariation": 0.1,

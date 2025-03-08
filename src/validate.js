@@ -228,17 +228,7 @@ function transformToSchemaKey({
 
 // If called directly, validate an example object
 if (require.main === module) {
-  const example = {
-    language: "python",
-    code: "print('Hello from Python')",
-    workingDirectory: ".",
-    exitCodes: [0],
-    stdio: "Hello from Python!",
-    path: "python-output.txt",
-    directory: "output",
-    maxVariation: 0.1,
-    overwrite: "aboveVariation",
-  };
-  const result = validate({ schemaKey: "runCode_v3", object: example });
+  const example = true;
+  const result = validate({ schemaKey: "record_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }
