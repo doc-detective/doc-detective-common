@@ -36,14 +36,15 @@ for (const [key, value] of Object.entries(schemas)) {
 
 const compatibleSchemas = {
   step_v3: [
-    "goTo_v2",
     "checkLink_v2",
+    "goTo_v2",
     "runShell_v2",
     "runCode_v2",
-    "typeKeys_v2",
     "saveScreenshot_v2",
+    "setVariables_v2",
     "startRecording_v2",
     "stopRecording_v2",
+    "typeKeys_v2",
     "wait_v2",
   ],
 };
@@ -196,6 +197,8 @@ function transformToSchemaKey({
         transformedObject.variables[variable.name] = variable.value;
       });
       // TODO: Handle v2 outputs
+    } else if (currentSchema === "setVariables_v2") {
+      transformedObject.loadVariables = object.path;
     } else if (currentSchema === "typeKeys_v2") {
       transformedObject.type = {
         keys: object.keys,
@@ -228,7 +231,10 @@ function transformToSchemaKey({
 
 // If called directly, validate an example object
 if (require.main === module) {
-  const example = true;
-  const result = validate({ schemaKey: "record_v3", object: example });
+  const example = {
+    "action": "setVariables",
+    "path": ".env"
+  };
+  const result = validate({ schemaKey: "step_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }

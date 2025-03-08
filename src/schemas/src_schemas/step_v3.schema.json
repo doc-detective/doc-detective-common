@@ -40,76 +40,84 @@
   },
   "anyOf": [
     {
+      "required": ["checkLink"],
       "properties": {
         "checkLink": {
           "$ref": "checkLink_v3.schema.json#"
         }
-      },
-      "required": ["checkLink"]
+      }
     },
     {
+      "required": ["goTo"],
       "properties": {
         "goTo": {
           "$ref": "goTo_v3.schema.json#"
         }
-      },
-      "required": ["goTo"]
+      }
     },
     {
+      "required": ["runShell"],
       "properties": {
         "runShell": {
           "$ref": "runShell_v3.schema.json#"
         }
-      },
-      "required": ["runShell"]
+      }
     },
     {
+      "required": ["runCode"],
       "properties": {
         "runCode": {
           "$ref": "runCode_v3.schema.json#"
         }
-      },
-      "required": ["runCode"]
+      }
     },
     {
+      "required": ["type"],
       "properties": {
         "type": {
           "$ref": "type_v3.schema.json#"
         }
-      },
-      "required": ["type"]
+      }
     },
     {
+      "required": ["screenshot"],
       "properties": {
         "screenshot": {
           "$ref": "screenshot_v3.schema.json#"
         }
-      },
-      "required": ["screenshot"]
+      }
     },
     {
+      "required": ["record"],
       "properties": {
         "record": {
           "$ref": "record_v3.schema.json#"
         }
-      },
-      "required": ["record"]
+      }
     },
     {
+      "required": ["stopRecord"],
       "properties": {
         "stopRecord": {
           "$ref": "stopRecord_v3.schema.json#"
         }
-      },
-      "required": ["stopRecord"]
+      }
     },
     {
+      "required": ["loadVariables"],
+      "properties": {
+        "loadVariables": {
+          "$ref": "loadVariables_v3.schema.json#"
+        }
+      }
+    },
+    {
+      "required": ["wait"],
       "properties": {
         "wait": {
           "$ref": "wait_v3.schema.json#"
         }
-      },
-      "required": ["wait"]
+      }
     }
   ],
   "examples": [
@@ -207,6 +215,7 @@
         "directory": "static/media",
         "overwrite": true
       }
-    }
+    },
+    { "loadVariables": "variables.env" }
   ]
 }

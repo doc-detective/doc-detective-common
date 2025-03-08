@@ -40,6 +40,9 @@
   },
   "anyOf": [
     {
+      "required": [
+        "checkLink"
+      ],
       "properties": {
         "checkLink": {
           "$schema": "http://json-schema.org/draft-07/schema#",
@@ -166,12 +169,12 @@
             }
           ]
         }
-      },
-      "required": [
-        "checkLink"
-      ]
+      }
     },
     {
+      "required": [
+        "goTo"
+      ],
       "properties": {
         "goTo": {
           "$schema": "http://json-schema.org/draft-07/schema#",
@@ -260,12 +263,12 @@
             }
           ]
         }
-      },
-      "required": [
-        "goTo"
-      ]
+      }
     },
     {
+      "required": [
+        "runShell"
+      ],
       "properties": {
         "runShell": {
           "$schema": "http://json-schema.org/draft-07/schema#",
@@ -497,12 +500,12 @@
             }
           ]
         }
-      },
-      "required": [
-        "runShell"
-      ]
+      }
     },
     {
+      "required": [
+        "runCode"
+      ],
       "properties": {
         "runCode": {
           "$schema": "http://json-schema.org/draft-07/schema#",
@@ -724,12 +727,12 @@
             }
           ]
         }
-      },
-      "required": [
-        "runCode"
-      ]
+      }
     },
     {
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "$schema": "http://json-schema.org/draft-07/schema#",
@@ -873,14 +876,15 @@
             }
           ]
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     {
+      "required": [
+        "screenshot"
+      ],
       "properties": {
         "screenshot": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
           "title": "screenshot",
           "description": "Takes a screenshot in PNG format.",
           "anyOf": [
@@ -1236,14 +1240,15 @@
             }
           ]
         }
-      },
-      "required": [
-        "screenshot"
-      ]
+      }
     },
     {
+      "required": [
+        "record"
+      ],
       "properties": {
         "record": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
           "title": "record",
           "description": "Start recording the current browser viewport. Must be followed by a `stopRecord` step. Only runs in Chrome browsers when they are visible. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
           "anyOf": [
@@ -1354,12 +1359,12 @@
             }
           ]
         }
-      },
-      "required": [
-        "record"
-      ]
+      }
     },
     {
+      "required": [
+        "stopRecord"
+      ],
       "properties": {
         "stopRecord": {
           "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1375,12 +1380,28 @@
             true
           ]
         }
-      },
-      "required": [
-        "stopRecord"
-      ]
+      }
     },
     {
+      "required": [
+        "loadVariables"
+      ],
+      "properties": {
+        "loadVariables": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "loadVariables",
+          "type": "string",
+          "description": "Load environment variables from the specified `.env` file.",
+          "examples": [
+            ".env"
+          ]
+        }
+      }
+    },
+    {
+      "required": [
+        "wait"
+      ],
       "properties": {
         "wait": {
           "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1420,10 +1441,7 @@
             true
           ]
         }
-      },
-      "required": [
-        "wait"
-      ]
+      }
     }
   ],
   "examples": [
@@ -1537,6 +1555,9 @@
         "directory": "static/media",
         "overwrite": true
       }
+    },
+    {
+      "loadVariables": "variables.env"
     }
   ]
 }
