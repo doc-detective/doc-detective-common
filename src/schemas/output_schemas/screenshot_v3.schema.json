@@ -58,14 +58,26 @@
               "type": "object",
               "description": "Crop the screenshot to a specific element.",
               "additionalProperties": false,
-              "properties": {
-                "selector": {
-                  "type": "string",
-                  "description": "Selector of the element to screenshot."
+              "anyOf": [
+                {
+                  "required": [
+                    "selector"
+                  ]
                 },
+                {
+                  "required": [
+                    "elementText"
+                  ]
+                }
+              ],
+              "properties": {
                 "elementText": {
                   "type": "string",
                   "description": "Display text of the element to screenshot."
+                },
+                "selector": {
+                  "type": "string",
+                  "description": "Selector of the element to screenshot."
                 },
                 "padding": {
                   "anyOf": [
@@ -98,19 +110,7 @@
                     }
                   ]
                 }
-              },
-              "anyOf": [
-                {
-                  "required": [
-                    "selector"
-                  ]
-                },
-                {
-                  "required": [
-                    "elementText"
-                  ]
-                }
-              ]
+              }
             }
           ]
         }
@@ -178,14 +178,26 @@
                 "type": "object",
                 "description": "Crop the screenshot to a specific element.",
                 "additionalProperties": false,
-                "properties": {
-                  "selector": {
-                    "type": "string",
-                    "description": "Selector of the element to screenshot."
+                "anyOf": [
+                  {
+                    "required": [
+                      "selector"
+                    ]
                   },
+                  {
+                    "required": [
+                      "elementText"
+                    ]
+                  }
+                ],
+                "properties": {
                   "elementText": {
                     "type": "string",
                     "description": "Display text of the element to screenshot."
+                  },
+                  "selector": {
+                    "type": "string",
+                    "description": "Selector of the element to screenshot."
                   },
                   "padding": {
                     "anyOf": [
@@ -218,19 +230,7 @@
                       }
                     ]
                   }
-                },
-                "anyOf": [
-                  {
-                    "required": [
-                      "selector"
-                    ]
-                  },
-                  {
-                    "required": [
-                      "elementText"
-                    ]
-                  }
-                ]
+                }
               }
             ]
           }
@@ -241,14 +241,26 @@
         "type": "object",
         "description": "Crop the screenshot to a specific element.",
         "additionalProperties": false,
-        "properties": {
-          "selector": {
-            "type": "string",
-            "description": "Selector of the element to screenshot."
+        "anyOf": [
+          {
+            "required": [
+              "selector"
+            ]
           },
+          {
+            "required": [
+              "elementText"
+            ]
+          }
+        ],
+        "properties": {
           "elementText": {
             "type": "string",
             "description": "Display text of the element to screenshot."
+          },
+          "selector": {
+            "type": "string",
+            "description": "Selector of the element to screenshot."
           },
           "padding": {
             "anyOf": [
@@ -281,19 +293,7 @@
               }
             ]
           }
-        },
-        "anyOf": [
-          {
-            "required": [
-              "selector"
-            ]
-          },
-          {
-            "required": [
-              "elementText"
-            ]
-          }
-        ]
+        }
       },
       "padding": {
         "type": "object",

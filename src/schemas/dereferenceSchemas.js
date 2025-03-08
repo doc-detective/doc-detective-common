@@ -18,17 +18,21 @@ async function dereferenceSchemas() {
   });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
   var files = [
-    "step_v3.schema.json",
+    // v3 schemas
     "checkLink_v3.schema.json",
+    "click_v3.schema.json",
+    "find_v3.schema.json",
     "goTo_v3.schema.json",
-    "runShell_v3.schema.json",
-    "runCode_v3.schema.json",
-    "type_v3.schema.json",
     "loadVariables_v3.schema.json",
-    "screenshot_v3.schema.json",
     "record_v3.schema.json",
+    "runCode_v3.schema.json",
+    "runShell_v3.schema.json",
+    "screenshot_v3.schema.json",
+    "step_v3.schema.json",
     "stopRecord_v3.schema.json",
+    "type_v3.schema.json",
     "wait_v3.schema.json",
+    // v2 schemas
     "checkLink_v2.schema.json",
     "config_v2.schema.json",
     "context_v2.schema.json",

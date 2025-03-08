@@ -48,6 +48,22 @@
       }
     },
     {
+      "required": ["click"],
+      "properties": {
+        "click": {
+          "$ref": "click_v3.schema.json#"
+        }
+      }
+    },
+    {
+      "required": ["find"],
+      "properties": {
+        "find": {
+          "$ref": "find_v3.schema.json#"
+        }
+      }
+    },
+    {
       "required": ["goTo"],
       "properties": {
         "goTo": {
@@ -216,6 +232,51 @@
         "overwrite": true
       }
     },
-    { "loadVariables": "variables.env" }
+    { "loadVariables": "variables.env" },
+    {
+      "find": {
+        "$ref": "find_v3.schema.json#/examples/0"
+      }
+    },
+    {
+      "find": {
+        "$ref": "find_v3.schema.json#/examples/1"
+      }
+    },
+    {
+      "find": {
+        "$ref": "find_v3.schema.json#/examples/2"
+      }
+    },
+    {
+      "find": {
+        "$ref": "find_v3.schema.json#/examples/3"
+      }
+    },
+    {
+      "find": {
+        "$ref": "find_v3.schema.json#/examples/4"
+      }
+    },
+    {
+      "click": {
+        "$ref": "click_v3.schema.json#/examples/0"
+      }
+    },
+    {
+      "click": {
+        "$ref": "click_v3.schema.json#/examples/1"
+      }
+    },
+    {
+      "click": {
+        "$ref": "click_v3.schema.json#/examples/2"
+      }
+    },
+    {
+      "click": {
+        "$ref": "click_v3.schema.json#/examples/3"
+      }
+    }
   ]
 }

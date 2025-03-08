@@ -37,6 +37,7 @@ for (const [key, value] of Object.entries(schemas)) {
 const compatibleSchemas = {
   step_v3: [
     "checkLink_v2",
+    "find_v2",
     "goTo_v2",
     "runShell_v2",
     "runCode_v2",
@@ -156,6 +157,25 @@ function transformToSchemaKey({
         origin: object.origin,
         statusCodes: object.statusCodes,
       };
+    } else if (currentSchema === "find_v2") {
+      transformedObject.find = {
+        selector: object.selector,
+        elementText: object.matchText,
+        timeout: object.timeout,
+        moveTo: object.moveTo,
+        click: object.click,
+        type: object.typeKeys,
+      };
+      // Handle typeKeys.delay key change
+      if (typeof object.typeKeys === "object" && object.typeKeys.keys) {
+        transformedObject.find.type.inputDelay = object.typeKeys.delay;
+        delete transformedObject.find.type.keys.delay;
+      }
+      // TODO: Handle variable setting
+      transformedObject.variables = {};
+      object.setVariables.forEach((variable) => {
+        transformedObject.variables[variable.name] = variable.regex;
+      });
     } else if (currentSchema === "runShell_v2") {
       transformedObject.runShell = {
         command: object.command,
@@ -171,11 +191,11 @@ function transformToSchemaKey({
           : object.overwrite),
         timeout: object.timeout,
       };
+      // TODO: Handle variable setting
       transformedObject.variables = {};
       object.setVariables.forEach((variable) => {
         transformedObject.variables[variable.name] = variable.value;
       });
-      // TODO: Handle v2 outputs
     } else if (currentSchema === "runCode_v2") {
       transformedObject.runCode = {
         language: object.language,
@@ -192,11 +212,11 @@ function transformToSchemaKey({
           : object.overwrite),
         timeout: object.timeout,
       };
+      // TODO: Handle variable setting
       transformedObject.variables = {};
       object.setVariables.forEach((variable) => {
         transformedObject.variables[variable.name] = variable.value;
       });
-      // TODO: Handle v2 outputs
     } else if (currentSchema === "setVariables_v2") {
       transformedObject.loadVariables = object.path;
     } else if (currentSchema === "typeKeys_v2") {
@@ -232,8 +252,14 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    "action": "setVariables",
-    "path": ".env"
+    action: "find",
+    selector: "[title=ResultsCount]",
+    setVariables: [
+      {
+        name: "resultsCount",
+        regex: ".*",
+      },
+    ],
   };
   const result = validate({ schemaKey: "step_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
