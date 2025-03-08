@@ -1217,7 +1217,7 @@
                 "path": "image.png",
                 "directory": "static/images",
                 "maxVariation": 0.1,
-                "overwrite": "byVariation"
+                "overwrite": "aboveVariation"
               },
               {
                 "path": "image.png",
@@ -2682,7 +2682,7 @@
         "path": "image.png",
         "directory": "static/images",
         "maxVariation": 0.1,
-        "overwrite": "byVariation"
+        "overwrite": "aboveVariation"
       },
       {
         "path": "image.png",
