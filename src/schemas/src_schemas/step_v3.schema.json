@@ -203,7 +203,7 @@
     },
     {
       "record": {
-        "path": "image.png",
+        "path": "video.mp4",
         "directory": "static/media",
         "overwrite": true
       }
