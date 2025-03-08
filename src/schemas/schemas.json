@@ -334,7 +334,7 @@
                     "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
                   },
                   "maxVariation": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
                     "default": 0,
                     "minimum": 0,
@@ -421,7 +421,7 @@
                       "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
                     },
                     "maxVariation": {
-                      "type": "integer",
+                      "type": "number",
                       "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
                       "default": 0,
                       "minimum": 0,
@@ -458,9 +458,7 @@
                 "command": "echo",
                 "args": [
                   "hello-world"
-                ],
-                "id": "ddec5e20-2e81-4f38-867c-92c8d9516755",
-                "description": "This is a test!"
+                ]
               },
               {
                 "command": "docker run hello-world",
@@ -468,7 +466,7 @@
                 "exitCodes": [
                   0
                 ],
-                "output": "Hello from Docker!"
+                "stdio": "Hello from Docker!"
               },
               {
                 "command": "false",
@@ -484,7 +482,7 @@
                 "exitCodes": [
                   0
                 ],
-                "output": "/.*?/"
+                "stdio": "/.*?/"
               },
               {
                 "command": "docker run hello-world",
@@ -492,10 +490,10 @@
                 "exitCodes": [
                   0
                 ],
-                "output": "Hello from Docker!",
+                "stdio": "Hello from Docker!",
                 "path": "docker-output.txt",
-                "saveDirectory": "output",
-                "maxVariation": 10,
+                "directory": "output",
+                "maxVariation": 0.1,
                 "overwrite": "aboveVariation"
               }
             ]
@@ -576,7 +574,7 @@
                     "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
                   },
                   "maxVariation": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
                     "default": 0,
                     "minimum": 0,
@@ -666,7 +664,7 @@
                       "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
                     },
                     "maxVariation": {
-                      "type": "integer",
+                      "type": "number",
                       "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
                       "default": 0,
                       "minimum": 0,
@@ -703,7 +701,7 @@
                 "exitCodes": [
                   0
                 ],
-                "output": "Hello from Docker!"
+                "stdio": "Hello from Docker!"
               },
               {
                 "language": "javascript",
@@ -719,10 +717,10 @@
                 "exitCodes": [
                   0
                 ],
-                "output": "Hello from Python!",
+                "stdio": "Hello from Python!",
                 "path": "python-output.txt",
                 "directory": "output",
-                "maxVariation": 10,
+                "maxVariation": 0.1,
                 "overwrite": "aboveVariation"
               }
             ]
@@ -1469,7 +1467,7 @@
           "output": "Hello from Python!",
           "path": "python-output.txt",
           "directory": "output",
-          "maxVariation": 10,
+          "maxVariation": 0.1,
           "overwrite": "aboveVariation"
         }
       },
@@ -1822,7 +1820,7 @@
             "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
           },
           "maxVariation": {
-            "type": "integer",
+            "type": "number",
             "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
             "default": 0,
             "minimum": 0,
@@ -1909,7 +1907,7 @@
               "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
             },
             "maxVariation": {
-              "type": "integer",
+              "type": "number",
               "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
               "default": 0,
               "minimum": 0,
@@ -1946,9 +1944,7 @@
         "command": "echo",
         "args": [
           "hello-world"
-        ],
-        "id": "ddec5e20-2e81-4f38-867c-92c8d9516755",
-        "description": "This is a test!"
+        ]
       },
       {
         "command": "docker run hello-world",
@@ -1956,7 +1952,7 @@
         "exitCodes": [
           0
         ],
-        "output": "Hello from Docker!"
+        "stdio": "Hello from Docker!"
       },
       {
         "command": "false",
@@ -1972,7 +1968,7 @@
         "exitCodes": [
           0
         ],
-        "output": "/.*?/"
+        "stdio": "/.*?/"
       },
       {
         "command": "docker run hello-world",
@@ -1980,10 +1976,10 @@
         "exitCodes": [
           0
         ],
-        "output": "Hello from Docker!",
+        "stdio": "Hello from Docker!",
         "path": "docker-output.txt",
-        "saveDirectory": "output",
-        "maxVariation": 10,
+        "directory": "output",
+        "maxVariation": 0.1,
         "overwrite": "aboveVariation"
       }
     ]
@@ -2057,7 +2053,7 @@
             "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
           },
           "maxVariation": {
-            "type": "integer",
+            "type": "number",
             "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
             "default": 0,
             "minimum": 0,
@@ -2147,7 +2143,7 @@
               "description": "Directory to save the command's output. If the directory doesn't exist, creates the directory. If not specified, the directory is your media directory."
             },
             "maxVariation": {
-              "type": "integer",
+              "type": "number",
               "description": "Allowed variation in percentage of text different between the current output and previously saved output. If the difference between the current output and the previous output is greater than `maxVariation`, the step fails. If output doesn't exist at `path`, this value is ignored.",
               "default": 0,
               "minimum": 0,
@@ -2184,7 +2180,7 @@
         "exitCodes": [
           0
         ],
-        "output": "Hello from Docker!"
+        "stdio": "Hello from Docker!"
       },
       {
         "language": "javascript",
@@ -2200,10 +2196,10 @@
         "exitCodes": [
           0
         ],
-        "output": "Hello from Python!",
+        "stdio": "Hello from Python!",
         "path": "python-output.txt",
         "directory": "output",
-        "maxVariation": 10,
+        "maxVariation": 0.1,
         "overwrite": "aboveVariation"
       }
     ]

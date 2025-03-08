@@ -147,7 +147,7 @@
         "output": "Hello from Python!",
         "path": "python-output.txt",
         "directory": "output",
-        "maxVariation": 10,
+        "maxVariation": 0.1,
         "overwrite": "aboveVariation"
       }
     },

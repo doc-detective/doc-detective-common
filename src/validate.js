@@ -69,6 +69,19 @@ function validate({ schemaKey = "", object = {}, addDefaults = true }) {
 
   if (check.errors) {
     // Check if the object is compatible with another schema
+    if (!compatibleSchemas[schemaKey]) {
+      result.errors = check.errors
+        .map(
+          (error) =>
+            `${error.instancePath} ${error.message} (${JSON.stringify(
+              error.params
+            )})`
+        )
+        .join(", ");
+      result.object = object;
+      result.valid = false;
+      return result;
+    }
     const matchedSchemaKey = compatibleSchemas[schemaKey].find((key) => {
       validationObject = JSON.parse(JSON.stringify(object));
       const check = ajv.getSchema(key);
@@ -151,7 +164,7 @@ function transformToSchemaKey({
         stdio: object.output,
         path: object.savePath,
         directory: object.saveDirectory,
-        maxVariation: object.maxVariation,
+        maxVariation: object.maxVariation / 100,
         overwrite: (object.overwrite = "byVariation"
           ? "aboveVariation"
           : object.overwrite),
@@ -172,7 +185,7 @@ function transformToSchemaKey({
         stdio: object.output,
         path: object.savePath,
         directory: object.saveDirectory,
-        maxVariation: object.maxVariation,
+        maxVariation: object.maxVariation / 100,
         overwrite: (object.overwrite = "byVariation"
           ? "aboveVariation"
           : object.overwrite),
@@ -216,13 +229,16 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    screenshot: {
-      path: "image.png",
-      directory: "static/images",
-      maxVariation: 0.1,
-      overwrite: "aboveVariation"
-    },
+    language: "python",
+    code: "print('Hello from Python')",
+    workingDirectory: ".",
+    exitCodes: [0],
+    stdio: "Hello from Python!",
+    path: "python-output.txt",
+    directory: "output",
+    maxVariation: 0.1,
+    overwrite: "aboveVariation",
   };
-  result = validate({ schemaKey: "step_v3", object: example });
+  const result = validate({ schemaKey: "runCode_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }
