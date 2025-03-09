@@ -36,7 +36,7 @@
           "openApi": {
             "allOf": [
               {
-                "$ref": "openApi_v2.schema.json#"
+                "$ref": "openApi_v3.schema.json#"
               },
               {
                 "required": ["operationId"]
@@ -236,7 +236,7 @@
     },
     {
       "openApi": {
-        "name": "Reqres",
+        "descriptionName": "Reqres",
         "operationId": "getUserById"
       },
       "request": {"params": {
@@ -273,7 +273,7 @@
         "operationId": "updateUser",
         "useExample": "request",
         "exampleKey": "acme",
-        "requestHeaders": {
+        "headers": {
           "Authorization": "Bearer $TOKEN"
         }
       }
