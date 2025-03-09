@@ -34,12 +34,27 @@
             "$ref": "#/components/schemas/url"
           },
           "openApi": {
-            "allOf": [
+            "anyOf": [
               {
-                "$ref": "openApi_v3.schema.json#"
+                "allOf": [
+                  {
+                    "$ref": "openApi_v3.schema.json#/components/schemas/operationId"
+                  },
+                  {
+                    "title": "Operation ID",
+                    "description": "Operation ID from the OpenAPI schema. Only valid if the OpenAPI description path is specified elsewhere and the operation ID is unique among all specified OpenAPI descriptions."
+                  }
+                ]
               },
               {
-                "required": ["operationId"]
+                "allOf": [
+                  {
+                    "$ref": "openApi_v3.schema.json#"
+                  },
+                  {
+                    "required": ["operationId"]
+                  }
+                ]
               }
             ]
           },
@@ -235,12 +250,17 @@
       "overwrite": "aboveVariation"
     },
     {
+      "openApi": "getUserById"
+    },
+    {
       "openApi": {
         "descriptionName": "Reqres",
         "operationId": "getUserById"
       },
-      "request": {"params": {
-        "id": 123}
+      "request": {
+        "params": {
+          "id": 123
+        }
       }
     },
     {
@@ -248,8 +268,10 @@
         "descriptionPath": "https://api.example.com/openapi.json",
         "operationId": "getUserById"
       },
-      "request": {"params": {
-        "id": 123}
+      "request": {
+        "params": {
+          "id": 123
+        }
       }
     },
     {

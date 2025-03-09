@@ -1,5 +1,5 @@
 {
-  "$id": "openApi_v2.schema.json",
+  "$id": "openApi_v3.schema.json",
   "version": "1.0.0",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "openApi",
@@ -12,12 +12,10 @@
       "description": "Name of the OpenAPI description, as defined in your configuration."
     },
     "descriptionPath": {
-      "type": "string",
-      "description": "URL or local path to the OpenAPI description."
+      "$ref": "#/components/schemas/descriptionPath"
     },
     "operationId": {
-      "type": "string",
-      "description": "ID of the operation to use for the request."
+      "$ref": "#/components/schemas/operationId"
     },
     "server": {
       "type": "string",
@@ -56,9 +54,76 @@
       }
     }
   },
-  "examples":[
+  "components": {
+    "schemas": {
+      "operationId": {
+        "type": "string",
+        "description": "ID of the operation to use for the request."
+      },
+      "descriptionPath": {
+        "type": "string",
+        "description": "URL or local path to the OpenAPI description."
+      }
+    }
+  },
+  "examples": [
     {
       "descriptionPath": "https://petstore.swagger.io/v2/swagger.json"
+    },
+    {
+      "descriptionName": "Reqres",
+      "operationId": "getUserById"
+    },
+    {
+      "descriptionPath": "https://api.example.com/openapi.json",
+      "operationId": "getUserById"
+    },
+    {
+      "descriptionPath": "https://api.example.com/openapi.json",
+      "operationId": "createUser",
+      "useExample": "both"
+    },
+    {
+      "descriptionPath": "https://api.example.com/openapi.json",
+      "operationId": "createUser",
+      "useExample": "both",
+      "exampleKey": "example1"
+    },
+    {
+      "descriptionPath": "https://api.example.com/openapi.json",
+      "operationId": "createUser",
+      "useExample": "both",
+      "exampleKey": "example1",
+      "statusCode": 201
+    },
+    {
+      "descriptionPath": "https://api.example.com/openapi.json",
+      "operationId": "createUser",
+      "useExample": "both",
+      "exampleKey": "example1",
+      "statusCode": 201,
+      "validateAgainstSchema": "none"
+    },
+    {
+      "descriptionPath": "https://api.example.com/openapi.json",
+      "operationId": "createUser",
+      "useExample": "both",
+      "exampleKey": "example1",
+      "statusCode": 201,
+      "validateAgainstSchema": "none",
+      "mockResponse": true
+    },
+    {
+      "descriptionPath": "https://api.example.com/openapi.json",
+      "operationId": "createUser",
+      "useExample": "both",
+      "exampleKey": "example1",
+      "statusCode": 201,
+      "validateAgainstSchema": "none",
+      "mockResponse": true,
+      "headers": {
+        "Authorization": "Bearer 12345"
+      }
     }
   ]
 }
