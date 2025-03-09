@@ -72,6 +72,14 @@
       }
     },
     {
+      "required": ["httpRequest"],
+      "properties": {
+        "httpRequest": {
+          "$ref": "httpRequest_v3.schema.json#"
+        }
+      }
+    },
+    {
       "required": ["runShell"],
       "properties": {
         "runShell": {
@@ -276,6 +284,66 @@
     {
       "click": {
         "$ref": "click_v3.schema.json#/examples/3"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/0"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/1"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/2"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/3"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/4"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/5"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/6"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/7"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/8"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/9"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/10"
+      }
+    },
+    {
+      "httpRequest": {
+        "$ref": "httpRequest_v3.schema.json#/examples/11"
       }
     }
   ]

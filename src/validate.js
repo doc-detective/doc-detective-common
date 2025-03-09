@@ -39,6 +39,7 @@ const compatibleSchemas = {
     "checkLink_v2",
     "find_v2",
     "goTo_v2",
+    "httpRequest_v2",
     "runShell_v2",
     "runCode_v2",
     "saveScreenshot_v2",
@@ -176,6 +177,41 @@ function transformToSchemaKey({
       object.setVariables.forEach((variable) => {
         transformedObject.variables[variable.name] = variable.regex;
       });
+    } else if (currentSchema === "httpRequest_v2") {
+      transformedObject.httpRequest = {
+        method: object.method,
+        url: object.url,
+        openApi: object.openApi,
+        request: {
+          body: object.requestData,
+          headers: object.requestHeaders,
+          params: object.requestParams,
+        },
+        response: {
+          body: object.responseData,
+          headers: object.responseHeaders,
+        },
+        statusCodes: object.statusCodes,
+        allowAdditionalFields: object.allowAdditionalFields,
+        timeout: object.timeout,
+        path: object.savePath,
+        directory: object.saveDirectory,
+        maxVariation: object.maxVariation / 100,
+        overwrite: (object.overwrite = "byVariation"
+          ? "aboveVariation"
+          : object.overwrite),
+      };
+      // Handle openApi.requestHeaders key change
+      if (typeof object.openApi === "object" && object.openApi.requestHeaders) {
+        transformedObject.httpRequest.openApi.headers =
+          object.openApi.requestHeaders;
+        delete transformedObject.httpRequest.openApi.requestHeaders;
+      }
+      // TODO: Handle variable setting
+      transformedObject.variables = {};
+      object.envsFromResponseData.forEach((variable) => {
+        transformedObject.variables[variable.name] = variable.regex;
+      });
     } else if (currentSchema === "runShell_v2") {
       transformedObject.runShell = {
         command: object.command,
@@ -252,14 +288,16 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    action: "find",
-    selector: "[title=ResultsCount]",
-    setVariables: [
-      {
-        name: "resultsCount",
-        regex: ".*",
+    action: "httpRequest",
+    openApi: {
+      descriptionPath: "https://api.example.com/openapi.json",
+      operationId: "updateUser",
+      useExample: "request",
+      exampleKey: "acme",
+      requestHeaders: {
+        Authorization: "Bearer $TOKEN",
       },
-    ],
+    },
   };
   const result = validate({ schemaKey: "step_v3", object: example });
   console.log(JSON.stringify(result, null, 2));

@@ -39,8 +39,16 @@
         "openApi": {
           "anyOf": [
             {
-              "type": "string",
-              "description": "ID of the operation to use for the request."
+              "allOf": [
+                {
+                  "type": "string",
+                  "description": "ID of the operation to use for the request."
+                },
+                {
+                  "title": "Operation ID",
+                  "description": "Operation ID from the OpenAPI schema. Only valid if the OpenAPI description path is specified elsewhere and the operation ID is unique among all specified OpenAPI descriptions."
+                }
+              ]
             },
             {
               "allOf": [
@@ -361,8 +369,16 @@
           "openApi": {
             "anyOf": [
               {
-                "type": "string",
-                "description": "ID of the operation to use for the request."
+                "allOf": [
+                  {
+                    "type": "string",
+                    "description": "ID of the operation to use for the request."
+                  },
+                  {
+                    "title": "Operation ID",
+                    "description": "Operation ID from the OpenAPI schema. Only valid if the OpenAPI description path is specified elsewhere and the operation ID is unique among all specified OpenAPI descriptions."
+                  }
+                ]
               },
               {
                 "allOf": [
