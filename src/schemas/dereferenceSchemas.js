@@ -24,6 +24,7 @@ async function dereferenceSchemas() {
     "find_v3.schema.json",
     "goTo_v3.schema.json",
     "loadVariables_v3.schema.json",
+    "httpRequest_v3.schema.json",
     "record_v3.schema.json",
     "runCode_v3.schema.json",
     "runShell_v3.schema.json",
