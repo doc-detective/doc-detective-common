@@ -3,148 +3,269 @@
   "title": "step",
   "description": "A step in a test.",
   "type": "object",
-  "dynamicDefaults": {
-    "stepId": "uuid"
-  },
-  "properties": {
-    "stepId": {
-      "type": "string",
-      "description": "ID of the step."
-    },
-    "description": {
-      "type": "string",
-      "description": "Description of the step."
-    },
-    "outputs": {
-      "type": "object",
-      "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
-      "default": {},
-      "patternProperties": {
-        "^[A-Za-z0-9_]+$": {
-          "type": "string",
-          "description": "Runtime expression for a user-defined output value."
+  "components": {
+    "schemas": {
+      "common": {
+        "type": "object",
+        "dynamicDefaults": {
+          "stepId": "uuid"
+        },
+        "properties": {
+          "stepId": {
+            "$ref": "#/components/schemas/stepId"
+          },
+          "description": {
+            "$ref": "#/components/schemas/description"
+          },
+          "outputs": {
+            "$ref": "#/components/schemas/outputs"
+          },
+          "variables": {
+            "$ref": "#/components/schemas/variables"
+          }
         }
-      }
-    },
-    "variables": {
-      "type": "object",
-      "description": "Environment variables to set from user-defined expressions.",
-      "default": {},
-      "patternProperties": {
-        "^[A-Za-z0-9_]+$": {
-          "type": "string",
-          "description": "Runtime expression for a user-defined output value."
+      },
+      "stepId": {
+        "type": "string",
+        "description": "ID of the step."
+      },
+      "description": {
+        "type": "string",
+        "description": "Description of the step."
+      },
+      "outputs": {
+        "type": "object",
+        "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+        "default": {},
+        "patternProperties": {
+          "^[A-Za-z0-9_]+$": {
+            "type": "string",
+            "description": "Runtime expression for a user-defined output value."
+          }
+        }
+      },
+      "variables": {
+        "type": "object",
+        "description": "Environment variables to set from user-defined expressions.",
+        "default": {},
+        "patternProperties": {
+          "^[A-Za-z0-9_]+$": {
+            "type": "string",
+            "description": "Runtime expression for a user-defined output value."
+          }
         }
       }
     }
   },
   "anyOf": [
     {
-      "required": ["checkLink"],
-      "properties": {
-        "checkLink": {
-          "$ref": "checkLink_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["checkLink"],
+          "properties": {
+            "checkLink": {
+              "$ref": "checkLink_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["click"],
-      "properties": {
-        "click": {
-          "$ref": "click_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["click"],
+          "properties": {
+            "click": {
+              "$ref": "click_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["find"],
-      "properties": {
-        "find": {
-          "$ref": "find_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["find"],
+          "properties": {
+            "find": {
+              "$ref": "find_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["goTo"],
-      "properties": {
-        "goTo": {
-          "$ref": "goTo_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["goTo"],
+          "properties": {
+            "goTo": {
+              "$ref": "goTo_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["httpRequest"],
-      "properties": {
-        "httpRequest": {
-          "$ref": "httpRequest_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["httpRequest"],
+          "properties": {
+            "httpRequest": {
+              "$ref": "httpRequest_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["runShell"],
-      "properties": {
-        "runShell": {
-          "$ref": "runShell_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["runShell"],
+          "properties": {
+            "runShell": {
+              "$ref": "runShell_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["runCode"],
-      "properties": {
-        "runCode": {
-          "$ref": "runCode_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["runCode"],
+          "properties": {
+            "runCode": {
+              "$ref": "runCode_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["type"],
-      "properties": {
-        "type": {
-          "$ref": "type_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["type"],
+          "properties": {
+            "type": {
+              "$ref": "type_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["screenshot"],
-      "properties": {
-        "screenshot": {
-          "$ref": "screenshot_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["screenshot"],
+          "properties": {
+            "screenshot": {
+              "$ref": "screenshot_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["record"],
-      "properties": {
-        "record": {
-          "$ref": "record_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["record"],
+          "properties": {
+            "record": {
+              "$ref": "record_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["stopRecord"],
-      "properties": {
-        "stopRecord": {
-          "$ref": "stopRecord_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["stopRecord"],
+          "properties": {
+            "stopRecord": {
+              "$ref": "stopRecord_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["loadVariables"],
-      "properties": {
-        "loadVariables": {
-          "$ref": "loadVariables_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["loadVariables"],
+          "properties": {
+            "loadVariables": {
+              "$ref": "loadVariables_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "required": ["wait"],
-      "properties": {
-        "wait": {
-          "$ref": "wait_v3.schema.json#"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "required": ["wait"],
+          "properties": {
+            "wait": {
+              "$ref": "wait_v3.schema.json#"
+            }
+          }
         }
-      }
+      ]
     }
   ],
   "examples": [
+    {
+      "stepId": "uuid",
+      "description": "Description of the step.",
+      "checkLink": "https://www.google.com",
+      "outputs": {
+        "outputKey": "outputValue"
+      },
+      "variables": {
+        "variableKey": "variableValue"
+      }
+    },
     {
       "checkLink": "https://www.google.com"
     },
