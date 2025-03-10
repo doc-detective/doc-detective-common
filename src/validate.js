@@ -17,7 +17,7 @@ const ajv = new Ajv({
   coerceTypes: true,
 });
 
-// Enable `uuid` dynamic defult
+// Enable `uuid` dynamic default
 const def = require("ajv-keywords/dist/definitions/dynamicDefaults");
 def.DEFAULTS.uuid = () => uuid.v4;
 
