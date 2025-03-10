@@ -64,6 +64,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["checkLink"],
           "properties": {
             "checkLink": {
@@ -79,6 +80,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["click"],
           "properties": {
             "click": {
@@ -94,6 +96,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["find"],
           "properties": {
             "find": {
@@ -109,6 +112,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["goTo"],
           "properties": {
             "goTo": {
@@ -124,6 +128,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["httpRequest"],
           "properties": {
             "httpRequest": {
@@ -139,6 +144,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["runShell"],
           "properties": {
             "runShell": {
@@ -154,6 +160,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["runCode"],
           "properties": {
             "runCode": {
@@ -169,6 +176,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["type"],
           "properties": {
             "type": {
@@ -184,6 +192,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["screenshot"],
           "properties": {
             "screenshot": {
@@ -199,6 +208,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["record"],
           "properties": {
             "record": {
@@ -214,6 +224,7 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
           "required": ["stopRecord"],
           "properties": {
             "stopRecord": {

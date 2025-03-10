@@ -52,6 +52,7 @@
                     "$ref": "openApi_v3.schema.json#"
                   },
                   {
+                    "type": "object",
                     "required": ["operationId"]
                   }
                 ]
