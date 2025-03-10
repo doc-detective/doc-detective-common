@@ -146,8 +146,8 @@ function transformToSchemaKey({
     );
   }
   // Transform the object
-  const transformedObject = {};
   if (targetSchema === "step_v3") {
+    const transformedObject = {};
     transformedObject.stepId = object.id;
     transformedObject.description = object.description;
     if (currentSchema === "goTo_v2") {
@@ -205,10 +205,12 @@ function transformToSchemaKey({
           : object.overwrite),
       };
       // Handle openApi.requestHeaders key change
-      if (typeof object.openApi === "object" && object.openApi.requestHeaders) {
-        transformedObject.httpRequest.openApi.headers =
-          object.openApi.requestHeaders;
-        delete transformedObject.httpRequest.openApi.requestHeaders;
+      if (object.openApi) {
+        transformedObject.httpRequest.openApi = transformToSchemaKey({
+          currentSchema: "openApi_v2",
+          targetSchema: "openApi_v3",
+          object: object.openApi,
+        });
       }
       // TODO: Handle variable setting
       transformedObject.variables = {};
@@ -284,7 +286,9 @@ function transformToSchemaKey({
     } else if (currentSchema === "wait_v2") {
       transformedObject.wait = object;
     }
+    return transformedObject;
   } else if (targetSchema === "context_v3") {
+    const transformedObject = {};
     // Handle context_v2 to context_v3 transformation
     transformedObject.platforms = object.platforms;
     if (object.app?.name) {
@@ -303,8 +307,19 @@ function transformToSchemaKey({
         },
       };
     }
+    return transformedObject;
+  } else if (targetSchema === "openApi_v3") {
+    let transformedObject;
+    // Handle openApi_v2 to openApi_v3 transformation
+    const { name, requestHeaders, ...intermediaryObject } = object;
+    intermediaryObject.descriptionName = object.name;
+    intermediaryObject.headers = object.requestHeaders;
+    transformedObject = { ...intermediaryObject };
+    return transformedObject;
   }
   return transformedObject;
+  }
+  return null;
 }
 
 // If called directly, validate an example object
