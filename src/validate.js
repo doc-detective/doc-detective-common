@@ -35,6 +35,8 @@ for (const [key, value] of Object.entries(schemas)) {
 }
 
 const compatibleSchemas = {
+  context_v3: ["context_v2"],
+  openApi_v3: ["openApi_v2"],
   step_v3: [
     "checkLink_v2",
     "find_v2",
@@ -49,6 +51,7 @@ const compatibleSchemas = {
     "typeKeys_v2",
     "wait_v2",
   ],
+  test_v3: ["test_v2"],
 };
 
 // Validate that `object` matches the specified JSON schema
@@ -281,6 +284,25 @@ function transformToSchemaKey({
     } else if (currentSchema === "wait_v2") {
       transformedObject.wait = object;
     }
+  } else if (targetSchema === "context_v3") {
+    // Handle context_v2 to context_v3 transformation
+    transformedObject.platforms = object.platforms;
+    if (object.app?.name) {
+      const name = object.app.name === "edge" ? "chrome" : object.app?.name;
+      transformedObject[name] = {
+        executablePath: object.app?.path,
+        driverPath: object.app?.options?.driverPath,
+        headless: object.app?.options?.headless,
+        dimensions: {
+          width: object.app?.options?.width,
+          height: object.app?.options?.height,
+        },
+        viewport: {
+          width: object.app?.options?.viewport_width,
+          height: object.app?.options?.viewport_height,
+        },
+      };
+    }
   }
   return transformedObject;
 }
@@ -288,17 +310,11 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    action: "httpRequest",
-    openApi: {
-      descriptionPath: "https://api.example.com/openapi.json",
-      operationId: "updateUser",
-      useExample: "request",
-      exampleKey: "acme",
-      requestHeaders: {
-        Authorization: "Bearer $TOKEN",
-      },
+    app: {
+      name: "chrome",
     },
+    platforms: ["linux"],
   };
-  const result = validate({ schemaKey: "step_v3", object: example });
+  const result = validate({ schemaKey: "context_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }

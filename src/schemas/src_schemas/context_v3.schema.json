@@ -1,108 +1,163 @@
 {
   "title": "context",
   "type": "object",
-  "description": "An application and supported platforms.\n\nIf no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For browsers, context priority is Firefox > Chrome > Chromium.",
+  "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
+  "additionalProperties": false,
   "properties": {
-    "app": {
-      "type": "object",
-      "description": "The application to run.",
-      "additionalProperties": false,
-      "required": ["name"],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the application.",
-          "enum": ["chrome", "firefox", "safari", "edge"]
+    "platforms": {
+      "description": "Supported platforms for the application.",
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/platform"
         },
-        "path": {
-          "type": "string",
-          "description": "Absolute path or command for the application. If not specified, defaults to typical install paths per platform. If specified but the path is invalid, the context is skipped."
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/platform"
+          }
+        }
+      ]
+    },
+    "chrome": {
+      "$ref": "#/components/schemas/browser"
+    },
+    "firefox": {
+      "$ref": "#/components/schemas/browser"
+    },
+    "safari": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/browser"
         },
-        "options": {
+        {
           "type": "object",
-          "description": "Options to pass to the app. Only works when `name` is `firefox` or `chrome`.",
-          "additionalProperties": false,
-          "properties": {
-            "width": {
-              "type": "integer",
-              "description": "Width of the window in pixels."
-            },
-            "height": {
-              "type": "integer",
-              "description": "Height of the window in pixels."
-            },
-            "viewport_height": {
-              "type": "integer",
-              "description": "Height of the viewport in pixels. Overrides `height`."
-            },
-            "viewport_width": {
-              "type": "integer",
-              "description": "Width of the viewport in pixels. Overrides `width`."
-            },
-            "headless": {
-              "type": "boolean",
-              "description": "If `true`, runs the browser in headless mode. Not supported by Safari."
-            },
-            "driverPath": {
-              "type": "string",
-              "description": "Path to the browser driver. If not specified, defaults to internally managed dependencies."
+          "not": {
+            "required": ["driverPath"]
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "platform": {
+        "type": "string",
+        "enum": ["linux", "mac", "windows"]
+      },
+      "browser": {
+        "type": "object",
+        "description": "Browser configuration.",
+        "additionalProperties": false,
+        "properties": {
+          "executablePath": {
+            "type": "string",
+            "description": "Path to the browser executable. If not specified, defaults to the system default."
+          },
+          "driverPath": {
+            "type": "string",
+            "description": "Path to the browser driver. If not specified, defaults to internally managed dependencies."
+          },
+          "headless": {
+            "type": "boolean",
+            "description": "If `true`, runs the browser in headless mode."
+          },
+          "dimensions": {
+            "type": "object",
+            "description": "Browser dimensions.",
+            "additionalProperties": false,
+            "properties": {
+              "width": {
+                "type": "integer",
+                "description": "Width of the browser window in pixels."
+              },
+              "height": {
+                "type": "integer",
+                "description": "Height of the browser window in pixels."
+              }
+            }
+          },
+          "viewport": {
+            "type": "object",
+            "description": "Viewport dimensions.",
+            "additionalProperties": false,
+            "properties": {
+              "width": {
+                "type": "integer",
+                "description": "Width of the viewport in pixels."
+              },
+              "height": {
+                "type": "integer",
+                "description": "Height of the viewport in pixels."
+              }
             }
           }
         }
       }
-    },
-    "platforms": {
-      "description": "Supported platforms for the application.",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": ["linux", "mac", "windows"]
-      }
     }
   },
-  "required": ["app", "platforms"],
-  "additionalProperties": false,
   "examples": [
     {
-      "app": {
-        "name": "chrome"
-      },
-      "platforms": ["linux"]
+      "chrome": {
+        "headless": true
+      }
     },
     {
-      "app": {
-        "name": "chrome",
-        "options": {
-          "viewport_width": 800,
-          "viewport_height": 600
+      "chrome": {
+        "executablePath": "/usr/bin/google-chrome",
+        "headless": true
+      },
+      "firefox": {
+        "executablePath": "/usr/bin/firefox",
+        "driverPath": "/usr/local/bin/geckodriver"
+      }
+    },
+    {
+      "platforms": ["mac", "linux"],
+      "chrome": {
+        "headless": true
+      }
+    },
+    {
+      "platforms": ["windows", "mac", "linux"],
+      "chrome": {
+        "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "driverPath": "C:\\WebDrivers\\chromedriver.exe",
+        "headless": true,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "viewport": {
+          "width": 1600,
+          "height": 900
         }
       },
-      "platforms": ["linux"]
-    },
-    {
-      "app": {
-        "name": "firefox",
-        "options": {
-          "width": 800,
-          "height": 600,
-          "headless": false,
-          "driverPath": "/usr/bin/geckodriver"
+      "firefox": {
+        "executablePath": "/usr/bin/firefox",
+        "driverPath": "/usr/local/bin/geckodriver",
+        "dimensions": {
+          "width": 1366,
+          "height": 768
         }
       },
-      "platforms": ["linux", "windows", "mac"]
+      "safari": {
+        "executablePath": "/Applications/Safari.app/Contents/MacOS/Safari",
+        "headless": false,
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        }
+      }
     },
     {
-      "app": {
-        "name": "safari"
-      },
-      "platforms": ["mac"]
-    },
-    {
-      "app": {
-        "name": "firefox",
-        "path": "/usr/bin/firefox"
-      },
-      "platforms": ["linux"]
+      "platforms": "mac",
+      "safari": {
+        "executablePath": "/Applications/Safari.app/Contents/MacOS/Safari",
+        "dimensions": {
+          "width": 1280,
+          "height": 800
+        }
+      }
     }
   ]
 }

@@ -1,0 +1,324 @@
+{
+  "title": "context",
+  "type": "object",
+  "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
+  "additionalProperties": false,
+  "properties": {
+    "platforms": {
+      "description": "Supported platforms for the application.",
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "linux",
+            "mac",
+            "windows"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "linux",
+              "mac",
+              "windows"
+            ]
+          }
+        }
+      ]
+    },
+    "chrome": {
+      "type": "object",
+      "description": "Browser configuration.",
+      "additionalProperties": false,
+      "properties": {
+        "executablePath": {
+          "type": "string",
+          "description": "Path to the browser executable. If not specified, defaults to the system default."
+        },
+        "driverPath": {
+          "type": "string",
+          "description": "Path to the browser driver. If not specified, defaults to internally managed dependencies."
+        },
+        "headless": {
+          "type": "boolean",
+          "description": "If `true`, runs the browser in headless mode."
+        },
+        "dimensions": {
+          "type": "object",
+          "description": "Browser dimensions.",
+          "additionalProperties": false,
+          "properties": {
+            "width": {
+              "type": "integer",
+              "description": "Width of the browser window in pixels."
+            },
+            "height": {
+              "type": "integer",
+              "description": "Height of the browser window in pixels."
+            }
+          }
+        },
+        "viewport": {
+          "type": "object",
+          "description": "Viewport dimensions.",
+          "additionalProperties": false,
+          "properties": {
+            "width": {
+              "type": "integer",
+              "description": "Width of the viewport in pixels."
+            },
+            "height": {
+              "type": "integer",
+              "description": "Height of the viewport in pixels."
+            }
+          }
+        }
+      }
+    },
+    "firefox": {
+      "type": "object",
+      "description": "Browser configuration.",
+      "additionalProperties": false,
+      "properties": {
+        "executablePath": {
+          "type": "string",
+          "description": "Path to the browser executable. If not specified, defaults to the system default."
+        },
+        "driverPath": {
+          "type": "string",
+          "description": "Path to the browser driver. If not specified, defaults to internally managed dependencies."
+        },
+        "headless": {
+          "type": "boolean",
+          "description": "If `true`, runs the browser in headless mode."
+        },
+        "dimensions": {
+          "type": "object",
+          "description": "Browser dimensions.",
+          "additionalProperties": false,
+          "properties": {
+            "width": {
+              "type": "integer",
+              "description": "Width of the browser window in pixels."
+            },
+            "height": {
+              "type": "integer",
+              "description": "Height of the browser window in pixels."
+            }
+          }
+        },
+        "viewport": {
+          "type": "object",
+          "description": "Viewport dimensions.",
+          "additionalProperties": false,
+          "properties": {
+            "width": {
+              "type": "integer",
+              "description": "Width of the viewport in pixels."
+            },
+            "height": {
+              "type": "integer",
+              "description": "Height of the viewport in pixels."
+            }
+          }
+        }
+      }
+    },
+    "safari": {
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Browser configuration.",
+          "additionalProperties": false,
+          "properties": {
+            "executablePath": {
+              "type": "string",
+              "description": "Path to the browser executable. If not specified, defaults to the system default."
+            },
+            "driverPath": {
+              "type": "string",
+              "description": "Path to the browser driver. If not specified, defaults to internally managed dependencies."
+            },
+            "headless": {
+              "type": "boolean",
+              "description": "If `true`, runs the browser in headless mode."
+            },
+            "dimensions": {
+              "type": "object",
+              "description": "Browser dimensions.",
+              "additionalProperties": false,
+              "properties": {
+                "width": {
+                  "type": "integer",
+                  "description": "Width of the browser window in pixels."
+                },
+                "height": {
+                  "type": "integer",
+                  "description": "Height of the browser window in pixels."
+                }
+              }
+            },
+            "viewport": {
+              "type": "object",
+              "description": "Viewport dimensions.",
+              "additionalProperties": false,
+              "properties": {
+                "width": {
+                  "type": "integer",
+                  "description": "Width of the viewport in pixels."
+                },
+                "height": {
+                  "type": "integer",
+                  "description": "Height of the viewport in pixels."
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "not": {
+            "required": [
+              "driverPath"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "platform": {
+        "type": "string",
+        "enum": [
+          "linux",
+          "mac",
+          "windows"
+        ]
+      },
+      "browser": {
+        "type": "object",
+        "description": "Browser configuration.",
+        "additionalProperties": false,
+        "properties": {
+          "executablePath": {
+            "type": "string",
+            "description": "Path to the browser executable. If not specified, defaults to the system default."
+          },
+          "driverPath": {
+            "type": "string",
+            "description": "Path to the browser driver. If not specified, defaults to internally managed dependencies."
+          },
+          "headless": {
+            "type": "boolean",
+            "description": "If `true`, runs the browser in headless mode."
+          },
+          "dimensions": {
+            "type": "object",
+            "description": "Browser dimensions.",
+            "additionalProperties": false,
+            "properties": {
+              "width": {
+                "type": "integer",
+                "description": "Width of the browser window in pixels."
+              },
+              "height": {
+                "type": "integer",
+                "description": "Height of the browser window in pixels."
+              }
+            }
+          },
+          "viewport": {
+            "type": "object",
+            "description": "Viewport dimensions.",
+            "additionalProperties": false,
+            "properties": {
+              "width": {
+                "type": "integer",
+                "description": "Width of the viewport in pixels."
+              },
+              "height": {
+                "type": "integer",
+                "description": "Height of the viewport in pixels."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "chrome": {
+        "headless": true
+      }
+    },
+    {
+      "chrome": {
+        "executablePath": "/usr/bin/google-chrome",
+        "headless": true
+      },
+      "firefox": {
+        "executablePath": "/usr/bin/firefox",
+        "driverPath": "/usr/local/bin/geckodriver"
+      }
+    },
+    {
+      "platforms": [
+        "mac",
+        "linux"
+      ],
+      "chrome": {
+        "headless": true
+      }
+    },
+    {
+      "platforms": [
+        "windows",
+        "mac",
+        "linux"
+      ],
+      "chrome": {
+        "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "driverPath": "C:\\WebDrivers\\chromedriver.exe",
+        "headless": true,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "viewport": {
+          "width": 1600,
+          "height": 900
+        }
+      },
+      "firefox": {
+        "executablePath": "/usr/bin/firefox",
+        "driverPath": "/usr/local/bin/geckodriver",
+        "dimensions": {
+          "width": 1366,
+          "height": 768
+        }
+      },
+      "safari": {
+        "executablePath": "/Applications/Safari.app/Contents/MacOS/Safari",
+        "headless": false,
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        }
+      }
+    },
+    {
+      "platforms": "mac",
+      "safari": {
+        "executablePath": "/Applications/Safari.app/Contents/MacOS/Safari",
+        "dimensions": {
+          "width": 1280,
+          "height": 800
+        }
+      }
+    }
+  ]
+}
