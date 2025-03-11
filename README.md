@@ -6,7 +6,7 @@
 
 Shared resources for Doc Detective projects.
 
-## Install
+## Install 
 
 ```bash
 npm i doc-detective-common
