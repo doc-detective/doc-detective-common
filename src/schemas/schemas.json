@@ -10641,6 +10641,160 @@
             "checkLink": "https://www.duckduckgo.com"
           }
         ]
+      },
+      {
+        "steps": [
+          {
+            "goTo": {
+              "url": "https://www.duckduckgo.com"
+            }
+          },
+          {
+            "find": {
+              "selector": "[title=Search]",
+              "click": true,
+              "type": {
+                "keys": [
+                  "shorthair cats",
+                  "$ENTER$"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "testId": "Do all the things! - Test",
+        "description": "This test includes every property across all actions.",
+        "before": "setup.json",
+        "after": "cleanup.json",
+        "runOn": [
+          {
+            "platforms": [
+              "linux"
+            ],
+            "firefox": {
+              "executablePath": "/usr/bin/firefox",
+              "dimensions": {},
+              "viewport": {}
+            }
+          }
+        ],
+        "steps": [
+          {
+            "loadVariables": ".env"
+          },
+          {
+            "runShell": {
+              "command": "echo",
+              "args": [
+                "$USER"
+              ],
+              "maxVariation": 0,
+              "overwrite": "aboveVariation"
+            },
+            "variables": {}
+          },
+          {
+            "checkLink": {
+              "url": "https://www.duckduckgo.com"
+            }
+          },
+          {
+            "httpRequest": {
+              "method": "post",
+              "url": "https://reqres.in/api/users",
+              "request": {
+                "body": {
+                  "name": "morpheus",
+                  "job": "leader"
+                }
+              },
+              "response": {
+                "body": {
+                  "name": "morpheus",
+                  "job": "leader"
+                }
+              },
+              "statusCodes": [
+                200,
+                201
+              ],
+              "maxVariation": 0,
+              "overwrite": "aboveVariation"
+            },
+            "variables": {}
+          },
+          {
+            "goTo": {
+              "url": "https://www.duckduckgo.com"
+            }
+          },
+          {
+            "find": {
+              "selector": "[title=Search]",
+              "elementText": "Search",
+              "timeout": 10000,
+              "moveTo": true,
+              "click": true,
+              "type": {
+                "keys": [
+                  "shorthair cat"
+                ]
+              }
+            },
+            "variables": {}
+          },
+          {
+            "type": {
+              "keys": [
+                "$ENTER$"
+              ]
+            }
+          },
+          {
+            "screenshot": {
+              "maxVariation": 0,
+              "overwrite": "aboveVariation"
+            }
+          }
+        ],
+        "detectSteps": true
+      },
+      {
+        "testId": "c61b02e8-7485-44d3-8065-f873673379c6",
+        "openApi": [
+          {
+            "descriptionPath": "https://www.acme.com/openapi.json",
+            "server": "https://api.acme.com",
+            "validateAgainstSchema": "both",
+            "useExample": "none",
+            "exampleKey": "",
+            "descriptionName": "Acme"
+          }
+        ],
+        "steps": [
+          {
+            "httpRequest": {
+              "openApi": {
+                "operationId": "getUserById",
+                "validateAgainstSchema": "both",
+                "useExample": "none",
+                "exampleKey": ""
+              },
+              "request": {
+                "params": {
+                  "id": 123
+                }
+              },
+              "response": {},
+              "maxVariation": 0,
+              "overwrite": "aboveVariation"
+            },
+            "variables": {}
+          }
+        ],
+        "detectSteps": true
       }
     ]
   },

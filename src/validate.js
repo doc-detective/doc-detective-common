@@ -388,12 +388,24 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    "steps": [
+    openApi: [
       {
-        "action": "checkLink",
-        "url": "https://www.duckduckgo.com"
-      }
-    ]
+        name: "Acme",
+        descriptionPath: "https://www.acme.com/openapi.json",
+        server: "https://api.acme.com",
+      },
+    ],
+    steps: [
+      {
+        action: "httpRequest",
+        openApi: {
+          operationId: "getUserById",
+        },
+        requestParams: {
+          id: 123,
+        },
+      },
+    ],
   };
   const result = validate({ schemaKey: "test_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
