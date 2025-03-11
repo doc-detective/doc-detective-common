@@ -1,0 +1,348 @@
+{
+  "title": "config",
+  "description": "Configuration options for Doc Detective operations.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "input": {
+      "default": ".",
+      "$ref": "#/components/schemas/input"
+    },
+    "outputDirectory": {
+      "default": ".",
+      "$ref": "#/components/schemas/output"
+    },
+    "recursive": {
+      "default": true,
+      "$ref": "#/components/schemas/recursive"
+    },
+    "relativePathBase": {
+      "description": "Whether paths should be interpreted as relative to the current working directory (`cwd`) or to the file in which they're specified (`file`).",
+      "type": "string",
+      "enum": ["cwd", "file"],
+      "default": "file"
+    },
+    "loadVariables": {
+      "description": "Path to a `.env` file to load before performing a Doc Detective operation.",
+      "type": "string"
+    },
+    "origin": {
+      "description": "Default protocol and domain to use for relative URLs.",
+      "type": "string"
+    },
+    "beforeAny": {
+      "description": "Path(s) to test specifications to perform before those specified by `input`. Useful for setting up testing environments.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "afterAll": {
+      "description": "Path(s) to test specifications to perform after those specified by `input`. Useful for cleaning up testing environments.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "detectSteps": {
+      "type": "boolean",
+      "description": "Whether or not to detect steps in input files based on defined markup.",
+      "default": true
+    },
+    "logLevel": {
+      "description": "Amount of detail to output when performing an operation.",
+      "type": "string",
+      "enum": ["silent", "error", "warning", "info", "debug"],
+      "default": "info"
+    },
+    "runOn": {
+      "$ref": "test_v3.schema.json#/properties/runOn"
+    },
+    "fileTypes": {
+      "description": "Configuration for file types and their markup detection.",
+      "default": ["markdown", "asciidoc", "html", "xml"],
+      "anyOf": [
+        {
+          "$comment": "Simple mode: Reference predefined templates by name.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": ["markdown", "asciidoc", "html", "xml", "jupyter_notebook"]
+          }
+        },
+        {
+          "$comment": "Custom mode: Define your own file types with full control.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": ["extensions"],
+                "properties": {
+                  "name": {
+                    "description": "Name of the file type.",
+                    "type": "string"
+                  },
+                  "extends": {
+                    "description": "Base template to extend.",
+                    "type": "string",
+                    "enum": ["markdown", "asciidoc", "html", "xml"]
+                  },
+                  "extensions": {
+                    "description": "File extensions to use with type.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "inlineStatements": {
+                    "$ref": "#/components/schemas/inlineStatements"
+                  },
+                  "markup": {
+                    "description": "Markup definitions for the file type.",
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/markupDefinition"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "integrations": {
+      "description": "Options for connecting to external services.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "openApi": {
+          "$ref": "test_v3.schema.json#/properties/openApi"
+        }
+      }
+    },
+    "telemetry": {
+      "description": "Options around sending telemetry for Doc Detective usage.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "send": {
+          "description": "If `true`, sends Doc Detective telemetry.",
+          "type": "boolean",
+          "default": true
+        },
+        "userId": {
+          "description": "Identifier for the organization, group, or individual running Doc Detective.",
+          "type": "string"
+        }
+      },
+      "required": ["send"],
+      "default": {
+        "send": true
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "markupDefinition": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Name of the markup type.",
+            "type": "string"
+          },
+          "regex": {
+            "description": "Regular expressions to match the markup type.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "batchMatches": {
+            "description": "If `true`, all matches are combined into a single string.",
+            "type": "boolean",
+            "default": false
+          },
+          "actions": {
+            "description": "Actions to perform when the markup type is detected.",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "checkLink",
+                    "click",
+                    "find",
+                    "goTo",
+                    "httpRequest",
+                    "loadVariables",
+                    "record",
+                    "runCode",
+                    "runShell",
+                    "screenshot",
+                    "stopRecord",
+                    "type",
+                    "wait"
+                  ]
+                },
+                { "$ref": "step_v3.schema.json#" }
+              ]
+            }
+          }
+        }
+      },
+      "inlineStatements": {
+        "description": "Statements to include tests and steps inside the content of the file, such as within Markdown.",
+        "type": "object",
+        "properties": {
+          "testStart": {
+            "$ref": "#/components/schemas/inlineStatementStart"
+          },
+          "testEnd": {
+            "description": "String that indicates that the current test is complete.",
+            "type": "string"
+          },
+          "ignoreStart": {
+            "description": "String that indicates that the following content should be ignored for testing purposes.",
+            "type": "string"
+          },
+          "ignoreEnd": {
+            "description": "String that indicates that the ignored content is complete.",
+            "type": "string"
+          },
+          "step": {
+            "$ref": "#/components/schemas/inlineStatementStart"
+          }
+        }
+      },
+      "inlineRegexStatement": {
+        "title": "Regex",
+        "type": "object",
+        "properties": {
+          "regex": {
+            "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
+            "type": "string"
+          }
+        }
+      },
+      "inlineStatementStart": {
+        "anyOf": [
+          {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/inlineRegexStatement"
+              },
+              {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/components/schemas/inlineRegexStatement"
+                }
+              }
+            ]
+          },
+          {
+            "title": "Strings",
+            "type": "object",
+            "required": ["open"],
+            "properties": {
+              "open": {
+                "description": "String that appears before the statement.",
+                "type": "string"
+              },
+              "close": {
+                "description": "String that appears after the statement.",
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "input": {
+        "description": "Path(s) to test specifications and documentation source files. May be paths to specific files or to directories to scan for files.",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "recursive": {
+        "description": "If `true` searches `input`, `setup`, and `cleanup` paths recursively for test specificaions and source files.",
+        "type": "boolean"
+      },
+      "output": {
+        "description": "Path of the of the file or directory in which to store the output of Doc Detective commands. If a file path is specified, the output is written to that file. If a file of that name already exists, Doc Detective creates appends an integer to the result file name. If a directory path is specified, the output file name is dependent on the command being run.",
+        "type": "string",
+        "default": "."
+      },
+      "markupToInclude": {
+        "description": "Markup types to include when performing this operation. If no markup types are specified, the operation includes all markup types as defined in `fileTypes`.",
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "type": "string"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "examples": [
+    {},
+    {
+      "fileTypes": ["markdown"]
+    },
+    {
+      "fileTypes": [{ "extensions": ["md"] }]
+    }
+  ]
+}
