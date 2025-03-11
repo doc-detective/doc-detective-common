@@ -28,6 +28,7 @@ async function dereferenceSchemas() {
     "httpRequest_v3.schema.json",
     "openApi_v3.schema.json",
     "record_v3.schema.json",
+    "report_v3.schema.json",
     "runCode_v3.schema.json",
     "runShell_v3.schema.json",
     "screenshot_v3.schema.json",
