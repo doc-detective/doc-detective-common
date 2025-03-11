@@ -37,6 +37,7 @@ for (const [key, value] of Object.entries(schemas)) {
 const compatibleSchemas = {
   context_v3: ["context_v2"],
   openApi_v3: ["openApi_v2"],
+  spec_v3: ["spec_v2"],
   step_v3: [
     "checkLink_v2",
     "find_v2",
@@ -339,6 +340,45 @@ function transformToSchemaKey({
       throw new Error(`Invalid object: ${result.errors}`);
     }
     return result.object;
+  } else if (targetSchema === "spec_v3") {
+    // Handle spec_v2 to spec_v3 transformation
+    const transformedObject = {
+      specId: object.id,
+      description: object.description,
+      contentPath: object.file,
+    };
+    if (object.contexts)
+      transformedObject.runOn = object.contexts.map((context) =>
+        transformToSchemaKey({
+          currentSchema: "context_v2",
+          targetSchema: "context_v3",
+          object: context,
+        })
+      );
+    if (object.openApi)
+      transformedObject.openApi = object.openApi.map((description) =>
+        transformToSchemaKey({
+          currentSchema: "openApi_v2",
+          targetSchema: "openApi_v3",
+          object: description,
+        })
+      );
+    transformedObject.tests = object.tests.map((test) =>
+      transformToSchemaKey({
+        currentSchema: "test_v2",
+        targetSchema: "test_v3",
+        object: test,
+      })
+    );
+
+    const result = validate({
+      schemaKey: "spec_v3",
+      object: transformedObject,
+    });
+    if (!result.valid) {
+      throw new Error(`Invalid object: ${result.errors}`);
+    }
+    return result.object;
   } else if (targetSchema === "test_v3") {
     // Handle test_v2 to test_v3 transformation
     const transformedObject = {
@@ -388,25 +428,30 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    openApi: [
+    "id": "Make a request from an OpenAPI definition",
+    "openApi": [
       {
-        name: "Acme",
-        descriptionPath: "https://www.acme.com/openapi.json",
-        server: "https://api.acme.com",
-      },
+        "name": "Acme",
+        "descriptionPath": "https://www.acme.com/openapi.json",
+        "server": "https://api.acme.com"
+      }
     ],
-    steps: [
+    "tests": [
       {
-        action: "httpRequest",
-        openApi: {
-          operationId: "getUserById",
-        },
-        requestParams: {
-          id: 123,
-        },
-      },
-    ],
+        "steps": [
+          {
+            "action": "httpRequest",
+            "openApi": {
+              "operationId": "getUserById"
+            },
+            "requestParams": {
+              "id": 123
+            }
+          }
+        ]
+      }
+    ]
   };
-  const result = validate({ schemaKey: "test_v3", object: example });
+  const result = validate({ schemaKey: "spec_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }

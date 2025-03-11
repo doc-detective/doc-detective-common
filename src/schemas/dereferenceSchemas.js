@@ -31,6 +31,7 @@ async function dereferenceSchemas() {
     "runCode_v3.schema.json",
     "runShell_v3.schema.json",
     "screenshot_v3.schema.json",
+    "spec_v3.schema.json",
     "step_v3.schema.json",
     "stopRecord_v3.schema.json",
     "test_v3.schema.json",
