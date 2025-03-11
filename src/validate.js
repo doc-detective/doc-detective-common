@@ -147,9 +147,10 @@ function transformToSchemaKey({
   }
   // Transform the object
   if (targetSchema === "step_v3") {
-    const transformedObject = {};
-    transformedObject.stepId = object.id;
-    transformedObject.description = object.description;
+    const transformedObject = {
+      stepId: object.id,
+      description: object.description,
+    };
     if (currentSchema === "goTo_v2") {
       transformedObject.goTo = {
         url: object.url,
@@ -177,7 +178,7 @@ function transformToSchemaKey({
       }
       // TODO: Handle variable setting
       transformedObject.variables = {};
-      object.setVariables.forEach((variable) => {
+      object.setVariables?.forEach((variable) => {
         transformedObject.variables[variable.name] = variable.regex;
       });
     } else if (currentSchema === "httpRequest_v2") {
@@ -214,7 +215,7 @@ function transformToSchemaKey({
       }
       // TODO: Handle variable setting
       transformedObject.variables = {};
-      object.envsFromResponseData.forEach((variable) => {
+      object.envsFromResponseData?.forEach((variable) => {
         transformedObject.variables[variable.name] = variable.regex;
       });
     } else if (currentSchema === "runShell_v2") {
@@ -234,7 +235,7 @@ function transformToSchemaKey({
       };
       // TODO: Handle variable setting
       transformedObject.variables = {};
-      object.setVariables.forEach((variable) => {
+      object.setVariables?.forEach((variable) => {
         transformedObject.variables[variable.name] = variable.value;
       });
     } else if (currentSchema === "runCode_v2") {
@@ -286,7 +287,14 @@ function transformToSchemaKey({
     } else if (currentSchema === "wait_v2") {
       transformedObject.wait = object;
     }
-    return transformedObject;
+    const result = validate({
+      schemaKey: "step_v3",
+      object: transformedObject,
+    });
+    if (!result.valid) {
+      throw new Error(`Invalid object: ${result.errors}`);
+    }
+    return result.object;
   } else if (targetSchema === "context_v3") {
     const transformedObject = {};
     // Handle context_v2 to context_v3 transformation
@@ -307,7 +315,14 @@ function transformToSchemaKey({
         },
       };
     }
-    return transformedObject;
+    const result = validate({
+      schemaKey: "context_v3",
+      object: transformedObject,
+    });
+    if (!result.valid) {
+      throw new Error(`Invalid object: ${result.errors}`);
+    }
+    return result.object;
   } else if (targetSchema === "openApi_v3") {
     let transformedObject;
     // Handle openApi_v2 to openApi_v3 transformation
@@ -315,9 +330,57 @@ function transformToSchemaKey({
     intermediaryObject.descriptionName = object.name;
     intermediaryObject.headers = object.requestHeaders;
     transformedObject = { ...intermediaryObject };
-    return transformedObject;
-  }
-  return transformedObject;
+
+    const result = validate({
+      schemaKey: "openApi_v3",
+      object: transformedObject,
+    });
+    if (!result.valid) {
+      throw new Error(`Invalid object: ${result.errors}`);
+    }
+    return result.object;
+  } else if (targetSchema === "test_v3") {
+    // Handle test_v2 to test_v3 transformation
+    const transformedObject = {
+      testId: object.id,
+      description: object.description,
+      contentPath: object.file,
+      detectSteps: object.detectSteps,
+      before: object.setup,
+      after: object.cleanup,
+    };
+    if (object.contexts)
+      transformedObject.runOn = object.contexts.map((context) =>
+        transformToSchemaKey({
+          currentSchema: "context_v2",
+          targetSchema: "context_v3",
+          object: context,
+        })
+      );
+    if (object.openApi)
+      transformedObject.openApi = object.openApi.map((description) =>
+        transformToSchemaKey({
+          currentSchema: "openApi_v2",
+          targetSchema: "openApi_v3",
+          object: description,
+        })
+      );
+    transformedObject.steps = object.steps.map((step) =>
+      transformToSchemaKey({
+        currentSchema: `${step.action}_v2`,
+        targetSchema: "step_v3",
+        object: step,
+      })
+    );
+
+    const result = validate({
+      schemaKey: "test_v3",
+      object: transformedObject,
+    });
+    if (!result.valid) {
+      throw new Error(`Invalid object: ${result.errors}`);
+    }
+    return result.object;
   }
   return null;
 }
@@ -325,11 +388,13 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    app: {
-      name: "chrome",
-    },
-    platforms: ["linux"],
+    "steps": [
+      {
+        "action": "checkLink",
+        "url": "https://www.duckduckgo.com"
+      }
+    ]
   };
-  const result = validate({ schemaKey: "context_v3", object: example });
+  const result = validate({ schemaKey: "test_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }

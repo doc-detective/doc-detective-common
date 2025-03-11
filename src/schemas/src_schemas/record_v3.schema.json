@@ -45,22 +45,6 @@
       }
     }
   },
-  "properties": {
-    "path": {
-      "type": "string",
-      "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
-      "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)"
-    },
-    "directory": {
-      "type": "string",
-      "description": "Directory of the file. Attempts to create the directory if it doesn't exist."
-    },
-    "overwrite": {
-      "type": "boolean",
-      "description": "If `true`, overwrites the existing file at `path` if it exists.",
-      "default": false
-    }
-  },
   "examples": [
     true,
     "results.mp4",
