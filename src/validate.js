@@ -428,29 +428,83 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    "id": "Make a request from an OpenAPI definition",
-    "openApi": [
+    id: "Do all the things! - Spec",
+    contexts: [
       {
-        "name": "Acme",
-        "descriptionPath": "https://www.acme.com/openapi.json",
-        "server": "https://api.acme.com"
-      }
+        app: {
+          name: "chrome",
+          path: "/usr/bin/firefox",
+        },
+        platforms: ["windows", "mac"],
+      },
     ],
-    "tests": [
+    tests: [
       {
-        "steps": [
+        id: "Do all the things! - Test",
+        description:
+          "This test includes nearly every property across all actions.",
+        contexts: [
           {
-            "action": "httpRequest",
-            "openApi": {
-              "operationId": "getUserById"
+            app: {
+              name: "firefox",
+              path: "/usr/bin/firefox",
             },
-            "requestParams": {
-              "id": 123
-            }
-          }
-        ]
-      }
-    ]
+            platforms: ["linux"],
+          },
+        ],
+        steps: [
+          {
+            action: "setVariables",
+            path: ".env",
+          },
+          {
+            action: "runShell",
+            command: "echo",
+            args: ["$USER"],
+          },
+          {
+            action: "checkLink",
+            url: "https://www.duckduckgo.com",
+          },
+          {
+            action: "httpRequest",
+            url: "https://reqres.in/api/users",
+            method: "post",
+            requestData: {
+              name: "morpheus",
+              job: "leader",
+            },
+            responseData: {
+              name: "morpheus",
+              job: "leader",
+            },
+            statusCodes: [200, 201],
+          },
+          {
+            action: "goTo",
+            url: "https://www.duckduckgo.com",
+          },
+          {
+            action: "find",
+            selector: "[title=Search]",
+            timeout: 10000,
+            matchText: "Search",
+            moveTo: true,
+            click: true,
+            typeKeys: {
+              keys: ["shorthair cat"],
+            },
+          },
+          {
+            action: "typeKeys",
+            keys: ["$ENTER$"],
+          },
+          {
+            action: "saveScreenshot",
+          },
+        ],
+      },
+    ],
   };
   const result = validate({ schemaKey: "spec_v3", object: example });
   console.log(JSON.stringify(result, null, 2));

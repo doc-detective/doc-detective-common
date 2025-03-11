@@ -53,7 +53,7 @@
             "windows",
             "mac"
           ],
-          "chrome": {
+          "firefox": {
             "executablePath": "/usr/bin/firefox",
             "dimensions": {},
             "viewport": {}
