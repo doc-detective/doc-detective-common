@@ -45,7 +45,8 @@
     },
     "loadVariables": {
       "description": "Path to a `.env` file to load before performing a Doc Detective operation.",
-      "type": "string"
+      "type": "string",
+      "default": ".env"
     },
     "origin": {
       "description": "Default protocol and domain to use for relative URLs.",
@@ -600,10 +601,15 @@
                   },
                   "markup": {
                     "description": "Markup definitions for the file type.",
-                    "type": "object",
-                    "additionalProperties": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
                       "type": "object",
                       "properties": {
+                        "name": {
+                          "description": "Name of the markup definition",
+                          "type": "string"
+                        },
                         "regex": {
                           "description": "Regular expressions to match the markup type.",
                           "anyOf": [
@@ -4784,6 +4790,10 @@
       "markupDefinition": {
         "type": "object",
         "properties": {
+          "name": {
+            "description": "Name of the markup definition",
+            "type": "string"
+          },
           "regex": {
             "description": "Regular expressions to match the markup type.",
             "anyOf": [
@@ -8652,6 +8662,10 @@
   "examples": [
     {},
     {
+      "input": ".",
+      "outputDirectory": ".",
+      "recursive": true,
+      "loadVariables": ".env",
       "fileTypes": [
         "markdown"
       ]
@@ -8672,12 +8686,13 @@
             "ignoreEnd": "<!-- ignoreEnd -->",
             "step": "<!--\\s*step\\s*(.*?)\\s*-->"
           },
-          "markup": {
-            "onscreenText": {
+          "markup": [
+            {
+              "name": "onscreenText",
               "regex": "\\*\\*.+?\\*\\*",
               "actions": "find"
             }
-          }
+          ]
         }
       ]
     },
