@@ -35,6 +35,7 @@ for (const [key, value] of Object.entries(schemas)) {
 }
 
 const compatibleSchemas = {
+  config_v3: ["config_v2"],
   context_v3: ["context_v2"],
   openApi_v3: ["openApi_v2"],
   spec_v3: ["spec_v2"],
@@ -54,6 +55,10 @@ const compatibleSchemas = {
   ],
   test_v3: ["test_v2"],
 };
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\\\$&"); // $& means the whole matched string
+}
 
 // Validate that `object` matches the specified JSON schema
 function validate({ schemaKey = "", object = {}, addDefaults = true }) {
@@ -296,6 +301,86 @@ function transformToSchemaKey({
       throw new Error(`Invalid object: ${result.errors}`);
     }
     return result.object;
+  } else if (targetSchema === "config_v3") {
+    // Handle config_v2 to config_v3 transformation
+    const transformedObject = {
+      loadVariables: object.envVariables,
+      input: object?.runTests?.input || object.input,
+      outputDirectory: object?.runTests?.output || object.output,
+      recursive: object?.runTests?.recursive || object.recursive,
+      relativePathBase: object.relativePathBase,
+      detectSteps: object?.runTests?.detectSteps,
+      beforeAny: object?.runTests?.setup,
+      afterAll: object?.runTests?.cleanup,
+      logLevel: object.logLevel,
+      telemetry: object.telemetry,
+    };
+    // Handle context transformation
+    if (object?.runTests?.contexts)
+      transformedObject.runOn = object.runTests.contexts.map((context) =>
+        transformToSchemaKey({
+          currentSchema: "context_v2",
+          targetSchema: "context_v3",
+          object: context,
+        })
+      );
+    // Handle openApi transformation
+    if (object?.integrations?.openApi)
+      transformedObject.integrations.openApi = object.integrations.openApi.map(
+        (description) =>
+          transformToSchemaKey({
+            currentSchema: "openApi_v2",
+            targetSchema: "openApi_v3",
+            object: description,
+          })
+      );
+    // Handle fileTypes transformation
+    if (object?.fileTypes)
+      transformedObject.fileTypes = object.fileTypes.map((fileType) => {
+        const transformedFileType = {
+          name: fileType.name,
+          extensions: fileType.extensions.map((extension) => ({
+            // Trim leading `.` from extension
+            extension: extension.replace(/^\./, ""),
+          })),
+          inlineStatements: {
+            // Convert strings to regex, escaping special characters
+            testStart: `${escapeRegExp(
+              fileType.testStartStatementOpen
+            )}(.*?)${escapeRegExp(fileType.testStartStatementClose)}`,
+            testEnd: escapeRegExp(object.testEndStatement),
+            ignoreStart: escapeRegExp(object.testIgnoreStatement),
+            step: `${escapeRegExp(
+              fileType.stepStatementOpen
+            )}(.*?)${escapeRegExp(fileType.stepStatementClose)}`,
+          },
+        };
+        if (fileType.markup)
+          transformedFileType.markup = fileType.markup.map((markup) => {
+            const transformedMarkup = {
+              name: markup.name,
+              regex: markup.regex,
+              actions: markup.actions.map((action) => {
+                if (typeof action === "string") return action;
+                if (typeof action === "object") {
+                  if (action.params) {
+                    action = {
+                      action: action.name,
+                      ...action.params,
+                    }
+                  }
+                  const transformedAction = transformToSchemaKey({
+                    currentSchema: `${action.action}_v2`,
+                    targetSchema: "step_v3",
+                    object: step,
+                  });
+                  return transformedAction;
+                }
+              }),
+            };
+            return transformedFileType;
+          });
+      });
   } else if (targetSchema === "context_v3") {
     const transformedObject = {};
     // Handle context_v2 to context_v3 transformation
