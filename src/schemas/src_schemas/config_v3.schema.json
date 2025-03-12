@@ -234,64 +234,57 @@
         "type": "object",
         "properties": {
           "testStart": {
-            "$ref": "#/components/schemas/inlineStatementStart"
-          },
-          "testEnd": {
-            "description": "String that indicates that the current test is complete.",
-            "type": "string"
-          },
-          "ignoreStart": {
-            "description": "String that indicates that the following content should be ignored for testing purposes.",
-            "type": "string"
-          },
-          "ignoreEnd": {
-            "description": "String that indicates that the ignored content is complete.",
-            "type": "string"
-          },
-          "step": {
-            "$ref": "#/components/schemas/inlineStatementStart"
-          }
-        }
-      },
-      "inlineRegexStatement": {
-        "title": "Regex",
-        "type": "object",
-        "properties": {
-          "regex": {
-            "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-            "type": "string"
-          }
-        }
-      },
-      "inlineStatementStart": {
-        "anyOf": [
-          {
+            "description": "Regular expressions that indicate the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
             "anyOf": [
               {
-                "$ref": "#/components/schemas/inlineRegexStatement"
-              },
-              {
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                  "$ref": "#/components/schemas/inlineRegexStatement"
-                }
+                "$ref": "#/components/schemas/inlineStatement"
               }
             ]
           },
-          {
-            "title": "Strings",
-            "type": "object",
-            "required": ["open"],
-            "properties": {
-              "open": {
-                "description": "String that appears before the statement.",
-                "type": "string"
-              },
-              "close": {
-                "description": "String that appears after the statement.",
-                "type": "string"
+          "testEnd": {
+            "description": "Regular expressions that indicate that the current test is complete.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/inlineStatement"
               }
+            ]
+          },
+          "ignoreStart": {
+            "description": "Regular expressions that indicates that the following content should be ignored for testing purposes.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/inlineStatement"
+              }
+            ]
+          },
+          "ignoreEnd": {
+            "description": "Regular expressions that indicate that the ignored section of content is complete.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/inlineStatement"
+              }
+            ]
+          },
+          "step": {
+            "description": "Regular expressions that indicate a step in a test.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/inlineStatement"
+              }
+            ]
+          }
+        }
+      },
+      "inlineStatement": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
             }
           }
         ]
@@ -342,7 +335,19 @@
       "fileTypes": ["markdown"]
     },
     {
-      "fileTypes": [{ "extensions": ["md"] }]
+      "fileTypes": [
+        {
+          "extends": "markdown",
+          "extensions": ["md", "markdown", "mdx"],
+          "inlineStatements": {
+            "testStart": "<!--\\s*testStart\\s*(.*?)\\s*-->",
+            "testEnd": "<!-- testEnd -->",
+            "ignoreStart": "<!-- ignoreStart -->",
+            "ignoreEnd": "<!-- ignoreEnd -->",
+            "step": "<!--\\s*step\\s*(.*?)\\s*-->"
+          }
+        }
+      ]
     }
   ]
 }

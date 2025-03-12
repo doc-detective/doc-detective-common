@@ -497,112 +497,97 @@
                     "type": "object",
                     "properties": {
                       "testStart": {
+                        "description": "Regular expressions that indicate the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
                         "anyOf": [
                           {
                             "anyOf": [
                               {
-                                "title": "Regex",
-                                "type": "object",
-                                "properties": {
-                                  "regex": {
-                                    "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-                                    "type": "string"
-                                  }
-                                }
+                                "type": "string"
                               },
                               {
                                 "type": "array",
                                 "minItems": 1,
                                 "items": {
-                                  "title": "Regex",
-                                  "type": "object",
-                                  "properties": {
-                                    "regex": {
-                                      "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-                                      "type": "string"
-                                    }
-                                  }
+                                  "type": "string"
                                 }
                               }
                             ]
-                          },
-                          {
-                            "title": "Strings",
-                            "type": "object",
-                            "required": [
-                              "open"
-                            ],
-                            "properties": {
-                              "open": {
-                                "description": "String that appears before the statement.",
-                                "type": "string"
-                              },
-                              "close": {
-                                "description": "String that appears after the statement.",
-                                "type": "string"
-                              }
-                            }
                           }
                         ]
                       },
                       "testEnd": {
-                        "description": "String that indicates that the current test is complete.",
-                        "type": "string"
-                      },
-                      "ignoreStart": {
-                        "description": "String that indicates that the following content should be ignored for testing purposes.",
-                        "type": "string"
-                      },
-                      "ignoreEnd": {
-                        "description": "String that indicates that the ignored content is complete.",
-                        "type": "string"
-                      },
-                      "step": {
+                        "description": "Regular expressions that indicate that the current test is complete.",
                         "anyOf": [
                           {
                             "anyOf": [
                               {
-                                "title": "Regex",
-                                "type": "object",
-                                "properties": {
-                                  "regex": {
-                                    "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-                                    "type": "string"
-                                  }
-                                }
+                                "type": "string"
                               },
                               {
                                 "type": "array",
                                 "minItems": 1,
                                 "items": {
-                                  "title": "Regex",
-                                  "type": "object",
-                                  "properties": {
-                                    "regex": {
-                                      "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-                                      "type": "string"
-                                    }
-                                  }
+                                  "type": "string"
                                 }
                               }
                             ]
-                          },
+                          }
+                        ]
+                      },
+                      "ignoreStart": {
+                        "description": "Regular expressions that indicates that the following content should be ignored for testing purposes.",
+                        "anyOf": [
                           {
-                            "title": "Strings",
-                            "type": "object",
-                            "required": [
-                              "open"
-                            ],
-                            "properties": {
-                              "open": {
-                                "description": "String that appears before the statement.",
+                            "anyOf": [
+                              {
                                 "type": "string"
                               },
-                              "close": {
-                                "description": "String that appears after the statement.",
-                                "type": "string"
+                              {
+                                "type": "array",
+                                "minItems": 1,
+                                "items": {
+                                  "type": "string"
+                                }
                               }
-                            }
+                            ]
+                          }
+                        ]
+                      },
+                      "ignoreEnd": {
+                        "description": "Regular expressions that indicate that the ignored section of content is complete.",
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "array",
+                                "minItems": 1,
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "step": {
+                        "description": "Regular expressions that indicate a step in a test.",
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "array",
+                                "minItems": 1,
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            ]
                           }
                         ]
                       }
@@ -8221,172 +8206,112 @@
         "type": "object",
         "properties": {
           "testStart": {
+            "description": "Regular expressions that indicate the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
             "anyOf": [
               {
                 "anyOf": [
                   {
-                    "title": "Regex",
-                    "type": "object",
-                    "properties": {
-                      "regex": {
-                        "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-                        "type": "string"
-                      }
-                    }
+                    "type": "string"
                   },
                   {
                     "type": "array",
                     "minItems": 1,
                     "items": {
-                      "title": "Regex",
-                      "type": "object",
-                      "properties": {
-                        "regex": {
-                          "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-                          "type": "string"
-                        }
-                      }
+                      "type": "string"
                     }
                   }
                 ]
-              },
-              {
-                "title": "Strings",
-                "type": "object",
-                "required": [
-                  "open"
-                ],
-                "properties": {
-                  "open": {
-                    "description": "String that appears before the statement.",
-                    "type": "string"
-                  },
-                  "close": {
-                    "description": "String that appears after the statement.",
-                    "type": "string"
-                  }
-                }
               }
             ]
           },
           "testEnd": {
-            "description": "String that indicates that the current test is complete.",
-            "type": "string"
-          },
-          "ignoreStart": {
-            "description": "String that indicates that the following content should be ignored for testing purposes.",
-            "type": "string"
-          },
-          "ignoreEnd": {
-            "description": "String that indicates that the ignored content is complete.",
-            "type": "string"
-          },
-          "step": {
+            "description": "Regular expressions that indicate that the current test is complete.",
             "anyOf": [
               {
                 "anyOf": [
                   {
-                    "title": "Regex",
-                    "type": "object",
-                    "properties": {
-                      "regex": {
-                        "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-                        "type": "string"
-                      }
-                    }
+                    "type": "string"
                   },
                   {
                     "type": "array",
                     "minItems": 1,
                     "items": {
-                      "title": "Regex",
-                      "type": "object",
-                      "properties": {
-                        "regex": {
-                          "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "title": "Strings",
-                "type": "object",
-                "required": [
-                  "open"
-                ],
-                "properties": {
-                  "open": {
-                    "description": "String that appears before the statement.",
-                    "type": "string"
-                  },
-                  "close": {
-                    "description": "String that appears after the statement.",
-                    "type": "string"
-                  }
-                }
-              }
-            ]
-          }
-        }
-      },
-      "inlineRegexStatement": {
-        "title": "Regex",
-        "type": "object",
-        "properties": {
-          "regex": {
-            "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-            "type": "string"
-          }
-        }
-      },
-      "inlineStatementStart": {
-        "anyOf": [
-          {
-            "anyOf": [
-              {
-                "title": "Regex",
-                "type": "object",
-                "properties": {
-                  "regex": {
-                    "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
-                    "type": "string"
-                  }
-                }
-              },
-              {
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                  "title": "Regex",
-                  "type": "object",
-                  "properties": {
-                    "regex": {
-                      "description": "Regular expression to match the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
                       "type": "string"
                     }
                   }
-                }
+                ]
               }
             ]
           },
-          {
-            "title": "Strings",
-            "type": "object",
-            "required": [
-              "open"
-            ],
-            "properties": {
-              "open": {
-                "description": "String that appears before the statement.",
-                "type": "string"
-              },
-              "close": {
-                "description": "String that appears after the statement.",
-                "type": "string"
+          "ignoreStart": {
+            "description": "Regular expressions that indicates that the following content should be ignored for testing purposes.",
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
               }
+            ]
+          },
+          "ignoreEnd": {
+            "description": "Regular expressions that indicate that the ignored section of content is complete.",
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "step": {
+            "description": "Regular expressions that indicate a step in a test.",
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "inlineStatement": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
             }
           }
         ]
@@ -8441,9 +8366,19 @@
     {
       "fileTypes": [
         {
+          "extends": "markdown",
           "extensions": [
-            "md"
-          ]
+            "md",
+            "markdown",
+            "mdx"
+          ],
+          "inlineStatements": {
+            "testStart": "<!--\\s*testStart\\s*(.*?)\\s*-->",
+            "testEnd": "<!-- testEnd -->",
+            "ignoreStart": "<!-- ignoreStart -->",
+            "ignoreEnd": "<!-- ignoreEnd -->",
+            "step": "<!--\\s*step\\s*(.*?)\\s*-->"
+          }
         }
       ]
     }
