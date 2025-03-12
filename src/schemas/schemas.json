@@ -231,11 +231,19 @@
     ]
   },
   "config_v3": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "config",
     "description": "Configuration options for Doc Detective operations.",
     "type": "object",
     "additionalProperties": false,
+    "dynamicDefaults": {
+      "configId": "uuid"
+    },
     "properties": {
+      "configId": {
+        "description": "Identifier for the configuration.",
+        "type": "string"
+      },
       "input": {
         "description": "Path(s) to test specifications and documentation source files. May be paths to specific files or to directories to scan for files.",
         "default": ".",
