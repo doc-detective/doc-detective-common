@@ -368,6 +368,20 @@
               "--stdout"
             ]
           }
+        },
+        {
+          "name": "JavaScript",
+          "extensions": "js",
+          "runShell": {
+            "command": "node $1"
+          }
+        },
+        {
+          "name": "Python",
+          "extensions": "py",
+          "runShell": {
+            "command": "python $1"
+          }
         }
       ]
     }
