@@ -184,14 +184,7 @@
             "description": "Regular expressions to match the markup type.",
             "anyOf": [
               {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                  "type": "string"
-                }
+                "$ref": "#/components/schemas/stringOrArray"
               }
             ]
           },
@@ -202,32 +195,42 @@
           },
           "actions": {
             "description": "Actions to perform when the markup type is detected.",
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "checkLink",
-                    "click",
-                    "find",
-                    "goTo",
-                    "httpRequest",
-                    "loadVariables",
-                    "record",
-                    "runCode",
-                    "runShell",
-                    "screenshot",
-                    "stopRecord",
-                    "type",
-                    "wait"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/markupActionString"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/markupActionString"
+                    },
+                    { "$ref": "step_v3.schema.json#" }
                   ]
-                },
-                { "$ref": "step_v3.schema.json#" }
-              ]
-            }
+                }
+              }
+            ]
           }
         }
+      },
+      "markupActionString": {
+        "type": "string",
+        "enum": [
+          "checkLink",
+          "click",
+          "find",
+          "goTo",
+          "httpRequest",
+          "loadVariables",
+          "record",
+          "runCode",
+          "runShell",
+          "screenshot",
+          "stopRecord",
+          "type",
+          "wait"
+        ]
       },
       "inlineStatements": {
         "description": "Statements to include tests and steps inside the content of the file, such as within Markdown.",
@@ -237,7 +240,7 @@
             "description": "Regular expressions that indicate the start of a test. If capture groups are used, the first capture group is used for the statement. If no capture groups are used, the entire match is used for the statement.",
             "anyOf": [
               {
-                "$ref": "#/components/schemas/inlineStatement"
+                "$ref": "#/components/schemas/stringOrArray"
               }
             ]
           },
@@ -245,7 +248,7 @@
             "description": "Regular expressions that indicate that the current test is complete.",
             "anyOf": [
               {
-                "$ref": "#/components/schemas/inlineStatement"
+                "$ref": "#/components/schemas/stringOrArray"
               }
             ]
           },
@@ -253,7 +256,7 @@
             "description": "Regular expressions that indicates that the following content should be ignored for testing purposes.",
             "anyOf": [
               {
-                "$ref": "#/components/schemas/inlineStatement"
+                "$ref": "#/components/schemas/stringOrArray"
               }
             ]
           },
@@ -261,7 +264,7 @@
             "description": "Regular expressions that indicate that the ignored section of content is complete.",
             "anyOf": [
               {
-                "$ref": "#/components/schemas/inlineStatement"
+                "$ref": "#/components/schemas/stringOrArray"
               }
             ]
           },
@@ -269,13 +272,13 @@
             "description": "Regular expressions that indicate a step in a test.",
             "anyOf": [
               {
-                "$ref": "#/components/schemas/inlineStatement"
+                "$ref": "#/components/schemas/stringOrArray"
               }
             ]
           }
         }
       },
-      "inlineStatement": {
+      "stringOrArray": {
         "anyOf": [
           {
             "type": "string"
@@ -345,7 +348,14 @@
             "ignoreStart": "<!-- ignoreStart -->",
             "ignoreEnd": "<!-- ignoreEnd -->",
             "step": "<!--\\s*step\\s*(.*?)\\s*-->"
-          }
+          },
+          "markup": [
+            {
+              "name": "onscreenText",
+              "regex": ["\\*\\*.+?\\*\\*"],
+              "actions": ["find"]
+            }
+          ]
         }
       ]
     }
