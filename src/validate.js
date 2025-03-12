@@ -57,7 +57,7 @@ const compatibleSchemas = {
 };
 
 function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\\\$&"); // $& means the whole matched string
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 }
 
 // Validate that `object` matches the specified JSON schema
@@ -339,17 +339,17 @@ function transformToSchemaKey({
       transformedObject.fileTypes = object.fileTypes.map((fileType) => {
         const transformedFileType = {
           name: fileType.name,
-          extensions: fileType.extensions.map((extension) => ({
+          extensions: fileType.extensions.map((extension) =>
             // Trim leading `.` from extension
-            extension: extension.replace(/^\./, ""),
-          })),
+            extension.replace(/^\./, "")
+          ),
           inlineStatements: {
             // Convert strings to regex, escaping special characters
             testStart: `${escapeRegExp(
               fileType.testStartStatementOpen
             )}(.*?)${escapeRegExp(fileType.testStartStatementClose)}`,
-            testEnd: escapeRegExp(object.testEndStatement),
-            ignoreStart: escapeRegExp(object.testIgnoreStatement),
+            testEnd: escapeRegExp(fileType.testEndStatement),
+            ignoreStart: escapeRegExp(fileType.testIgnoreStatement),
             step: `${escapeRegExp(
               fileType.stepStatementOpen
             )}(.*?)${escapeRegExp(fileType.stepStatementClose)}`,
@@ -360,14 +360,16 @@ function transformToSchemaKey({
             const transformedMarkup = {
               name: markup.name,
               regex: markup.regex,
-              actions: markup.actions.map((action) => {
+            };
+            if (markup.actions)
+              transformedMarkup.actions = markup.actions.map((action) => {
                 if (typeof action === "string") return action;
                 if (typeof action === "object") {
                   if (action.params) {
                     action = {
                       action: action.name,
                       ...action.params,
-                    }
+                    };
                   }
                   const transformedAction = transformToSchemaKey({
                     currentSchema: `${action.action}_v2`,
@@ -376,11 +378,20 @@ function transformToSchemaKey({
                   });
                   return transformedAction;
                 }
-              }),
-            };
-            return transformedFileType;
+              });
+
+            return transformedMarkup;
           });
+        return transformedFileType;
       });
+    const result = validate({
+      schemaKey: "config_v3",
+      object: transformedObject,
+    });
+    if (!result.valid) {
+      throw new Error(`Invalid object: ${result.errors}`);
+    }
+    return result.object;
   } else if (targetSchema === "context_v3") {
     const transformedObject = {};
     // Handle context_v2 to context_v3 transformation
@@ -513,84 +524,9 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    id: "Do all the things! - Spec",
-    contexts: [
-      {
-        app: {
-          name: "chrome",
-          path: "/usr/bin/firefox",
-        },
-        platforms: ["windows", "mac"],
-      },
-    ],
-    tests: [
-      {
-        id: "Do all the things! - Test",
-        description:
-          "This test includes nearly every property across all actions.",
-        contexts: [
-          {
-            app: {
-              name: "firefox",
-              path: "/usr/bin/firefox",
-            },
-            platforms: ["linux"],
-          },
-        ],
-        steps: [
-          {
-            action: "setVariables",
-            path: ".env",
-          },
-          {
-            action: "runShell",
-            command: "echo",
-            args: ["$USER"],
-          },
-          {
-            action: "checkLink",
-            url: "https://www.duckduckgo.com",
-          },
-          {
-            action: "httpRequest",
-            url: "https://reqres.in/api/users",
-            method: "post",
-            requestData: {
-              name: "morpheus",
-              job: "leader",
-            },
-            responseData: {
-              name: "morpheus",
-              job: "leader",
-            },
-            statusCodes: [200, 201],
-          },
-          {
-            action: "goTo",
-            url: "https://www.duckduckgo.com",
-          },
-          {
-            action: "find",
-            selector: "[title=Search]",
-            timeout: 10000,
-            matchText: "Search",
-            moveTo: true,
-            click: true,
-            typeKeys: {
-              keys: ["shorthair cat"],
-            },
-          },
-          {
-            action: "typeKeys",
-            keys: ["$ENTER$"],
-          },
-          {
-            action: "saveScreenshot",
-          },
-        ],
-      },
-    ],
+    input: ".",
+    output: ".",
   };
-  const result = validate({ schemaKey: "spec_v3", object: example });
+  const result = validate({ schemaKey: "config_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }
