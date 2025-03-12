@@ -709,6 +709,10 @@
                     "extensions"
                   ],
                   "properties": {
+                    "name": {
+                      "description": "Name of the file type.",
+                      "type": "string"
+                    },
                     "extends": {
                       "description": "Base template to extend.",
                       "type": "string",
