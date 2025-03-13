@@ -90,7 +90,7 @@
     {
       "path": "results.mp4",
       "directory": "static/media",
-      "overwrite": true
+      "overwrite": "true"
     }
   ]
 }
