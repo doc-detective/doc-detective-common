@@ -17,7 +17,7 @@ async function dereferenceSchemas() {
     if (err) throw err;
   });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
-  var files = [
+  const files = [
     // v3 schemas
     "checkLink_v3.schema.json",
     "click_v3.schema.json",
