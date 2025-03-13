@@ -14,10 +14,9 @@ for (const [key, value] of Object.entries(schemas)) {
     value.examples.forEach((example, index) => {
       it(`example with index ${index} passes validation`, function () {
         try {
-          const validityCheck = validate(key, example);
+          const validityCheck = validate({schemaKey: key, object: example});
           assert.ok(
             validityCheck.valid,
-            true,
             `Validation failed for ${key}, example ${index}: ${validityCheck.errors}`
           );
         } catch (error) {

@@ -17,7 +17,29 @@ async function dereferenceSchemas() {
     if (err) throw err;
   });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
-  var files = [
+  const files = [
+    // v3 schemas
+    "checkLink_v3.schema.json",
+    "click_v3.schema.json",
+    "config_v3.schema.json",
+    "context_v3.schema.json",
+    "find_v3.schema.json",
+    "goTo_v3.schema.json",
+    "loadVariables_v3.schema.json",
+    "httpRequest_v3.schema.json",
+    "openApi_v3.schema.json",
+    "record_v3.schema.json",
+    "report_v3.schema.json",
+    "runCode_v3.schema.json",
+    "runShell_v3.schema.json",
+    "screenshot_v3.schema.json",
+    "spec_v3.schema.json",
+    "step_v3.schema.json",
+    "stopRecord_v3.schema.json",
+    "test_v3.schema.json",
+    "type_v3.schema.json",
+    "wait_v3.schema.json",
+    // v2 schemas
     "checkLink_v2.schema.json",
     "config_v2.schema.json",
     "context_v2.schema.json",
@@ -75,8 +97,11 @@ async function dereferenceSchemas() {
     // Load into `schema` object
     schemas[key] = schema;
   });
-  fs.writeFileSync(`${__dirname}/schemas.json`, JSON.stringify(schemas,null,2));
-  
+  fs.writeFileSync(
+    `${__dirname}/schemas.json`,
+    JSON.stringify(schemas, null, 2)
+  );
+
   // Clean up build dir
   // fs.rm(buildDir, { recursive: true }, (err) => {
   //   if (err) throw err;
@@ -109,7 +134,7 @@ function deleteDollarIds(schema) {
       deleteDollarIds(value);
     }
     if (key === "$id") {
-      delete schema[key]
+      delete schema[key];
     }
   }
   return schema;
