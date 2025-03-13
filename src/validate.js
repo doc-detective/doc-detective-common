@@ -207,10 +207,9 @@ function transformToSchemaKey({
         path: object.savePath,
         directory: object.saveDirectory,
         maxVariation: object.maxVariation / 100,
-        overwrite: (object.overwrite = "byVariation"
+        overwrite: (object.overwrite === "byVariation"
           ? "aboveVariation"
           : object.overwrite),
-      };
       // Handle openApi.requestHeaders key change
       if (object.openApi) {
         transformedObject.httpRequest.openApi = transformToSchemaKey({
