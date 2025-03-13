@@ -207,9 +207,11 @@ function transformToSchemaKey({
         path: object.savePath,
         directory: object.saveDirectory,
         maxVariation: object.maxVariation / 100,
-        overwrite: (object.overwrite === "byVariation"
-          ? "aboveVariation"
-          : object.overwrite),
+        overwrite:
+          object.overwrite === "byVariation"
+            ? "aboveVariation"
+            : object.overwrite,
+      };
       // Handle openApi.requestHeaders key change
       if (object.openApi) {
         transformedObject.httpRequest.openApi = transformToSchemaKey({
@@ -233,9 +235,10 @@ function transformToSchemaKey({
         path: object.savePath,
         directory: object.saveDirectory,
         maxVariation: object.maxVariation / 100,
-        overwrite: (object.overwrite === "byVariation"
-          ? "aboveVariation"
-          : object.overwrite),
+        overwrite:
+          object.overwrite === "byVariation"
+            ? "aboveVariation"
+            : object.overwrite,
         timeout: object.timeout,
       };
       // TODO: Handle variable setting
@@ -254,9 +257,10 @@ function transformToSchemaKey({
         path: object.savePath,
         directory: object.saveDirectory,
         maxVariation: object.maxVariation / 100,
-        overwrite: (object.overwrite === "byVariation"
-          ? "aboveVariation"
-          : object.overwrite),
+        overwrite:
+          object.overwrite === "byVariation"
+            ? "aboveVariation"
+            : object.overwrite,
         timeout: object.timeout,
       };
       // TODO: Handle variable setting
@@ -276,9 +280,10 @@ function transformToSchemaKey({
         path: object.path,
         directory: object.directory,
         maxVariation: object.maxVariation / 100,
-        overwrite: (object.overwrite === "byVariation"
-          ? "aboveVariation"
-          : object.overwrite),
+        overwrite:
+          object.overwrite === "byVariation"
+            ? "aboveVariation"
+            : object.overwrite,
         crop: object.crop,
       };
     } else if (currentSchema === "startRecording_v2") {

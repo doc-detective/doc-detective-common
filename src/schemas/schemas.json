@@ -1770,7 +1770,7 @@
                                               "properties": {
                                                 "goTo": {
                                                   "$schema": "http://json-schema.org/draft-07/schema#",
-                                                  "title": "checkLink",
+                                                  "title": "goTo",
                                                   "anyOf": [
                                                     {
                                                       "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
@@ -5954,7 +5954,7 @@
                                 "properties": {
                                   "goTo": {
                                     "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "title": "checkLink",
+                                    "title": "goTo",
                                     "anyOf": [
                                       {
                                         "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
@@ -9643,7 +9643,7 @@
   },
   "goTo_v3": {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "checkLink",
+    "title": "goTo",
     "anyOf": [
       {
         "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
@@ -12693,7 +12693,7 @@
                                       "properties": {
                                         "goTo": {
                                           "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "title": "checkLink",
+                                          "title": "goTo",
                                           "anyOf": [
                                             {
                                               "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
@@ -18721,7 +18721,7 @@
                             "properties": {
                               "goTo": {
                                 "$schema": "http://json-schema.org/draft-07/schema#",
-                                "title": "checkLink",
+                                "title": "goTo",
                                 "anyOf": [
                                   {
                                     "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
@@ -22711,7 +22711,7 @@
             "properties": {
               "goTo": {
                 "$schema": "http://json-schema.org/draft-07/schema#",
-                "title": "checkLink",
+                "title": "goTo",
                 "anyOf": [
                   {
                     "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
@@ -26898,7 +26898,7 @@
                   "properties": {
                     "goTo": {
                       "$schema": "http://json-schema.org/draft-07/schema#",
-                      "title": "checkLink",
+                      "title": "goTo",
                       "anyOf": [
                         {
                           "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
