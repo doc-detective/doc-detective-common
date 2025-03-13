@@ -276,7 +276,7 @@ function transformToSchemaKey({
         path: object.path,
         directory: object.directory,
         maxVariation: object.maxVariation / 100,
-        overwrite: (object.overwrite = "byVariation"
+        overwrite: (object.overwrite === "byVariation"
           ? "aboveVariation"
           : object.overwrite),
         crop: object.crop,
