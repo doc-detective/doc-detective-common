@@ -61,7 +61,13 @@ function escapeRegExp(string) {
 }
 
 // Validate that `object` matches the specified JSON schema
-function validate({ schemaKey = "", object = {}, addDefaults = true }) {
+function validate({ schemaKey = null, object = null, addDefaults = true }) {
+  if (!schemaKey) {
+    throw new Error("Schema key is required.");
+  }
+  if (!object) {
+    throw new Error("Object is required.");
+  }
   const result = {};
   let validationObject;
   let check = ajv.getSchema(schemaKey);
@@ -330,6 +336,7 @@ function transformToSchemaKey({
       );
     // Handle openApi transformation
     if (object?.integrations?.openApi)
+      transformedObject.integrations = {};
       transformedObject.integrations.openApi = object.integrations.openApi.map(
         (description) =>
           transformToSchemaKey({
