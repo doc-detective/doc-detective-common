@@ -61,7 +61,7 @@ function escapeRegExp(string) {
 }
 
 // Validate that `object` matches the specified JSON schema
-function validate({ schemaKey = null, object = null, addDefaults = true }) {
+function validate({ schemaKey, object, addDefaults = true }) {
   if (!schemaKey) {
     throw new Error("Schema key is required.");
   }
