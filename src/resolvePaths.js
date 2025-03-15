@@ -5,22 +5,29 @@ const { validate } = require("./validate");
 exports.resolvePaths = resolvePaths;
 
 /**
- * Resolves paths in config and spec objects based on the provided configuration, object type, object, and source file path.
+ * Resolves relative paths in configuration and specification objects to absolute paths.
+ * 
+ * This function traverses an object (either a config or spec) and converts all path properties
+ * to absolute paths based on the provided configuration and file path. It can handle nested objects
+ * and special path relationships like path/directory and savePath/saveDirectory.
  *
- * @param {object} config - The configuration object.
- * @param {object} object - The object containing the paths to resolve.
- * @param {string} filePath - The path of the file that contains the relative paths.
- * @param {boolean} [nested=false] - Whether the object is nested within another object.
- * @param {string} [objectType] - The type of object to resolve paths in ("config" or "spec"). Required if the object is nested.
- * @returns {object} - The object with resolved paths.
+ * @async
+ * @param {Object} options - The options object.
+ * @param {Object} options.config - The configuration object containing settings like relativePathBase.
+ * @param {Object} options.object - The object whose paths need to be resolved.
+ * @param {string} options.filePath - The reference file path for resolving relative paths.
+ * @param {boolean} [options.nested=false] - Flag indicating if this is a recursive call for a nested object.
+ * @param {string} [options.objectType] - The type of object ('config' or 'spec'). Required for nested objects.
+ * @returns {Promise<Object>} The object with all paths resolved to absolute paths.
+ * @throws {Error} Throws an error if the object isn't a valid config or spec, or if objectType is missing for nested objects.
  */
-async function resolvePaths(
+async function resolvePaths({
   config,
   object,
   filePath,
   nested = false,
-  objectType
-) {
+  objectType,
+}) {
   // Config properties that contain paths
   const configPaths = [
     "input",
@@ -83,13 +90,19 @@ async function resolvePaths(
   let pathProperties;
   if (!nested && !objectType) {
     // Check if object matches the config schema
-    const validation = validate("config_v2", { ...object });
+    const validation = validate({
+      schemaKey: "config_v3",
+      object: { ...object },
+    });
     if (validation.valid) {
       pathProperties = configPaths;
       objectType = "config";
     } else {
       // Check if object matches the spec schema
-      const validation = validate("spec_v2", { ...object });
+      const validation = validate({
+        schemaKey: "spec_v3",
+        object: { ...object },
+      });
       if (validation.valid) {
         pathProperties = specPaths;
         objectType = "spec";
@@ -115,12 +128,13 @@ async function resolvePaths(
         objectType === "config")
     ) {
       // If the property is an object, recursively call resolvePaths to resolve paths within the object
-      object[property] = await resolvePaths(
-        config,
-        object[property],
-        filePath,
-        true,
-        objectType
+      object[property] = await resolvePaths({
+        config: config,
+        object: object[property],
+        filePath: filePath,
+        nested: true,
+        objectType: objectType
+      }
       );
     } else if (typeof object[property] === "string") {
       // If the property is a string, check if it matches any of the path properties and resolve it if it does
