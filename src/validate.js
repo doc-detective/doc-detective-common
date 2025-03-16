@@ -535,8 +535,7 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    input: ".",
-    output: ".",
+    fileTypes: ["foobar"]
   };
   const result = validate({ schemaKey: "config_v3", object: example });
   console.log(JSON.stringify(result, null, 2));

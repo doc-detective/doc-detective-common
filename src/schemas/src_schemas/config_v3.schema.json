@@ -101,18 +101,19 @@
       "default": ["markdown", "asciidoc", "html", "xml"],
       "anyOf": [
         {
-          "$comment": "Custom mode: Define your own file types with full control.",
           "type": "array",
           "minItems": 1,
           "items": {
             "anyOf": [
               {
                 "$comment": "Simple mode: Reference predefined templates by name.",
+                "title": "Predefined",
                 "type": "string",
                 "enum": ["markdown", "asciidoc", "html", "xml"]
               },
               {
                 "$comment": "Custom mode: Extend predefined templates or write whole new ones.",
+                "title": "Custom",
                 "type": "object",
                 "required": ["extensions"],
                 "properties": {
@@ -145,22 +146,27 @@
                 }
               },
               {
+                "title": "Executable",
                 "$comment": "Executable mode: Convert executable inputs directly into tests.",
-                "extensions": {
-                  "description": "File extensions to use with type.",
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/stringOrArray"
-                    }
-                  ]
-                },
-                "runShell": {
-                  "description": "`runShell` step to perform for this file type. Use $1 as a placeholder for the file path.",
-                  "anyOf": [
-                    {
-                      "$ref": "runShell_v3.schema.json#"
-                    }
-                  ]
+                "type": "object",
+                "required": ["extensions"],
+                "properties": {
+                  "extensions": {
+                    "description": "File extensions to use with type.",
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/stringOrArray"
+                      }
+                    ]
+                  },
+                  "runShell": {
+                    "description": "`runShell` step to perform for this file type. Use $1 as a placeholder for the file path.",
+                    "anyOf": [
+                      {
+                        "$ref": "runShell_v3.schema.json#"
+                      }
+                    ]
+                  }
                 }
               }
             ]
