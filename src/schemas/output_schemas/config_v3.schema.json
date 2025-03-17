@@ -8665,17 +8665,6 @@
             }
           }
         ]
-      },
-      "markupToInclude": {
-        "description": "Markup types to include when performing this operation. If no markup types are specified, the operation includes all markup types as defined in `fileTypes`.",
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "type": "string"
-            }
-          ]
-        }
       }
     }
   },
