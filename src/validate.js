@@ -28,6 +28,7 @@ addErrors(ajv);
 
 // Exports
 exports.validate = validate;
+exports.transformToSchemaKey = transformToSchemaKey;
 
 // Add all schemas from `schema` object.
 for (const [key, value] of Object.entries(schemas)) {
