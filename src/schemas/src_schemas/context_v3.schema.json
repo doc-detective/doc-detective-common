@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "properties": {
     "platforms": {
-      "description": "Supported platforms for the application.",
+      "description": "Platforms to run tests on.",
       "anyOf": [
         {
           "$ref": "#/components/schemas/platform"
@@ -18,21 +18,22 @@
         }
       ]
     },
-    "chrome": {
-      "$ref": "#/components/schemas/browser"
-    },
-    "firefox": {
-      "$ref": "#/components/schemas/browser"
-    },
-    "safari": {
-      "allOf": [
+    "browsers": {
+      "description": "Browsers to run tests on.",
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/browserName"
+        },
         {
           "$ref": "#/components/schemas/browser"
         },
         {
-          "type": "object",
-          "not": {
-            "required": ["driverPath"]
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/browserName" },
+              { "$ref": "#/components/schemas/browser" }
+            ]
           }
         }
       ]
@@ -44,11 +45,21 @@
         "type": "string",
         "enum": ["linux", "mac", "windows"]
       },
+      "browserName": {
+        "type": "string",
+        "description": "Name of the browser.",
+        "enum": ["chrome", "firefox", "safari", "webkit"],
+        "$comment": "`safari` is just a shortcut for `webkit`. Included for visibility and to reduce questions."
+      },
       "browser": {
         "type": "object",
         "description": "Browser configuration.",
+        "required": ["name"],
         "additionalProperties": false,
         "properties": {
+          "name": {
+            "$ref": "#/components/schemas/browserName"
+          },
           "executablePath": {
             "type": "string",
             "description": "Path to the browser executable. If not specified, defaults to the system default."
@@ -97,67 +108,89 @@
   },
   "examples": [
     {
-      "chrome": {
+      "platforms": "linux",
+      "browsers": "chrome"
+    },
+    {
+      "platforms": ["windows", "mac", "linux"],
+      "browsers": ["chrome", "firefox", "webkit"]
+    },
+    {
+      "browsers": {
+        "name": "chrome",
         "headless": true
       }
     },
     {
-      "chrome": {
-        "executablePath": "/usr/bin/google-chrome",
-        "headless": true
-      },
-      "firefox": {
-        "executablePath": "/usr/bin/firefox",
-        "driverPath": "/usr/local/bin/geckodriver"
-      }
+      "browsers": [
+        {
+          "name": "chrome",
+          "executablePath": "/usr/bin/google-chrome",
+          "headless": true
+        },
+        {
+          "name": "firefox",
+          "executablePath": "/usr/bin/firefox",
+          "driverPath": "/usr/local/bin/geckodriver"
+        }
+      ]
     },
     {
       "platforms": ["mac", "linux"],
-      "chrome": {
+      "browsers": {
+        "name": "chrome",
         "headless": true
       }
     },
     {
       "platforms": ["windows", "mac", "linux"],
-      "chrome": {
-        "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-        "driverPath": "C:\\WebDrivers\\chromedriver.exe",
-        "headless": true,
-        "dimensions": {
-          "width": 1920,
-          "height": 1080
+      "browsers": [
+        {
+          "name": "chrome",
+          "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+          "driverPath": "C:\\WebDrivers\\chromedriver.exe",
+          "headless": true,
+          "dimensions": {
+            "width": 1920,
+            "height": 1080
+          },
+          "viewport": {
+            "width": 1600,
+            "height": 900
+          }
         },
-        "viewport": {
-          "width": 1600,
-          "height": 900
+        {
+          "name": "firefox",
+          "executablePath": "/usr/bin/firefox",
+          "driverPath": "/usr/local/bin/geckodriver",
+          "dimensions": {
+            "width": 1366,
+            "height": 768
+          }
+        },
+        {
+          "name": "webkit",
+          "executablePath": "/Applications/Safari.app/Contents/MacOS/Safari",
+          "headless": false,
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          }
         }
-      },
-      "firefox": {
-        "executablePath": "/usr/bin/firefox",
-        "driverPath": "/usr/local/bin/geckodriver",
-        "dimensions": {
-          "width": 1366,
-          "height": 768
-        }
-      },
-      "safari": {
-        "executablePath": "/Applications/Safari.app/Contents/MacOS/Safari",
-        "headless": false,
-        "viewport": {
-          "width": 1440,
-          "height": 900
-        }
-      }
+      ]
     },
     {
       "platforms": "mac",
-      "safari": {
-        "executablePath": "/Applications/Safari.app/Contents/MacOS/Safari",
-        "dimensions": {
-          "width": 1280,
-          "height": 800
+      "browsers": [
+        {
+          "name": "safari",
+          "executablePath": "/Applications/Safari.app/Contents/MacOS/Safari",
+          "dimensions": {
+            "width": 1280,
+            "height": 800
+          }
         }
-      }
+      ]
     }
   ]
 }

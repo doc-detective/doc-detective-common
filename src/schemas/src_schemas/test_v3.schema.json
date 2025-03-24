@@ -105,7 +105,8 @@
       "runOn": [
         {
           "platforms": ["linux"],
-          "firefox": {
+          "browsers": {
+            "name": "firefox",
             "executablePath": "/usr/bin/firefox",
             "dimensions": {},
             "viewport": {}

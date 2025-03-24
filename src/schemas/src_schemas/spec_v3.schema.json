@@ -52,11 +52,9 @@
       "specId": "Do all the things! - Spec",
       "runOn": [
         {
-          "platforms": [
-            "windows",
-            "mac"
-          ],
-          "firefox": {
+          "platforms": ["windows", "mac"],
+          "browsers": {
+            "name": "firefox",
             "executablePath": "/usr/bin/firefox",
             "dimensions": {},
             "viewport": {}
@@ -69,14 +67,8 @@
           "description": "This test includes nearly every property across all actions.",
           "runOn": [
             {
-              "platforms": [
-                "linux"
-              ],
-              "firefox": {
-                "executablePath": "/usr/bin/firefox",
-                "dimensions": {},
-                "viewport": {}
-              }
+              "platforms": "linux",
+              "browsers": "firefox"
             }
           ],
           "steps": [
@@ -86,9 +78,7 @@
             {
               "runShell": {
                 "command": "echo",
-                "args": [
-                  "$USER"
-                ],
+                "args": ["$USER"],
                 "maxVariation": 0,
                 "overwrite": "aboveVariation"
               },
@@ -115,10 +105,7 @@
                     "job": "leader"
                   }
                 },
-                "statusCodes": [
-                  200,
-                  201
-                ],
+                "statusCodes": [200, 201],
                 "maxVariation": 0,
                 "overwrite": "aboveVariation"
               },
@@ -137,18 +124,14 @@
                 "moveTo": true,
                 "click": true,
                 "type": {
-                  "keys": [
-                    "shorthair cat"
-                  ]
+                  "keys": ["shorthair cat"]
                 }
               },
               "variables": {}
             },
             {
               "type": {
-                "keys": [
-                  "$ENTER$"
-                ]
+                "keys": ["$ENTER$"]
               }
             },
             {
