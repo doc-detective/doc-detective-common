@@ -336,16 +336,15 @@ function transformToSchemaKey({
         })
       );
     // Handle openApi transformation
-    if (object?.integrations?.openApi)
-      transformedObject.integrations = {};
-      transformedObject.integrations.openApi = object.integrations.openApi.map(
-        (description) =>
-          transformToSchemaKey({
-            currentSchema: "openApi_v2",
-            targetSchema: "openApi_v3",
-            object: description,
-          })
-      );
+    if (object?.integrations?.openApi) transformedObject.integrations = {};
+    transformedObject.integrations.openApi = object.integrations.openApi.map(
+      (description) =>
+        transformToSchemaKey({
+          currentSchema: "openApi_v2",
+          targetSchema: "openApi_v3",
+          object: description,
+        })
+    );
     // Handle fileTypes transformation
     if (object?.fileTypes)
       transformedObject.fileTypes = object.fileTypes.map((fileType) => {
@@ -410,11 +409,11 @@ function transformToSchemaKey({
     transformedObject.platforms = object.platforms;
     if (object.app?.name) {
       const name = object.app.name === "edge" ? "chrome" : object.app?.name;
-      transformedObject[name] = {
-        executablePath: object.app?.path,
-        driverPath: object.app?.options?.driverPath,
+      transformedObject.browsers = [];
+      transformedObject.browsers.push({
+        name,
         headless: object.app?.options?.headless,
-        dimensions: {
+        window: {
           width: object.app?.options?.width,
           height: object.app?.options?.height,
         },
@@ -422,7 +421,7 @@ function transformToSchemaKey({
           width: object.app?.options?.viewport_width,
           height: object.app?.options?.viewport_height,
         },
-      };
+      });
     }
     const result = validate({
       schemaKey: "context_v3",
@@ -536,8 +535,12 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 if (require.main === module) {
   const example = {
-    fileTypes: ["foobar"]
+    app: {
+      name: "safari",
+    },
+    platforms: ["mac"],
   };
-  const result = validate({ schemaKey: "config_v3", object: example });
+
+  const result = validate({ schemaKey: "context_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }

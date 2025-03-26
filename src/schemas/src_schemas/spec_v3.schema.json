@@ -55,8 +55,7 @@
           "platforms": ["windows", "mac"],
           "browsers": {
             "name": "firefox",
-            "executablePath": "/usr/bin/firefox",
-            "dimensions": {},
+            "window": {},
             "viewport": {}
           }
         }

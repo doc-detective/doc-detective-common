@@ -181,19 +181,12 @@
                         ],
                         "$comment": "`safari` is just a shortcut for `webkit`. Included for visibility and to reduce questions."
                       },
-                      "executablePath": {
-                        "type": "string",
-                        "description": "Path to the browser executable. If not specified, defaults to the system default."
-                      },
-                      "driverPath": {
-                        "type": "string",
-                        "description": "Path to the browser driver. If not specified, defaults to internally managed dependencies."
-                      },
                       "headless": {
                         "type": "boolean",
-                        "description": "If `true`, runs the browser in headless mode."
+                        "description": "If `true`, runs the browser in headless mode.",
+                        "default": true
                       },
-                      "dimensions": {
+                      "window": {
                         "type": "object",
                         "description": "Browser dimensions.",
                         "additionalProperties": false,
@@ -259,19 +252,12 @@
                               ],
                               "$comment": "`safari` is just a shortcut for `webkit`. Included for visibility and to reduce questions."
                             },
-                            "executablePath": {
-                              "type": "string",
-                              "description": "Path to the browser executable. If not specified, defaults to the system default."
-                            },
-                            "driverPath": {
-                              "type": "string",
-                              "description": "Path to the browser driver. If not specified, defaults to internally managed dependencies."
-                            },
                             "headless": {
                               "type": "boolean",
-                              "description": "If `true`, runs the browser in headless mode."
+                              "description": "If `true`, runs the browser in headless mode.",
+                              "default": true
                             },
-                            "dimensions": {
+                            "window": {
                               "type": "object",
                               "description": "Browser dimensions.",
                               "additionalProperties": false,
@@ -349,19 +335,12 @@
                       ],
                       "$comment": "`safari` is just a shortcut for `webkit`. Included for visibility and to reduce questions."
                     },
-                    "executablePath": {
-                      "type": "string",
-                      "description": "Path to the browser executable. If not specified, defaults to the system default."
-                    },
-                    "driverPath": {
-                      "type": "string",
-                      "description": "Path to the browser driver. If not specified, defaults to internally managed dependencies."
-                    },
                     "headless": {
                       "type": "boolean",
-                      "description": "If `true`, runs the browser in headless mode."
+                      "description": "If `true`, runs the browser in headless mode.",
+                      "default": true
                     },
-                    "dimensions": {
+                    "window": {
                       "type": "object",
                       "description": "Browser dimensions.",
                       "additionalProperties": false,
@@ -422,13 +401,10 @@
                 "browsers": [
                   {
                     "name": "chrome",
-                    "executablePath": "/usr/bin/google-chrome",
                     "headless": true
                   },
                   {
-                    "name": "firefox",
-                    "executablePath": "/usr/bin/firefox",
-                    "driverPath": "/usr/local/bin/geckodriver"
+                    "name": "firefox"
                   }
                 ]
               },
@@ -451,10 +427,8 @@
                 "browsers": [
                   {
                     "name": "chrome",
-                    "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-                    "driverPath": "C:\\WebDrivers\\chromedriver.exe",
                     "headless": true,
-                    "dimensions": {
+                    "window": {
                       "width": 1920,
                       "height": 1080
                     },
@@ -465,16 +439,13 @@
                   },
                   {
                     "name": "firefox",
-                    "executablePath": "/usr/bin/firefox",
-                    "driverPath": "/usr/local/bin/geckodriver",
-                    "dimensions": {
+                    "window": {
                       "width": 1366,
                       "height": 768
                     }
                   },
                   {
                     "name": "webkit",
-                    "executablePath": "/Applications/Safari.app/Contents/MacOS/Safari",
                     "headless": false,
                     "viewport": {
                       "width": 1440,
@@ -488,8 +459,7 @@
                 "browsers": [
                   {
                     "name": "safari",
-                    "executablePath": "/Applications/Safari.app/Contents/MacOS/Safari",
-                    "dimensions": {
+                    "window": {
                       "width": 1280,
                       "height": 800
                     }
