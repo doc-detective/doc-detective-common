@@ -435,7 +435,7 @@ function transformToSchemaKey({
     let transformedObject;
     // Handle openApi_v2 to openApi_v3 transformation
     const { name, requestHeaders, ...intermediaryObject } = object;
-    intermediaryObject.descriptionName = object.name;
+    intermediaryObject.name = object.name;
     intermediaryObject.headers = object.requestHeaders;
     transformedObject = { ...intermediaryObject };
 

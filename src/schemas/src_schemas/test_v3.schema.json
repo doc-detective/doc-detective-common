@@ -44,7 +44,7 @@
             "not": {
               "required": ["operationId"]
             },
-            "required": ["descriptionName", "descriptionPath"]
+            "required": ["name", "descriptionPath"]
           }
         ]
       }
@@ -193,7 +193,7 @@
           "validateAgainstSchema": "both",
           "useExample": "none",
           "exampleKey": "",
-          "descriptionName": "Acme"
+          "name": "Acme"
         }
       ],
       "steps": [

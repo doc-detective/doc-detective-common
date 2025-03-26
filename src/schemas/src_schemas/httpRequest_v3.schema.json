@@ -255,7 +255,7 @@
     },
     {
       "openApi": {
-        "descriptionName": "Reqres",
+        "name": "Reqres",
         "operationId": "getUserById"
       },
       "request": {

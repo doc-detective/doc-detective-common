@@ -150,7 +150,7 @@
         {
           "descriptionPath": "https://www.acme.com/openapi.json",
           "server": "https://api.acme.com",
-          "descriptionName": "Acme"
+          "name": "Acme"
         }
       ],
       "tests": [

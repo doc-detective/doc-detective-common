@@ -1762,7 +1762,7 @@
                                                                 "description": "OpenAPI description and configuration.",
                                                                 "additionalProperties": false,
                                                                 "properties": {
-                                                                  "descriptionName": {
+                                                                  "name": {
                                                                     "type": "string",
                                                                     "description": "Name of the OpenAPI description, as defined in your configuration."
                                                                   },
@@ -1840,7 +1840,7 @@
                                                                     "descriptionPath": "https://petstore.swagger.io/v2/swagger.json"
                                                                   },
                                                                   {
-                                                                    "descriptionName": "Reqres",
+                                                                    "name": "Reqres",
                                                                     "operationId": "getUserById"
                                                                   },
                                                                   {
@@ -2093,7 +2093,7 @@
                                                                   "description": "OpenAPI description and configuration.",
                                                                   "additionalProperties": false,
                                                                   "properties": {
-                                                                    "descriptionName": {
+                                                                    "name": {
                                                                       "type": "string",
                                                                       "description": "Name of the OpenAPI description, as defined in your configuration."
                                                                     },
@@ -2171,7 +2171,7 @@
                                                                       "descriptionPath": "https://petstore.swagger.io/v2/swagger.json"
                                                                     },
                                                                     {
-                                                                      "descriptionName": "Reqres",
+                                                                      "name": "Reqres",
                                                                       "operationId": "getUserById"
                                                                     },
                                                                     {
@@ -2456,7 +2456,7 @@
                                                   },
                                                   {
                                                     "openApi": {
-                                                      "descriptionName": "Reqres",
+                                                      "name": "Reqres",
                                                       "operationId": "getUserById"
                                                     },
                                                     "request": {
@@ -4304,7 +4304,7 @@
                                       {
                                         "httpRequest": {
                                           "openApi": {
-                                            "descriptionName": "Reqres",
+                                            "name": "Reqres",
                                             "operationId": "getUserById"
                                           },
                                           "request": {
@@ -4657,7 +4657,7 @@
                 "description": "OpenAPI description and configuration.",
                 "additionalProperties": false,
                 "properties": {
-                  "descriptionName": {
+                  "name": {
                     "type": "string",
                     "description": "Name of the OpenAPI description, as defined in your configuration."
                   },
@@ -4735,7 +4735,7 @@
                     "descriptionPath": "https://petstore.swagger.io/v2/swagger.json"
                   },
                   {
-                    "descriptionName": "Reqres",
+                    "name": "Reqres",
                     "operationId": "getUserById"
                   },
                   {
@@ -4799,7 +4799,7 @@
                   ]
                 },
                 "required": [
-                  "descriptionName",
+                  "name",
                   "descriptionPath"
                 ]
               }
@@ -5953,7 +5953,7 @@
                                                   "description": "OpenAPI description and configuration.",
                                                   "additionalProperties": false,
                                                   "properties": {
-                                                    "descriptionName": {
+                                                    "name": {
                                                       "type": "string",
                                                       "description": "Name of the OpenAPI description, as defined in your configuration."
                                                     },
@@ -6031,7 +6031,7 @@
                                                       "descriptionPath": "https://petstore.swagger.io/v2/swagger.json"
                                                     },
                                                     {
-                                                      "descriptionName": "Reqres",
+                                                      "name": "Reqres",
                                                       "operationId": "getUserById"
                                                     },
                                                     {
@@ -6284,7 +6284,7 @@
                                                     "description": "OpenAPI description and configuration.",
                                                     "additionalProperties": false,
                                                     "properties": {
-                                                      "descriptionName": {
+                                                      "name": {
                                                         "type": "string",
                                                         "description": "Name of the OpenAPI description, as defined in your configuration."
                                                       },
@@ -6362,7 +6362,7 @@
                                                         "descriptionPath": "https://petstore.swagger.io/v2/swagger.json"
                                                       },
                                                       {
-                                                        "descriptionName": "Reqres",
+                                                        "name": "Reqres",
                                                         "operationId": "getUserById"
                                                       },
                                                       {
@@ -6647,7 +6647,7 @@
                                     },
                                     {
                                       "openApi": {
-                                        "descriptionName": "Reqres",
+                                        "name": "Reqres",
                                         "operationId": "getUserById"
                                       },
                                       "request": {
@@ -8495,7 +8495,7 @@
                         {
                           "httpRequest": {
                             "openApi": {
-                              "descriptionName": "Reqres",
+                              "name": "Reqres",
                               "operationId": "getUserById"
                             },
                             "request": {
