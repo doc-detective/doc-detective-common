@@ -6,7 +6,7 @@ exports.resolvePaths = resolvePaths;
 
 /**
  * Resolves relative paths in configuration and specification objects to absolute paths.
- * 
+ *
  * This function traverses an object (either a config or spec) and converts all path properties
  * to absolute paths based on the provided configuration and file path. It can handle nested objects
  * and special path relationships like path/directory and savePath/saveDirectory.
@@ -78,13 +78,19 @@ async function resolvePaths({
     if (path.isAbsolute(relativePath)) {
       return relativePath;
     }
-    // If filePath is a file, use its directory as the base path
-    filePath = fs.lstatSync(filePath).isFile()
-      ? path.dirname(filePath)
-      : filePath;
+
+    // Check if filePath exists and is a file
+    const fileExists = fs.existsSync(filePath);
+    const isFile = fileExists
+      ? fs.lstatSync(filePath).isFile()
+      : path.parse(filePath).ext !== "";
+
+    // Use directory of filePath if it's a file (or looks like one)
+    const basePath = isFile ? path.dirname(filePath) : filePath;
+
     // Resolve the path based on the base type
     return baseType === "file"
-      ? path.resolve(filePath, relativePath)
+      ? path.resolve(basePath, relativePath)
       : path.resolve(relativePath);
   }
 
@@ -136,9 +142,8 @@ async function resolvePaths({
         object: object[property],
         filePath: filePath,
         nested: true,
-        objectType: objectType
-      }
-      );
+        objectType: objectType,
+      });
     } else if (typeof object[property] === "string") {
       // If the property is a string, check if it matches any of the path properties and resolve it if it does
       pathProperties.forEach((pathProperty) => {
@@ -149,24 +154,6 @@ async function resolvePaths({
                 relativePathBase,
                 object[pathProperty],
                 object.directory
-              );
-            } else {
-              object[pathProperty] = path.join(
-                object.directory,
-                object[pathProperty]
-              );
-            }
-          } else if (pathProperty === "savePath" && object.saveDirectory) {
-            if (path.isAbsolute(object.saveDirectory)) {
-              object[pathProperty] = resolve(
-                relativePathBase,
-                object[pathProperty],
-                object.saveDirectory
-              );
-            } else {
-              object[pathProperty] = path.join(
-                object.saveDirectory,
-                object[pathProperty]
               );
             }
           } else {
