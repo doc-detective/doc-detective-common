@@ -2200,6 +2200,10 @@
                                                                   "properties": {}
                                                                 },
                                                                 {
+                                                                  "type": "array",
+                                                                  "items": {}
+                                                                },
+                                                                {
                                                                   "type": "string"
                                                                 }
                                                               ],
@@ -2224,6 +2228,10 @@
                                                                   "type": "object",
                                                                   "additionalProperties": true,
                                                                   "properties": {}
+                                                                },
+                                                                {
+                                                                  "type": "array",
+                                                                  "items": {}
                                                                 },
                                                                 {
                                                                   "type": "string"
@@ -2532,6 +2540,10 @@
                                                                     "properties": {}
                                                                   },
                                                                   {
+                                                                    "type": "array",
+                                                                    "items": {}
+                                                                  },
+                                                                  {
                                                                     "type": "string"
                                                                   }
                                                                 ],
@@ -2556,6 +2568,10 @@
                                                                     "type": "object",
                                                                     "additionalProperties": true,
                                                                     "properties": {}
+                                                                  },
+                                                                  {
+                                                                    "type": "array",
+                                                                    "items": {}
                                                                   },
                                                                   {
                                                                     "type": "string"
@@ -6393,6 +6409,10 @@
                                                     "properties": {}
                                                   },
                                                   {
+                                                    "type": "array",
+                                                    "items": {}
+                                                  },
+                                                  {
                                                     "type": "string"
                                                   }
                                                 ],
@@ -6417,6 +6437,10 @@
                                                     "type": "object",
                                                     "additionalProperties": true,
                                                     "properties": {}
+                                                  },
+                                                  {
+                                                    "type": "array",
+                                                    "items": {}
                                                   },
                                                   {
                                                     "type": "string"
@@ -6725,6 +6749,10 @@
                                                       "properties": {}
                                                     },
                                                     {
+                                                      "type": "array",
+                                                      "items": {}
+                                                    },
+                                                    {
                                                       "type": "string"
                                                     }
                                                   ],
@@ -6749,6 +6777,10 @@
                                                       "type": "object",
                                                       "additionalProperties": true,
                                                       "properties": {}
+                                                    },
+                                                    {
+                                                      "type": "array",
+                                                      "items": {}
                                                     },
                                                     {
                                                       "type": "string"
@@ -10058,6 +10090,10 @@
                     "properties": {}
                   },
                   {
+                    "type": "array",
+                    "items": {}
+                  },
+                  {
                     "type": "string"
                   }
                 ],
@@ -10082,6 +10118,10 @@
                     "type": "object",
                     "additionalProperties": true,
                     "properties": {}
+                  },
+                  {
+                    "type": "array",
+                    "items": {}
                   },
                   {
                     "type": "string"
@@ -10390,6 +10430,10 @@
                       "properties": {}
                     },
                     {
+                      "type": "array",
+                      "items": {}
+                    },
+                    {
                       "type": "string"
                     }
                   ],
@@ -10414,6 +10458,10 @@
                       "type": "object",
                       "additionalProperties": true,
                       "properties": {}
+                    },
+                    {
+                      "type": "array",
+                      "items": {}
                     },
                     {
                       "type": "string"
@@ -13203,6 +13251,10 @@
                                                           "properties": {}
                                                         },
                                                         {
+                                                          "type": "array",
+                                                          "items": {}
+                                                        },
+                                                        {
                                                           "type": "string"
                                                         }
                                                       ],
@@ -13227,6 +13279,10 @@
                                                           "type": "object",
                                                           "additionalProperties": true,
                                                           "properties": {}
+                                                        },
+                                                        {
+                                                          "type": "array",
+                                                          "items": {}
                                                         },
                                                         {
                                                           "type": "string"
@@ -13535,6 +13591,10 @@
                                                             "properties": {}
                                                           },
                                                           {
+                                                            "type": "array",
+                                                            "items": {}
+                                                          },
+                                                          {
                                                             "type": "string"
                                                           }
                                                         ],
@@ -13559,6 +13619,10 @@
                                                             "type": "object",
                                                             "additionalProperties": true,
                                                             "properties": {}
+                                                          },
+                                                          {
+                                                            "type": "array",
+                                                            "items": {}
                                                           },
                                                           {
                                                             "type": "string"
@@ -19273,6 +19337,10 @@
                                                 "properties": {}
                                               },
                                               {
+                                                "type": "array",
+                                                "items": {}
+                                              },
+                                              {
                                                 "type": "string"
                                               }
                                             ],
@@ -19297,6 +19365,10 @@
                                                 "type": "object",
                                                 "additionalProperties": true,
                                                 "properties": {}
+                                              },
+                                              {
+                                                "type": "array",
+                                                "items": {}
                                               },
                                               {
                                                 "type": "string"
@@ -19605,6 +19677,10 @@
                                                   "properties": {}
                                                 },
                                                 {
+                                                  "type": "array",
+                                                  "items": {}
+                                                },
+                                                {
                                                   "type": "string"
                                                 }
                                               ],
@@ -19629,6 +19705,10 @@
                                                   "type": "object",
                                                   "additionalProperties": true,
                                                   "properties": {}
+                                                },
+                                                {
+                                                  "type": "array",
+                                                  "items": {}
                                                 },
                                                 {
                                                   "type": "string"
@@ -23259,6 +23339,10 @@
                                 "properties": {}
                               },
                               {
+                                "type": "array",
+                                "items": {}
+                              },
+                              {
                                 "type": "string"
                               }
                             ],
@@ -23283,6 +23367,10 @@
                                 "type": "object",
                                 "additionalProperties": true,
                                 "properties": {}
+                              },
+                              {
+                                "type": "array",
+                                "items": {}
                               },
                               {
                                 "type": "string"
@@ -23591,6 +23679,10 @@
                                   "properties": {}
                                 },
                                 {
+                                  "type": "array",
+                                  "items": {}
+                                },
+                                {
                                   "type": "string"
                                 }
                               ],
@@ -23615,6 +23707,10 @@
                                   "type": "object",
                                   "additionalProperties": true,
                                   "properties": {}
+                                },
+                                {
+                                  "type": "array",
+                                  "items": {}
                                 },
                                 {
                                   "type": "string"
@@ -27474,6 +27570,10 @@
                                       "properties": {}
                                     },
                                     {
+                                      "type": "array",
+                                      "items": {}
+                                    },
+                                    {
                                       "type": "string"
                                     }
                                   ],
@@ -27498,6 +27598,10 @@
                                       "type": "object",
                                       "additionalProperties": true,
                                       "properties": {}
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": {}
                                     },
                                     {
                                       "type": "string"
@@ -27806,6 +27910,10 @@
                                         "properties": {}
                                       },
                                       {
+                                        "type": "array",
+                                        "items": {}
+                                      },
+                                      {
                                         "type": "string"
                                       }
                                     ],
@@ -27830,6 +27938,10 @@
                                         "type": "object",
                                         "additionalProperties": true,
                                         "properties": {}
+                                      },
+                                      {
+                                        "type": "array",
+                                        "items": {}
                                       },
                                       {
                                         "type": "string"
