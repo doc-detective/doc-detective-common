@@ -1753,7 +1753,8 @@
                               ]
                             },
                             "default": [
-                              200
+                              200,
+                              201
                             ]
                           },
                           "method": {
@@ -1794,7 +1795,7 @@
                                 "default": {},
                                 "properties": {}
                               },
-                              "data": {
+                              "body": {
                                 "description": "JSON object to include as the body of the HTTP request.",
                                 "anyOf": [
                                   {
@@ -1820,7 +1821,7 @@
                                 "properties": {},
                                 "default": {}
                               },
-                              "data": {
+                              "body": {
                                 "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
                                 "anyOf": [
                                   {
@@ -1864,7 +1865,7 @@
                               "false",
                               "aboveVariation"
                             ],
-                            "default": "false"
+                            "default": "aboveVariation"
                           }
                         }
                       }
@@ -2084,7 +2085,8 @@
                                 ]
                               },
                               "default": [
-                                200
+                                200,
+                                201
                               ]
                             },
                             "method": {
@@ -2125,7 +2127,7 @@
                                   "default": {},
                                   "properties": {}
                                 },
-                                "data": {
+                                "body": {
                                   "description": "JSON object to include as the body of the HTTP request.",
                                   "anyOf": [
                                     {
@@ -2151,7 +2153,7 @@
                                   "properties": {},
                                   "default": {}
                                 },
-                                "data": {
+                                "body": {
                                   "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
                                   "anyOf": [
                                     {
@@ -2195,7 +2197,7 @@
                                 "false",
                                 "aboveVariation"
                               ],
-                              "default": "false"
+                              "default": "aboveVariation"
                             }
                           }
                         }
