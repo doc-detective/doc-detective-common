@@ -272,7 +272,7 @@ function transformToSchemaKey({
       };
       // TODO: Handle variable setting
       transformedObject.variables = {};
-      object.setVariables.forEach((variable) => {
+      object?.setVariables?.forEach((variable) => {
         transformedObject.variables[variable.name] = variable.value;
       });
     } else if (currentSchema === "setVariables_v2") {
