@@ -242,6 +242,7 @@
         },
         "request": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
             "headers": {
               "description": "Headers to include in the HTTP request, in key/value format.",
@@ -279,6 +280,7 @@
         },
         "response": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
             "headers": {
               "description": "Headers expected in the response, in key/value format. If one or more `responseHeaders` entries aren't present in the response, the step fails.",
@@ -582,6 +584,7 @@
           },
           "request": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
               "headers": {
                 "description": "Headers to include in the HTTP request, in key/value format.",
@@ -619,6 +622,7 @@
           },
           "response": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
               "headers": {
                 "description": "Headers expected in the response, in key/value format. If one or more `responseHeaders` entries aren't present in the response, the step fails.",

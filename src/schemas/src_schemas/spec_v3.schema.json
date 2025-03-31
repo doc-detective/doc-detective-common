@@ -165,7 +165,7 @@
                   "exampleKey": ""
                 },
                 "request": {
-                  "params": {
+                  "parameters": {
                     "id": 123
                   }
                 },
