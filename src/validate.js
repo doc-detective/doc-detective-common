@@ -202,7 +202,7 @@ function transformToSchemaKey({
         request: {
           body: object.requestData,
           headers: object.requestHeaders,
-          params: object.requestParams,
+          parameters: object.requestParams,
         },
         response: {
           body: object.responseData,

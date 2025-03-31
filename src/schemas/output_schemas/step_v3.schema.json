@@ -1234,7 +1234,7 @@
                           "properties": {},
                           "default": {}
                         },
-                        "params": {
+                        "parameters": {
                           "description": "URL parameters to include in the HTTP request, in key/value format.",
                           "type": "object",
                           "additionalProperties": true,
@@ -1574,7 +1574,7 @@
                             "properties": {},
                             "default": {}
                           },
-                          "params": {
+                          "parameters": {
                             "description": "URL parameters to include in the HTTP request, in key/value format.",
                             "type": "object",
                             "additionalProperties": true,
@@ -1711,7 +1711,7 @@
                     "headers": {
                       "header": "value"
                     },
-                    "params": {
+                    "parameters": {
                       "param": "value"
                     }
                   },
@@ -1760,7 +1760,7 @@
                     "operationId": "getUserById"
                   },
                   "request": {
-                    "params": {
+                    "parameters": {
                       "id": 123
                     }
                   }
@@ -1771,7 +1771,7 @@
                     "operationId": "getUserById"
                   },
                   "request": {
-                    "params": {
+                    "parameters": {
                       "id": 123
                     }
                   }
@@ -3553,7 +3553,7 @@
           "headers": {
             "header": "value"
           },
-          "params": {
+          "parameters": {
             "param": "value"
           }
         },
@@ -3608,7 +3608,7 @@
           "operationId": "getUserById"
         },
         "request": {
-          "params": {
+          "parameters": {
             "id": 123
           }
         }
@@ -3621,7 +3621,7 @@
           "operationId": "getUserById"
         },
         "request": {
-          "params": {
+          "parameters": {
             "id": 123
           }
         }
