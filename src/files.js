@@ -7,42 +7,54 @@ const { URL } = require("url");
  * Reads a file from a given URL or local file path and returns its content.
  * Supports JSON and YAML file formats.
  *
- * @param {string} fileURL - The URL or local file path of the file to read.
- * @returns {Promise<Object|string|null>} - The parsed content of the file if it's JSON or YAML, 
- *                                          the raw content if it's another format, 
+ * @param {string} fileURLOrPath - The URL or local file path of the file to read.
+ * @returns {Promise<Object|string|null>} - The parsed content of the file if it's JSON or YAML,
+ *                                          the raw content if it's another format,
  *                                          or null if an error occurs.
  */
-async function readFile(fileURL) {
+async function readFile({ fileURLOrPath }) {
+  if (!fileURLOrPath) {
+    throw new Error("fileURLOrPath is required");
+  }
+  if (typeof fileURLOrPath !== "string") {
+    throw new Error("fileURLOrPath must be a string");
+  }
+  if (fileURLOrPath.trim() === "") {
+    throw new Error("fileURLOrPath cannot be an empty string");
+  }
 
   let content;
   let isRemote = false;
 
   try {
-    const parsedURL = new URL(fileURL);
-    isRemote = parsedURL.protocol === "http:" || parsedURL.protocol === "https:";
+    const parsedURL = new URL(fileURLOrPath);
+    isRemote =
+      parsedURL.protocol === "http:" || parsedURL.protocol === "https:";
   } catch (error) {
     // Not a valid URL, assume local file path
   }
 
   if (isRemote) {
     try {
-      const response = await axios.get(fileURL);
+      const response = await axios.get(fileURLOrPath);
       content = response.data;
     } catch (error) {
-      console.warn(`Error reading remote file from ${fileURL}: ${error.message}`);
+      console.warn(
+        `Error reading remote file from ${fileURLOrPath}: ${error.message}`
+      );
       return null;
     }
-  } else {  
-    try {  
-      content = await fs.promises.readFile(fileURL, "utf8");  
-    } catch (error) {  
-      if (error.code === 'ENOENT') {  
-        console.warn(`File not found: ${fileURL}`);  
-      } else {  
-        console.warn(`Error reading file: ${error.message}`);  
-      }  
-      return null;  
-    }  
+  } else {
+    try {
+      content = await fs.promises.readFile(fileURLOrPath, "utf8");
+    } catch (error) {
+      if (error.code === "ENOENT") {
+        console.warn(`File not found: ${fileURLOrPath}`);
+      } else {
+        console.warn(`Error reading file: ${error.message}`);
+      }
+      return null;
+    }
   }
 
   // Parse based on file content, and return either object or string
@@ -58,7 +70,6 @@ async function readFile(fileURL) {
       return content;
     }
   }
-
 }
 
 module.exports = { readFile };
