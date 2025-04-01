@@ -446,7 +446,7 @@ function transformToSchemaKey({
     if (!result.valid) {
       throw new Error(`Invalid object: ${result.errors}`);
     }
-    return result.object;
+    return transformedObject;
   } else if (targetSchema === "spec_v3") {
     // Handle spec_v2 to spec_v3 transformation
     const transformedObject = {
