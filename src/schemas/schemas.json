@@ -355,7 +355,14 @@
               "type": "object",
               "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
               "additionalProperties": false,
+              "dynamicDefaults": {
+                "contextId": "uuid"
+              },
               "properties": {
+                "contextId": {
+                  "type": "string",
+                  "description": "Unique identifier for the context."
+                },
                 "platforms": {
                   "description": "Platforms to run tests on.",
                   "anyOf": [
@@ -9047,7 +9054,14 @@
     "type": "object",
     "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
     "additionalProperties": false,
+    "dynamicDefaults": {
+      "contextId": "uuid"
+    },
     "properties": {
+      "contextId": {
+        "type": "string",
+        "description": "Unique identifier for the context."
+      },
       "platforms": {
         "description": "Platforms to run tests on.",
         "anyOf": [
@@ -10942,7 +10956,14 @@
                         "type": "object",
                         "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
                         "additionalProperties": false,
+                        "dynamicDefaults": {
+                          "contextId": "uuid"
+                        },
                         "properties": {
+                          "contextId": {
+                            "type": "string",
+                            "description": "Unique identifier for the context."
+                          },
                           "platforms": {
                             "description": "Platforms to run tests on.",
                             "anyOf": [
@@ -11490,7 +11511,14 @@
                                   "type": "object",
                                   "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
                                   "additionalProperties": false,
+                                  "dynamicDefaults": {
+                                    "contextId": "uuid"
+                                  },
                                   "properties": {
+                                    "contextId": {
+                                      "type": "string",
+                                      "description": "Unique identifier for the context."
+                                    },
                                     "platforms": {
                                       "description": "Platforms to run tests on.",
                                       "anyOf": [
@@ -17032,7 +17060,14 @@
               "type": "object",
               "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
               "additionalProperties": false,
+              "dynamicDefaults": {
+                "contextId": "uuid"
+              },
               "properties": {
+                "contextId": {
+                  "type": "string",
+                  "description": "Unique identifier for the context."
+                },
                 "platforms": {
                   "description": "Platforms to run tests on.",
                   "anyOf": [
@@ -17580,7 +17615,14 @@
                         "type": "object",
                         "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
                         "additionalProperties": false,
+                        "dynamicDefaults": {
+                          "contextId": "uuid"
+                        },
                         "properties": {
+                          "contextId": {
+                            "type": "string",
+                            "description": "Unique identifier for the context."
+                          },
                           "platforms": {
                             "description": "Platforms to run tests on.",
                             "anyOf": [
@@ -25821,7 +25863,14 @@
               "type": "object",
               "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
               "additionalProperties": false,
+              "dynamicDefaults": {
+                "contextId": "uuid"
+              },
               "properties": {
+                "contextId": {
+                  "type": "string",
+                  "description": "Unique identifier for the context."
+                },
                 "platforms": {
                   "description": "Platforms to run tests on.",
                   "anyOf": [

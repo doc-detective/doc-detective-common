@@ -24,7 +24,7 @@ const { readFile } = require("../src/files");
       const fileContent = '{"key": "value"}';
       axiosGetStub.resolves({ data: fileContent });
 
-      const result = await readFile(fileURL);
+      const result = await readFile({fileURLOrPath: fileURL});
 
       expect(result).to.deep.equal({ key: "value" });
       expect(axiosGetStub.calledOnceWith(fileURL)).to.be.true;
@@ -35,7 +35,7 @@ const { readFile } = require("../src/files");
       const fileContent = "key: value";
       axiosGetStub.resolves({ data: fileContent });
 
-      const result = await readFile(fileURL);
+      const result = await readFile({fileURLOrPath: fileURL});
 
       expect(result).to.deep.equal({ key: "value" });
       expect(axiosGetStub.calledOnceWith(fileURL)).to.be.true;
@@ -46,7 +46,7 @@ const { readFile } = require("../src/files");
       const fileContent = '{"key": "value"}';
       fsReadFileStub.resolves(fileContent);
 
-      const result = await readFile(filePath);
+      const result = await readFile({fileURLOrPath: filePath});
 
       expect(result).to.deep.equal({ key: "value" });
       expect(fsReadFileStub.calledOnceWith(filePath, "utf8")).to.be.true;
@@ -57,7 +57,7 @@ const { readFile } = require("../src/files");
       const fileContent = "key: value";
       fsReadFileStub.resolves(fileContent);
 
-      const result = await readFile(filePath);
+      const result = await readFile({fileURLOrPath: filePath});
 
       expect(result).to.deep.equal({ key: "value" });
       expect(fsReadFileStub.calledOnceWith(filePath, "utf8")).to.be.true;
@@ -68,7 +68,7 @@ const { readFile } = require("../src/files");
       const fileContent = "plain text content";
       fsReadFileStub.resolves(fileContent);
 
-      const result = await readFile(filePath);
+      const result = await readFile({fileURLOrPath: filePath});
 
       expect(result).to.equal(fileContent);
       expect(fsReadFileStub.calledOnceWith(filePath, "utf8")).to.be.true;
@@ -78,7 +78,7 @@ const { readFile } = require("../src/files");
       const fileURL = "http://example.com/file.json";
       axiosGetStub.rejects(new Error("Network error"));
 
-      const result = await readFile(fileURL);
+      const result = await readFile({fileURLOrPath: fileURL});
 
       expect(result).to.be.null;
       expect(axiosGetStub.calledOnceWith(fileURL)).to.be.true;
@@ -88,7 +88,7 @@ const { readFile } = require("../src/files");
       const filePath = "/path/to/nonexistent.json";
       fsReadFileStub.rejects({ code: "ENOENT" });
 
-      const result = await readFile(filePath);
+      const result = await readFile({fileURLOrPath: filePath});
 
       expect(result).to.be.null;
       expect(fsReadFileStub.calledOnceWith(filePath, "utf8")).to.be.true;
@@ -98,7 +98,7 @@ const { readFile } = require("../src/files");
       const filePath = "/path/to/file.json";
       fsReadFileStub.rejects(new Error("Read error"));
 
-      const result = await readFile(filePath);
+      const result = await readFile({fileURLOrPath: filePath});
 
       expect(result).to.be.null;
       expect(fsReadFileStub.calledOnceWith(filePath, "utf8")).to.be.true;
