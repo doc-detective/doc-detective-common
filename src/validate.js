@@ -193,7 +193,7 @@ function transformToSchemaKey({
       object.setVariables?.forEach((variable) => {
         transformedObject.variables[
           variable.name
-        ] = `extract($$element.text, ${variable.regex})`;
+        ] = `extract($$element.text, "${variable.regex}")`;
       });
     } else if (currentSchema === "httpRequest_v2") {
       transformedObject.httpRequest = {
@@ -232,7 +232,7 @@ function transformToSchemaKey({
       object.envsFromResponseData?.forEach((variable) => {
         transformedObject.variables[
           variable.name
-        ] = `jq($$response.data, ${variable.jqFilter})`;
+        ] = `jq($$response.body, "${variable.jqFilter}")`;
       });
     } else if (currentSchema === "runShell_v2") {
       transformedObject.runShell = {
@@ -254,7 +254,7 @@ function transformToSchemaKey({
       object.setVariables?.forEach((variable) => {
         transformedObject.variables[
           variable.name
-        ] = `extract($$response.data, ${variable.regex})`;
+        ] = `extract($$stdio.stdout, "${variable.regex}")`;
       });
     } else if (currentSchema === "runCode_v2") {
       transformedObject.runCode = {
@@ -277,7 +277,7 @@ function transformToSchemaKey({
       object?.setVariables?.forEach((variable) => {
         transformedObject.variables[
           variable.name
-        ] = `extract($$response.data, ${variable.regex})`;
+        ] = `extract($$stdio.stdout, "${variable.regex}")`;
       });
     } else if (currentSchema === "setVariables_v2") {
       transformedObject.loadVariables = object.path;
