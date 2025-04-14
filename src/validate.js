@@ -189,10 +189,11 @@ function transformToSchemaKey({
         transformedObject.find.type.inputDelay = object.typeKeys.delay;
         delete transformedObject.find.type.keys.delay;
       }
-      // TODO: Handle variable setting
       transformedObject.variables = {};
       object.setVariables?.forEach((variable) => {
-        transformedObject.variables[variable.name] = variable.regex;
+        transformedObject.variables[
+          variable.name
+        ] = `extract($$element.text, ${variable.regex})`;
       });
     } else if (currentSchema === "httpRequest_v2") {
       transformedObject.httpRequest = {
@@ -227,10 +228,11 @@ function transformToSchemaKey({
           object: object.openApi,
         });
       }
-      // TODO: Handle variable setting
       transformedObject.variables = {};
       object.envsFromResponseData?.forEach((variable) => {
-        transformedObject.variables[variable.name] = variable.regex;
+        transformedObject.variables[
+          variable.name
+        ] = `jq($$response.data, ${variable.jqFilter})`;
       });
     } else if (currentSchema === "runShell_v2") {
       transformedObject.runShell = {
@@ -248,10 +250,11 @@ function transformToSchemaKey({
             : object.overwrite,
         timeout: object.timeout,
       };
-      // TODO: Handle variable setting
       transformedObject.variables = {};
       object.setVariables?.forEach((variable) => {
-        transformedObject.variables[variable.name] = variable.value;
+        transformedObject.variables[
+          variable.name
+        ] = `extract($$response.data, ${variable.regex})`;
       });
     } else if (currentSchema === "runCode_v2") {
       transformedObject.runCode = {
@@ -270,10 +273,11 @@ function transformToSchemaKey({
             : object.overwrite,
         timeout: object.timeout,
       };
-      // TODO: Handle variable setting
       transformedObject.variables = {};
       object?.setVariables?.forEach((variable) => {
-        transformedObject.variables[variable.name] = variable.value;
+        transformedObject.variables[
+          variable.name
+        ] = `extract($$response.data, ${variable.regex})`;
       });
     } else if (currentSchema === "setVariables_v2") {
       transformedObject.loadVariables = object.path;
