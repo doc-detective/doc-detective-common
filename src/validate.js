@@ -340,15 +340,17 @@ function transformToSchemaKey({
         })
       );
     // Handle openApi transformation
-    if (object?.integrations?.openApi) transformedObject.integrations = {};
-    transformedObject.integrations.openApi = object.integrations.openApi.map(
-      (description) =>
-        transformToSchemaKey({
-          currentSchema: "openApi_v2",
-          targetSchema: "openApi_v3",
-          object: description,
-        })
-    );
+    if (object?.integrations?.openApi) {
+      transformedObject.integrations = {};
+      transformedObject.integrations.openApi = object.integrations.openApi.map(
+        (description) =>
+          transformToSchemaKey({
+            currentSchema: "openApi_v2",
+            targetSchema: "openApi_v3",
+            object: description,
+          })
+      );
+    }
     // Handle fileTypes transformation
     if (object?.fileTypes)
       transformedObject.fileTypes = object.fileTypes.map((fileType) => {
