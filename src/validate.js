@@ -391,7 +391,7 @@ function transformToSchemaKey({
                   const transformedAction = transformToSchemaKey({
                     currentSchema: `${action.action}_v2`,
                     targetSchema: "step_v3",
-                    object: step,
+                    object: action,
                   });
                   return transformedAction;
                 }
