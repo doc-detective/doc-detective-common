@@ -321,7 +321,7 @@ function transformToSchemaKey({
     const transformedObject = {
       loadVariables: object.envVariables,
       input: object?.runTests?.input || object.input,
-      outputDirectory: object?.runTests?.output || object.output,
+      output: object?.runTests?.output || object.output,
       recursive: object?.runTests?.recursive || object.recursive,
       relativePathBase: object.relativePathBase,
       detectSteps: object?.runTests?.detectSteps,
