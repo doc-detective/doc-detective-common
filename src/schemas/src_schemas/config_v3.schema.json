@@ -98,7 +98,7 @@
     },
     "fileTypes": {
       "description": "Configuration for file types and their markup detection.",
-      "default": ["markdown", "asciidoc", "html", "xml"],
+      "default": ["markdown", "asciidoc", "html"],
       "anyOf": [
         {
           "type": "array",
@@ -109,7 +109,7 @@
                 "$comment": "Simple mode: Reference predefined templates by name.",
                 "title": "Predefined",
                 "type": "string",
-                "enum": ["markdown", "asciidoc", "html", "xml"]
+                "enum": ["markdown", "asciidoc", "html"]
               },
               {
                 "$comment": "Custom mode: Extend predefined templates or write whole new ones.",
@@ -122,9 +122,10 @@
                     "type": "string"
                   },
                   "extends": {
+                    "$comment": "In development",
                     "description": "Base template to extend.",
                     "type": "string",
-                    "enum": ["markdown", "asciidoc", "html", "xml"]
+                    "enum": ["markdown", "asciidoc", "html"]
                   },
                   "extensions": {
                     "description": "File extensions to use with type.",

@@ -483,8 +483,7 @@
       "default": [
         "markdown",
         "asciidoc",
-        "html",
-        "xml"
+        "html"
       ],
       "anyOf": [
         {
@@ -499,8 +498,7 @@
                 "enum": [
                   "markdown",
                   "asciidoc",
-                  "html",
-                  "xml"
+                  "html"
                 ]
               },
               {
@@ -516,13 +514,13 @@
                     "type": "string"
                   },
                   "extends": {
+                    "$comment": "In development",
                     "description": "Base template to extend.",
                     "type": "string",
                     "enum": [
                       "markdown",
                       "asciidoc",
-                      "html",
-                      "xml"
+                      "html"
                     ]
                   },
                   "extensions": {
