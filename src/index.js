@@ -1,5 +1,5 @@
 const { schemas } = require("./schemas");
-const { validate } = require("./validate");
+const { validate, transformToSchemaKey } = require("./validate");
 const { resolvePaths } = require("./resolvePaths");
 const { readFile } = require("./files");
 
@@ -8,4 +8,5 @@ module.exports = {
   validate,
   resolvePaths,
   readFile,
+  transformToSchemaKey,
 };

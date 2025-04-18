@@ -5,22 +5,27 @@ const { validate } = require("./validate");
 exports.resolvePaths = resolvePaths;
 
 /**
- * Resolves paths in config and spec objects based on the provided configuration, object type, object, and source file path.
+ * Recursively resolves all relative path properties in a configuration or specification object to absolute paths.
  *
- * @param {object} config - The configuration object.
- * @param {object} object - The object containing the paths to resolve.
- * @param {string} filePath - The path of the file that contains the relative paths.
- * @param {boolean} [nested=false] - Whether the object is nested within another object.
- * @param {string} [objectType] - The type of object to resolve paths in ("config" or "spec"). Required if the object is nested.
- * @returns {object} - The object with resolved paths.
+ * Traverses the provided object, converting all recognized path-related properties to absolute paths using the given configuration and reference file path. Supports nested objects and distinguishes between config and spec objects based on schema validation. Throws an error if the object is not a valid config or spec, or if the object type is missing for nested objects.
+ *
+ * @async
+ * @param {Object} options - Options for path resolution.
+ * @param {Object} options.config - Configuration object containing settings such as `relativePathBase`.
+ * @param {Object} options.object - The config or spec object whose path properties will be resolved.
+ * @param {string} options.filePath - Reference file path used for resolving relative paths.
+ * @param {boolean} [options.nested=false] - Indicates if this is a recursive call for a nested object.
+ * @param {string} [options.objectType] - Specifies the object type ('config' or 'spec'); required for nested objects.
+ * @returns {Promise<Object>} The object with all applicable path properties resolved to absolute paths.
+ * @throws {Error} If the object is neither a valid config nor spec, or if `objectType` is missing for nested objects.
  */
-async function resolvePaths(
+async function resolvePaths({
   config,
   object,
   filePath,
   nested = false,
-  objectType
-) {
+  objectType,
+}) {
   // Config properties that contain paths
   const configPaths = [
     "input",
@@ -38,6 +43,9 @@ async function resolvePaths(
     "file",
     "path",
     "directory",
+    "before",
+    "after",
+    "loadVariables",
     "setup",
     "cleanup",
     "savePath",
@@ -56,25 +64,33 @@ async function resolvePaths(
   ];
 
   /**
-   * Resolves a path based on the provided base type, relative path, and file path.
+   * Resolves a relative path to an absolute path using a specified base type and reference file path.
    *
-   * @param {string} baseType - The base type of the path ("file" or "cwd").
-   * @param {string} relativePath - The relative path to resolve.
-   * @param {string} filePath - The file path to use as a reference.
-   * @returns {string} - The resolved path.
+   * @param {string} baseType - Indicates whether to resolve relative to the reference file's directory ("file") or the current working directory ("cwd").
+   * @param {string} relativePath - The path to resolve, which may be relative or absolute.
+   * @param {string} filePath - The reference file or directory path used for resolution.
+   * @returns {string} The absolute path corresponding to {@link relativePath}.
+   *
+   * @remark If {@link relativePath} is already absolute, it is returned unchanged. If {@link filePath} does not exist, its extension is used to infer whether it is a file or directory.
    */
   function resolve(baseType, relativePath, filePath) {
     // If path is already absolute, return it
     if (path.isAbsolute(relativePath)) {
       return relativePath;
     }
-    // If filePath is a file, use its directory as the base path
-    filePath = fs.lstatSync(filePath).isFile()
-      ? path.dirname(filePath)
-      : filePath;
+
+    // Check if filePath exists and is a file
+    const fileExists = fs.existsSync(filePath);
+    const isFile = fileExists
+      ? fs.lstatSync(filePath).isFile()
+      : path.parse(filePath).ext !== "";
+
+    // Use directory of filePath if it's a file (or looks like one)
+    const basePath = isFile ? path.dirname(filePath) : filePath;
+
     // Resolve the path based on the base type
     return baseType === "file"
-      ? path.resolve(filePath, relativePath)
+      ? path.resolve(basePath, relativePath)
       : path.resolve(relativePath);
   }
 
@@ -83,13 +99,19 @@ async function resolvePaths(
   let pathProperties;
   if (!nested && !objectType) {
     // Check if object matches the config schema
-    const validation = validate("config_v2", { ...object });
+    const validation = validate({
+      schemaKey: "config_v3",
+      object: { ...object },
+    });
     if (validation.valid) {
       pathProperties = configPaths;
       objectType = "config";
     } else {
       // Check if object matches the spec schema
-      const validation = validate("spec_v2", { ...object });
+      const validation = validate({
+        schemaKey: "spec_v3",
+        object: { ...object },
+      });
       if (validation.valid) {
         pathProperties = specPaths;
         objectType = "spec";
@@ -115,13 +137,13 @@ async function resolvePaths(
         objectType === "config")
     ) {
       // If the property is an object, recursively call resolvePaths to resolve paths within the object
-      object[property] = await resolvePaths(
-        config,
-        object[property],
-        filePath,
-        true,
-        objectType
-      );
+      object[property] = await resolvePaths({
+        config: config,
+        object: object[property],
+        filePath: filePath,
+        nested: true,
+        objectType: objectType,
+      });
     } else if (typeof object[property] === "string") {
       // If the property is a string, check if it matches any of the path properties and resolve it if it does
       pathProperties.forEach((pathProperty) => {
@@ -132,24 +154,6 @@ async function resolvePaths(
                 relativePathBase,
                 object[pathProperty],
                 object.directory
-              );
-            } else {
-              object[pathProperty] = path.join(
-                object.directory,
-                object[pathProperty]
-              );
-            }
-          } else if (pathProperty === "savePath" && object.saveDirectory) {
-            if (path.isAbsolute(object.saveDirectory)) {
-              object[pathProperty] = resolve(
-                relativePathBase,
-                object[pathProperty],
-                object.saveDirectory
-              );
-            } else {
-              object[pathProperty] = path.join(
-                object.saveDirectory,
-                object[pathProperty]
               );
             }
           } else {
