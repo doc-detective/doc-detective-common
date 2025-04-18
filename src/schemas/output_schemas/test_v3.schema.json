@@ -398,6 +398,18 @@
             "type": "object",
             "description": "OpenAPI description and configuration.",
             "additionalProperties": false,
+            "anyOf": [
+              {
+                "required": [
+                  "descriptionPath"
+                ]
+              },
+              {
+                "required": [
+                  "operationId"
+                ]
+              }
+            ],
             "properties": {
               "name": {
                 "type": "string",
@@ -691,7 +703,7 @@
                       {
                         "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
                         "type": "string",
-                        "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
+                        "pattern": "(^(http://|https://|\\/).*|\\$[A-Za-z0-9_]+$)",
                         "transform": [
                           "trim"
                         ]
@@ -752,7 +764,7 @@
                         "string": {
                           "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
                           "type": "string",
-                          "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
+                          "pattern": "(^(http://|https://|\\/).*|\\$[A-Za-z0-9_]+$)",
                           "transform": [
                             "trim"
                           ]
@@ -2007,6 +2019,18 @@
                                     "type": "object",
                                     "description": "OpenAPI description and configuration.",
                                     "additionalProperties": false,
+                                    "anyOf": [
+                                      {
+                                        "required": [
+                                          "descriptionPath"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "operationId"
+                                        ]
+                                      }
+                                    ],
                                     "properties": {
                                       "name": {
                                         "type": "string",
@@ -2349,6 +2373,18 @@
                                       "type": "object",
                                       "description": "OpenAPI description and configuration.",
                                       "additionalProperties": false,
+                                      "anyOf": [
+                                        {
+                                          "required": [
+                                            "descriptionPath"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "operationId"
+                                          ]
+                                        }
+                                      ],
                                       "properties": {
                                         "name": {
                                           "type": "string",
@@ -4247,8 +4283,7 @@
                     "default": 5000,
                     "anyOf": [
                       {
-                        "type": "number",
-                        "nullable": true
+                        "type": "number"
                       },
                       {
                         "type": "string",

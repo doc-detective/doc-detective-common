@@ -5,8 +5,7 @@
     "default": 5000,
     "anyOf": [
       {
-        "type": "number",
-        "nullable": true
+        "type": "number"
       },
       {
         "$ref": "#/components/schemas/string"

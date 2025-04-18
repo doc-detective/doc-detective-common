@@ -6,6 +6,14 @@
   "type": "object",
   "description": "OpenAPI description and configuration.",
   "additionalProperties": false,
+  "anyOf": [
+    {
+      "required": ["descriptionPath"]
+    },
+    {
+      "required": ["operationId"]
+    }
+  ],
   "properties": {
     "name": {
       "type": "string",
