@@ -1442,6 +1442,20 @@
                                 },
                                 {
                                   "type": "object",
+                                  "anyOf": [
+                                    {
+                                      "required": [
+                                        "button",
+                                        "selector"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "button",
+                                        "elementText"
+                                      ]
+                                    }
+                                  ],
                                   "properties": {
                                     "button": {
                                       "description": "Kind of click to perform.",
@@ -1463,8 +1477,7 @@
                                   }
                                 },
                                 {
-                                  "type": "boolean",
-                                  "nullable": true
+                                  "type": "boolean"
                                 }
                               ],
                               "components": {
@@ -1480,6 +1493,20 @@
                                   },
                                   "object": {
                                     "type": "object",
+                                    "anyOf": [
+                                      {
+                                        "required": [
+                                          "button",
+                                          "selector"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "button",
+                                          "elementText"
+                                        ]
+                                      }
+                                    ],
                                     "properties": {
                                       "button": {
                                         "description": "Kind of click to perform.",
@@ -1631,6 +1658,20 @@
                                               },
                                               {
                                                 "type": "object",
+                                                "anyOf": [
+                                                  {
+                                                    "required": [
+                                                      "button",
+                                                      "selector"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "button",
+                                                      "elementText"
+                                                    ]
+                                                  }
+                                                ],
                                                 "properties": {
                                                   "button": {
                                                     "description": "Kind of click to perform.",
@@ -1652,8 +1693,7 @@
                                                 }
                                               },
                                               {
-                                                "type": "boolean",
-                                                "nullable": true
+                                                "type": "boolean"
                                               }
                                             ],
                                             "components": {
@@ -1669,6 +1709,20 @@
                                                 },
                                                 "object": {
                                                   "type": "object",
+                                                  "anyOf": [
+                                                    {
+                                                      "required": [
+                                                        "button",
+                                                        "selector"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "button",
+                                                        "elementText"
+                                                      ]
+                                                    }
+                                                  ],
                                                   "properties": {
                                                     "button": {
                                                       "description": "Kind of click to perform.",
