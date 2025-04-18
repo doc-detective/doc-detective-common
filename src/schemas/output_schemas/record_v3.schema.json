@@ -31,7 +31,7 @@
         },
         "overwrite": {
           "type": "string",
-          "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+          "description": "If `true`, overwrites the existing recording at `path` if it exists.",
           "enum": [
             "true",
             "false"
@@ -40,8 +40,7 @@
       }
     },
     {
-      "type": "boolean",
-      "nullable": true
+      "type": "boolean"
     }
   ],
   "components": {
@@ -74,7 +73,7 @@
           },
           "overwrite": {
             "type": "string",
-            "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+            "description": "If `true`, overwrites the existing recording at `path` if it exists.",
             "enum": [
               "true",
               "false"

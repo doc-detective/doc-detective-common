@@ -2425,7 +2425,7 @@
                                                       },
                                                       "allowAdditionalFields": {
                                                         "type": "boolean",
-                                                        "description": "If `false`, the step fails when the response data contains fields not specified in thr response body.",
+                                                        "description": "If `false`, the step fails when the response data contains fields not specified in the response body.",
                                                         "default": true
                                                       },
                                                       "path": {
@@ -2767,7 +2767,7 @@
                                                         },
                                                         "allowAdditionalFields": {
                                                           "type": "boolean",
-                                                          "description": "If `false`, the step fails when the response data contains fields not specified in thr response body.",
+                                                          "description": "If `false`, the step fails when the response data contains fields not specified in the response body.",
                                                           "default": true
                                                         },
                                                         "path": {
@@ -4172,7 +4172,7 @@
                                                       },
                                                       "overwrite": {
                                                         "type": "string",
-                                                        "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+                                                        "description": "If `true`, overwrites the existing recording at `path` if it exists.",
                                                         "enum": [
                                                           "true",
                                                           "false"
@@ -4181,8 +4181,7 @@
                                                     }
                                                   },
                                                   {
-                                                    "type": "boolean",
-                                                    "nullable": true
+                                                    "type": "boolean"
                                                   }
                                                 ],
                                                 "components": {
@@ -4215,7 +4214,7 @@
                                                         },
                                                         "overwrite": {
                                                           "type": "string",
-                                                          "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+                                                          "description": "If `true`, overwrites the existing recording at `path` if it exists.",
                                                           "enum": [
                                                             "true",
                                                             "false"
@@ -7042,7 +7041,7 @@
                                         },
                                         "allowAdditionalFields": {
                                           "type": "boolean",
-                                          "description": "If `false`, the step fails when the response data contains fields not specified in thr response body.",
+                                          "description": "If `false`, the step fails when the response data contains fields not specified in the response body.",
                                           "default": true
                                         },
                                         "path": {
@@ -7384,7 +7383,7 @@
                                           },
                                           "allowAdditionalFields": {
                                             "type": "boolean",
-                                            "description": "If `false`, the step fails when the response data contains fields not specified in thr response body.",
+                                            "description": "If `false`, the step fails when the response data contains fields not specified in the response body.",
                                             "default": true
                                           },
                                           "path": {
@@ -8789,7 +8788,7 @@
                                         },
                                         "overwrite": {
                                           "type": "string",
-                                          "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+                                          "description": "If `true`, overwrites the existing recording at `path` if it exists.",
                                           "enum": [
                                             "true",
                                             "false"
@@ -8798,8 +8797,7 @@
                                       }
                                     },
                                     {
-                                      "type": "boolean",
-                                      "nullable": true
+                                      "type": "boolean"
                                     }
                                   ],
                                   "components": {
@@ -8832,7 +8830,7 @@
                                           },
                                           "overwrite": {
                                             "type": "string",
-                                            "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
+                                            "description": "If `true`, overwrites the existing recording at `path` if it exists.",
                                             "enum": [
                                               "true",
                                               "false"
