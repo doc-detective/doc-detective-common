@@ -1,4 +1,5 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "httpRequest",
   "description": "Perform a generic HTTP request, for example to an API.",
   "anyOf": [

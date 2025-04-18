@@ -311,9 +311,13 @@
         "default": "file"
       },
       "loadVariables": {
-        "description": "Path to a `.env` file to load before performing a Doc Detective operation.",
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "title": "loadVariables",
         "type": "string",
-        "default": ".env"
+        "description": "Load environment variables from the specified `.env` file.",
+        "examples": [
+          ".env"
+        ]
       },
       "origin": {
         "description": "Default protocol and domain to use for relative URLs.",
@@ -2367,6 +2371,7 @@
                                               ],
                                               "properties": {
                                                 "httpRequest": {
+                                                  "$schema": "http://json-schema.org/draft-07/schema#",
                                                   "title": "httpRequest",
                                                   "description": "Perform a generic HTTP request, for example to an API.",
                                                   "anyOf": [
@@ -6983,6 +6988,7 @@
                                 ],
                                 "properties": {
                                   "httpRequest": {
+                                    "$schema": "http://json-schema.org/draft-07/schema#",
                                     "title": "httpRequest",
                                     "description": "Perform a generic HTTP request, for example to an API.",
                                     "anyOf": [
@@ -11052,6 +11058,7 @@
     ]
   },
   "httpRequest_v3": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "httpRequest",
     "description": "Perform a generic HTTP request, for example to an API.",
     "anyOf": [
@@ -14634,6 +14641,7 @@
                                       ],
                                       "properties": {
                                         "httpRequest": {
+                                          "$schema": "http://json-schema.org/draft-07/schema#",
                                           "title": "httpRequest",
                                           "description": "Perform a generic HTTP request, for example to an API.",
                                           "anyOf": [
@@ -21143,6 +21151,7 @@
                             ],
                             "properties": {
                               "httpRequest": {
+                                "$schema": "http://json-schema.org/draft-07/schema#",
                                 "title": "httpRequest",
                                 "description": "Perform a generic HTTP request, for example to an API.",
                                 "anyOf": [
@@ -25552,6 +25561,7 @@
             ],
             "properties": {
               "httpRequest": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
                 "title": "httpRequest",
                 "description": "Perform a generic HTTP request, for example to an API.",
                 "anyOf": [
@@ -30198,6 +30208,7 @@
                   ],
                   "properties": {
                     "httpRequest": {
+                      "$schema": "http://json-schema.org/draft-07/schema#",
                       "title": "httpRequest",
                       "description": "Perform a generic HTTP request, for example to an API.",
                       "anyOf": [

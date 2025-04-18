@@ -38,9 +38,7 @@
       "default": "file"
     },
     "loadVariables": {
-      "description": "Path to a `.env` file to load before performing a Doc Detective operation.",
-      "type": "string",
-      "default": ".env"
+      "$ref": "loadVariables_v3.schema.json#"
     },
     "origin": {
       "description": "Default protocol and domain to use for relative URLs.",
