@@ -378,6 +378,7 @@
         "items": {
           "oneOf": [
             {
+              "$schema": "http://json-schema.org/draft-07/schema#",
               "title": "context",
               "type": "object",
               "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
@@ -9183,6 +9184,7 @@
     ]
   },
   "context_v3": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "context",
     "type": "object",
     "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
@@ -11112,6 +11114,7 @@
                   "items": {
                     "oneOf": [
                       {
+                        "$schema": "http://json-schema.org/draft-07/schema#",
                         "title": "context",
                         "type": "object",
                         "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
@@ -11667,6 +11670,7 @@
                             "items": {
                               "oneOf": [
                                 {
+                                  "$schema": "http://json-schema.org/draft-07/schema#",
                                   "title": "context",
                                   "type": "object",
                                   "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
@@ -17270,6 +17274,7 @@
         "items": {
           "oneOf": [
             {
+              "$schema": "http://json-schema.org/draft-07/schema#",
               "title": "context",
               "type": "object",
               "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
@@ -17825,6 +17830,7 @@
                   "items": {
                     "oneOf": [
                       {
+                        "$schema": "http://json-schema.org/draft-07/schema#",
                         "title": "context",
                         "type": "object",
                         "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
@@ -26181,6 +26187,7 @@
         "items": {
           "oneOf": [
             {
+              "$schema": "http://json-schema.org/draft-07/schema#",
               "title": "context",
               "type": "object",
               "description": "A context in which to perform tests. If no contexts are specified but a context is required by one or more tests, Doc Detective attempts to identify a supported context in the current environment and run tests against it. For example, if a browser isn't specified but is required by steps in the test, Doc Detective will search for and use a supported browser available in the current environment.",
