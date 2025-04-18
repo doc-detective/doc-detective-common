@@ -6,9 +6,12 @@ const fs = require("fs");
   await dereferenceSchemas();
 })();
 
-/*
- * Walks through all schema in src/src_schema
- * For each schema, dereferences it and writes it to src/schema
+/**
+ * Processes JSON schema files by updating reference paths, dereferencing all `$ref` pointers, and generating fully resolved schema outputs.
+ *
+ * For each schema in the input directory, this function updates reference paths, writes intermediate schemas to a build directory, dereferences all references, removes `$id` properties, and writes the final schemas to an output directory. It also creates a consolidated `schemas.json` file containing all dereferenced schemas keyed by filename.
+ *
+ * @remark The function assumes all schema files listed exist in the input directory and does not handle missing files or invalid JSON beyond throwing synchronous errors.
  */
 async function dereferenceSchemas() {
   const inputDir = path.resolve(`${__dirname}/src_schemas`);
@@ -127,7 +130,12 @@ function updateRefPaths(schema) {
   return schema;
 }
 
-// Prepend app-root path to referenced relative paths
+/**
+ * Recursively removes all `$id` properties from a JSON schema object.
+ *
+ * @param {object} schema - The JSON schema object to process.
+ * @returns {object} The schema object with all `$id` properties deleted.
+ */
 function deleteDollarIds(schema) {
   for (let [key, value] of Object.entries(schema)) {
     if (typeof value === "object") {

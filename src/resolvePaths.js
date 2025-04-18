@@ -5,21 +5,19 @@ const { validate } = require("./validate");
 exports.resolvePaths = resolvePaths;
 
 /**
- * Resolves relative paths in configuration and specification objects to absolute paths.
+ * Recursively resolves all relative path properties in a configuration or specification object to absolute paths.
  *
- * This function traverses an object (either a config or spec) and converts all path properties
- * to absolute paths based on the provided configuration and file path. It can handle nested objects
- * and special path relationships like path/directory and savePath/saveDirectory.
+ * Traverses the provided object, converting all recognized path-related properties to absolute paths using the given configuration and reference file path. Supports nested objects and distinguishes between config and spec objects based on schema validation. Throws an error if the object is not a valid config or spec, or if the object type is missing for nested objects.
  *
  * @async
- * @param {Object} options - The options object.
- * @param {Object} options.config - The configuration object containing settings like relativePathBase.
- * @param {Object} options.object - The object whose paths need to be resolved.
- * @param {string} options.filePath - The reference file path for resolving relative paths.
- * @param {boolean} [options.nested=false] - Flag indicating if this is a recursive call for a nested object.
- * @param {string} [options.objectType] - The type of object ('config' or 'spec'). Required for nested objects.
- * @returns {Promise<Object>} The object with all paths resolved to absolute paths.
- * @throws {Error} Throws an error if the object isn't a valid config or spec, or if objectType is missing for nested objects.
+ * @param {Object} options - Options for path resolution.
+ * @param {Object} options.config - Configuration object containing settings such as `relativePathBase`.
+ * @param {Object} options.object - The config or spec object whose path properties will be resolved.
+ * @param {string} options.filePath - Reference file path used for resolving relative paths.
+ * @param {boolean} [options.nested=false] - Indicates if this is a recursive call for a nested object.
+ * @param {string} [options.objectType] - Specifies the object type ('config' or 'spec'); required for nested objects.
+ * @returns {Promise<Object>} The object with all applicable path properties resolved to absolute paths.
+ * @throws {Error} If the object is neither a valid config nor spec, or if `objectType` is missing for nested objects.
  */
 async function resolvePaths({
   config,
@@ -66,12 +64,14 @@ async function resolvePaths({
   ];
 
   /**
-   * Resolves a path based on the provided base type, relative path, and file path.
+   * Resolves a relative path to an absolute path using a specified base type and reference file path.
    *
-   * @param {string} baseType - The base type of the path ("file" or "cwd").
-   * @param {string} relativePath - The relative path to resolve.
-   * @param {string} filePath - The file path to use as a reference.
-   * @returns {string} - The resolved path.
+   * @param {string} baseType - Indicates whether to resolve relative to the reference file's directory ("file") or the current working directory ("cwd").
+   * @param {string} relativePath - The path to resolve, which may be relative or absolute.
+   * @param {string} filePath - The reference file or directory path used for resolution.
+   * @returns {string} The absolute path corresponding to {@link relativePath}.
+   *
+   * @remark If {@link relativePath} is already absolute, it is returned unchanged. If {@link filePath} does not exist, its extension is used to infer whether it is a file or directory.
    */
   function resolve(baseType, relativePath, filePath) {
     // If path is already absolute, return it
