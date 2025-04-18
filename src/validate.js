@@ -57,11 +57,29 @@ const compatibleSchemas = {
   test_v3: ["test_v2"],
 };
 
+/**
+ * Escapes special characters in a string for safe use in a regular expression pattern.
+ *
+ * @param {string} string - The input string to escape.
+ * @returns {string} The escaped string, safe for use in regular expressions.
+ */
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 }
 
-// Validate that `object` matches the specified JSON schema
+/**
+ * Validates an object against a specified JSON schema, supporting backward compatibility and automatic transformation from older schema versions if needed.
+ *
+ * If validation against the target schema fails and compatible older schemas are defined, attempts validation against each compatible schema. On a match, transforms the object to the target schema and revalidates. Returns the validation result, any errors, and the (possibly transformed) object.
+ *
+ * @param {Object} options
+ * @param {string} options.schemaKey - The key identifying the target JSON schema.
+ * @param {Object} options.object - The object to validate.
+ * @param {boolean} [options.addDefaults=true] - Whether to include default values in the returned object.
+ * @returns {{ valid: boolean, errors: string, object: Object }} Validation result, error messages, and the validated (and possibly transformed) object.
+ *
+ * @throws {Error} If {@link schemaKey} or {@link object} is missing.
+ */
 function validate({ schemaKey, object, addDefaults = true }) {
   if (!schemaKey) {
     throw new Error("Schema key is required.");
@@ -143,6 +161,20 @@ function validate({ schemaKey, object, addDefaults = true }) {
   return result;
 }
 
+/**
+ * Transforms an object from one JSON schema version to another, supporting multiple schema types and nested conversions.
+ *
+ * @param {Object} params
+ * @param {string} params.currentSchema - The schema key of the object's current version.
+ * @param {string} params.targetSchema - The schema key to which the object should be transformed.
+ * @param {Object} params.object - The object to transform.
+ * @returns {Object} The transformed object, validated against the target schema.
+ *
+ * @throws {Error} If transformation between the specified schemas is not supported, or if the transformed object fails validation.
+ *
+ * @remark
+ * Supports deep and recursive transformations for complex schema types, including steps, configs, contexts, OpenAPI integrations, specs, and tests. Throws if the schemas are incompatible or if the resulting object does not conform to the target schema.
+ */
 function transformToSchemaKey({
   currentSchema = "",
   targetSchema = "",

@@ -4,13 +4,15 @@ const axios = require("axios");
 const { URL } = require("url");
 
 /**
- * Reads a file from a given URL or local file path and returns its content.
- * Supports JSON and YAML file formats.
+ * Reads and parses content from a remote URL or local file path, supporting JSON and YAML formats.
  *
- * @param {string} fileURLOrPath - The URL or local file path of the file to read.
- * @returns {Promise<Object|string|null>} - The parsed content of the file if it's JSON or YAML,
- *                                          the raw content if it's another format,
- *                                          or null if an error occurs.
+ * Attempts to parse the file content as JSON first, then YAML. If both parsing attempts fail, returns the raw content as a string. Returns `null` if the file cannot be read.
+ *
+ * @param {Object} options
+ * @param {string} options.fileURLOrPath - The URL or local file path to read.
+ * @returns {Promise<Object|string|null>} Parsed object for JSON or YAML files, raw string for other formats, or `null` if reading fails.
+ *
+ * @throws {Error} If {@link fileURLOrPath} is missing, not a string, or is an empty string.
  */
 async function readFile({ fileURLOrPath }) {
   if (!fileURLOrPath) {
