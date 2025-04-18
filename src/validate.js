@@ -106,7 +106,8 @@ function validate({ schemaKey, object, addDefaults = true }) {
 
   if (check.errors) {
     // Check if the object is compatible with another schema
-    if (!compatibleSchemas[schemaKey]) {
+    const compatibleSchemasList = compatibleSchemas[schemaKey];
+    if (!compatibleSchemasList) {
       result.errors = check.errors
         .map(
           (error) =>
@@ -119,7 +120,7 @@ function validate({ schemaKey, object, addDefaults = true }) {
       result.valid = false;
       return result;
     }
-    const matchedSchemaKey = compatibleSchemas[schemaKey].find((key) => {
+    const matchedSchemaKey = compatibleSchemasList.find((key) => {
       validationObject = JSON.parse(JSON.stringify(object));
       const check = ajv.getSchema(key);
       if (check(validationObject)) return key;
@@ -219,7 +220,7 @@ function transformToSchemaKey({
       // Handle typeKeys.delay key change
       if (typeof object.typeKeys === "object" && object.typeKeys.keys) {
         transformedObject.find.type.inputDelay = object.typeKeys.delay;
-        delete transformedObject.find.type.keys.delay;
+        delete transformedObject.find.type.delay;
       }
       transformedObject.variables = {};
       object.setVariables?.forEach((variable) => {
@@ -572,13 +573,8 @@ function transformToSchemaKey({
 
 // If called directly, validate an example object
 if (require.main === module) {
-  const example =  {
-      "selector": "[title=Search]",
-      "click": {
-        "button": "right"
-      }
-    };
+  const example =  {path: "/User/manny/projects/doc-detective/static/images/image.png"};
 
-  const result = validate({ schemaKey: "find_v3", object: example });
+  const result = validate({ schemaKey: "screenshot_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }

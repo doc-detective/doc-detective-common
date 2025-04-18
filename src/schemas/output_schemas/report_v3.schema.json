@@ -3687,7 +3687,7 @@
                                             "properties": {
                                               "language": {
                                                 "type": "string",
-                                                "description": "Language of the code to run. If not specified, the code is run in the shell.",
+                                                "description": "Language of the code to run.",
                                                 "enum": [
                                                   "python",
                                                   "bash",
@@ -3777,7 +3777,7 @@
                                               "properties": {
                                                 "language": {
                                                   "type": "string",
-                                                  "description": "Language of the code to run. If not specified, the code is run in the shell.",
+                                                  "description": "Language of the code to run.",
                                                   "enum": [
                                                     "python",
                                                     "bash",
@@ -4143,7 +4143,7 @@
                                         "description": "Takes a screenshot in PNG format.",
                                         "anyOf": [
                                           {
-                                            "description": "File path of the PNG file, relative to your media directory. Accepts absolute paths. If not specified, the file name is the ID of the step.",
+                                            "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                                             "type": "string",
                                             "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
                                             "transform": [
@@ -4152,10 +4152,11 @@
                                           },
                                           {
                                             "type": "object",
+                                            "additionalProperties": false,
                                             "properties": {
                                               "path": {
+                                                "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                                                 "type": "string",
-                                                "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
                                                 "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
                                                 "transform": [
                                                   "trim"
@@ -4170,7 +4171,7 @@
                                               },
                                               "maxVariation": {
                                                 "type": "number",
-                                                "description": "Allowed variation in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `maxVariation`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
+                                                "description": "Allowed variation in percentage of pixels between the new screenshot and the existing screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `maxVariation`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
                                                 "default": 0.05,
                                                 "minimum": 0,
                                                 "maximum": 1
@@ -4256,14 +4257,13 @@
                                             }
                                           },
                                           {
-                                            "type": "boolean",
-                                            "nullable": true
+                                            "type": "boolean"
                                           }
                                         ],
                                         "components": {
                                           "schemas": {
-                                            "string": {
-                                              "description": "File path of the PNG file, relative to your media directory. Accepts absolute paths. If not specified, the file name is the ID of the step.",
+                                            "path": {
+                                              "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                                               "type": "string",
                                               "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
                                               "transform": [
@@ -4272,10 +4272,11 @@
                                             },
                                             "object": {
                                               "type": "object",
+                                              "additionalProperties": false,
                                               "properties": {
                                                 "path": {
+                                                  "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                                                   "type": "string",
-                                                  "description": "File path of the PNG file, relative to `directory`. If not specified, the file name is the ID of the step.",
                                                   "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
                                                   "transform": [
                                                     "trim"
@@ -4290,7 +4291,7 @@
                                                 },
                                                 "maxVariation": {
                                                   "type": "number",
-                                                  "description": "Allowed variation in percentage of pixels between the new screenshot and the exisitng screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `maxVariation`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
+                                                  "description": "Allowed variation in percentage of pixels between the new screenshot and the existing screenshot at `path`. If the difference between the new screenshot and the existing screenshot is greater than `maxVariation`, the step fails. If a screenshot doesn't exist at `path`, this value is ignored.",
                                                   "default": 0.05,
                                                   "minimum": 0,
                                                   "maximum": 1

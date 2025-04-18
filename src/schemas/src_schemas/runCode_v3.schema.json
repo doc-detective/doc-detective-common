@@ -15,7 +15,7 @@
         "properties": {
           "language": {
             "type": "string",
-            "description": "Language of the code to run. If not specified, the code is run in the shell.",
+            "description": "Language of the code to run.",
             "enum": ["python", "bash", "javascript"]
           },
           "code": {
