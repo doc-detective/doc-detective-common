@@ -38,7 +38,8 @@
           },
           "inputDelay": {
             "type": "number",
-            "description": "Delay in milliseconds between each key press. If not specified during a recording, defaults to `100`."
+            "description": "Delay in milliseconds between each key press during a recording",
+            "default": 100
           },
           "selector": {
             "type": "string",

@@ -2,6 +2,14 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "find",
   "description": "Find an element based on display text or a selector, then optionally interact with it.",
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/string"
+    },
+    {
+      "$ref": "#/components/schemas/object"
+    }
+  ],
   "components": {
     "schemas": {
       "string": {
@@ -42,13 +50,16 @@
           },
           "click": {
             "description": "Click the element.",
-            "allOf": [
+            "anyOf": [
               {
                 "$ref": "click_v3.schema.json#"
               },
               {
-                "not": {
-                  "required": ["selector", "elementText"]
+                "type": "object",
+                "properties": {
+                  "button": {
+                    "$ref": "click_v3.schema.json#/components/schemas/button"
+                  }
                 }
               }
             ]
@@ -61,6 +72,7 @@
               },
               {
                 "not": {
+                  "type": "object",
                   "required": ["selector", "elementText"]
                 }
               }

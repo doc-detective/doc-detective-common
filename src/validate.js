@@ -572,13 +572,13 @@ function transformToSchemaKey({
 
 // If called directly, validate an example object
 if (require.main === module) {
-  const example = {
-    app: {
-      name: "safari",
-    },
-    platforms: ["mac"],
-  };
+  const example =  {
+      "selector": "[title=Search]",
+      "click": {
+        "button": "right"
+      }
+    };
 
-  const result = validate({ schemaKey: "context_v3", object: example });
+  const result = validate({ schemaKey: "find_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }
