@@ -1,6 +1,6 @@
 {
   "name": "doc-detective-common",
-  "version": "1.22.0",
+  "version": "3.0.0",
   "description": "Shared components for Doc Detective projects.",
   "main": "src/index.js",
   "scripts": {
@@ -13,24 +13,24 @@
     "url": "git+https://github.com/doc-detective/doc-detective-common.git"
   },
   "author": "Manny Silva",
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "bugs": {
     "url": "https://github.com/doc-detective/doc-detective-common/issues"
   },
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
-    "chai": "^5.1.2",
+    "chai": "^5.2.0",
     "mocha": "^11.1.0",
-    "sinon": "^19.0.2"
+    "sinon": "^20.0.0"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^11.9.0",
-    "ajv": "8.16.0",
+    "@apidevtools/json-schema-ref-parser": "^12.0.1",
+    "ajv": "^8.17.1",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.1.0",
-    "axios": "^1.7.9",
-    "uuid": "^11.0.5",
-    "yaml": "^2.7.0"
+    "axios": "^1.8.4",
+    "uuid": "^11.1.0",
+    "yaml": "^2.7.1"
   }
 }
