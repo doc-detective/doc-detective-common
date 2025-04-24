@@ -1060,13 +1060,11 @@
                                                     "anyOf": [
                                                       {
                                                         "required": [
-                                                          "button",
                                                           "selector"
                                                         ]
                                                       },
                                                       {
                                                         "required": [
-                                                          "button",
                                                           "elementText"
                                                         ]
                                                       }
@@ -1111,13 +1109,11 @@
                                                       "anyOf": [
                                                         {
                                                           "required": [
-                                                            "button",
                                                             "selector"
                                                           ]
                                                         },
                                                         {
                                                           "required": [
-                                                            "button",
                                                             "elementText"
                                                           ]
                                                         }
@@ -1275,13 +1271,11 @@
                                                                 "anyOf": [
                                                                   {
                                                                     "required": [
-                                                                      "button",
                                                                       "selector"
                                                                     ]
                                                                   },
                                                                   {
                                                                     "required": [
-                                                                      "button",
                                                                       "elementText"
                                                                     ]
                                                                   }
@@ -1326,13 +1320,11 @@
                                                                   "anyOf": [
                                                                     {
                                                                       "required": [
-                                                                        "button",
                                                                         "selector"
                                                                       ]
                                                                     },
                                                                     {
                                                                       "required": [
-                                                                        "button",
                                                                         "elementText"
                                                                       ]
                                                                     }
@@ -1614,13 +1606,11 @@
                                                                   "anyOf": [
                                                                     {
                                                                       "required": [
-                                                                        "button",
                                                                         "selector"
                                                                       ]
                                                                     },
                                                                     {
                                                                       "required": [
-                                                                        "button",
                                                                         "elementText"
                                                                       ]
                                                                     }
@@ -1665,13 +1655,11 @@
                                                                     "anyOf": [
                                                                       {
                                                                         "required": [
-                                                                          "button",
                                                                           "selector"
                                                                         ]
                                                                       },
                                                                       {
                                                                         "required": [
-                                                                          "button",
                                                                           "elementText"
                                                                         ]
                                                                       }
@@ -5712,13 +5700,11 @@
                                       "anyOf": [
                                         {
                                           "required": [
-                                            "button",
                                             "selector"
                                           ]
                                         },
                                         {
                                           "required": [
-                                            "button",
                                             "elementText"
                                           ]
                                         }
@@ -5763,13 +5749,11 @@
                                         "anyOf": [
                                           {
                                             "required": [
-                                              "button",
                                               "selector"
                                             ]
                                           },
                                           {
                                             "required": [
-                                              "button",
                                               "elementText"
                                             ]
                                           }
@@ -5927,13 +5911,11 @@
                                                   "anyOf": [
                                                     {
                                                       "required": [
-                                                        "button",
                                                         "selector"
                                                       ]
                                                     },
                                                     {
                                                       "required": [
-                                                        "button",
                                                         "elementText"
                                                       ]
                                                     }
@@ -5978,13 +5960,11 @@
                                                     "anyOf": [
                                                       {
                                                         "required": [
-                                                          "button",
                                                           "selector"
                                                         ]
                                                       },
                                                       {
                                                         "required": [
-                                                          "button",
                                                           "elementText"
                                                         ]
                                                       }
@@ -6266,13 +6246,11 @@
                                                     "anyOf": [
                                                       {
                                                         "required": [
-                                                          "button",
                                                           "selector"
                                                         ]
                                                       },
                                                       {
                                                         "required": [
-                                                          "button",
                                                           "elementText"
                                                         ]
                                                       }
@@ -6317,13 +6295,11 @@
                                                       "anyOf": [
                                                         {
                                                           "required": [
-                                                            "button",
                                                             "selector"
                                                           ]
                                                         },
                                                         {
                                                           "required": [
-                                                            "button",
                                                             "elementText"
                                                           ]
                                                         }
