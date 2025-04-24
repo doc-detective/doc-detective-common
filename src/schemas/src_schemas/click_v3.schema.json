@@ -24,10 +24,10 @@
         "type": "object",
         "anyOf": [
           {
-            "required": ["button", "selector"]
+            "required": ["selector"]
           },
           {
-            "required": ["button", "elementText"]
+            "required": ["elementText"]
           }
         ],
         "properties": {
