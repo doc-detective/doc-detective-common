@@ -1476,15 +1476,12 @@
                                         "description": "Click or tap an element.",
                                         "anyOf": [
                                           {
-                                            "description": "Kind of click to perform.",
+                                            "title": "Find element (simple)",
                                             "type": "string",
-                                            "enum": [
-                                              "left",
-                                              "right",
-                                              "middle"
-                                            ]
+                                            "description": "Display text or selector of the element to find."
                                           },
                                           {
+                                            "title": "Click element (detailed)",
                                             "type": "object",
                                             "anyOf": [
                                               {
@@ -1524,6 +1521,11 @@
                                         ],
                                         "components": {
                                           "schemas": {
+                                            "string": {
+                                              "title": "Find element (simple)",
+                                              "type": "string",
+                                              "description": "Display text or selector of the element to find."
+                                            },
                                             "button": {
                                               "description": "Kind of click to perform.",
                                               "type": "string",
@@ -1534,6 +1536,7 @@
                                               ]
                                             },
                                             "object": {
+                                              "title": "Click element (detailed)",
                                               "type": "object",
                                               "anyOf": [
                                                 {
@@ -1687,15 +1690,12 @@
                                                     "description": "Click or tap an element.",
                                                     "anyOf": [
                                                       {
-                                                        "description": "Kind of click to perform.",
+                                                        "title": "Find element (simple)",
                                                         "type": "string",
-                                                        "enum": [
-                                                          "left",
-                                                          "right",
-                                                          "middle"
-                                                        ]
+                                                        "description": "Display text or selector of the element to find."
                                                       },
                                                       {
+                                                        "title": "Click element (detailed)",
                                                         "type": "object",
                                                         "anyOf": [
                                                           {
@@ -1735,6 +1735,11 @@
                                                     ],
                                                     "components": {
                                                       "schemas": {
+                                                        "string": {
+                                                          "title": "Find element (simple)",
+                                                          "type": "string",
+                                                          "description": "Display text or selector of the element to find."
+                                                        },
                                                         "button": {
                                                           "description": "Kind of click to perform.",
                                                           "type": "string",
@@ -1745,6 +1750,7 @@
                                                           ]
                                                         },
                                                         "object": {
+                                                          "title": "Click element (detailed)",
                                                           "type": "object",
                                                           "anyOf": [
                                                             {
@@ -2022,15 +2028,12 @@
                                                       "description": "Click or tap an element.",
                                                       "anyOf": [
                                                         {
-                                                          "description": "Kind of click to perform.",
+                                                          "title": "Find element (simple)",
                                                           "type": "string",
-                                                          "enum": [
-                                                            "left",
-                                                            "right",
-                                                            "middle"
-                                                          ]
+                                                          "description": "Display text or selector of the element to find."
                                                         },
                                                         {
+                                                          "title": "Click element (detailed)",
                                                           "type": "object",
                                                           "anyOf": [
                                                             {
@@ -2070,6 +2073,11 @@
                                                       ],
                                                       "components": {
                                                         "schemas": {
+                                                          "string": {
+                                                            "title": "Find element (simple)",
+                                                            "type": "string",
+                                                            "description": "Display text or selector of the element to find."
+                                                          },
                                                           "button": {
                                                             "description": "Kind of click to perform.",
                                                             "type": "string",
@@ -2080,6 +2088,7 @@
                                                             ]
                                                           },
                                                           "object": {
+                                                            "title": "Click element (detailed)",
                                                             "type": "object",
                                                             "anyOf": [
                                                               {
