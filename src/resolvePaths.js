@@ -30,7 +30,7 @@ async function resolvePaths({
   const configPaths = [
     "input",
     "output",
-    "envVariables",
+    "loadVariables",
     "setup",
     "cleanup",
     "mediaDirectory",
