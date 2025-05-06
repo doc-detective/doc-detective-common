@@ -182,6 +182,13 @@ async function resolvePaths({
         objectType: objectType,
       });
     } else if (typeof object[property] === "string") {
+      // If the property begins with "https://" or "http://", skip it
+      if (
+        object[property].startsWith("https://") ||
+        object[property].startsWith("http://")
+      ) {
+        continue;
+      }
       // Check if it matches any of the path properties and resolve it if it does
       if (pathProperties.includes(property)) {
         if (property === "path" && object.directory) {
