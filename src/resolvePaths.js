@@ -182,26 +182,24 @@ async function resolvePaths({
         objectType: objectType,
       });
     } else if (typeof object[property] === "string") {
-      // If the property is a string, check if it matches any of the path properties and resolve it if it does
-      pathProperties.forEach((pathProperty) => {
-        if (object[pathProperty]) {
-          if (pathProperty === "path" && object.directory) {
-            if (path.isAbsolute(object.directory)) {
-              object[pathProperty] = resolve(
-                relativePathBase,
-                object[pathProperty],
-                object.directory
-              );
-            }
-          } else {
-            object[pathProperty] = resolve(
+      // Check if it matches any of the path properties and resolve it if it does
+      if (pathProperties.includes(property)) {
+        if (property === "path" && object.directory) {
+          if (path.isAbsolute(object.directory)) {
+            object[property] = resolve(
               relativePathBase,
-              object[pathProperty],
+              object[property],
+              object.directory
+            );
+          }
+        } else {
+          object[property] = resolve(
+              relativePathBase,
+              object[property],
               filePath
             );
           }
         }
-      });
     }
   }
   return object;
