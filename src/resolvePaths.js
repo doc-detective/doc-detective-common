@@ -131,7 +131,44 @@ async function resolvePaths({
   }
 
   for (const property of Object.keys(object)) {
-    if (
+    // If the property is an array, recursively call resolvePaths for each item in the array
+    if (Array.isArray(object[property])) {
+      for (const item of object[property]) {
+        // If the item is an object, recursively call resolvePaths to resolve paths within the object
+        if (typeof item === "object") {
+          await resolvePaths({
+            config: config,
+            object: item,
+            filePath: filePath,
+            nested: true,
+            objectType: objectType,
+          });
+        } else if (typeof item === "string") {
+          // If the item is a string, check if it matches any of the path properties and resolve it if it does
+          pathProperties.forEach((pathProperty) => {
+            if (item[pathProperty]) {
+              if (pathProperty === "path" && object.directory) {
+                if (path.isAbsolute(object.directory)) {
+                  object[pathProperty] = resolve(
+                    relativePathBase,
+                    item[pathProperty],
+                    object.directory
+                  );
+                }
+              } else {
+                object[pathProperty] = resolve(
+                  relativePathBase,
+                  item[pathProperty],
+                  filePath
+                );
+              }
+            }
+          });
+        }
+      }
+    }
+    // If the property is an object, recursively call resolvePaths to resolve paths within the object
+    else if (
       typeof object[property] === "object" &&
       ((objectType === "spec" && !specNoResolve.includes(property)) ||
         objectType === "config")
