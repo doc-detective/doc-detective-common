@@ -179,13 +179,14 @@ async function resolvePaths({
       // Check if it matches any of the path properties and resolve it if it does
       if (pathProperties.includes(property)) {
         if (property === "path" && object.directory) {
-          if (path.isAbsolute(object.directory)) {
+          const directory = path.isAbsolute(object.directory)
+            ? object.directory
+            : resolve(relativePathBase, object.directory, filePath);
             object[property] = resolve(
               relativePathBase,
               object[property],
-              object.directory
+            directory
             );
-          }
         } else {
           object[property] = resolve(
               relativePathBase,
