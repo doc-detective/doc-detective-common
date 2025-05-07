@@ -30,7 +30,7 @@ async function resolvePaths({
   const configPaths = [
     "input",
     "output",
-    "envVariables",
+    "loadVariables",
     "setup",
     "cleanup",
     "mediaDirectory",
@@ -131,7 +131,37 @@ async function resolvePaths({
   }
 
   for (const property of Object.keys(object)) {
-    if (
+    // If the property is an array, recursively call resolvePaths for each item in the array
+    if (Array.isArray(object[property])) {
+      for (let i = 0; i < object[property].length; i++) {
+        const item = object[property][i];
+
+        // If the item is an object, recursively call resolvePaths to resolve paths within the object
+        if (typeof item === "object") {
+          await resolvePaths({
+            config: config,
+            object: item,
+            filePath: filePath,
+            nested: true,
+            objectType: objectType,
+          });
+        } else if (
+          typeof item === "string" &&
+          pathProperties.includes(property)
+        ) {
+          // Resolve the string path and write it back into the array
+          const resolved =
+            property === "path" &&
+            object.directory &&
+            path.isAbsolute(object.directory)
+              ? resolve(relativePathBase, item, object.directory)
+              : resolve(relativePathBase, item, filePath);
+          object[property][i] = resolved;
+        }
+      }
+    }
+    // If the property is an object, recursively call resolvePaths to resolve paths within the object
+    else if (
       typeof object[property] === "object" &&
       ((objectType === "spec" && !specNoResolve.includes(property)) ||
         objectType === "config")
@@ -145,27 +175,62 @@ async function resolvePaths({
         objectType: objectType,
       });
     } else if (typeof object[property] === "string") {
-      // If the property is a string, check if it matches any of the path properties and resolve it if it does
-      pathProperties.forEach((pathProperty) => {
-        if (object[pathProperty]) {
-          if (pathProperty === "path" && object.directory) {
-            if (path.isAbsolute(object.directory)) {
-              object[pathProperty] = resolve(
-                relativePathBase,
-                object[pathProperty],
-                object.directory
-              );
-            }
-          } else {
-            object[pathProperty] = resolve(
-              relativePathBase,
-              object[pathProperty],
-              filePath
-            );
-          }
+      // If the property begins with "https://" or "http://", skip it
+      if (
+        object[property].startsWith("https://") ||
+        object[property].startsWith("http://")
+      ) {
+        continue;
+      }
+      // Check if it matches any of the path properties and resolve it if it does
+      if (pathProperties.includes(property)) {
+        if (property === "path" && object.directory) {
+          const directory = path.isAbsolute(object.directory)
+            ? object.directory
+            : resolve(relativePathBase, object.directory, filePath);
+          object[property] = resolve(
+            relativePathBase,
+            object[property],
+            directory
+          );
+        } else {
+          object[property] = resolve(
+            relativePathBase,
+            object[property],
+            filePath
+          );
         }
-      });
+      }
     }
   }
   return object;
+}
+
+// If called directly, resolve paths in the provided object
+if (require.main === module) {
+  (async () => {
+    // Example usage
+    const config = {
+      relativePathBase: "file",
+    };
+    const object = {
+      tests: [
+        {
+          steps: [
+            {
+              screenshot: {
+                path: "file.png",
+                directory:
+                  "/home/hawkeyexl/Workspaces/doc-detective-common/screenshots",
+              },
+            },
+          ],
+        },
+      ],
+    };
+    const filePath = process.cwd();
+
+    await resolvePaths({ config, object, filePath });
+    console.log(JSON.stringify(object, null, 2));
+  })();
 }
