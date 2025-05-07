@@ -199,3 +199,32 @@ async function resolvePaths({
   }
   return object;
 }
+
+// If called directly, resolve paths in the provided object
+if (require.main === module) {
+  (async () => {
+    // Example usage
+    const config = {
+      relativePathBase: "file",
+    };
+    const object = {
+      tests: [
+        {
+          steps: [
+            {
+              screenshot: {
+                path: "file.png",
+                directory:
+                  "/home/hawkeyexl/Workspaces/doc-detective-common/screenshots",
+              },
+            },
+          ],
+        },
+      ],
+    };
+    const filePath = process.cwd();
+
+    await resolvePaths({ config, object, filePath });
+    console.log(JSON.stringify(object, null, 2));
+  })();
+}
