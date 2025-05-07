@@ -133,7 +133,9 @@ async function resolvePaths({
   for (const property of Object.keys(object)) {
     // If the property is an array, recursively call resolvePaths for each item in the array
     if (Array.isArray(object[property])) {
-      for (const item of object[property]) {
+      for (let i = 0; i < object[property].length; i++) {
+        const item = object[property][i];
+
         // If the item is an object, recursively call resolvePaths to resolve paths within the object
         if (typeof item === "object") {
           await resolvePaths({
@@ -143,27 +145,12 @@ async function resolvePaths({
             nested: true,
             objectType: objectType,
           });
-        } else if (typeof item === "string") {
-          // If the item is a string, check if it matches any of the path properties and resolve it if it does
-          pathProperties.forEach((pathProperty) => {
-            if (item[pathProperty]) {
-              if (pathProperty === "path" && object.directory) {
-                if (path.isAbsolute(object.directory)) {
-                  object[pathProperty] = resolve(
-                    relativePathBase,
-                    item[pathProperty],
-                    object.directory
-                  );
-                }
-              } else {
-                object[pathProperty] = resolve(
-                  relativePathBase,
-                  item[pathProperty],
-                  filePath
-                );
-              }
-            }
-          });
+        } else if (typeof item === "string" && pathProperties.includes(property)) {
+          // Resolve the string path and write it back into the array
+          const resolved = property === "path" && object.directory && path.isAbsolute(object.directory)
+            ? resolve(relativePathBase, item, object.directory)
+            : resolve(relativePathBase, item, filePath);
+          object[property][i] = resolved;
         }
       }
     }
