@@ -145,11 +145,17 @@ async function resolvePaths({
             nested: true,
             objectType: objectType,
           });
-        } else if (typeof item === "string" && pathProperties.includes(property)) {
+        } else if (
+          typeof item === "string" &&
+          pathProperties.includes(property)
+        ) {
           // Resolve the string path and write it back into the array
-          const resolved = property === "path" && object.directory && path.isAbsolute(object.directory)
-            ? resolve(relativePathBase, item, object.directory)
-            : resolve(relativePathBase, item, filePath);
+          const resolved =
+            property === "path" &&
+            object.directory &&
+            path.isAbsolute(object.directory)
+              ? resolve(relativePathBase, item, object.directory)
+              : resolve(relativePathBase, item, filePath);
           object[property][i] = resolved;
         }
       }
@@ -182,19 +188,19 @@ async function resolvePaths({
           const directory = path.isAbsolute(object.directory)
             ? object.directory
             : resolve(relativePathBase, object.directory, filePath);
-            object[property] = resolve(
-              relativePathBase,
-              object[property],
+          object[property] = resolve(
+            relativePathBase,
+            object[property],
             directory
-            );
+          );
         } else {
           object[property] = resolve(
-              relativePathBase,
-              object[property],
-              filePath
-            );
-          }
+            relativePathBase,
+            object[property],
+            filePath
+          );
         }
+      }
     }
   }
   return object;
